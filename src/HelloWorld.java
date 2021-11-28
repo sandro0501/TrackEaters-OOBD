@@ -5,9 +5,9 @@ public class HelloWorld {
 		// TODO Auto-generated method stub
 		System.out.println("Ciao mondo we");
 
-		System.out.print("Ciaosaneeeedro");
+		System.out.print("Ciaosanedrerewro");
+		System.out.print("12rewrwtrhtrhe345");
 
-		System.out.print("12rewrwwwwe345");
 
 
 	}

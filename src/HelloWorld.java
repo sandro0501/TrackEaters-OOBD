@@ -3,10 +3,8 @@ public class HelloWorld {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("Ciao mondo we");
+		System.out.println("Ciao");
 
-		System.out.print("Ciaosanedrerewro");
-		System.out.print("12rewrwtrhtrhe345");
 
 
 

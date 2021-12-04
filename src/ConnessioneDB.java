@@ -21,7 +21,7 @@ public class ConnessioneDB {
 			throwables.printStackTrace();
 		}
 		
-		System.out.println("ConnessioneOk\n");
+		System.out.println("Connessione Ok\n");
 		
 		try {
 			stmt = conn.createStatement();

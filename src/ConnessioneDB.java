@@ -2,7 +2,8 @@ import java.sql.*;
 
 public class ConnessioneDB {
 
-	public static void main(String args[]) throws Exception {
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");  
@@ -45,6 +46,7 @@ public class ConnessioneDB {
 		catch(SQLException throwables){
 			throwables.printStackTrace();
 		}
-		
+
 	}
+
 }

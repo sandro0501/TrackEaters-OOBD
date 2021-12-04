@@ -1,4 +1,5 @@
 --DATABASE Museo
+--n.b. potrebbe contenere errori di sintassi (da verificare in oracle db)
 
 --Tabella Museo
 CREATE TABLE Museo
@@ -62,10 +63,10 @@ CREATE TABLE Servizio
 	PrezzoS DECIMAL(6,2) NOT NULL,
 	
 	PRIMARY KEY (CodiceS),
-	CHECK (TipologiaS IN ('ServizioPersonale','ProdottoAccessorio')), //V3
+	CHECK (TipologiaS IN ('ServizioPersonale','ProdottoAccessorio')),
 	CHECK (DescrizioneS IN ('InterpretePersonale','Audioguida',
-	'AccompagnatorePersonalizzato','CatalogoOpere','MappaMuseo')), //V4
-	CHECK (PrezzoS > 0) //V6
+	'AccompagnatorePersonalizzato','CatalogoOpere','MappaMuseo')), 
+	CHECK (PrezzoS > 0) 
 ) 
 
 --Tabella Visitatore

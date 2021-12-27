@@ -1,0 +1,6 @@
+-vincoli di unicita sui vari codici (codproprietario, codmanager, codristorante, codsala, numcid, codcaso, codtavolo).
+-vincolo su data e ora di arrivo (forse potremmo anche evitare di inserire questo, e mettere direttamente un valore di 
+default).
+- vincolo per il greenpass, se hagreenpas è vero, nessun vincolo; se hagreenpass è falso sala esterna.
+- vincolo su temperatura (<= 37.2(?))(questo penso possa essere risolto con un trigger).
+- procedura per la cancellazione automatica dei casi risolti dopo 31gg.

@@ -1,2 +1,2 @@
-Ristorante: https://ibb.co/dcGZyNn
-RistoranteRistrutturato: https://ibb.co/mq06XYD
+Ristorante class diagram: https://ibb.co/7WC7zWC
+Ristorante class diagram ristrutturato: https://ibb.co/VpHcWvx

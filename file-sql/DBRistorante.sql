@@ -12,6 +12,7 @@ CREATE TABLE PROPRIETARIO
 	Cognome			VARCHAR2(64)  NOT NULL,
 	Email			VARCHAR2(320)   
 );
+/
 
 -- Definizione dei vincoli per la tabella PROPRIETARIO
 ALTER TABLE PROPRIETARIO ADD
@@ -25,6 +26,7 @@ ALTER TABLE PROPRIETARIO ADD
 	-- Vincolo Unico username proprietario
 	CONSTRAINT UNICO_USERNAME_PROPRIETARIO UNIQUE (Username)
 );
+/
 
 -- Trigger per il vincolo Password legale 
 CREATE OR REPLACE TRIGGER PASSWORD_PROPRIETARIO_LEGALE
@@ -34,6 +36,7 @@ DECLARE
 BEGIN
 	PASSWORD_LEGALE(:NEW.PASSWORD);
 END;
+/
 
 /*
 -- Trigger SetUpper_Nome_Cognome : DA RIVEDERE PUO' NON ESSERE NECESSARIO.

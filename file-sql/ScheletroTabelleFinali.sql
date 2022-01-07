@@ -6,7 +6,7 @@ CREATE TABLE SALA
     Denominazione       VARCHAR2(64)    NOT NULL,
     CapienzaAvventori   INTEGER         NOT NULL,
     DimensioneMq        INTEGER,
-    TipoSala            TSala           NOT NULL,
+    TipoSala            ENUM('Interna', 'Esterna')           NOT NULL,
     Ristornate          INTEGER         NOT NULL
     
 };
@@ -30,7 +30,7 @@ CREATE TABLE CAMERIERE
     Nome                VARCHAR2(64)     NOT NULL,
     Cognome             VARCHAR2(64)     NOT NULL,
     DataN               DATE             NOT NULL,
-    Sesso               TSesso           NOT NULL,
+    Sesso               ENUM('Maschio', 'Femmina', 'Non specificato')           NOT NULL,
     CittaN              VARCHAR2(64)     NOT NULL,
     ProvN               VARCHAR2(2)      NOT NULL,
     CittaRes            VARCHAR2         NOT NULL,
@@ -113,7 +113,7 @@ CREATE TABLE AVVENTORE
     Nome                VARCHAR2(64)     NOT NULL,
     Cognome             VARCHAR2(64)     NOT NULL,
     DataN               DATE             NOT NULL,
-    Sesso               TSesso           NOT NULL,
+    Sesso               ENUM('Maschio', 'Femmina', 'Non specificato')           NOT NULL,
     CittaN              VARCHAR2(64)     NOT NULL,
     ProvN               VARCHAR2(2)      NOT NULL,
     CittaRes            VARCHAR2         NOT NULL,
@@ -149,7 +149,7 @@ CREATE TABLE CASO
 {
     CodCaso INTEGER GENERETED BY DEFAULT AS IDENTITY,
     DataRegistrazione    DATE    NOT NULL,
-    StatoCaso            TCaso   NOT NULL,
+    StatoCaso            ENUM('Risolto', 'InRisoluzione', 'NonRisolto')   NOT NULL,
     Note                 VARCHAR2(320)
     AvventorePositivo    INTEGER,
     CamerierePositivo    INTEGER,

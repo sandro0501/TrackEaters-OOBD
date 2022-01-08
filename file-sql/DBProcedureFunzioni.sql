@@ -38,7 +38,7 @@ BEGIN
 	-- Se il controllo fallisce, è presente un carattere diverso da un numero 
 	-- quindi il numero di telefono non è valido.
 	IF (is_number(numero)=0) THEN
-		RAISE_APPLICATION_ERROR(-20011,'Numero di telefono non valido.');
+		RAISE_APPLICATION_ERROR(-20010,'Numero di telefono non valido.');
 	END IF;
 END;
 /
@@ -59,7 +59,7 @@ BEGIN
 	-- Se la password inserita è lunga meno di 8 caratteri o 
 	-- non contiene almeno una lettera ed un numero allora non è valida
 	IF (LENGTH(password) < 8) OR (password_okay = 0) THEN
-		RAISE_APPLICATION_ERROR(-20010,'Password non valida. Deve contenere almeno 8 caratteri, una lettera ed un numero!');
+		RAISE_APPLICATION_ERROR(-20011,'Password non valida. Deve contenere almeno 8 caratteri, una lettera ed un numero!');
 	END IF;
 END;
 /

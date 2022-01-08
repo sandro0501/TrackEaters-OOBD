@@ -35,7 +35,7 @@ CREATE TABLE CAMERIERE
     ProvN               VARCHAR2(2)      NOT NULL,
     CittaRes            VARCHAR2         NOT NULL,
     ProvRes             VARCHAR2(2)      NOT NULL,
-    Telefono            VARCHAR2(15)     NOT NULL,
+    Telefono            VARCHAR2(20)     NOT NULL,
     Email               VARCHAR2(320),
     Ristorante          INTEGER
     
@@ -118,7 +118,7 @@ CREATE TABLE AVVENTORE
     ProvN               VARCHAR2(2)      NOT NULL,
     CittaRes            VARCHAR2         NOT NULL,
     ProvRes             VARCHAR2(2)      NOT NULL,
-    Telefono            VARCHAR2(15)     NOT NULL,
+    Telefono            VARCHAR2(20)     NOT NULL,
     Email               VARCHAR2(320),
     Temperatura         DECIMAL          NOT NULL,
     HaGreenpass         BOOLEAN          NOT NULL,

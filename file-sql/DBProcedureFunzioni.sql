@@ -1,47 +1,49 @@
 --FUNZIONI E PROCEDURE DEL DB
 /*============================================================================================*/
 /*============================================================================================*/
-
 -- 1. Funzione IS_NUMBER il cui scopo è quello di verificare che una stringa inserita contenga solo caratteri numerici
 CREATE FUNCTION IS_NUMBER (stringa IN VARCHAR2) RETURN INT
 IS
 valorenumerico NUMBER;
 BEGIN
-	-- Converte da valore numerico a stringa
+	-- Converte da valore numerico a stringa e ritorna 1
 	valorenumerico := TO_NUMBER(stringa);
 	RETURN 1;
 	
+	-- Se fallisce la conversione, errore e ritorna 0
 	EXCEPTION WHEN VALUE_ERROR THEN
 	RETURN 0;
 END;
-
+/
 /*============================================================================================*/
 /*============================================================================================*/
-
--- 2. Procedure Numero di telefono legale (viene riutilizzata più volte nei trigger)
+-- 2. Procedure Numero di telefono legale (viene riutilizzata più volte nei trigger) *forse da aggiustare*
 CREATE PROCEDURE NUMERO_DI_TELEFONO_LEGALE (numerotelefonico IN VARCHAR2) 
 IS 
+stringa VARCHAR2(15);
 numero VARCHAR2(15);
 BEGIN
-    numero := numerotelefonico;
+
+	-- Rimuove inizialmente tutti gli spazi, se presenti, dalla stringa del numero telefonico
+	-- per effettuare il successivo controllo
+    stringa := REPLACE(numerotelefonico,' ','');
 	
 	-- Se presente un prefisso nel numero telefonico con il carattere +, rimuove quest'ultimo
 	-- per effettuare il successivo controllo 
-	IF numero LIKE '+%' THEN
-		numero := TRIM('+' FROM numerotelefonico);
+	IF stringa LIKE '+%' THEN
+		numero := TRIM('+' FROM stringa);
 	END IF;
 	
-	-- Controlla che i restanti caratteri associati al numero telefonico siano numeri, 
-	-- se il controllo fallisce, quindi è presente un carattere diverso da un numero 
-	-- allora il numero di telefono non è valido.
+	-- Controlla che i restanti caratteri associati al numero telefonico siano numeri. 
+	-- Se il controllo fallisce, è presente un carattere diverso da un numero 
+	-- quindi il numero di telefono non è valido.
 	IF (is_number(numero)=0) THEN
 		RAISE_APPLICATION_ERROR(-20011,'Numero di telefono non valido.');
 	END IF;
 END;
- 
+/
 /*============================================================================================*/
 /*============================================================================================*/
-
 -- 3. Procedure Password legale (viene riutilizzata più volte nei trigger)
 CREATE PROCEDURE PASSWORD_LEGALE (password IN VARCHAR2) 
 IS 
@@ -60,6 +62,6 @@ BEGIN
 		RAISE_APPLICATION_ERROR(-20010,'Password non valida. Deve contenere almeno 8 caratteri, una lettera ed un numero!');
 	END IF;
 END;
-
+/
 /*============================================================================================*/
 /*============================================================================================*/

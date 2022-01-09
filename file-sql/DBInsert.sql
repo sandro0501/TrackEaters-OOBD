@@ -109,16 +109,195 @@ VALUES ('CA13264UI','Morena','Costa',TO_DATE('19/03/1999','dd/mm/yyyy'),'Femmina
 COMMIT;
 /*============================================================================================*/
 /*============================================================================================*/
+-- Insert per la tabella TAVOLO
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (1, 10, 1, 2)
 
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (2, 5, 1, 3)
 
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (3, 5, 1, 4)
 
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (4, 2, 1, 5)
 
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (5, 2, 1, 6)
 
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (6, 2, 1, 7)
 
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (7, 2, 1, 8)
 
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (8, 2, 1, 9)
 
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (9, 20, 1, NULL)
 
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (10, 5, 2, 11)
 
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (11, 5, 2, 12)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (12, 2, 2, 13)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (13, 2, 2, 14)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (14, 2, 2, 15)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (15, 2, 2, 16)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (16, 2, 2, NULL)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (17, 2, 3, 18)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (18, 2, 3, 19)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (19, 2, 3, 20)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (20, 2, 3, 21)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (21, 2, 3, NULL)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (22, 10, 4, 23)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (23, 5, 4, 24)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (24, 5, 4, 25)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (25, 2, 4, 26)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (26, 2, 4, 27)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (28, 2, 4, 29)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (29, 2, 4, 30)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (31, 2, 4, 32)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (32, 20, 4, NULL)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (33, 2, 5, 34)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (34, 2, 5, 35)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (35, 4, 5, 36)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (36, 2, 5, 37)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (37, 2, 5, 38)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (38, 2, 5, 39)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (39, 4, 5, NULL)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (40, 10, 6, 41)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (41, 5, 6, 42)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (42, 5, 6, 43)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (43, 10, 6, NULL)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (44, 10, 7, 45)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (45, 5, 7, 46)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (46, 5, 7, 47)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (47, 10, 7, NULL)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (48, 5, 8, 49)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (49, 5, 8, 50)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (50, 2, 8, 51)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (51, 2, 8, 52)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (52, 2, 8, 53)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (53, 2, 8, 54)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (54, 2, 8, NULL)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (55, 2, 9, 56)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (56, 2, 9, 57)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (57, 2, 9, 58)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (58, 2, 9, 59)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (59, 2, 9, NULL)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (60, 2, 10, 61)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (61, 2, 10, 62)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (62, 2, 10, 63)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (63, 2, 10, 64)
+
+INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
+VALUES (64, 2, 10, NULL)
+COMMIT;
+/*============================================================================================*/
+/*============================================================================================*/
 
 
 

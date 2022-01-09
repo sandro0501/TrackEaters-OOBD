@@ -21,7 +21,6 @@ END;
 CREATE PROCEDURE NUMERO_DI_TELEFONO_LEGALE (numerotelefonico IN VARCHAR2) 
 IS 
 stringa VARCHAR2(15);
-numero VARCHAR2(15);
 BEGIN
 
 	-- Rimuove inizialmente tutti gli spazi, se presenti, dalla stringa del numero telefonico
@@ -31,13 +30,13 @@ BEGIN
 	-- Se presente un prefisso nel numero telefonico con il carattere +, rimuove quest'ultimo
 	-- per effettuare il successivo controllo 
 	IF stringa LIKE '+%' THEN
-		numero := TRIM('+' FROM stringa);
+		stringa := TRIM('+' FROM stringa);
 	END IF;
 	
 	-- Controlla che i restanti caratteri associati al numero telefonico siano numeri. 
 	-- Se il controllo fallisce, è presente un carattere diverso da un numero 
 	-- quindi il numero di telefono non è valido.
-	IF (is_number(numero)=0) THEN
+	IF (is_number(stringa)=0) THEN
 		RAISE_APPLICATION_ERROR(-20010,'Numero di telefono non valido.');
 	END IF;
 END;

@@ -276,7 +276,7 @@ ALTER TABLE TAVOLO ADD
     
     -- Vincolo di chiave esterna
 	-- Se si cancella una sala vengono eliminati anche i tavoli in essa contenuti
-    CONSTRAINT FK_SALA FOREIGN KEY (Sala) REFERENCES SALA(CodSala) ON DELETE CASCADE,
+    CONSTRAINT FK_TAVOLO FOREIGN KEY (Sala) REFERENCES SALA(CodSala) ON DELETE CASCADE,
     
     --Vincolo di chiave esterna
 	--Se si cancella un tavolo adiacente ad un altro, l'adiacenza diventa NULL 
@@ -286,49 +286,29 @@ ALTER TABLE TAVOLO ADD
 
 --Trigger per il vincolo MaxAvventori legale 
 CREATE OR REPLACE TRIGGER MAXAVVENTORI_LEGALE
-BEFORE INSERT OR UPDATE ON TAVOLO
+AFTER INSERT OR UPDATE ON TAVOLO
+FOR EACH ROW 
 DECLARE
 capienza INTEGER;
 BEGIN
+	-- Calcolo di CapienzaAvventori 
+	SELECT S.CapienzaAvventori INTO capienza
+	FROM SALA S 
+	WHERE S.CodSala = :NEW.Sala;
+
 	-- Se MaxAvventori è <=0 allora non è valido 
 	IF :NEW.MaxAvventori <=0 THEN
 		RAISE_APPLICATION_ERROR(-20015,'Il valore per MaxAvventori deve essere maggiore di 0!');
 	ELSE 
-		 -- Se MaxAvventori è > di CapienzaAvventori della sala in cui il tavolo è contenuto
-		 -- allora non è valido 
-		 
-		 -- Calcolo di CapienzaAvventori 
-		 SELECT CapienzaAvventori INTO capienza
-		 FROM SALA S JOIN TAVOLO T ON S.CodSala=T.Sala
-		 WHERE T.Sala = :NEW.Sala;
-		 
-		 IF :NEW.MaxAvventori > capienza THEN 
+		-- Se MaxAvventori è > di CapienzaAvventori della sala in cui il tavolo è contenuto
+		-- allora non è valido 
+		IF :NEW.MaxAvventori > capienza THEN 
 			RAISE_APPLICATION_ERROR(-20016,'Il valore di MaxAvventori per il tavolo deve essere 
 			minore o uguale alla CapienzaAvventori della sala che contiene il tavolo in questione!');
+		END IF;
 	END IF; 
 END;
 /
 
---Trigger per il vincolo Somma MaxAvventori legale 
-CREATE OR REPLACE TRIGGER SOMMA_MAXAVVENTORI_LEGALE
-BEFORE INSERT OR UPDATE ON TAVOLO
-DECLARE
-capienza INTEGER;
-somma_avventori INTEGER;
-BEGIN
-	SELECT CapienzaAvventori INTO capienza
-	FROM TAVOLO T JOIN SALA S ON T.Sala=S.CodSala
-	WHERE T.Sala = :NEW.Sala; 
-	
-	SELECT SUM(MaxAvventori) INTO somma_avventori 
-	FROM TAVOLO T JOIN SALA S ON T.Sala=S.CodSala 
-	WHERE T.Sala = :NEW.Sala; 
-	
-	IF somma_avventori > capienza THEN 
-		RAISE_APPLICATION_ERROR(-20017,'Valore per MaxAvventori del tavolo non valido: 
-		la CapienzaAvventori della sala è stata superata!');
-	END IF; 
-END;
-/
 /*============================================================================================*/
 /*============================================================================================*/

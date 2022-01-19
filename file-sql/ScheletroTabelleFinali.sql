@@ -175,4 +175,6 @@ ALTER TABLE CASO AS
     -- Vincolo di chiave esterna
    CONSTRAINT FK_REGISTRA_MANAGER FOREIGN KEY (RegistraManager) REFERENCES MANAGERRISTORANTE(CodManager)
    
+   -- Stringa di prova
+   
   

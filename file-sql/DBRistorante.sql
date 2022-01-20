@@ -278,13 +278,13 @@ ALTER TABLE TAVOLO ADD
 	-- Se si cancella una sala vengono eliminati anche i tavoli in essa contenuti
     CONSTRAINT FK_TAVOLO FOREIGN KEY (Sala) REFERENCES SALA(CodSala) ON DELETE CASCADE,
     
-    --Vincolo di chiave esterna
-	--Se si cancella un tavolo adiacente ad un altro, l'adiacenza diventa NULL 
+    -- Vincolo di chiave esterna
+	-- Se si cancella un tavolo adiacente ad un altro, l'adiacenza diventa NULL 
     CONSTRAINT FK_TAVOLO_ADIACENTE FOREIGN KEY (TavoloAdiacente) REFERENCES TAVOLO(CodTavolo) ON DELETE SET NULL
 );
 /
 
---Trigger per il vincolo MaxAvventori legale 
+-- Trigger per il vincolo MaxAvventori legale 
 CREATE OR REPLACE TRIGGER MAXAVVENTORI_LEGALE
 AFTER INSERT OR UPDATE ON TAVOLO
 FOR EACH ROW 
@@ -310,5 +310,33 @@ BEGIN
 END;
 /
 
+-- Trigger per il vincolo Capienza legale 
+CREATE OR REPLACE TRIGGER CAPIENZA_LEGALE
+BEFORE INSERT ON TAVOLO
+FOR EACH ROW
+DECLARE
+capienza INTEGER;
+capienzacorrente INTEGER;
+BEGIN
+	-- Calcolo di CapienzaAvventori 
+	SELECT S.CapienzaAvventori INTO capienza
+	FROM SALA S 
+	WHERE S.CodSala = :NEW.Sala;
+	
+	-- Calcolo della CapienzaAvventori corrente per la Sala 
+	SELECT SUM(T.MAXAVVENTORI) INTO capienzacorrente
+	FROM TAVOLO T
+	WHERE T.Sala =:NEW.Sala;
+	
+	-- Se la somma fra la Capienza corrente e il nuovo MaxAvventori supera 
+	-- la Capienza massima della Sala allora blocca l'inserimento
+	IF :NEW.MAXAVVENTORI+capienzacorrente > capienza THEN
+		RAISE_APPLICATION_ERROR(-20017,'Errore. Capienza massima della sala di riferimento superata!');
+	END IF;
+	
+END;
+/
+
 /*============================================================================================*/
 /*============================================================================================*/
+

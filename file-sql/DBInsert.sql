@@ -299,8 +299,8 @@ COMMIT;
 /*============================================================================================*/
 /*============================================================================================*/
 -- Insert per la tabella TAVOLATA
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (1, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 1, CA78432DB )
+INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
+VALUES (1, TO_DATE('22/01/2022', 'dd/mm/yyyy'),1,CA78432DB);
 
 INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
 VALUES (2, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 4, CA78432DB)

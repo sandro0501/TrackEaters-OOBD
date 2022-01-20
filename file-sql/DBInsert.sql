@@ -111,190 +111,190 @@ COMMIT;
 /*============================================================================================*/
 -- Insert per la tabella TAVOLO
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (1, 10, 1, 2)
+VALUES (1, 10, 1, NULL);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (2, 5, 1, 3)
+VALUES (2, 5, 1, 1);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (3, 5, 1, 4)
+VALUES (3, 5, 1, 2);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (4, 2, 1, 5)
+VALUES (4, 2, 1, 3);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (5, 2, 1, 6)
+VALUES (5, 2, 1, 4);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (6, 2, 1, 7)
+VALUES (6, 2, 1, 5);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (7, 2, 1, 8)
+VALUES (7, 2, 1, 6);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (8, 2, 1, 9)
+VALUES (8, 2, 1, 7);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (9, 20, 1, NULL)
+VALUES (9, 20, 1, 8);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (10, 5, 2, 11)
+VALUES (10, 5, 2, NULL);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (11, 5, 2, 12)
+VALUES (11, 5, 2, 10);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (12, 2, 2, 13)
+VALUES (12, 2, 2, 11);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (13, 2, 2, 14)
+VALUES (13, 2, 2, 12);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (14, 2, 2, 15)
+VALUES (14, 2, 2, 13);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (15, 2, 2, 16)
+VALUES (15, 2, 2, 14);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (16, 2, 2, NULL)
+VALUES (16, 2, 2, 15);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (17, 2, 3, 18)
+VALUES (17, 2, 3, NULL);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (18, 2, 3, 19)
+VALUES (18, 2, 3, 17);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (19, 2, 3, 20)
+VALUES (19, 2, 3, 18);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (20, 2, 3, 21)
+VALUES (20, 2, 3, 19);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (21, 2, 3, NULL)
+VALUES (21, 2, 3, 20);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (22, 10, 4, 23)
+VALUES (22, 10, 4, NULL);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (23, 5, 4, 24)
+VALUES (23, 5, 4, 22);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (24, 5, 4, 25)
+VALUES (24, 5, 4, 23);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (25, 2, 4, 26)
+VALUES (25, 2, 4, 24);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (26, 2, 4, 27)
+VALUES (26, 2, 4, 25);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (28, 2, 4, 29)
+VALUES (27, 2, 4, 26);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (29, 2, 4, 30)
+VALUES (28, 2, 4, 27);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (31, 2, 4, 32)
+VALUES (29, 2, 4, 28);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (32, 20, 4, NULL)
+VALUES (30, 20, 4, 29);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (33, 2, 5, 34)
+VALUES (31, 2, 5, NULL);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (34, 2, 5, 35)
+VALUES (32, 2, 5, 31);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (35, 4, 5, 36)
+VALUES (33, 4, 5, 32);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (36, 2, 5, 37)
+VALUES (34, 2, 5, 33);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (37, 2, 5, 38)
+VALUES (35, 2, 5, 34);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (38, 2, 5, 39)
+VALUES (36, 2, 5, 35);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (39, 4, 5, NULL)
+VALUES (37, 4, 5, 36);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (40, 10, 6, 41)
+VALUES (38, 10, 6, NULL);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (41, 5, 6, 42)
+VALUES (39, 5, 6, 38);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (42, 5, 6, 43)
+VALUES (40, 5, 6, 39);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (43, 10, 6, NULL)
+VALUES (41, 10, 6, 40);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (44, 10, 7, 45)
+VALUES (42, 10, 7, NULL);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (45, 5, 7, 46)
+VALUES (43, 5, 7, 42);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (46, 5, 7, 47)
+VALUES (44, 5, 7, 43);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (47, 10, 7, NULL)
+VALUES (45, 10, 7, 44);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (48, 5, 8, 49)
+VALUES (46, 5, 8, NULL);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (49, 5, 8, 50)
+VALUES (47, 5, 8, 46);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (50, 2, 8, 51)
+VALUES (48, 2, 8, 47);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (51, 2, 8, 52)
+VALUES (49, 2, 8, 48);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (52, 2, 8, 53)
+VALUES (50, 2, 8, 49);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (53, 2, 8, 54)
+VALUES (51, 2, 8, 50);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (54, 2, 8, NULL)
+VALUES (52, 2, 8, 51);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (55, 2, 9, 56)
+VALUES (53, 2, 9, NULL);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (56, 2, 9, 57)
+VALUES (54, 2, 9, 53);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (57, 2, 9, 58)
+VALUES (55, 2, 9, 54);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (58, 2, 9, 59)
+VALUES (56, 2, 9, 55);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (59, 2, 9, NULL)
+VALUES (57, 2, 9, 56);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (60, 2, 10, 61)
+VALUES (58, 2, 10, NULL);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (61, 2, 10, 62)
+VALUES (59, 2, 10, 58);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (62, 2, 10, 63)
+VALUES (60, 2, 10, 59);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (63, 2, 10, 64)
+VALUES (61, 2, 10, 60);
 
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala, TavoloAdiacente)
-VALUES (64, 2, 10, NULL)
+VALUES (62, 2, 10, 61);
 COMMIT;
 /*============================================================================================*/
 /*============================================================================================*/

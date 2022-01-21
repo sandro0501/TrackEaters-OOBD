@@ -300,252 +300,58 @@ COMMIT;
 /*============================================================================================*/
 -- Insert per la tabella TAVOLATA
 INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
-VALUES (1, TO_DATE('22/01/2022', 'dd/mm/yyyy'),1,CA78432DB);
+VALUES (1, TO_DATE(SYSDATE,'dd/mm/yyyy'),4,'CA78432DB');
 
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (2, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 4, CA78432DB)
+INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
+VALUES (2, TO_DATE(SYSDATE,'dd/mm/yyyy'),5,'CA66421DA');
 
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (3, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 5, CA78432DB)
+INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
+VALUES (3, TO_DATE(SYSDATE,'dd/mm/yyyy'),12,'AU0199811');
 
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (4, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 9, CA66421DA)
+INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
+VALUES (4, TO_DATE(SYSDATE,'dd/mm/yyyy'),13,'CA64321CE');
 
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (5, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 10, CA66421DA )
+INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
+VALUES (5, TO_DATE(SYSDATE,'dd/mm/yyyy'),18,'AU3425442');
 
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (6, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 12, AU0199811)
+INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
+VALUES (6, TO_DATE('27/03/2022','dd/mm/yyyy'),8,'CA78432DB');
 
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (7, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 13, AU0199811)
+INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
+VALUES (7, TO_DATE(SYSDATE,'dd/mm/yyyy'),25,'CA53216BE');
 
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (8, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 15, CA64321CE)
+INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
+VALUES (8, TO_DATE(SYSDATE,'dd/mm/yyyy'),26,'CA73121FE');
 
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (9, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 16, CA64321CE)
+INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
+VALUES (9, TO_DATE(SYSDATE,'dd/mm/yyyy'),27,'AU0567231');
 
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (10, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 17, AU3425442)
+INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
+VALUES (10, TO_DATE(SYSDATE,'dd/mm/yyyy'),37,'CA52131PV');
 
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (11, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 19, AU3425442)
+INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
+VALUES (11, TO_DATE('26/03/2022','dd/mm/yyyy'),26,'CA53216BE');
 
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (12, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 23, CA53216BE)
+INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
+VALUES (12, TO_DATE(SYSDATE,'dd/mm/yyyy'),39,'CA87452TB');
 
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (13, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 24, CA53216BE)
+INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
+VALUES (13, TO_DATE(SYSDATE,'dd/mm/yyyy'),49,'CA33145OD');
 
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (14, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 27, CA73121FE)
+INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
+VALUES (14, TO_DATE(SYSDATE,'dd/mm/yyyy'),50,'AU0236754');
 
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (15, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 28, CA73121FE)
+INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
+VALUES (15, TO_DATE(SYSDATE,'dd/mm/yyyy'),53,'CA10946DE');
 
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (16, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 29, CA73121FE)
+INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
+VALUES (16, TO_DATE(SYSDATE,'dd/mm/yyyy'),55,'CA33241OA');
 
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (17, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 31, AU0567231)
+INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
+VALUES (17, TO_DATE(SYSDATE,'dd/mm/yyyy'),62,'CA13264UI');
 
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (18, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 33, AU0567231)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (19, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 35, CA52131PV)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (20, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 37, CA52131PV)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (21, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 38, CA87452TB)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (22, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 39, CA87452TB)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (23, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 41, CA87452TB)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (24, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 42, CA33145OD)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (25, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 43, CA33145OD)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (26, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 44, CA33145OD)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (27, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 46, AU0236754)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (28, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 47, AU0236754)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (29, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 50, AU0236754)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (30, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 52, AU0236754)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (31, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 53, CA10946DE)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (32, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 55, CA10946DE)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (33, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 56, CA10946DE)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (34, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 58, CA33241OA)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (35, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 59, CA33241OA)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (36, TO_DATE('15/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 62, CA13264UI)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (37, TO_DATE('16/11/2021', 'dd/mm/yyyy'), 20:00, 22:00, 1, CA78432DB)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (38, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 4, CA78432DB)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (39, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 5, CA78432DB)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (40, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 7, CA66421DA)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (41, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 8, CA66421DA)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (42, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 9, CA66421DA )
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (43, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 10, CA66421DA )
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (44, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 12, AU0199811 )
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (45, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 13, AU0199811 )
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (46, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 15, CA64321CE  )
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (47, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 16 CA64321CE  )
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (48, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 17, AU3425442 )
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (49, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 18, AU3425442)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (50, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 19, AU3425442 )
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (51, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 22, CA53216BE)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (52, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 23, CA53216BE )
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (53, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 24, CA53216BE )
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (54, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 26, CA53216BE)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (55, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 27, CA73121FE )
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (56, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 28, CA73121FE )
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (57, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 29, CA73121FE )
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (58, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 30, AU0567231)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (59, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 31, AU0567231)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (60, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 32, AU0567231 )
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (61, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 33, AU0567231 )
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (62, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 35, CA52131PV )
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (63, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 36, CA52131PV)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (64, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 37, CA52131PV )
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (65, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 38, CA87452TB )
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (66, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 39, CA87452TB)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (67, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 41, CA87452TB)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (68, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 42, CA33145OD)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (69, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 43, CA33145OD)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (70, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 44, CA33145OD)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (71, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 46, AU0236754)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (72, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 47, AU0236754)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (73, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 48, AU0236754 )
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (74, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 50, AU0236754)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (75, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 52, AU0236754)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (76, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 53, CA10946DE)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (77, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 55, CA10946DE)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (78, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 56, CA10946DE)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (79, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 57, CA10946DE)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (80, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 58, CA33241OA)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (81, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 59, CA33241OA)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (82, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 60, CA13264UI)
-
-INSERT INTO TAVOLATA (CodTavolata, DataArrivo, OraArrivo, OraUScita, Tavolo, Cameriere)
-VALUES (83, TO_DATE('16/11/2021', 'dd/mm/yyyy'),20:00, 22:00, 62, CA13264UI)
+INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
+VALUES (18, TO_DATE('29/03/2022','dd/mm/yyyy'),50,'CA13264UI');
+COMMIT;
 /*===========================================================================================*/
 /*===========================================================================================*/

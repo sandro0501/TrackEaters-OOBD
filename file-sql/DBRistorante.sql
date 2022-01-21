@@ -368,6 +368,7 @@ ALTER TABLE TAVOLATA ADD
 );
 /
 
+/*
 -- Trigger per il vincolo Data arrivo legale 
 CREATE OR REPLACE TRIGGER DATA_ARRIVO_LEGALE 
 BEFORE INSERT OR UPDATE ON TAVOLATA
@@ -377,6 +378,26 @@ BEGIN
 		RAISE_APPLICATION_ERROR( -20018, 'La data di arrivo deve essere maggiore o uguale alla data corrente: '||TO_CHAR(SYSDATE,'dd/mm/yyyy'));
 	END IF;
 END;
-/
+/ */
 /*============================================================================================*/
 /*============================================================================================*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

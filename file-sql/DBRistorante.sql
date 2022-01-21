@@ -381,7 +381,7 @@ END;
 /*============================================================================================*/
 -- Creazione della tabella AVVENTORE
 CREATE TABLE AVVENTORE
-{
+(
     NumCid              VARCHAR2(9)		NOT NULL,
     Nome                VARCHAR2(64)	NOT NULL,
     Cognome             VARCHAR2(64)	NOT NULL,
@@ -397,7 +397,7 @@ CREATE TABLE AVVENTORE
     HaGreenpass         CHAR          	DEFAULT 'F' NOT NULL,
     Ristorante          INTEGER			NOT NULL,
     Tavolata            INTEGER         NOT NULL
-};
+);
 /
 -- Definizione dei vincoli per la tabella AVVENTORE
 ALTER TABLE AVVENTORE ADD
@@ -414,13 +414,50 @@ ALTER TABLE AVVENTORE ADD
 	CONSTRAINT FK_AVVENTORE_TAVOLATA FOREIGN KEY (Tavolata) REFERENCES TAVOLATA(CodTavolata) ON DELETE CASCADE,
 	
 	-- Vincolo Email legale
-	CONSTRAINT EMAIL_LEGALE_AVVENTORE CHECK (Email LIKE '_%@_%.__%' OR Email IS NULL)
+	CONSTRAINT EMAIL_LEGALE_AVVENTORE CHECK (Email LIKE '_%@_%.__%' OR Email IS NULL),
+	
+	-- Vincolo TSesso
+	CONSTRAINT TSesso_AVVENTORE CHECK (Sesso IN ('Maschio','Femmina','Non specificato')),	
 	
 	-- Vincolo per il dominio dell'attributo booleano HaGreenPass
-	CONSTRAINT HAGREENPASS_VALUES CHECK (HaGreenPass IN('V','F'))
+	CONSTRAINT HAGREENPASS_VALUES CHECK (HaGreenPass IN('V','F')),
+	
+	-- Vincolo Temperatura avventore legale 
+	CONSTRAINT TEMPERATURA_AVVENTORE_LEGALE CHECK (Temperatura BETWEEN 35.0 AND 37.5)	
 );
 /
-
+-- Trigger per il vincolo Data nascita legale 
+CREATE OR REPLACE TRIGGER DATA_NASCITA_LEGALE
+BEFORE INSERT OR UPDATE ON AVVENTORE
+FOR EACH ROW
+BEGIN
+	
+END;
+/
+-- Trigger per il vincolo Numero di telefono legale 
+CREATE OR REPLACE TRIGGER NUMERO_DI_TELEFONO_AVVENTORE_LEGALE
+BEFORE INSERT OR UPDATE ON AVVENTORE
+FOR EACH ROW
+BEGIN
+	NUMERO_DI_TELEFONO_LEGALE(:NEW.Telefono);
+END;
+/
+-- Trigger per il vincolo Has greenpass  
+CREATE OR REPLACE TRIGGER HAS_GREENPASS
+BEFORE INSERT OR UPDATE ON AVVENTORE
+FOR EACH ROW
+BEGIN
+	
+END;
+/
+-- Trigger per il vincolo Somma avventori a tavolata legale 
+CREATE OR REPLACE TRIGGER SOMMA_AVVENTORI_A_TAVOLATA_LEGALE
+BEFORE INSERT OR UPDATE ON AVVENTORE
+FOR EACH ROW
+BEGIN
+	
+END;
+/
 
 
 

@@ -17,7 +17,7 @@ END;
 /
 /*============================================================================================*/
 /*============================================================================================*/
--- 2. Procedure Numero di telefono legale (viene riutilizzata più volte nei trigger) *forse da aggiustare*
+-- 2. Procedure Numero di telefono legale (viene riutilizzata più volte nei trigger) 
 CREATE PROCEDURE NUMERO_DI_TELEFONO_LEGALE (numerotelefonico IN VARCHAR2) 
 IS 
 stringa VARCHAR2(15);

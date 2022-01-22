@@ -430,8 +430,16 @@ ALTER TABLE AVVENTORE ADD
 CREATE OR REPLACE TRIGGER DATA_NASCITA_LEGALE
 BEFORE INSERT OR UPDATE ON AVVENTORE
 FOR EACH ROW
+DECLARE
+datatavolata TAVOLATA.DataArrivo%TYPE; 
 BEGIN
-	
+	SELECT T.DataArrivo INTO datatavolata
+	FROM TAVOLATA T 
+	WHERE T.CodTavolata = :NEW.Tavolata;
+
+	IF :NEW.DataN > datatavolata THEN 
+		RAISE_APPLICATION_ERROR( -20018, 'La data di nascita di un avventore deve essere precedente alla data di arrivo della tavolata!');
+	END IF;
 END;
 /
 -- Trigger per il vincolo Numero di telefono legale 

@@ -366,17 +366,6 @@ ALTER TABLE TAVOLATA ADD
 	CONSTRAINT UNICA_COMPOSIZIONE_TAVOLO_A_TAVOLATA UNIQUE(DataArrivo,Tavolo)
 );
 /
-/*
--- Trigger per il vincolo Data arrivo legale 
-CREATE OR REPLACE TRIGGER DATA_ARRIVO_LEGALE 
-BEFORE INSERT OR UPDATE ON TAVOLATA
-FOR EACH ROW
-BEGIN
-	IF( TO_DATE(:NEW.DataArrivo,'dd/mm/yyyy') < TO_DATE(SYSDATE,'dd/mm/yyyy') ) THEN
-		RAISE_APPLICATION_ERROR( -20018, 'La data di arrivo deve essere maggiore o uguale alla data corrente: '||TO_CHAR(SYSDATE,'dd/mm/yyyy'));
-	END IF;
-END;
-/ */
 /*============================================================================================*/
 /*============================================================================================*/
 -- Creazione della tabella AVVENTORE
@@ -450,12 +439,36 @@ BEGIN
 	NUMERO_DI_TELEFONO_LEGALE(:NEW.Telefono);
 END;
 /
+
 -- Trigger per il vincolo Has greenpass  
 CREATE OR REPLACE TRIGGER HAS_GREENPASS
 BEFORE INSERT OR UPDATE ON AVVENTORE
 FOR EACH ROW
+DECLARE 
+tipologiasala SALA.TipoSala%TYPE;
 BEGIN
 	
+	-- Recupera la tipologia della sala in cui è ubicato il tavolo della tavolata a cui partecipa l'avventore 
+	SELECT S.TipoSala INTO tipologiasala
+	FROM TAVOLATA T JOIN TAVOLO TA ON T.Tavolo = TA.CodTavolo JOIN SALA S ON S.CodSala = TA.Sala
+	WHERE T.CodTavolata = :NEW.Tavolata;
+	
+	-- Se l'avventore è sprovvisto di green pass ed è stato associato ad una tavolata il cui tavolo 
+	-- si trova in una sala interna allora non può partecipare alla tavolata. 
+	IF :NEW.HaGreenpass='F' AND tipologiasala='Interna' THEN 
+		RAISE_APPLICATION_ERROR( -20019, 'Un avventore sprovvisto di green pass può partecipare unicamente
+		ad una tavolata composta da un tavolo ubicato in una sala esterna!');
+	END IF;
+END;
+/
+-- Trigger per il vincolo Temperatura avventore legale
+CREATE OR REPLACE TRIGGER TEMPERATURA_AVVENTORE
+BEFORE INSERT OR UPDATE ON AVVENTORE
+FOR EACH ROW
+BEGIN
+	IF :NEW.Temperatura > 37.5 THEN 
+		RAISE_APPLICATION_ERROR( -20020, 'Temperatura avventore illegale! Potrebbe essere un potenziale CASO da registrare.');
+	END IF;
 END;
 /
 -- Trigger per il vincolo Somma avventori a tavolata legale 

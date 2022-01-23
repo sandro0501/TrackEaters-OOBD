@@ -422,10 +422,13 @@ FOR EACH ROW
 DECLARE
 datatavolata TAVOLATA.DataArrivo%TYPE; 
 BEGIN
+	-- Recupera la data della tavolata a cui partecipa l'avventore 
 	SELECT T.DataArrivo INTO datatavolata
 	FROM TAVOLATA T 
 	WHERE T.CodTavolata = :NEW.Tavolata;
-
+	
+	-- Se la data di nascita dell'avventore è successiva alla data della tavolata allora
+	-- blocca l'inserimento dell'avventore 
 	IF :NEW.DataN > datatavolata THEN 
 		RAISE_APPLICATION_ERROR( -20018, 'La data di nascita di un avventore deve essere precedente alla data di arrivo della tavolata!');
 	END IF;
@@ -439,7 +442,6 @@ BEGIN
 	NUMERO_DI_TELEFONO_LEGALE(:NEW.Telefono);
 END;
 /
-
 -- Trigger per il vincolo Has greenpass  
 CREATE OR REPLACE TRIGGER HAS_GREENPASS
 BEFORE INSERT OR UPDATE ON AVVENTORE
@@ -466,6 +468,8 @@ CREATE OR REPLACE TRIGGER TEMPERATURA_AVVENTORE
 BEFORE INSERT OR UPDATE ON AVVENTORE
 FOR EACH ROW
 BEGIN
+	-- Se la temperatura dell'avventore supera i 37.5 gradi allora comunica che l'avventore 
+	-- puo' essere un potenziale caso da registrare nella tabella CASO. 
 	IF :NEW.Temperatura > 37.5 THEN 
 		RAISE_APPLICATION_ERROR( -20020, 'Temperatura avventore illegale! Potrebbe essere un potenziale CASO da registrare.');
 	END IF;
@@ -473,12 +477,34 @@ END;
 /
 -- Trigger per il vincolo Somma avventori a tavolata legale 
 CREATE OR REPLACE TRIGGER SOMMA_AVVENTORI_A_TAVOLATA_LEGALE
-BEFORE INSERT OR UPDATE ON AVVENTORE
+BEFORE INSERT ON AVVENTORE
 FOR EACH ROW
+DECLARE 
+maxavventoritavolata TAVOLO.MaxAvventori%TYPE;
+numavventoricorrente INTEGER; 
+avventorecorrente INTEGER;
 BEGIN
-	
+	-- Recupera il massimo numero dei posti del tavolo associato alla tavolata 
+	SELECT TA.MaxAvventori INTO maxavventoritavolata
+	FROM TAVOLATA T JOIN TAVOLO TA ON T.Tavolo = TA.CodTavolo
+	WHERE T.CodTavolata = :NEW.Tavolata;
+    
+	-- Conta gli avventori correnti che partecipano alla tavolata 
+	SELECT COUNT(A.NumCid) INTO numavventoricorrente
+	FROM AVVENTORE A 
+	WHERE A.Tavolata = :NEW.Tavolata;
+
+	-- Se il numero di avventori correnti che partecipano alla tavolata 
+	-- più il nuovo avventore che si sta per registrare 
+	-- superano complessivamente il numero dei posti del tavolo 
+	-- allora non è possibile registrare il nuovo avventore 
+	IF numavventoricorrente+1 > maxavventoritavolata THEN 
+		RAISE_APPLICATION_ERROR( -20021, 'Impossibile registrare avventore alla tavolata. 
+		Il tavolo di riferimento ha tutti i posti occupati!');
+	END IF;
 END;
-/
+
+
 
 
 

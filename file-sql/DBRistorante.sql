@@ -503,7 +503,7 @@ BEGIN
 		Il tavolo di riferimento ha tutti i posti occupati!');
 	END IF;
 END;
-
+/
 
 
 

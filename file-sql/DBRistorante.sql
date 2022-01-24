@@ -541,8 +541,40 @@ ALTER TABLE CASO ADD
 	CONSTRAINT TCaso CHECK (StatoCaso IN ('Risolto','InRisoluzione','NonRisolto'))
 );
 /
-
-
+-- Trigger per il vincolo Data registrazione caso 
+CREATE OR REPLACE TRIGGER DATA_REGISTRAZIONE_CASO
+BEFORE INSERT OR UPDATE ON CASO
+FOR EACH ROW
+DECLARE 
+datanascita_avventore AVVENTORE.DataN%TYPE;
+datanascita_cameriere CAMERIERE.DataN%TYPE;
+BEGIN
+	IF :NEW.AvventorePositivo IS NOT NULL THEN 
+		-- Recupera la data di nascita dell'avventore positivo 
+		SELECT A.DataN INTO datanascita_avventore
+		FROM CASO C JOIN AVVENTORE A ON C.AvventorePositivo = A.NumCid
+		WHERE A.NumCid = :NEW.AvventorePositivo;
+		
+		IF :NEW.DataRegistrazione > datanascita_avventore THEN 
+				RAISE_APPLICATION_ERROR( -20022, 'Impossibile registrare caso: data registrazione non valida.');
+		END IF; 	
+	END IF; 
+	
+	
+	IF :NEW.CamerierePositivo IS NOT NULL THEN 
+		-- Recupera la data di nascita del cameriere positivo 
+		SELECT CA.DataN INTO datanascita_cameriere
+		FROM CASO C JOIN CAMERIERE CA ON C.AvventorePositivo = CA.NumCid
+		WHERE CA.NumCid = :NEW.CamerierePositivo;
+		
+		IF :NEW.DataRegistrazione > datanascita_cameriere THEN 
+				RAISE_APPLICATION_ERROR( -20022, 'Impossibile registrare caso: data registrazione non valida.');
+		END IF; 
+	END IF; 	
+END;
+/
+/*============================================================================================*/
+/*============================================================================================*/
 
 
 

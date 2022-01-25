@@ -345,13 +345,13 @@ INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
 VALUES (15, TO_DATE('25/12/2021','dd/mm/yyyy'),53,'CA10946DE');
 
 INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
-VALUES (16, TO_DATE(SYSDATE,'dd/mm/yyyy'),55,'CA33241OA');
+VALUES (16,SYSDATE,55,'CA33241OA');
 
 INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
-VALUES (17, TO_DATE(SYSDATE,'dd/mm/yyyy'),62,'CA13264UI');
+VALUES (17,SYSDATE,62,'CA13264UI');
 
 INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
-VALUES (18, TO_DATE(SYSDATE,'dd/mm/yyyy'),50,'CA13264UI');
+VALUES (18,SYSDATE,50,'CA13264UI');
 COMMIT;
 /*===========================================================================================*/
 /*===========================================================================================*/

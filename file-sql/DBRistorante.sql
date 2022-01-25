@@ -12,7 +12,6 @@ CREATE TABLE PROPRIETARIO
 	Email			VARCHAR2(320)   
 );
 /
-
 -- Definizione dei vincoli per la tabella PROPRIETARIO
 ALTER TABLE PROPRIETARIO ADD
 (
@@ -26,7 +25,6 @@ ALTER TABLE PROPRIETARIO ADD
 	CONSTRAINT UNICO_USERNAME_PROPRIETARIO UNIQUE (Username)
 );
 /
-
 -- Trigger per il vincolo Password legale 
 CREATE OR REPLACE TRIGGER PASSWORD_PROPRIETARIO_LEGALE
 BEFORE INSERT OR UPDATE ON PROPRIETARIO
@@ -35,19 +33,6 @@ BEGIN
 	PASSWORD_LEGALE(:NEW.Password);
 END;
 /
-/*
--- Trigger SetUpper_Nome_Cognome : DA RIVEDERE PUO' NON ESSERE NECESSARIO.
-CREATE OR REPLACE TRIGGER SET_UPPER_NOME_COGNOME
-BEFORE INSERT OR UPDATE ON PROPRIETARIO
-FOR EACH ROW
-BEGIN
-	-- Setta la stringa relativa a Nome tutta in maiuscolo
-	:NEW.Nome := UPPER(:NEW.Nome);
-	-- Setta la stringa relativa a Cognome tutta in maiuscolo
-	:NEW.Cognome := UPPER(:NEW.Cognome);
-END;
-/
-*/
 /*============================================================================================*/
 /*============================================================================================*/
 -- Creazione della tabella RISTORANTE
@@ -65,7 +50,6 @@ CREATE TABLE RISTORANTE
 	Proprietario	INTEGER		  	NOT NULL
 );
 /
-
 -- Definizione dei vincoli per la tabella RISTORANTE
 ALTER TABLE RISTORANTE ADD
 (
@@ -82,10 +66,8 @@ ALTER TABLE RISTORANTE ADD
 	
 	-- Vincolo Sito Web Legale
 	CONSTRAINT SITO_WEB_LEGALE CHECK (SitoWeb LIKE 'www.__%._%' OR SitoWeb IS NULL)
-
 );
 /
-
 -- Trigger per il vincolo Numero di telefono legale 
 CREATE OR REPLACE TRIGGER NUMERO_DI_TELEFONO_RISTORANTE_LEGALE
 BEFORE INSERT OR UPDATE ON RISTORANTE
@@ -94,7 +76,6 @@ BEGIN
 	NUMERO_DI_TELEFONO_LEGALE(:NEW.Telefono);
 END;
 /
-
 -- Trigger per il vincolo Cap legale
 CREATE OR REPLACE TRIGGER CAP_LEGALE
 BEFORE INSERT OR UPDATE ON RISTORANTE
@@ -123,7 +104,6 @@ CREATE TABLE MANAGERRISTORANTE
 	RistoranteGestito	INTEGER 	  		  
 );
 /
-
 -- Definizione dei vincoli per la tabella MANAGERRISTORANTE
 ALTER TABLE MANAGERRISTORANTE ADD
 (
@@ -141,7 +121,6 @@ ALTER TABLE MANAGERRISTORANTE ADD
 	CONSTRAINT UNICO_USERNAME_MANAGER_RISTORANTE UNIQUE (Username)
 );
 /
-
 -- Trigger per il vincolo Password legale
 CREATE OR REPLACE TRIGGER PASSWORD_MANAGER_RISTORANTE_LEGALE
 BEFORE INSERT OR UPDATE ON MANAGERRISTORANTE
@@ -150,7 +129,6 @@ BEGIN
 	PASSWORD_LEGALE(:NEW.Password);
 END;
 /
-
 -- Trigger per il vincolo Numero di telefono legale 
 CREATE OR REPLACE TRIGGER NUMERO_DI_TELEFONO_MANAGER_RISTORANTE_LEGALE
 BEFORE INSERT OR UPDATE ON MANAGERRISTORANTE
@@ -159,7 +137,6 @@ BEGIN
 	NUMERO_DI_TELEFONO_LEGALE(:NEW.Telefono);
 END;
 /
-
 /*============================================================================================*/
 /*============================================================================================*/
 -- Creazione della tabella SALA
@@ -173,7 +150,6 @@ CREATE TABLE SALA
     Ristorante        	INTEGER         NOT NULL   
 );
 /
-
 -- Definizione dei vincoli per la tabella SALA
 ALTER TABLE SALA ADD
 (
@@ -213,7 +189,6 @@ CREATE TABLE CAMERIERE
     Ristorante          INTEGER			NOT NULL  
 );
 /
-
 -- Definizione dei vincoli per la tabella CAMERIERE
 ALTER TABLE CAMERIERE ADD
 (
@@ -231,7 +206,6 @@ ALTER TABLE CAMERIERE ADD
 	CONSTRAINT TSesso CHECK (Sesso IN ('Maschio','Femmina','Non specificato'))	
 );
 /
-
 -- Trigger per il vincolo Numero di telefono legale 
 CREATE OR REPLACE TRIGGER NUMERO_DI_TELEFONO_CAMERIERE_LEGALE
 BEFORE INSERT OR UPDATE ON CAMERIERE
@@ -240,7 +214,6 @@ BEGIN
 	NUMERO_DI_TELEFONO_LEGALE(:NEW.Telefono);
 END;
 /
-
 -- Trigger per il vincolo Età cameriere legale
 CREATE OR REPLACE TRIGGER ETA_CAMERIERE_LEGALE
 BEFORE INSERT OR UPDATE ON CAMERIERE
@@ -267,7 +240,6 @@ CREATE TABLE TAVOLO
     TavoloAdiacente INTEGER     
 );
 /
-
 -- Definizione dei vincoli per la tabella TAVOLO
 ALTER TABLE TAVOLO ADD
 (
@@ -283,7 +255,6 @@ ALTER TABLE TAVOLO ADD
     CONSTRAINT FK_TAVOLO_ADIACENTE FOREIGN KEY (TavoloAdiacente) REFERENCES TAVOLO(CodTavolo) ON DELETE SET NULL
 );
 /
-
 -- Trigger per il vincolo MaxAvventori legale 
 CREATE OR REPLACE TRIGGER MAXAVVENTORI_LEGALE
 AFTER INSERT OR UPDATE ON TAVOLO
@@ -309,7 +280,6 @@ BEGIN
 	END IF; 
 END;
 /
-
 -- Trigger per il vincolo Capienza legale 
 CREATE OR REPLACE TRIGGER CAPIENZA_LEGALE
 BEFORE INSERT ON TAVOLO
@@ -458,7 +428,7 @@ BEGIN
 	-- Se l'avventore è sprovvisto di green pass ed è stato associato ad una tavolata il cui tavolo 
 	-- si trova in una sala interna allora non può partecipare alla tavolata. 
 	IF :NEW.HaGreenpass='F' AND tipologiasala='Interna' THEN 
-		RAISE_APPLICATION_ERROR( -20019, 'Un avventore sprovvisto di green pass può partecipare unicamente
+		RAISE_APPLICATION_ERROR( -20019, 'Un avventore sprovvisto di green pass puo partecipare unicamente
 		ad una tavolata composta da un tavolo ubicato in una sala esterna!');
 	END IF;
 END;
@@ -579,17 +549,3 @@ END;
 /
 /*============================================================================================*/
 /*============================================================================================*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-

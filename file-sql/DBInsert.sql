@@ -345,13 +345,13 @@ INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
 VALUES (15, TO_DATE('25/12/2021','dd/mm/yyyy'),53,'CA10946DE');
 
 INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
-VALUES (16,SYSDATE,55,'CA33241OA');
+VALUES (16,TO_DATE('25/01/2022','dd/mm/yyyy'),55,'CA33241OA');
 
 INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
-VALUES (17,SYSDATE,62,'CA13264UI');
+VALUES (17,TO_DATE('25/01/2022','dd/mm/yyyy'),62,'CA13264UI');
 
 INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere)
-VALUES (18,SYSDATE,50,'CA13264UI');
+VALUES (18,TO_DATE('25/01/2022','dd/mm/yyyy'),50,'CA13264UI');
 COMMIT;
 /*===========================================================================================*/
 /*===========================================================================================*/
@@ -483,34 +483,34 @@ COMMIT;
 /*===========================================================================================*/
 -- Insert per la tabella CASO
 INSERT INTO CASO (CodCaso, DataRegistrazione, StatoCaso, Note, AvventorePositivo, CamerierePositivo, RegistraProprietario, RegistraManager)
-VALUES(1,SYSDATE,'NonRisolto',NULL,'IC3159530',NULL,1,NULL);
+VALUES(1,TO_DATE('25/01/2022','dd/mm/yyyy'),'NonRisolto',NULL,'IC3159530',NULL,1,NULL);
 
 INSERT INTO CASO (CodCaso, DataRegistrazione, StatoCaso, Note, AvventorePositivo, CamerierePositivo, RegistraProprietario, RegistraManager)
-VALUES(2,SYSDATE,'NonRisolto',NULL,'SU2810531',NULL,1,NULL);
+VALUES(2,TO_DATE('25/01/2022','dd/mm/yyyy'),'NonRisolto',NULL,'SU2810531',NULL,1,NULL);
 
 INSERT INTO CASO (CodCaso, DataRegistrazione, StatoCaso, Note, AvventorePositivo, CamerierePositivo, RegistraProprietario, RegistraManager)
-VALUES(3,SYSDATE,'NonRisolto',NULL,'RT1739919',NULL,1,NULL);
+VALUES(3,TO_DATE('25/01/2022','dd/mm/yyyy'),'NonRisolto',NULL,'RT1739919',NULL,1,NULL);
 
 INSERT INTO CASO (CodCaso, DataRegistrazione, StatoCaso, Note, AvventorePositivo, CamerierePositivo, RegistraProprietario, RegistraManager)
-VALUES(4,SYSDATE,'InRisoluzione',NULL,'LE2615481',NULL,NULL,1);
+VALUES(4,TO_DATE('25/01/2022','dd/mm/yyyy'),'InRisoluzione',NULL,'LE2615481',NULL,NULL,1);
 
 INSERT INTO CASO (CodCaso, DataRegistrazione, StatoCaso, Note, AvventorePositivo, CamerierePositivo, RegistraProprietario, RegistraManager)
-VALUES(5,SYSDATE,'NonRisolto',NULL,'LZ9575684',NULL,NULL,2);
+VALUES(5,TO_DATE('25/01/2022','dd/mm/yyyy'),'NonRisolto',NULL,'LZ9575684',NULL,NULL,2);
 
 INSERT INTO CASO (CodCaso, DataRegistrazione, StatoCaso, Note, AvventorePositivo, CamerierePositivo, RegistraProprietario, RegistraManager)
-VALUES(6,SYSDATE,'NonRisolto',NULL,'OG6427318',NULL,NULL,2);
+VALUES(6,TO_DATE('25/01/2022','dd/mm/yyyy'),'NonRisolto',NULL,'OG6427318',NULL,NULL,2);
 
 INSERT INTO CASO (CodCaso, DataRegistrazione, StatoCaso, Note, AvventorePositivo, CamerierePositivo, RegistraProprietario, RegistraManager)
-VALUES(7,SYSDATE,'Risolto',NULL,'GE9197735',NULL,NULL,2);
+VALUES(7,TO_DATE('25/01/2022','dd/mm/yyyy'),'Risolto',NULL,'GE9197735',NULL,NULL,2);
 
 INSERT INTO CASO (CodCaso, DataRegistrazione, StatoCaso, Note, AvventorePositivo, CamerierePositivo, RegistraProprietario, RegistraManager)
-VALUES(8,SYSDATE,'NonRisolto',NULL,NULL,'CA78432DB',1,NULL);
+VALUES(8,TO_DATE('25/01/2022','dd/mm/yyyy'),'NonRisolto',NULL,NULL,'CA78432DB',1,NULL);
 
 INSERT INTO CASO (CodCaso, DataRegistrazione, StatoCaso, Note, AvventorePositivo, CamerierePositivo, RegistraProprietario, RegistraManager)
-VALUES(9,SYSDATE,'NonRisolto',NULL,NULL,'CA33241OA',NULL,2);
+VALUES(9,TO_DATE('25/01/2022','dd/mm/yyyy'),'NonRisolto',NULL,NULL,'CA33241OA',NULL,2);
 
 INSERT INTO CASO (CodCaso, DataRegistrazione, StatoCaso, Note, AvventorePositivo, CamerierePositivo, RegistraProprietario, RegistraManager)
-VALUES(10,SYSDATE,'NonRisolto',NULL,NULL,'CA66421DA',1,NULL);
+VALUES(10,TO_DATE('25/01/2022','dd/mm/yyyy'),'NonRisolto',NULL,NULL,'CA66421DA',1,NULL);
 COMMIT;
 /*===========================================================================================*/
 /*===========================================================================================*/

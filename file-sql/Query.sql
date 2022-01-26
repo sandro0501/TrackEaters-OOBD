@@ -61,12 +61,11 @@ GROUP   BY R.CodRistorante;
 La query, dato un determinato ristorante e specificata una data, 
 calcola il numero giornaliero totale di avventori risultati positivi nel ristorante in quella data.*/
 
-SELECT  T.DataArrivo Data, COUNT(C.AvventorePositivo) Numero_Positivi
-FROM    (TAVOLATA T JOIN AVVENTORE A 
-        ON T.CodTavolata=A.Tavolata) JOIN CASO C 
+SELECT  C.DataRegistrazione Data, COUNT(C.AvventorePositivo) Numero_Positivi
+FROM    AVVENTORE A JOIN CASO C 
         ON A.NumCid=C.AvventorePositivo
-WHERE T.DataArrivo=TO_DATE('22/11/2021', 'dd/mm/yyyy')
-GROUP BY T.DataArrivo;
+WHERE C.DataRegistrazione=TO_DATE('22/11/2021', 'dd/mm/yyyy')
+GROUP BY C.DataRegistrazione;
 
 /*============================================================================================*/
 /*============================================================================================*/
@@ -75,12 +74,11 @@ GROUP BY T.DataArrivo;
 La query, dato un determinato ristorante e specificato un mese, 
 calcola il numero mensile di avventori risultati positivi nel ristorante in quel mese. */
 
-SELECT  TO_CHAR(T.DataArrivo, 'yyyy') Anno, TO_CHAR(T.DataArrivo, 'mm') Mese, COUNT(C.AvventorePositivo) Numero_Positivi
-FROM    (TAVOLATA T JOIN AVVENTORE A 
-        ON T.CodTavolata=A.Tavolata) JOIN CASO C 
+SELECT  TO_CHAR(C.DataRegistrazione, 'yyyy') Anno, TO_CHAR(C.DataRegistrazione, 'mm') Mese, COUNT(C.AvventorePositivo) Numero_Positivi
+FROM    AVVENTORE A JOIN CASO C 
         ON A.NumCid=C.AvventorePositivo
-WHERE TO_CHAR(T.DataArrivo, 'yyyy')= 2021 AND TO_CHAR(T.DataArrivo, 'mm')=11
-GROUP BY TO_CHAR(T.DataArrivo, 'yyyy'), TO_CHAR(T.DataArrivo, 'mm');
+WHERE TO_CHAR(C.DataRegistrazione, 'yyyy')= 2021 AND TO_CHAR(C.DataRegistrazione, 'mm')=11
+GROUP BY TO_CHAR(C.DataRegistrazione, 'yyyy'), TO_CHAR(C.DataRegistrazione, 'mm');
 
 /*============================================================================================*/
 /*============================================================================================*/
@@ -89,12 +87,11 @@ GROUP BY TO_CHAR(T.DataArrivo, 'yyyy'), TO_CHAR(T.DataArrivo, 'mm');
 La query, dato un determinato ristorante e specificato un anno, 
 calcola il numero annuale di avventori risultati positivi nel ristorante in quell'anno.*/
 
-SELECT  TO_CHAR(T.DataArrivo, 'yyyy') Anno, COUNT(C.AvventorePositivo) Numero_Positivi
-FROM    (TAVOLATA T JOIN AVVENTORE A 
-        ON T.CodTavolata=A.Tavolata) JOIN CASO C 
+SELECT  TO_CHAR(C.DataRegistrazione, 'yyyy') Anno, COUNT(C.AvventorePositivo) Numero_Positivi
+FROM    AVVENTORE A JOIN CASO C 
         ON A.NumCid=C.AvventorePositivo
-WHERE TO_CHAR(T.DataArrivo, 'yyyy')= 2021
-GROUP BY TO_CHAR(T.DataArrivo, 'yyyy');
+WHERE TO_CHAR(C.DataRegistrazione, 'yyyy')= 2021
+GROUP BY TO_CHAR(C.DataRegistrazione, 'yyyy');
 
 /*============================================================================================*/
 /*============================================================================================*/
@@ -104,12 +101,11 @@ La query, dato un determinato proprietario e specificata una data,
 calcola il numero giornaliero totale di avventori risultati positivi 
 nei ristoranti da lui amministrati. */
 
-SELECT  R.CodRistorante Ristorante, COUNT(C.AvventorePositivo) Numero_Positivi
-FROM    ((TAVOLATA T JOIN AVVENTORE A 
-        ON T.CodTavolata=A.Tavolata) JOIN CASO C 
+SELECT  A.Ristorante Ristorante, COUNT(C.AvventorePositivo) Numero_Positivi
+FROM    (AVVENTORE A JOIN CASO C 
         ON A.NumCid=C.AvventorePositivo) JOIN RISTORANTE R
         ON A.Ristorante=R.CodRistorante
-WHERE   R.Proprietario=1 AND T.DataArrivo=TO_DATE('17/11/2021', 'dd/mm/yyyy')
+WHERE   R.Proprietario=1 AND C.DataRegistrazione=TO_DATE('17/11/2021', 'dd/mm/yyyy')
 GROUP BY R.CodRistorante;
 
 /*============================================================================================*/

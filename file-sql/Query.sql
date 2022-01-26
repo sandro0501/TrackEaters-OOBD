@@ -57,11 +57,63 @@ GROUP   BY R.CodRistorante;
 /*============================================================================================*/
 /*============================================================================================*/
 
---Query 5:
+/* Casi positivi giornalieri di un ristorante
+La query, dato un determinato ristorante e specificata una data, 
+calcola il numero giornaliero totale di avventori risultati positivi nel ristorante in quella data.*/
+
+SELECT  T.DataArrivo Data, COUNT(C.AvventorePositivo) Numero_Positivi
+FROM    (TAVOLATA T JOIN AVVENTORE A 
+        ON T.CodTavolata=A.Tavolata) JOIN CASO C 
+        ON A.NumCid=C.AvventorePositivo
+WHERE T.DataArrivo=TO_DATE('22/11/2021', 'dd/mm/yyyy')
+GROUP BY T.DataArrivo;
 
 /*============================================================================================*/
 /*============================================================================================*/
 
+/* Casi positivi mensili di un ristorante
+La query, dato un determinato ristorante e specificato un mese, 
+calcola il numero mensile di avventori risultati positivi nel ristorante in quel mese. */
+
+SELECT  TO_CHAR(T.DataArrivo, 'yyyy') Anno, TO_CHAR(T.DataArrivo, 'mm') Mese, COUNT(C.AvventorePositivo) Numero_Positivi
+FROM    (TAVOLATA T JOIN AVVENTORE A 
+        ON T.CodTavolata=A.Tavolata) JOIN CASO C 
+        ON A.NumCid=C.AvventorePositivo
+WHERE TO_CHAR(T.DataArrivo, 'yyyy')= 2021 AND TO_CHAR(T.DataArrivo, 'mm')=11
+GROUP BY TO_CHAR(T.DataArrivo, 'yyyy'), TO_CHAR(T.DataArrivo, 'mm');
+
+/*============================================================================================*/
+/*============================================================================================*/
+
+/* Casi positivi annuali di un ristorante
+La query, dato un determinato ristorante e specificato un anno, 
+calcola il numero annuale di avventori risultati positivi nel ristorante in quell'anno.*/
+
+SELECT  TO_CHAR(T.DataArrivo, 'yyyy') Anno, COUNT(C.AvventorePositivo) Numero_Positivi
+FROM    (TAVOLATA T JOIN AVVENTORE A 
+        ON T.CodTavolata=A.Tavolata) JOIN CASO C 
+        ON A.NumCid=C.AvventorePositivo
+WHERE TO_CHAR(T.DataArrivo, 'yyyy')= 2021
+GROUP BY TO_CHAR(T.DataArrivo, 'yyyy');
+
+/*============================================================================================*/
+/*============================================================================================*/
+
+/* Casi positivi giornalieri per tutti i ristoranti di un proprietario
+La query, dato un determinato proprietario e specificata una data, 
+calcola il numero giornaliero totale di avventori risultati positivi 
+nei ristoranti da lui amministrati. */
+
+SELECT  R.CodRistorante Ristorante, COUNT(C.AvventorePositivo) Numero_Positivi
+FROM    ((TAVOLATA T JOIN AVVENTORE A 
+        ON T.CodTavolata=A.Tavolata) JOIN CASO C 
+        ON A.NumCid=C.AvventorePositivo) JOIN RISTORANTE R
+        ON A.Ristorante=R.CodRistorante
+WHERE   R.Proprietario=1 AND T.DataArrivo=TO_DATE('17/11/2021', 'dd/mm/yyyy')
+GROUP BY R.CodRistorante;
+
+/*============================================================================================*/
+/*============================================================================================*/
 -- Casi positivi mensili per tutti i ristoranti di un proprietario
 SELECT TO_CHAR(C.DataRegistrazione,'mm  ') AS MESE, TO_CHAR(C.DataRegistrazione,'yyyy') AS ANNO, COUNT(C.CodCaso) AS TOT_AVVENTORI_POSITIVI
 FROM Caso C JOIN Avventore A ON C.AvventorePositivo = A.NumCid JOIN Ristorante R ON R.CodRistorante = A.Ristorante

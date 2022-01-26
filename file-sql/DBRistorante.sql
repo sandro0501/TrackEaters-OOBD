@@ -549,3 +549,13 @@ END;
 /
 /*============================================================================================*/
 /*============================================================================================*/
+-- Creazione della VISTA 'Tavolate' : 
+-- per ogni tavolata di un ristorante calcola il numero totale di partecipanti alla tavolata. 
+CREATE VIEW TAVOLATE (Ristorante, CodiceTavolata, Partecipanti) AS
+SELECT A.Ristorante, A.Tavolata, COUNT(A.NumCid) AS TOT_TAVOLATA
+FROM AVVENTORE A JOIN TAVOLATA T ON A.Tavolata = T.CodTavolata
+GROUP BY A.Ristorante, A.Tavolata
+ORDER BY A.Tavolata ASC;
+/
+/*============================================================================================*/
+/*============================================================================================*/

@@ -400,7 +400,8 @@ BEGIN
 	-- Se la data di nascita dell'avventore è successiva alla data della tavolata allora
 	-- blocca l'inserimento dell'avventore 
 	IF :NEW.DataN > datatavolata THEN 
-		RAISE_APPLICATION_ERROR( -20018, 'La data di nascita di un avventore deve essere precedente alla data di arrivo della tavolata!');
+		RAISE_APPLICATION_ERROR( -20018, 'La data di nascita di un avventore deve essere 
+		precedente alla data di arrivo della tavolata!');
 	END IF;
 END;
 /
@@ -441,7 +442,8 @@ BEGIN
 	-- Se la temperatura dell'avventore supera i 37.5 gradi allora comunica che l'avventore 
 	-- puo' essere un potenziale caso da registrare nella tabella CASO. 
 	IF :NEW.Temperatura > 37.5 THEN 
-		RAISE_APPLICATION_ERROR( -20020, 'Temperatura avventore illegale! Potrebbe essere un potenziale CASO da registrare.');
+		RAISE_APPLICATION_ERROR( -20020, 'Temperatura avventore illegale! 
+		Potrebbe essere un potenziale CASO da registrare.');
 	END IF;
 END;
 /

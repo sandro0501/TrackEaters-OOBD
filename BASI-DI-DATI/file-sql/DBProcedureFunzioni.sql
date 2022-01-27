@@ -58,7 +58,8 @@ BEGIN
 	-- Se la password inserita è lunga meno di 8 caratteri o 
 	-- non contiene almeno una lettera ed un numero allora non è valida
 	IF (LENGTH(password) < 8) OR (password_okay = 0) THEN
-		RAISE_APPLICATION_ERROR(-20011,'Password non valida. Deve contenere almeno 8 caratteri, una lettera ed un numero!');
+		RAISE_APPLICATION_ERROR(-20011,'Password non valida. 
+		Deve contenere almeno 8 caratteri, una lettera ed un numero!');
 	END IF;
 END;
 /

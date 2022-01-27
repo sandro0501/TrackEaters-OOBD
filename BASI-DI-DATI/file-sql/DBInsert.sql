@@ -355,7 +355,7 @@ VALUES (18,TO_DATE('25/01/2022','dd/mm/yyyy'),50,'CA13264UI');
 COMMIT;
 /*===========================================================================================*/
 /*===========================================================================================*/
--- Insert per la tabella Avventore
+-- Insert per la tabella AVVENTORE
 INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
 VALUES('IC3159530','Baldassarre','Pinto',TO_DATE('04/06/1953','dd/mm/yyyy'),'Maschio','Napoli','NA','Napoli','NA','+393493302038','baldassareepinto@gmail.com',35.8,'V',1,1);
 

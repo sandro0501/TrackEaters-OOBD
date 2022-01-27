@@ -72,7 +72,7 @@ WHERE R.Proprietario = 1 AND TO_CHAR(T.DataArrivo,'mm') = 11 AND TO_CHAR(T.DataA
 GROUP BY R.Proprietario, TO_CHAR(T.DataArrivo, 'mm  '), TO_CHAR(T.DataArrivo, 'yyyy');
 /*============================================================================================*/
 /*============================================================================================*/
--- 10.Casi positivi di tutti i ristoranti di un proprietario per mese di arrivo della tavolata 
+-- 10.Casi positivi di tutti i ristoranti di un proprietario per anno di arrivo della tavolata 
 -- Supponiamo che il codice del proprietario sia CodProprietario = 1 e che l'anno di arrivo della tavolata sia il 2021
 SELECT R.Proprietario, TO_CHAR(T.DataArrivo, 'yyyy') AS ANNO, COUNT(C.AvventorePositivo) TOT_RISULTATI_POSITIVI_RISTORANTI
 FROM RISTORANTE R JOIN AVVENTORE A ON R.CodRistorante = A.Ristorante JOIN TAVOLATA T ON T.CodTavolata = A.Tavolata JOIN CASO C ON C.AvventorePositivo = A.NumCid 
@@ -90,7 +90,7 @@ WHERE A.Ristorante = 1
 ORDER BY C.CodCaso;
 /*============================================================================================*/
 /*============================================================================================*/
--- 12.Informazioni sugli avventori risultati positivi in un ristorante
+-- 12.Informazioni sugli avventori risultati positivi in tutti i ristoranti di un proprietario 
 -- Supponiamo che il codice del proprietario dei ristoranti sia CodProprietario = 1
 SELECT C.CodCaso, C.DataRegistrazione AS DATAR, CAST(R.Denominazione AS VARCHAR2(20)) AS RISTORANTE, A.NumCid, CAST(A.Nome AS VARCHAR2(30)) AS Nome, 
 CAST(A.Cognome AS VARCHAR2(30)) AS Cognome, A.DataN, A.Telefono, A.HaGreenpass AS G , T.CodTavolata, T.DataArrivo, T.Cameriere, T.Tavolo, TA.TavoloAdiacente 

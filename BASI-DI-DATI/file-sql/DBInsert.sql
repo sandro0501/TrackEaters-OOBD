@@ -12,10 +12,10 @@ INSERT INTO RISTORANTE (CodRistorante, Denominazione, Indirizzo, Telefono, Citta
 VALUES (1,'Bella Napoli','Via Francesco Caracciolo, 1','0813509900','Napoli','NA','80122','bellanapoli@gmail.com','www.ristorantebellanapoli.it',1);
 
 INSERT INTO RISTORANTE (CodRistorante, Denominazione, Indirizzo, Telefono, Citta, Prov, Cap, Email, SitoWeb, Proprietario)
-VALUES (2,'Bella Napoli 2','Via Toledo, 30','0813339900','Napoli','NA','80134','bellanapoli@gmail.com','www.ristorantebellanapoli.it',1);
+VALUES (2,'Taverna Napoletana','Via Toledo, 30','0813339900','Napoli','NA','80134','bellanapoli@gmail.com','www.ristorantebellanapoli.it',1);
 
 INSERT INTO RISTORANTE (CodRistorante, Denominazione, Indirizzo, Telefono, Citta, Prov, Cap, Proprietario)
-VALUES (3,'La Madonnina','Via Alessandro Manzoni, 5','+390289091122','Milano','MI','20121',1);
+VALUES (3,'Trattoria Milanese','Via Alessandro Manzoni, 5','+390289091122','Milano','MI','20121',1);
 COMMIT;
 /*============================================================================================*/
 /*============================================================================================*/
@@ -109,7 +109,7 @@ VALUES ('CA13264UI','Morena','Costa',TO_DATE('19/03/1999','dd/mm/yyyy'),'Femmina
 COMMIT;
 /*============================================================================================*/
 /*============================================================================================*/
--- Insert per la tabella TAVOLO
+-- Insert per la tabella TAVOLO: aggiunge i tavoli alle relative sale dei ristoranti.
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala) VALUES (1, 10, 1);
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala) VALUES (2, 5, 1);
 INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala) VALUES (3, 5, 1);
@@ -184,7 +184,7 @@ INSERT INTO TAVOLO (CodTavolo, MaxAvventori, Sala) VALUES (62, 2, 10);
 COMMIT;
 /*============================================================================================*/
 /*============================================================================================*/
--- Insert per la tabella ADIACENZATAVOLO 
+-- Insert per la tabella ADIACENZATAVOLO: aggiunge la lista di tavoli adiacenti per ogni tavolo, se esiste adiacenza
 INSERT INTO ADIACENZATAVOLO (Tavolo, TavoloAdiacente) VALUES (1, 2);
 INSERT INTO ADIACENZATAVOLO (Tavolo, TavoloAdiacente) VALUES (1, 4);
 INSERT INTO ADIACENZATAVOLO (Tavolo, TavoloAdiacente) VALUES (2, 1);
@@ -325,7 +325,7 @@ INSERT INTO ADIACENZATAVOLO (Tavolo, TavoloAdiacente) VALUES (62, 60);
 COMMIT;
 /*============================================================================================*/
 /*============================================================================================*/
--- Insert per la tabella TAVOLATA
+-- Insert per la tabella TAVOLATA: inserisce le tavolate create per i rispettivi ristoranti 
 INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere) VALUES (1, TO_DATE('17/11/2021','dd/mm/yyyy'),4,'CA78432DB');
 
 INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere) VALUES (2, TO_DATE('17/11/2021','dd/mm/yyyy'),5,'CA66421DA');
@@ -364,133 +364,242 @@ INSERT INTO TAVOLATA (CodTavolata, DataArrivo, Tavolo, Cameriere) VALUES (18,TO_
 COMMIT;
 /*===========================================================================================*/
 /*===========================================================================================*/
--- Insert per la tabella AVVENTORE
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('IC3159530','Baldassarre','Pinto',TO_DATE('04/06/1953','dd/mm/yyyy'),'Maschio','Napoli','NA','Napoli','NA','+393493302038','baldassareepinto@gmail.com',35.8,'V',1,1);
+-- Insert per la tabella AVVENTORE: inserisce una lista di avventori generici con le loro generalità 
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('IC3159530','Baldassarre','Pinto',TO_DATE('04/06/1953','dd/mm/yyyy'),'Maschio','Napoli','NA','Napoli','NA','+393493302038','baldassareepinto@gmail.com',35.8,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('PW824173','Filiberto','Milano',TO_DATE('19/11/1940','dd/mm/yyyy'),'Maschio','Napoli','NA','Napoli','NA','+393598741558','filibertomilano@outlook.com',36.8,'V',1,1);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('PW824173','Filiberto','Milano',TO_DATE('19/11/1940','dd/mm/yyyy'),'Maschio','Napoli','NA','Napoli','NA','+393598741558','filibertomilano@outlook.com',36.8,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('WF1996739','Felicita','Piazza',TO_DATE('16/06/1973','dd/mm/yyyy'),'Femmina','Vindoli','RN','Vindoli','RN','+393658942018','felicitaPiazza3@libero.it',36.9,'V',1,2);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('WF1996739','Felicita','Piazza',TO_DATE('16/06/1973','dd/mm/yyyy'),'Femmina','Vindoli','RN','Vindoli','RN','+393658942018','felicitaPiazza3@libero.it',36.9,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('SU2810531','Lea','Barese',TO_DATE('26/07/1985','dd/mm/yyyy'),'Femmina','Cino','SO','Caivano','NA','+393259847862','leaBarese26@gmail.com',36.5,'V',1,2);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('SU2810531','Lea','Barese',TO_DATE('26/07/1985','dd/mm/yyyy'),'Femmina','Cino','SO','Caivano','NA','+393259847862','leaBarese26@gmail.com',36.5,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('BD8518049','Nazzareno','Onio',TO_DATE('07/12/2001','dd/mm/yyyy'),'Maschio','Badia','VV','Marcianise','CE','+393517788436','nazaon2001@outlook.it',37.0,'V',1,3);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('BD8518049','Nazzareno','Onio',TO_DATE('07/12/2001','dd/mm/yyyy'),'Maschio','Badia','VV','Marcianise','CE','+393517788436','nazaon2001@outlook.it',37.0,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('KT5802431','Edoardo','Ricci',TO_DATE('29/01/2002','dd/mm/yyyy'),'Maschio','Perticani','PG','Benevento','BN','+393254159687','edoRich@libero.it',36.4,'V',1,3);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('KT5802431','Edoardo','Ricci',TO_DATE('29/01/2002','dd/mm/yyyy'),'Maschio','Perticani','PG','Benevento','BN','+393254159687','edoRich@libero.it',36.4,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('WI0726870','Prospero','Padovesi',TO_DATE('24/04/1963','dd/mm/yyyy'),'Maschio','Dorno','PV','Caserta','CE','+393659852014','prPa2404@gmail.com',36.4,'V',1,4);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('WI0726870','Prospero','Padovesi',TO_DATE('24/04/1963','dd/mm/yyyy'),'Maschio','Dorno','PV','Caserta','CE','+393659852014','prPa2404@gmail.com',36.4,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('CY1881570','Alice','Cocci',TO_DATE('24/05/1951','dd/mm/yyyy'),'Femmina','Calvignasco','MI','Roma','RM','+393654002598','AliceCC@outlook.com',36.2,'V',1,4);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('CY1881570','Alice','Cocci',TO_DATE('24/05/1951','dd/mm/yyyy'),'Femmina','Calvignasco','MI','Roma','RM','+393654002598','AliceCC@outlook.com',36.2,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('RT1739919','Quinzio','Pugliesi',TO_DATE('18/05/1989','dd/mm/yyyy'),'Maschio','Ascensione','RA','Recale','CE','+393398947852','QuinzioPugliesi0589@gmail.com',37.0,'F',1,5);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('RT1739919','Quinzio','Pugliesi',TO_DATE('18/05/1989','dd/mm/yyyy'),'Maschio','Ascensione','RA','Recale','CE','+393398947852','QuinzioPugliesi0589@gmail.com',37.0,'F');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('YS3432289','Ida','Pagnotto',TO_DATE('01/03/1966','dd/mm/yyyy'),'Femmina','Martano','LE','Martano','LE','+393698521655','IdaPagno@gmail.com',36.8,'F',1,5);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('YS3432289','Ida','Pagnotto',TO_DATE('01/03/1966','dd/mm/yyyy'),'Femmina','Martano','LE','Martano','LE','+393698521655','IdaPagno@gmail.com',36.8,'F');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('GU1160846','Geronima','Endrizzi',TO_DATE('09/11/2000','dd/mm/yyyy'),'Non specificato','Nago','TN','Vico Equense','NA','+393854759624','GeronimaEnd@gmail.com',35.9,'V',1,6);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('GU1160846','Geronima','Endrizzi',TO_DATE('09/11/2000','dd/mm/yyyy'),'Non specificato','Nago','TN','Vico Equense','NA','+393854759624','GeronimaEnd@gmail.com',35.9,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('AD8695321','Carolina','Pugliese',TO_DATE('07/04/1953','dd/mm/yyyy'),'Femmina','Casavatore','NA','Casoria','NA','+393275273639','CarolinaPugliese@gmail.com',35.4,'V',1,6);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('AD8695321','Carolina','Pugliese',TO_DATE('07/04/1953','dd/mm/yyyy'),'Femmina','Casavatore','NA','Casoria','NA','+393275273639','CarolinaPugliese@gmail.com',35.4,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('BG2548759','Marcella','Pezzali',TO_DATE('28/12/1977','dd/mm/yyyy'),'Femmina','Arzano','NA','Arzano','NA','+393732068075','MarcellaPezzali@gmail.com',36.1,'V',2,7);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('BG2548759','Marcella','Pezzali',TO_DATE('28/12/1977','dd/mm/yyyy'),'Femmina','Arzano','NA','Arzano','NA','+393732068075','MarcellaPezzali@gmail.com',36.1,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('GH5632104','Dolores','Zanzi',TO_DATE('18/01/1955','dd/mm/yyyy'),'Femmina','Volla','NA','Cetara','SA','+393380722982','DoloresDePanza@gmail.com',36.4,'V',2,7);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('GH5632104','Dolores','Zanzi',TO_DATE('18/01/1955','dd/mm/yyyy'),'Femmina','Volla','NA','Cetara','SA','+393380722982','DoloresDePanza@gmail.com',36.4,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('FR5849625','Fabiola','Mengolo',TO_DATE('19/09/1956','dd/mm/yyyy'),'Femmina','Giffoni Sei Casali','SA','San Giorgio a Cremano','NA','+393416755818','FabiMengolo@gmail.com',36.5,'V',2,8);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('FR5849625','Fabiola','Mengolo',TO_DATE('19/09/1956','dd/mm/yyyy'),'Femmina','Giffoni Sei Casali','SA','San Giorgio a Cremano','NA','+393416755818','FabiMengolo@gmail.com',36.5,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('TR5625487','Daniele','Bernardi',TO_DATE('03/12/1959','dd/mm/yyyy'),'Maschio','Cercola','NA','Portici','NA','+393562319517','DaanBernardi@gmail.com',37.1,'V',2,8);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('TR5625487','Daniele','Bernardi',TO_DATE('03/12/1959','dd/mm/yyyy'),'Maschio','Cercola','NA','Portici','NA','+393562319517','DaanBernardi@gmail.com',37.1,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('BR2648058','Carolina','Lombardi',TO_DATE('07/11/1961','dd/mm/yyyy'),'Femmina','Melito di Napoli','NA','Melito di Napoli','NA','+393516530360','CaroLombardi@gmail.com',37.0,'V',2,9);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('BR2648058','Carolina','Lombardi',TO_DATE('07/11/1961','dd/mm/yyyy'),'Femmina','Melito di Napoli','NA','Melito di Napoli','NA','+393516530360','CaroLombardi@gmail.com',37.0,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('LE2615481','Rossana','Filzi',TO_DATE('23/09/1965','dd/mm/yyyy'),'Femmina','Afragola','NA','Montecorvino Pugliano','SA','+393316825631','RossanaFilzi@gmail.com',36.8,'V',2,9);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('LE2615481','Rossana','Filzi',TO_DATE('23/09/1965','dd/mm/yyyy'),'Femmina','Afragola','NA','Montecorvino Pugliano','SA','+393316825631','RossanaFilzi@gmail.com',36.8,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('ML6215403','Pierluigi','Trapanese',TO_DATE('30/09/1965','dd/mm/yyyy'),'Maschio','Casandrino','NA','Fisciano','SA','+393303659368','LuigiTrapanese@gmail.com',36.8,'V',2,10);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('ML6215403','Pierluigi','Trapanese',TO_DATE('30/09/1965','dd/mm/yyyy'),'Maschio','Casandrino','NA','Fisciano','SA','+393303659368','LuigiTrapanese@gmail.com',36.8,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('RS4697315','Silvia','Golgi',TO_DATE('22/04/1968','dd/mm/yyyy'),'Femmina','Casalnuovo di Napoli','NA','Calvanico','SA','+393869408344','SilviGolgi@gmail.com',36.6,'V',2,10);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('RS4697315','Silvia','Golgi',TO_DATE('22/04/1968','dd/mm/yyyy'),'Femmina','Casalnuovo di Napoli','NA','Calvanico','SA','+393869408344','SilviGolgi@gmail.com',36.6,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('GC9674582','Nicola','Ricci',TO_DATE('21/08/1969','dd/mm/yyyy'),'Maschio','Bellizzi','SA','San Sebastiano al Vesuvio','NA','+393362582808','NicoRic@gmail.com',36.5,'V',2,10);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('GC9674582','Nicola','Ricci',TO_DATE('21/08/1969','dd/mm/yyyy'),'Maschio','Bellizzi','SA','San Sebastiano al Vesuvio','NA','+393362582808','NicoRic@gmail.com',36.5,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('AE6164595','Antonio','Bettoni',TO_DATE('20/08/1971','dd/mm/yyyy'),'Maschio','Mugnano di Napoli','NA','Mercato San Severino','SA','+393410197804','AntoBet@gmail.com',36.3,'V',2,10);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('AE6164595','Antonio','Bettoni',TO_DATE('20/08/1971','dd/mm/yyyy'),'Maschio','Mugnano di Napoli','NA','Mercato San Severino','SA','+393410197804','AntoBet@gmail.com',36.3,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('PO3031697','Amleto','Virgilio',TO_DATE('05/01/1975','dd/mm/yyyy'),'Maschio','Marano di Napoli','NA','Maiori','SA','+393488969310','AmletoVirgilio@gmail.com',36.2,'V',2,11);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('PO3031697','Amleto','Virgilio',TO_DATE('05/01/1975','dd/mm/yyyy'),'Maschio','Marano di Napoli','NA','Maiori','SA','+393488969310','AmletoVirgilio@gmail.com',36.2,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('MR9748683','Mauro','Priuli',TO_DATE('15/04/1988','dd/mm/yyyy'),'Maschio','Marano di Napoli','NA','Marano di Napoli','NA','+393394922230','MauroPriuli@gmail.com',36.2,'V',2,11);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('MR9748683','Mauro','Priuli',TO_DATE('15/04/1988','dd/mm/yyyy'),'Maschio','Marano di Napoli','NA','Marano di Napoli','NA','+393394922230','MauroPriuli@gmail.com',36.2,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('DR0301264','Rosaria','Argurio',TO_DATE('25/05/1976','dd/mm/yyyy'),'Femmina','Dugenta','BN','Durazzano','BN','+393250404211','RosiArgurio@gmail.com',36.5,'V',3,12);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('DR0301264','Rosaria','Argurio',TO_DATE('25/05/1976','dd/mm/yyyy'),'Femmina','Dugenta','BN','Durazzano','BN','+393250404211','RosiArgurio@gmail.com',36.5,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('LZ9575684','Mauro','Zola',TO_DATE('17/10/1979','dd/mm/yyyy'),'Maschio','Bellona','CE','Arienzo','CE','+393411767562','MauroZola@gmail.com',36.5,'V',3,12);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('LZ9575684','Mauro','Zola',TO_DATE('17/10/1979','dd/mm/yyyy'),'Maschio','Bellona','CE','Arienzo','CE','+393411767562','MauroZola@gmail.com',36.5,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('IC2558319','Donatello','Pellegrini',TO_DATE('19/03/1980','dd/mm/yyyy'),'Maschio','Vitulazio','CE','Vitulazio','CE','+393397508638','DonaPellegrini@gmail.com',37.0,'V',3,12);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('IC2558319','Donatello','Pellegrini',TO_DATE('19/03/1980','dd/mm/yyyy'),'Maschio','Vitulazio','CE','Vitulazio','CE','+393397508638','DonaPellegrini@gmail.com',37.0,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('TE0864370','Giancarlo','Boitani',TO_DATE('05/04/1982','dd/mm/yyyy'),'Maschio','Cervino','CE','San Felice a Cancello','CE','+393416061365','GianBoitani@gmail.com',37.0,'V',3,12);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('TE0864370','Giancarlo','Boitani',TO_DATE('05/04/1982','dd/mm/yyyy'),'Maschio','Cervino','CE','San Felice a Cancello','CE','+393416061365','GianBoitani@gmail.com',37.0,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('ZO6283162','Melania','Poerio',TO_DATE('23/04/1984','dd/mm/yyyy'),'Femmina','Santa Maria a Vico','CE','Santa Maria la Fossa','CE','+393533370100','MelaniaPoerio@gmail.com',36.7,'V',3,12);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('ZO6283162','Melania','Poerio',TO_DATE('23/04/1984','dd/mm/yyyy'),'Femmina','Santa Maria a Vico','CE','Santa Maria la Fossa','CE','+393533370100','MelaniaPoerio@gmail.com',36.7,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('IH2648039','Renata','Pizzetti',TO_DATE('11/11/1985','dd/mm/yyyy'),'Femmina','Piana di Monte Verna','CE','Piana di Monte Verna','CE','+393516025201','RenataPizz@gmail.com',36.7,'V',3,13);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('IH2648039','Renata','Pizzetti',TO_DATE('11/11/1985','dd/mm/yyyy'),'Femmina','Piana di Monte Verna','CE','Piana di Monte Verna','CE','+393516025201','RenataPizz@gmail.com',36.7,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('FU2645786','Giuseppina','Giannuzzi',TO_DATE('20/07/1990','dd/mm/yyyy'),'Femmina','Grazzanise','CE','Grazzanise','CE','+393520418674','GeppyGianni@gmail.com',36.3,'V',3,13);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('FU2645786','Giuseppina','Giannuzzi',TO_DATE('20/07/1990','dd/mm/yyyy'),'Femmina','Grazzanise','CE','Grazzanise','CE','+393520418674','GeppyGianni@gmail.com',36.3,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('UR6437280','Angelica','Barbarigo',TO_DATE('02/07/1991','dd/mm/yyyy'),'Femmina','San Tammaro','CE','Santa Maria Capua Vetere','CE','+393510895615','LikaBarbagio@gmail.com',36.3,'V',3,14);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('UR6437280','Angelica','Barbarigo',TO_DATE('02/07/1991','dd/mm/yyyy'),'Femmina','San Tammaro','CE','Santa Maria Capua Vetere','CE','+393510895615','LikaBarbagio@gmail.com',36.3,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('OG6407351','Melissa','Tasso',TO_DATE('16/08/1992','dd/mm/yyyy'),'Femmina','Santa Maria Capua Vetere','CE','Caiazzo','CE','+393309496253','MeliTasso@gmail.com',36.4,'V',3,14);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('OG6407351','Melissa','Tasso',TO_DATE('16/08/1992','dd/mm/yyyy'),'Femmina','Santa Maria Capua Vetere','CE','Caiazzo','CE','+393309496253','MeliTasso@gmail.com',36.4,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('OG6427318','Gianluca','Murri',TO_DATE('19/05/1995','dd/mm/yyyy'),'Maschio','Marcianise','CE','Marcianise','CE','+393528831547','GianMurri@gmail.com',36.5,'F',3,15);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('OG6427318','Gianluca','Murri',TO_DATE('19/05/1995','dd/mm/yyyy'),'Maschio','Marcianise','CE','Marcianise','CE','+393528831547','GianMurri@gmail.com',36.5,'F');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('LR9137648','Jolanda','Adinolfi',TO_DATE('06/05/1996','dd/mm/yyyy'),'Femmina','Portico di Caserta','CE','Macerata Campania','CE','+393519447992','JoleAdi@gmail.com',37.0,'F',3,15);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('LR9137648','Jolanda','Adinolfi',TO_DATE('06/05/1996','dd/mm/yyyy'),'Femmina','Portico di Caserta','CE','Macerata Campania','CE','+393519447992','JoleAdi@gmail.com',37.0,'F');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('HE5467974','Fernando','Cilibrasi',TO_DATE('19/07/1997','dd/mm/yyyy'),'Maschio','Pozzuoli','NA','Pozzuoli','NA','+393342696918','FernandoCilibrasi@gmail.com',36.5,'F',3,16);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('HE5467974','Fernando','Cilibrasi',TO_DATE('19/07/1997','dd/mm/yyyy'),'Maschio','Pozzuoli','NA','Pozzuoli','NA','+393342696918','FernandoCilibrasi@gmail.com',36.5,'F');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('TR9746286','Roberto','Camanni',TO_DATE('24/11/1998','dd/mm/yyyy'),'Maschio','Quarto','NA','Quarto','NA','+393438255310','RobiCamanni@gmail.com',36.4,'F',3,16);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('TR9746286','Roberto','Camanni',TO_DATE('24/11/1998','dd/mm/yyyy'),'Maschio','Quarto','NA','Quarto','NA','+393438255310','RobiCamanni@gmail.com',36.4,'F');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('IT3146975','Carmelo','Mastroianni',TO_DATE('12/02/1999','dd/mm/yyyy'),'Maschio','Cardito','NA','Curti','CE','+393309290526','CarmeloMastroianni@gmail.com',36.5,'F',3,17);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('IT3146975','Carmelo','Mastroianni',TO_DATE('12/02/1999','dd/mm/yyyy'),'Maschio','Cardito','NA','Curti','CE','+393309290526','CarmeloMastroianni@gmail.com',36.5,'F');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('HY9746580','Ezio','Ammaniti',TO_DATE('11/12/2001','dd/mm/yyyy'),'Maschio','Frattamaggiore','NA','Frattamaggiore','NA','+393353722101','EzioAmm@gmail.com',36.8,'F',3,17);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('HY9746580','Ezio','Ammaniti',TO_DATE('11/12/2001','dd/mm/yyyy'),'Maschio','Frattamaggiore','NA','Frattamaggiore','NA','+393353722101','EzioAmm@gmail.com',36.8,'F');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('LH9137684','Aria','Moschino',TO_DATE('02/05/2002','dd/mm/yyyy'),'Femmina','Capodrise','CE','Massa di Somma','NA','+393301539510','AriMoschino@gmail.com',36.7,'V',3,18);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('LH9137684','Aria','Moschino',TO_DATE('02/05/2002','dd/mm/yyyy'),'Femmina','Capodrise','CE','Massa di Somma','NA','+393301539510','AriMoschino@gmail.com',36.7,'V');
 
-INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass, Ristorante, Tavolata)
-VALUES('GE9197735','Vittorio','Pulci',TO_DATE('10/12/2002','dd/mm/yyyy'),'Maschio','Grumo Nevano','NA','Casapulla','CE','+393273531946','VikPulci@gmail.com',36.5,'V',3,18);
+INSERT INTO AVVENTORE (NumCid, Nome, Cognome, DataN, Sesso, CittaN, ProvN, CittaRes, ProvRes, Telefono, Email, Temperatura, HaGreenpass)
+VALUES('GE9197735','Vittorio','Pulci',TO_DATE('10/12/2002','dd/mm/yyyy'),'Maschio','Grumo Nevano','NA','Casapulla','CE','+393273531946','VikPulci@gmail.com',36.5,'V');
 COMMIT;
 /*===========================================================================================*/
 /*===========================================================================================*/
--- Insert per la tabella CASO
+-- Insert per la tabella ACCOGLIENZA: collega ogni avventore al ristorante che lo accoglie 
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (1,'IC3159530');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (1,'PW824173');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (1,'WF1996739');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (1,'SU2810531');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (1,'BD8518049');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (1,'KT5802431');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (1,'WI0726870');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (1,'CY1881570');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (1,'RT1739919');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (1,'YS3432289');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (1,'GU1160846');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (1,'AD8695321');
+
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (2,'BG2548759');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (2,'GH5632104');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (2,'FR5849625');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (2,'TR5625487');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (2,'BR2648058');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (2,'LE2615481');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (2,'ML6215403');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (2,'RS4697315');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (2,'GC9674582');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (2,'AE6164595');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (2,'PO3031697');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (2,'MR9748683');
+
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (3,'DR0301264');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (3,'LZ9575684');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (3,'IC2558319');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (3,'TE0864370');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (3,'ZO6283162');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (3,'IH2648039');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (3,'FU2645786');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (3,'UR6437280');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (3,'OG6407351');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (3,'OG6427318');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (3,'LR9137648');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (3,'HE5467974');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (3,'TR9746286');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (3,'IT3146975');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (3,'HY9746580');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (3,'LH9137684');
+INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (3,'GE9197735');
+COMMIT;
+/*===========================================================================================*/
+/*===========================================================================================*/
+-- Insert per la tabella PARTECIPAZIONETAVOLATA: collega ogni avventore alla tavolata a cui partecipa 
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('IC3159530',1);
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('PW824173',1);
+
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('WF1996739',2);
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('SU2810531',2);
+
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('BD8518049',3);
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('KT5802431',3);
+
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('WI0726870',4);
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('CY1881570',4);
+
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('RT1739919',5);
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('YS3432289',5);
+
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('GU1160846',6);
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('AD8695321',6);
+
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('BG2548759',7);
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('GH5632104',7);
+
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('FR5849625',8);
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('TR5625487',8);
+
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('BR2648058',9);
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('LE2615481',9);
+
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('ML6215403',10);
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('RS4697315',10);
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('GC9674582',10);
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('AE6164595',10);
+
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('PO3031697',11);
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('MR9748683',11);
+
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('DR0301264',12);
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('LZ9575684',12);
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('IC2558319',12);
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('TE0864370',12);
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('ZO6283162',12);
+
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('IH2648039',13);
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('FU2645786',13);
+
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('UR6437280',14);
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('OG6407351',14);
+
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('OG6427318',15);
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('LR9137648',15);
+
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('HE5467974',16);
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('TR9746286',16);
+
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('IT3146975',17);
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('HY9746580',17);
+
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('LH9137684',18);
+INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES ('GE9197735',18);
+COMMIT;
+/*===========================================================================================*/
+/*===========================================================================================*/
+-- Insert per la tabella CASO: inserisce i casi covid registrati nei ristoranti 
 INSERT INTO CASO (CodCaso, DataRegistrazione, StatoCaso, Note, AvventorePositivo, CamerierePositivo, RegistraProprietario, RegistraManager)
 VALUES(1,TO_DATE('25/01/2022','dd/mm/yyyy'),'NonRisolto',NULL,'IC3159530',NULL,1,NULL);
 

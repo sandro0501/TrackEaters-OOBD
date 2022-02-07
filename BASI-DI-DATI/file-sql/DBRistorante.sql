@@ -584,7 +584,6 @@ BEGIN
 		END IF; 	
 	END IF; 
 
-
 	IF :NEW.CamerierePositivo IS NOT NULL THEN 
 		-- Recupera la data di nascita del cameriere positivo 
 		SELECT C.DataN INTO datanascita_cameriere
@@ -601,21 +600,43 @@ END;
 /
 /*============================================================================================*/
 /*============================================================================================*/
--- Creazione della VISTA 'Tavolate' : 
--- per ogni tavolata di un ristorante calcola il numero totale di partecipanti alla tavolata. 
-CREATE VIEW TAVOLATE (Ristorante, CodiceTavolata, Partecipanti) AS
-SELECT A.Ristorante, PT.Tavolata, COUNT(PT.Avventori) AS TOT_TAVOLATA
-FROM ACCOGLIENZA A JOIN PARTECIPAZIONETAVOLATA PT ON A.Avventore = PT.Avventore
-GROUP BY A.Ristorante, PT.Tavolata
-ORDER BY PT.Tavolata ASC;
-/
-/*============================================================================================*/
-/*============================================================================================*/
 -- Creazione della VISTA RIEPILOGO_RISTORANTI_PROPRIETARIO 
 -- la vista, dato un codice di un proprietario, crea un riepilogo generale che include dettagli su tutti i ristoranti da esso amministrati
 -- supponiamo che sia CodProprietario = 1
-CREATE VIEW RIEPILOGO_RISTORANTI_PROPRIETARIO (Ristorante, Sala, CapienzaSala, TipoSala, TavoloInSala, MaxAvventoriTavolo) AS
-SELECT R.CodRistorante, S.CodSala, S.CapienzaAvventori, S.TipoSala, T.CodTavolo, T.MaxAvventori
+CREATE VIEW RIEPILOGO_RISTORANTI_PROPRIETARIO (CodRistorante, Ristorante, Sala, CapienzaSala, TipoSala, TavoloInSala, MaxAvventoriTavolo) AS
+SELECT R.CodRistorante, R.Denominazione, S.CodSala, S.CapienzaAvventori, S.TipoSala, T.CodTavolo, T.MaxAvventori
 FROM PROPRIETARIO P JOIN RISTORANTE R ON P.CodProprietario = R.Proprietario JOIN SALA S ON R.CodRistorante = S.Ristorante JOIN TAVOLO T ON T.Sala = S.CodSala 
 WHERE P.CodProprietario = 1
 ORDER BY R.CodRistorante ASC, S.CodSala ASC, T.CodTavolo ASC;
+/*============================================================================================*/
+/*============================================================================================*/
+-- Creazione della VISTA RIEPILOGO_TAVOLATE_RISTORANTI_PROPRIETARIO
+-- la vista, dato un codice di un proprietario, crea un riepilogo generale che include dettagli su tutte le tavolate create nei ristoranti da lui amministrati
+-- supponiamo che sia CodProprietario = 1
+CREATE VIEW RIEPILOGO_TAVOLATE_RISTORANTI_PROPRIETARIO (CodRistorante, Ristorante, DataArrivo, CodTavolata, Sala, TipoSala, Tavolo, MaxAvventoriTavolo, PartecipantiTavolata)  AS
+SELECT R.CodRistorante, R.Denominazione, TA.DataArrivo, TA.CodTavolata, S.CodSala, S.TipoSala, TA.Tavolo, T.MaxAvventori, COUNT(PT.Avventore) 
+FROM PROPRIETARIO P JOIN RISTORANTE R ON P.CodProprietario = R.Proprietario 
+				    JOIN SALA S ON R.CodRistorante = S.Ristorante 
+					JOIN TAVOLO T ON T.Sala = S.CodSala 
+					JOIN TAVOLATA TA ON TA.Tavolo = T.CodTavolo 
+                    JOIN PARTECIPAZIONETAVOLATA PT ON PT.Tavolata = TA.CodTavolata
+WHERE P.CodProprietario = 1 
+GROUP BY R.CodRistorante, R.Denominazione, TA.DataArrivo, TA.CodTavolata, S.CodSala, S.TipoSala, TA.Tavolo, T.MaxAvventori 
+ORDER BY R.CodRistorante ASC, TA.DataArrivo ASC, TA.CodTavolata ASC; 
+/*============================================================================================*/
+/*============================================================================================*/
+-- Creazione della VISTA RIEPILOGO_AVVENTORI_RISTORANTI
+-- la vista, dato un codice di un proprietario, crea un riepilogo generale che include dettagli anagrafici 
+-- su tutti  gli avventori accolti nei ristoranti da lui amministrati, inclusi la tavolata, il tavolo e la sala in cui l'avventore è stato 
+-- supponiamo che sia CodProprietario = 1
+CREATE VIEW RIEPILOGO_AVVENTORI_RISTORANTI (CodRistorante, Ristorante, DataArrivo, NumCid, Nome, Cognome, DataN, Sesso, Telefono, Tavolata, Tavolo, Sala) AS
+SELECT R.CodRistorante, R.Denominazione, T.DataArrivo, AVV.NumCid, AVV.Nome, AVV.Cognome, AVV.DataN, AVV.Sesso, AVV.Telefono, PT.Tavolata, T.Tavolo, TA.Sala
+FROM  RISTORANTE R JOIN ACCOGLIENZA A ON R.CodRistorante = A.Ristorante
+                   JOIN AVVENTORE AVV ON A.Avventore = AVV.NumCid 
+                   JOIN PARTECIPAZIONETAVOLATA PT ON PT.Avventore = AVV.NumCid 
+                   JOIN TAVOLATA T ON T.CodTavolata = PT.Tavolata
+				   JOIN TAVOLO TA ON TA.CodTavolo = T.Tavolo 
+WHERE R.Proprietario = 1 
+ORDER BY R.CodRistorante ASC, T.DataArrivo ASC, PT.Tavolata ASC;
+/*============================================================================================*/
+/*============================================================================================*/ 

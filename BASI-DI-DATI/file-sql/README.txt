@@ -9,7 +9,7 @@ Per il corretto funzionamento e popolamento del database:
 2. Eseguire lo script "DBProcedureFunzioni.sql" che contiene le stored procedure e le stored function implementate;
 3. Eseguire lo script "DBRistorante.sql" relativo alla creazione della struttura della base di dati e dei i vari trigger implementati;
 4. Eseguire lo script "DBInsert.sql" relativo al popolamento del database;
-5. Eseguire lo script "Query.sql" contenente l'implementazione di alcune query di prova da effettuare sul database implementato.
+5. Eseguire lo script "DBQuery.sql" contenente l'implementazione di alcune query di prova da effettuare sul database implementato.
 
 N.B. Il file "EsportazioneDBCompleta.sql" è aggiuntivo e contiene l'esportazione completa di tutto il database implementato.
 Esso unisce tutti i file menzionati in precedenza.

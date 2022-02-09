@@ -14,5 +14,5 @@ Per il corretto funzionamento e popolamento del database:
 N.B. Il file "EsportazioneDBCompleta.sql" è aggiuntivo e contiene l'esportazione completa di tutto il database implementato.
 Esso unisce tutti i file menzionati in precedenza.
 E' possibile completare direttamente i passi 2,3,4,5 eseguendo lo script in esso contenuto.
-Per operazioni di cancellazione riguardanti le procedure/function, delle tabelle e dei dati in esse visionare il file: "DBDelete.sql".
+Per operazioni di cancellazione riguardanti le procedure/function e viste, delle tabelle e dei dati in esse visionare il file: "DBDelete.sql".
 ********************************************************************************************************************

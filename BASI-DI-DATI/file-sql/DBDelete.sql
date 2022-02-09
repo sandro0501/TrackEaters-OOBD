@@ -17,7 +17,22 @@ DELETE FROM CASO;
 COMMIT; 
 /*============================================================================================*/
 /*============================================================================================*/
--- Script 2: Cancella tutte le tabelle del DB Ristorante 
+-- Script 2: Cancella le procedure e funzioni del DB Ristorante  
+DROP PROCEDURE NUMERO_DI_TELEFONO_LEGALE;
+DROP PROCEDURE PASSWORD_LEGALE;
+DROP FUNCTION IS_NUMBER;
+COMMIT; 
+COMMIT; 
+/*============================================================================================*/
+/*============================================================================================*/
+-- Script 3: Cancella tutte le viste del DB Ristorante 
+DROP VIEW RIEPILOGO_RISTORANTI_PROPRIETARIO;
+DROP VIEW RIEPILOGO_TAVOLATE_RISTORANTI_PROPRIETARIO;
+DROP VIEW VISTA RIEPILOGO_AVVENTORI_RISTORANTI;
+COMMIT;
+/*============================================================================================*/
+/*============================================================================================*/
+-- Script 4: Cancella tutte le tabelle del DB RISTORANTE
 DROP TABLE PROPRIETARIO CASCADE CONSTRAINTS;
 DROP TABLE RISTORANTE CASCADE CONSTRAINTS;
 DROP TABLE MANAGERRISTORANTE CASCADE CONSTRAINTS;
@@ -30,13 +45,5 @@ DROP TABLE AVVENTORE CASCADE CONSTRAINTS;
 DROP TABLE ACCOGLIENZA CASCADE CONSTRAINTS;
 DROP TABLE PARTECIPAZIONETAVOLATA CASCADE CONSTRAINTS;
 DROP TABLE CASO CASCADE CONSTRAINTS;
-COMMIT; 
-/*============================================================================================*/
-/*============================================================================================*/
--- Script 3: Cancella le procedure e funzioni del DB Ristorante 
-DROP PROCEDURE NUMERO_DI_TELEFONO_LEGALE;
-DROP PROCEDURE PASSWORD_LEGALE;
-DROP FUNCTION IS_NUMBER;
-COMMIT; 
 /*============================================================================================*/
 /*============================================================================================*/

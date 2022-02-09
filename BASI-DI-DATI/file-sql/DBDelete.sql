@@ -28,7 +28,7 @@ COMMIT;
 -- Script 3: Cancella tutte le viste del DB Ristorante 
 DROP VIEW RIEPILOGO_RISTORANTI_PROPRIETARIO;
 DROP VIEW RIEPILOGO_TAVOLATE_RISTORANTI_PROPRIETARIO;
-DROP VIEW VISTA RIEPILOGO_AVVENTORI_RISTORANTI;
+DROP VIEW RIEPILOGO_AVVENTORI_RISTORANTI;
 COMMIT;
 /*============================================================================================*/
 /*============================================================================================*/

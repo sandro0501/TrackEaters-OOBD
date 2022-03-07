@@ -22,7 +22,6 @@ DROP PROCEDURE NUMERO_DI_TELEFONO_LEGALE;
 DROP PROCEDURE PASSWORD_LEGALE;
 DROP FUNCTION IS_NUMBER;
 COMMIT; 
-COMMIT; 
 /*============================================================================================*/
 /*============================================================================================*/
 -- Script 3: Cancella tutte le viste del DB Ristorante 
@@ -45,5 +44,6 @@ DROP TABLE AVVENTORE CASCADE CONSTRAINTS;
 DROP TABLE ACCOGLIENZA CASCADE CONSTRAINTS;
 DROP TABLE PARTECIPAZIONETAVOLATA CASCADE CONSTRAINTS;
 DROP TABLE CASO CASCADE CONSTRAINTS;
+COMMIT; 
 /*============================================================================================*/
 /*============================================================================================*/

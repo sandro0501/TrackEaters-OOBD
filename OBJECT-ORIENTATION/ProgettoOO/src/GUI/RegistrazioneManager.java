@@ -34,7 +34,7 @@ public class RegistrazioneManager extends JFrame {
 	public RegistrazioneManager(controller c) {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistrazioneManager.class.getResource("/resources/icon.png")));
-		setTitle("SecureRisto\r\n");
+		setTitle("SecuRisto\r\n");
 		theController = c;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);

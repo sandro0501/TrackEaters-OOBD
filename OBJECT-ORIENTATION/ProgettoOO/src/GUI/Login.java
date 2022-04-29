@@ -33,7 +33,7 @@ public class Login extends JFrame {
 		theController = c;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/resources/icon.png")));
 		setResizable(false);
-		setTitle("SecurRisto");
+		setTitle("SecuRisto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		LoginPane = new JPanel();
@@ -51,6 +51,11 @@ public class Login extends JFrame {
 		LoginPane.add(RuoloBox);
 		
 		JButton LoginNewButton = new JButton("Login");
+		LoginNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				c.login();
+			}
+		});
 		LoginNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		LoginNewButton.setBounds(250, 156, 90, 40);
 		LoginPane.add(LoginNewButton);

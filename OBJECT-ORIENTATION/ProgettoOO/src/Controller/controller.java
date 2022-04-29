@@ -22,5 +22,10 @@ public class controller {
 		ln.setVisible(false);
 		rgm.setVisible(true);
 	}
+	
+	public void back() {
+		rgm.setVisible(false);
+		ln.setVisible(true);
+	}
 
 }

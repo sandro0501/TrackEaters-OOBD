@@ -9,7 +9,7 @@ public class ConnessioneDatabase {
 	private String url = "";
 	private String username = "";
 	private String password = "";
-	private String driver = "";
+	private String driver = "d";
 	
 	private ConnessioneDatabase() throws SQLException {
 		try {

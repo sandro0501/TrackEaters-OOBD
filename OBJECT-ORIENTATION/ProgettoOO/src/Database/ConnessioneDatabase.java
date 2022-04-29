@@ -6,10 +6,10 @@ public class ConnessioneDatabase {
 	
 	private static ConnessioneDatabase istanzaConnessione;
 	private Connection connessione = null;
-	private String url = "";
-	private String username = "";
-	private String password = "";
-	private String driver = "";
+	private String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+	private String username = "santolo";
+	private String password = "orcl";
+	private String driver = "oracle.jdbc.driver.OracleDriver";
 	
 	private ConnessioneDatabase() throws SQLException {
 		try {

@@ -18,6 +18,8 @@ import Controller.controller;
 import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class Login extends JFrame {
@@ -29,7 +31,7 @@ public class Login extends JFrame {
 
 	public Login(controller c) {
 		theController = c;
-		setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\File Progetto\\ProgettoOOBD\\OBJECT-ORIENTATION\\ProgettoOO\\src\\resources\\icon.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/resources/icon.png")));
 		setResizable(false);
 		setTitle("SecurRisto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,6 +56,11 @@ public class Login extends JFrame {
 		LoginPane.add(LoginNewButton);
 		
 		JButton RegistrazioneNewButton = new JButton("Registrazione");
+		RegistrazioneNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				c.NewUser();
+			}
+		});
 		RegistrazioneNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		RegistrazioneNewButton.setBounds(249, 227, 160, 23);
 		LoginPane.add(RegistrazioneNewButton);

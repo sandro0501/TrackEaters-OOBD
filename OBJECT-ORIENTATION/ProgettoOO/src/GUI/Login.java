@@ -20,6 +20,7 @@ import java.awt.SystemColor;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.DefaultComboBoxModel;
 
 
 public class Login extends JFrame {
@@ -28,9 +29,11 @@ public class Login extends JFrame {
 	private JTextField UsernameField;
 	private controller theController;
 	private JPasswordField passwordField;
-
+	private Login curr;
+	
 	public Login(controller c) {
 		theController = c;
+		curr=this;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/resources/icon.png")));
 		setResizable(false);
 		setTitle("SecuRisto");
@@ -47,13 +50,19 @@ public class Login extends JFrame {
 		UsernameField.setColumns(10);
 		
 		JComboBox RuoloBox = new JComboBox();
+		RuoloBox.setModel(new DefaultComboBoxModel(new String[] {"Proprietario", "Manager"}));
 		RuoloBox.setBounds(249, 119, 160, 22);
 		LoginPane.add(RuoloBox);
 		
 		JButton LoginNewButton = new JButton("Login");
 		LoginNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				c.login();
+				if(RuoloBox.getSelectedIndex()==0) {
+					c.loginProprietario();
+				}
+				else {
+					c.loginManager();
+				}
 			}
 		});
 		LoginNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));

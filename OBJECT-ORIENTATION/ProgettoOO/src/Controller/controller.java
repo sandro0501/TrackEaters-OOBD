@@ -11,6 +11,7 @@ public class controller {
 	Login ln;
 	RegistrazioneManager rgm;
 	HomepageProprietario hgpr;
+	HomepageManager hgmg;
 	
 	public static void main (String[] args) {
 		controller c = new controller(); 
@@ -34,10 +35,16 @@ public class controller {
 		ln.setVisible(true);
 	}
 	
-	public void login() {
+	public void loginProprietario() {
 		hgpr = new HomepageProprietario(this);
 		ln.setVisible(false);
 		hgpr.setVisible(true);
+	}
+	
+	public void loginManager() {
+		hgmg = new HomepageManager(this);
+		ln.setVisible(false);
+		hgmg.setVisible(true);
 	}
 	
 	public void logout() {

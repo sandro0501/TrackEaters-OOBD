@@ -63,7 +63,7 @@ public class Login extends JFrame {
 		JButton RegistrazioneNewButton = new JButton("Registrazione");
 		RegistrazioneNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				c.NewUser();
+				c.newUser();
 			}
 		});
 		RegistrazioneNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));

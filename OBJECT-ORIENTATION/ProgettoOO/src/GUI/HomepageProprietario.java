@@ -16,10 +16,12 @@ import java.awt.Font;
 import javax.swing.JTextPane;
 import java.awt.SystemColor;
 import Controller.controller;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class HomepageProprietario extends JFrame {
 
-	private JPanel contentPane;
+	private JPanel HomepageProprietarioPane;
 	private controller theController = new controller();
 
 	
@@ -30,70 +32,93 @@ public class HomepageProprietario extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(HomepageProprietario.class.getResource("/resources/icon.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1060, 500);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		HomepageProprietarioPane = new JPanel();
+		HomepageProprietarioPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(HomepageProprietarioPane);
+		HomepageProprietarioPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBounds(0, 409, 1044, 52);
-		contentPane.add(panel);
-		panel.setLayout(null);
+		JPanel Navigation_panel = new JPanel();
+		Navigation_panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		Navigation_panel.setBounds(0, 409, 1044, 52);
+		HomepageProprietarioPane.add(Navigation_panel);
+		Navigation_panel.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Home");
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnNewButton.setBounds(10, 11, 89, 30);
-		panel.add(btnNewButton);
+		JButton HomeButton = new JButton("Home");
+		HomeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.homeProprietario();
+			}
+		});
+		HomeButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+		HomeButton.setBounds(10, 11, 89, 30);
+		Navigation_panel.add(HomeButton);
 		
-		JButton btnNewButton_1 = new JButton("Indietro");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnNewButton_1.setBounds(109, 11, 89, 30);
-		panel.add(btnNewButton_1);
+		JButton IndietroButton = new JButton("Indietro");
+		IndietroButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.back();
+			}
+		});
+		IndietroButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+		IndietroButton.setBounds(109, 11, 89, 30);
+		Navigation_panel.add(IndietroButton);
 		
-		JLabel lblNewLabel = new JLabel("------");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(412, 11, 220, 30);
-		panel.add(lblNewLabel);
+		JLabel OrarioLabel = new JLabel("------");
+		OrarioLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+		OrarioLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		OrarioLabel.setBounds(412, 11, 220, 30);
+		Navigation_panel.add(OrarioLabel);
 		
-		JButton btnNewButton_2 = new JButton("Logout");
-		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnNewButton_2.setBounds(945, 11, 89, 30);
-		panel.add(btnNewButton_2);
+		JButton LogoutButton_2 = new JButton("Logout");
+		LogoutButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.logout();			
+			}
+		});
+		LogoutButton_2.setFont(new Font("Tahoma", Font.BOLD, 12));
+		LogoutButton_2.setBounds(945, 11, 89, 30);
+		Navigation_panel.add(LogoutButton_2);
 		
-		JTextPane txtpnBenvenutoNomeCognome = new JTextPane();
-		txtpnBenvenutoNomeCognome.setEditable(false);
-		txtpnBenvenutoNomeCognome.setBackground(SystemColor.control);
-		txtpnBenvenutoNomeCognome.setFont(new Font("Tahoma", Font.BOLD, 12));
-		txtpnBenvenutoNomeCognome.setText("Benvenuto\r\nNome Cognome\r\nusername - mail@mail.it");
-		txtpnBenvenutoNomeCognome.setBounds(10, 11, 200, 72);
-		contentPane.add(txtpnBenvenutoNomeCognome);
+		JTextPane BenvenutoNomeCognomeTxtPane = new JTextPane();
+		BenvenutoNomeCognomeTxtPane.setEditable(false);
+		BenvenutoNomeCognomeTxtPane.setBackground(SystemColor.control);
+		BenvenutoNomeCognomeTxtPane.setFont(new Font("Tahoma", Font.BOLD, 12));
+		BenvenutoNomeCognomeTxtPane.setText("Benvenuto\r\nNome Cognome\r\nusername - mail@mail.it");
+		BenvenutoNomeCognomeTxtPane.setBounds(10, 11, 200, 72);
+		HomepageProprietarioPane.add(BenvenutoNomeCognomeTxtPane);
 		
-		JLabel lblNewLabel_1 = new JLabel("GESTIONE CASI COVID-19");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(273, 94, 497, 52);
-		contentPane.add(lblNewLabel_1);
+		JLabel GestioneCasiCovid19Label = new JLabel("GESTIONE CASI COVID-19");
+		GestioneCasiCovid19Label.setFont(new Font("Tahoma", Font.BOLD, 15));
+		GestioneCasiCovid19Label.setHorizontalAlignment(SwingConstants.CENTER);
+		GestioneCasiCovid19Label.setBounds(273, 94, 497, 52);
+		HomepageProprietarioPane.add(GestioneCasiCovid19Label);
 		
-		JButton btnNewButton_3 = new JButton("I miei ristoranti");
-		btnNewButton_3.setBounds(60, 205, 130, 50);
-		contentPane.add(btnNewButton_3);
+		JButton IMieiRistorantiButton = new JButton("I miei ristoranti");
+		IMieiRistorantiButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		IMieiRistorantiButton.setBounds(60, 205, 130, 50);
+		HomepageProprietarioPane.add(IMieiRistorantiButton);
 		
-		JButton btnNewButton_4 = new JButton("Personale");
-		btnNewButton_4.setBounds(264, 205, 130, 50);
-		contentPane.add(btnNewButton_4);
+		JButton PersonaleButton = new JButton("Personale");
+		PersonaleButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		PersonaleButton.setBounds(264, 205, 130, 50);
+		HomepageProprietarioPane.add(PersonaleButton);
 		
-		JButton btnNewButton_5 = new JButton("Statistiche");
-		btnNewButton_5.setBounds(468, 205, 130, 50);
-		contentPane.add(btnNewButton_5);
+		JButton StatisticheButton = new JButton("Statistiche");
+		StatisticheButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		StatisticheButton.setBounds(468, 205, 130, 50);
+		HomepageProprietarioPane.add(StatisticheButton);
 		
-		JButton btnNewButton_6 = new JButton("Registra caso");
-		btnNewButton_6.setBounds(672, 205, 130, 50);
-		contentPane.add(btnNewButton_6);
+		JButton RegistraCasoButton = new JButton("Registra caso");
+		RegistraCasoButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		RegistraCasoButton.setBounds(672, 205, 130, 50);
+		HomepageProprietarioPane.add(RegistraCasoButton);
 		
-		JButton btnNewButton_7 = new JButton("Impostazioni");
-		btnNewButton_7.setBounds(876, 205, 130, 50);
-		contentPane.add(btnNewButton_7);
+		JButton ImpostazioniButton = new JButton("Impostazioni");
+		ImpostazioniButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		ImpostazioniButton.setBounds(876, 205, 130, 50);
+		HomepageProprietarioPane.add(ImpostazioniButton);
 	}
 }

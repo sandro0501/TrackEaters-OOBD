@@ -131,6 +131,7 @@ public class RegistrazioneManager extends JFrame {
 		JButton btnNewButton = new JButton("Indietro");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
 				c.back();
 			}
 		});

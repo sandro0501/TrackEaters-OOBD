@@ -1,5 +1,9 @@
 package Controller;
 
+import java.awt.Window;
+
+import javax.swing.*;
+
 import GUI.*;
 
 public class controller {
@@ -18,20 +22,29 @@ public class controller {
 		ln.setVisible(true);
 	}
 	
-	public void NewUser() {
+	
+	
+	public void newUser() {
 		rgm = new RegistrazioneManager(this);
 		ln.setVisible(false);
 		rgm.setVisible(true);
 	}
 	
 	public void back() {
-		rgm.setVisible(false);
 		ln.setVisible(true);
 	}
 	
 	public void login() {
 		hgpr = new HomepageProprietario(this);
 		ln.setVisible(false);
+		hgpr.setVisible(true);
+	}
+	
+	public void logout() {
+		ln.setVisible(true);
+	}
+	
+	public void homeProprietario() {
 		hgpr.setVisible(true);
 	}
 

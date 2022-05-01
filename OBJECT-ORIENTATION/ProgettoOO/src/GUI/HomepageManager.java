@@ -1,73 +1,132 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.FlowLayout;
-import javax.swing.JTabbedPane;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+
 import Controller.controller;
 
 public class HomepageManager extends JFrame {
 
-	private JPanel contentPane;
+	private JPanel HomepageManagerPane;
 	private controller theController;
 
+	
+	
 	public HomepageManager(controller c) {
+		setResizable(false);
 		theController = c;
+		setTitle("SecuRisto");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(HomepageManager.class.getResource("/resources/icon.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1060, 500);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		HomepageManagerPane = new JPanel();
+		HomepageManagerPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(HomepageManagerPane);
+		HomepageManagerPane.setLayout(null);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(0, 0, 1044, 412);
-		contentPane.add(tabbedPane);
+		JPanel Navigation_panel = new JPanel();
+		Navigation_panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		Navigation_panel.setBounds(0, 409, 1044, 52);
+		HomepageManagerPane.add(Navigation_panel);
+		Navigation_panel.setLayout(null);
 		
-		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.addTab("New tab", null, tabbedPane_1, null);
+		JButton HomeButton = new JButton("Home");
+		HomeButton.setEnabled(false);
+		HomeButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+		HomeButton.setBounds(10, 11, 89, 30);
+		Navigation_panel.add(HomeButton);
 		
-		JTabbedPane tabbedPane_2 = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.addTab("New tab", null, tabbedPane_2, null);
+		JButton IndietroButton = new JButton("Indietro");
+		IndietroButton.setEnabled(false);
+		IndietroButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+		IndietroButton.setBounds(109, 11, 89, 30);
+		Navigation_panel.add(IndietroButton);
 		
-		JTabbedPane tabbedPane_3 = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.addTab("New tab", null, tabbedPane_3, null);
+		JLabel OrarioLabel = new JLabel("\"Data & Ora\"");
+		OrarioLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+		OrarioLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		OrarioLabel.setBounds(412, 11, 220, 30);
+		Navigation_panel.add(OrarioLabel);
 		
-		JTabbedPane tabbedPane_4 = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.addTab("New tab", null, tabbedPane_4, null);
+		JButton LogoutButton_2 = new JButton("Logout");
+		LogoutButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.logout();			
+			}
+		});
+		LogoutButton_2.setFont(new Font("Tahoma", Font.BOLD, 12));
+		LogoutButton_2.setBounds(945, 11, 89, 30);
+		Navigation_panel.add(LogoutButton_2);
 		
-		JTabbedPane tabbedPane_5 = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.addTab("New tab", null, tabbedPane_5, null);
+		JTextPane InfoManagerTxtPane = new JTextPane();
+		InfoManagerTxtPane.setEditable(false);
+		InfoManagerTxtPane.setBackground(SystemColor.control);
+		InfoManagerTxtPane.setFont(new Font("Tahoma", Font.BOLD, 12));
+		InfoManagerTxtPane.setText("Manager: \"Nome\" \"Cognome\"\r\n\"Telefono\"\r\n\"Email\"");
+		InfoManagerTxtPane.setBounds(798, 11, 236, 72);
+		HomepageManagerPane.add(InfoManagerTxtPane);
 		
-		JTabbedPane tabbedPane_6 = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.addTab("New tab", null, tabbedPane_6, null);
+		JLabel GestioneCasiCovid19Label = new JLabel("TRACCIAMENTO CONTATTI COVID-19");
+		GestioneCasiCovid19Label.setFont(new Font("Tahoma", Font.BOLD, 15));
+		GestioneCasiCovid19Label.setHorizontalAlignment(SwingConstants.CENTER);
+		GestioneCasiCovid19Label.setBounds(277, 94, 490, 52);
+		HomepageManagerPane.add(GestioneCasiCovid19Label);
 		
-		JButton btnNewButton = new JButton("Home");
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnNewButton.setBounds(10, 423, 89, 30);
-		contentPane.add(btnNewButton);
+		JButton InformazioniRistorantiButton = new JButton("Informazioni \r\nRistorante");
+		InformazioniRistorantiButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		InformazioniRistorantiButton.setBounds(72, 205, 170, 50);
+		HomepageManagerPane.add(InformazioniRistorantiButton);
 		
-		JButton btnNewButton_1 = new JButton("Indietro");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnNewButton_1.setBounds(109, 423, 89, 30);
-		contentPane.add(btnNewButton_1);
+		JButton SaleTavoliButton = new JButton("Sale e Tavoli");
+		SaleTavoliButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		SaleTavoliButton.setBounds(314, 205, 170, 50);
+		HomepageManagerPane.add(SaleTavoliButton);
 		
-		JButton btnNewButton_2 = new JButton("Logout");
-		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnNewButton_2.setBounds(945, 423, 89, 30);
-		contentPane.add(btnNewButton_2);
+		JButton CamerieriButton = new JButton("Camerieri");
+		CamerieriButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		CamerieriButton.setBounds(556, 205, 170, 50);
+		HomepageManagerPane.add(CamerieriButton);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(412, 423, 220, 30);
-		contentPane.add(lblNewLabel);
+		JButton StatisticheButton = new JButton("Statistiche ");
+		StatisticheButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		StatisticheButton.setBounds(798, 205, 170, 50);
+		HomepageManagerPane.add(StatisticheButton);
+		
+		JButton ImpostazioniButton = new JButton("Casi");
+		ImpostazioniButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		ImpostazioniButton.setBounds(234, 313, 170, 50);
+		HomepageManagerPane.add(ImpostazioniButton);
+		
+		JButton TavolateButton = new JButton("Tavolate");
+		TavolateButton.setBounds(638, 314, 170, 50);
+		HomepageManagerPane.add(TavolateButton);
+		
+		JLabel RistoranteLabel = new JLabel("RISTORANTE");
+		RistoranteLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+		RistoranteLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		RistoranteLabel.setBounds(479, 35, 85, 20);
+		HomepageManagerPane.add(RistoranteLabel);
+		
+		JLabel DenominazioneLabel = new JLabel("\"Denominazione\"");
+		DenominazioneLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+		DenominazioneLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		DenominazioneLabel.setBounds(277, 66, 490, 20);
+		HomepageManagerPane.add(DenominazioneLabel);
 	}
 }

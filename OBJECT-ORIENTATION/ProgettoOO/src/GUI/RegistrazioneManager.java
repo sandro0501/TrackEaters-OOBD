@@ -132,7 +132,7 @@ public class RegistrazioneManager extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.back();
+				c.logout();
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));

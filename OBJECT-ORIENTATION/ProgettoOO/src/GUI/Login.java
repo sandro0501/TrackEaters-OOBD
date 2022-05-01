@@ -45,13 +45,13 @@ public class Login extends JFrame {
 		LoginPane.setLayout(null);
 		
 		UsernameField = new JTextField();
-		UsernameField.setBounds(249, 29, 160, 20);
+		UsernameField.setBounds(249, 45, 160, 20);
 		LoginPane.add(UsernameField);
 		UsernameField.setColumns(10);
 		
 		JComboBox RuoloBox = new JComboBox();
 		RuoloBox.setModel(new DefaultComboBoxModel(new String[] {"Proprietario", "Manager"}));
-		RuoloBox.setBounds(249, 119, 160, 22);
+		RuoloBox.setBounds(249, 135, 160, 22);
 		LoginPane.add(RuoloBox);
 		
 		JButton LoginNewButton = new JButton("Login");
@@ -66,38 +66,23 @@ public class Login extends JFrame {
 			}
 		});
 		LoginNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		LoginNewButton.setBounds(250, 156, 90, 40);
+		LoginNewButton.setBounds(250, 172, 90, 40);
 		LoginPane.add(LoginNewButton);
-		
-		JButton RegistrazioneNewButton = new JButton("Registrazione");
-		RegistrazioneNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				c.newUser();
-			}
-		});
-		RegistrazioneNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		RegistrazioneNewButton.setBounds(249, 227, 160, 23);
-		LoginPane.add(RegistrazioneNewButton);
 		
 		JLabel UsernameLabel = new JLabel("Username");
 		UsernameLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		UsernameLabel.setBounds(249, 15, 77, 14);
+		UsernameLabel.setBounds(249, 31, 77, 14);
 		LoginPane.add(UsernameLabel);
 		
 		JLabel PasswordLabel = new JLabel("Password");
 		PasswordLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		PasswordLabel.setBounds(249, 60, 74, 14);
+		PasswordLabel.setBounds(249, 76, 74, 14);
 		LoginPane.add(PasswordLabel);
 		
 		JLabel RuoloLabel = new JLabel("Ruolo");
 		RuoloLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		RuoloLabel.setBounds(249, 105, 68, 14);
+		RuoloLabel.setBounds(249, 121, 68, 14);
 		LoginPane.add(RuoloLabel);
-		
-		JLabel RegistrazioneLabel = new JLabel("Non ancora registrato?");
-		RegistrazioneLabel.setFont(new Font("Tahoma", Font.ITALIC, 12));
-		RegistrazioneLabel.setBounds(250, 206, 146, 14);
-		LoginPane.add(RegistrazioneLabel);
 		
 		JLabel PictureLabel = new JLabel("");
 		PictureLabel.setBounds(10, 16, 162, 145);
@@ -111,7 +96,7 @@ public class Login extends JFrame {
 		LoginPane.add(SistemaDiTracciamentotxtpn);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(249, 74, 160, 20);
+		passwordField.setBounds(249, 90, 160, 20);
 		LoginPane.add(passwordField);
 	}
 }

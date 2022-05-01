@@ -12,6 +12,7 @@ public class controller {
 	RegistrazioneManager rgm;
 	HomepageProprietario hgpr;
 	HomepageManager hgmg;
+	IMieiRistoranti imrst;
 	
 	public static void main (String[] args) {
 		controller c = new controller(); 
@@ -23,16 +24,12 @@ public class controller {
 		ln.setVisible(true);
 	}
 	
-	
+
 	
 	public void newUser() {
 		rgm = new RegistrazioneManager(this);
 		ln.setVisible(false);
 		rgm.setVisible(true);
-	}
-	
-	public void back() {
-		ln.setVisible(true);
 	}
 	
 	public void loginProprietario() {
@@ -53,6 +50,11 @@ public class controller {
 	
 	public void homeProprietario() {
 		hgpr.setVisible(true);
+	}
+	
+	public void iMieiRistorantiProprietario() {
+		imrst = new IMieiRistoranti(this);
+		imrst.setVisible(true);
 	}
 
 }

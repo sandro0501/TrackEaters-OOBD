@@ -28,9 +28,9 @@ public class HomepageProprietario extends JFrame {
 
 	
 	public HomepageProprietario(controller c) {
-		setResizable(false);
 		theController = c;
 		
+		setResizable(false);
 		setTitle("SecuRisto");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(HomepageProprietario.class.getResource("/resources/icon.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -101,6 +101,12 @@ public class HomepageProprietario extends JFrame {
 		HomepageProprietarioPane.add(IMieiRistorantiButton);
 		
 		JButton PersonaleButton = new JButton("Personale");
+		PersonaleButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.personaleProprietario();
+			}
+		});
 		PersonaleButton.setBounds(338, 205, 130, 50);
 		PersonaleButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		HomepageProprietarioPane.add(PersonaleButton);

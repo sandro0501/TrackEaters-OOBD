@@ -29,11 +29,9 @@ public class Login extends JFrame {
 	private JTextField UsernameField;
 	private controller theController;
 	private JPasswordField passwordField;
-	private Login curr;
 	
 	public Login(controller c) {
 		theController = c;
-		curr=this;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/resources/icon.png")));
 		setResizable(false);
 		setTitle("SecuRisto");
@@ -58,10 +56,11 @@ public class Login extends JFrame {
 		LoginNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(RuoloBox.getSelectedIndex()==0) {
+					setVisible(false);
 					c.loginProprietario();
-				}
-				else {
+				} else {
 					c.loginManager();
+					setVisible(false);
 				}
 			}
 		});
@@ -98,5 +97,15 @@ public class Login extends JFrame {
 		passwordField = new JPasswordField();
 		passwordField.setBounds(249, 90, 160, 20);
 		LoginPane.add(passwordField);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.loginProprietario();
+			}
+		});
+		btnNewButton.setBounds(144, 223, 89, 23);
+		LoginPane.add(btnNewButton);
 	}
 }

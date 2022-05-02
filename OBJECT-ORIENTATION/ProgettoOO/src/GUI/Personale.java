@@ -105,14 +105,13 @@ public class Personale extends JFrame {
 		JButton HomeButton = new JButton("Home");
 		HomeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				c.loginProprietario();
+				c.startLoginProprietario();
 				setVisible(false);
 			}
 		});
 		HomeButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		HomeButton.setBounds(10, 11, 89, 30);
 		Navigation_panel.add(HomeButton);
-		
 		JButton IndietroButton = new JButton("Indietro");
 		IndietroButton.setEnabled(false);
 		IndietroButton.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -137,6 +136,12 @@ public class Personale extends JFrame {
 		Navigation_panel.add(LogoutButton);
 		
 		JButton AggiungiButton = new JButton("Aggiungi");
+		AggiungiButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				c.startRegistrazione();
+				setVisible(false);
+			}
+		});
 		AggiungiButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		AggiungiButton.setBounds(178, 358, 110, 40);
 		PersonalePane.add(AggiungiButton);

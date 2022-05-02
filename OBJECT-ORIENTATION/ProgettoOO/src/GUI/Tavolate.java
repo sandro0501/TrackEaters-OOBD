@@ -24,41 +24,42 @@ import java.awt.Cursor;
 import javax.swing.JScrollBar;
 import java.awt.Toolkit;
 
-public class IMieiRistoranti extends JFrame {
+public class Tavolate extends JFrame {
 
-	private JPanel IMieiRistorantiPane;
+	private JPanel TavolataPane;
 	private controller theController;
-	private JTable RistornatiTable;
+	private JTable TavolataTable;
 
-	public IMieiRistoranti(controller c) {
+	public Tavolate(controller c) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(IMieiRistoranti.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		theController = c;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1060, 500);
-		IMieiRistorantiPane = new JPanel();
-		IMieiRistorantiPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(IMieiRistorantiPane);
-		IMieiRistorantiPane.setLayout(null);
+		TavolataPane = new JPanel();
+		TavolataPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(TavolataPane);
+		TavolataPane.setLayout(null);
 		
-		JLabel IMieiRistorantiLabel = new JLabel("I MIEI RISTORANTI");
-		IMieiRistorantiLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		IMieiRistorantiLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		IMieiRistorantiLabel.setBounds(277, 11, 490, 52);
-		IMieiRistorantiPane.add(IMieiRistorantiLabel);
+		JLabel tavolateLabel = new JLabel("TAVOLATE");
+		tavolateLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		tavolateLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		tavolateLabel.setBounds(277, 50, 490, 52);
+		TavolataPane.add(tavolateLabel);
 		
-		JLabel NomeECognomeLabel = new JLabel("\"Nome\" \"Cognome\"");
-		NomeECognomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		NomeECognomeLabel.setBounds(277, 74, 490, 20);
-		IMieiRistorantiPane.add(NomeECognomeLabel);
+		JLabel RistoranteLabel = new JLabel("Ristorante: \"Denominazione\"");
+		RistoranteLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+		RistoranteLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		RistoranteLabel.setBounds(277, 28, 490, 20);
+		TavolataPane.add(RistoranteLabel);
 		
-		RistornatiTable = new JTable();
-		RistornatiTable.setColumnSelectionAllowed(true);
-		RistornatiTable.setCellSelectionEnabled(true);
-		RistornatiTable.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		RistornatiTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		RistornatiTable.setModel(new DefaultTableModel(
+		TavolataTable = new JTable();
+		TavolataTable.setColumnSelectionAllowed(true);
+		TavolataTable.setCellSelectionEnabled(true);
+		TavolataTable.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		TavolataTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		TavolataTable.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null, null, null, null, null},
 				{null, null, null, null, null, null, null, null},
@@ -86,25 +87,25 @@ public class IMieiRistoranti extends JFrame {
 				return columnTypes[columnIndex];
 			}
 		});
-		RistornatiTable.getColumnModel().getColumn(0).setPreferredWidth(110);
-		RistornatiTable.getColumnModel().getColumn(1).setPreferredWidth(110);
-		RistornatiTable.getColumnModel().getColumn(2).setPreferredWidth(85);
-		RistornatiTable.getColumnModel().getColumn(3).setPreferredWidth(90);
-		RistornatiTable.getColumnModel().getColumn(4).setPreferredWidth(65);
-		RistornatiTable.getColumnModel().getColumn(5).setPreferredWidth(55);
-		RistornatiTable.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		RistornatiTable.setBackground(Color.WHITE);
-		RistornatiTable.setBounds(10, 124, 1007, 223);
-		IMieiRistorantiPane.add(RistornatiTable);
+		TavolataTable.getColumnModel().getColumn(0).setPreferredWidth(110);
+		TavolataTable.getColumnModel().getColumn(1).setPreferredWidth(110);
+		TavolataTable.getColumnModel().getColumn(2).setPreferredWidth(85);
+		TavolataTable.getColumnModel().getColumn(3).setPreferredWidth(90);
+		TavolataTable.getColumnModel().getColumn(4).setPreferredWidth(65);
+		TavolataTable.getColumnModel().getColumn(5).setPreferredWidth(55);
+		TavolataTable.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		TavolataTable.setBackground(Color.WHITE);
+		TavolataTable.setBounds(10, 124, 1007, 223);
+		TavolataPane.add(TavolataTable);
 		
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(1017, 124, 17, 223);
-		IMieiRistorantiPane.add(scrollBar);
+		TavolataPane.add(scrollBar);
 		
 		JPanel Navigation_panel = new JPanel();
 		Navigation_panel.setBounds(0, 409, 1044, 52);
 		Navigation_panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		IMieiRistorantiPane.add(Navigation_panel);
+		TavolataPane.add(Navigation_panel);
 		Navigation_panel.setLayout(null);
 		
 		JButton HomeButton = new JButton("Home");
@@ -144,21 +145,21 @@ public class IMieiRistoranti extends JFrame {
 		JButton GestireButton = new JButton("Gestisci");
 		GestireButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GestireButton.setBounds(120, 358, 110, 40);
-		IMieiRistorantiPane.add(GestireButton);
+		TavolataPane.add(GestireButton);
 		
 		JButton AggiungiButton = new JButton("Aggiungi");
 		AggiungiButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		AggiungiButton.setBounds(350, 358, 110, 40);
-		IMieiRistorantiPane.add(AggiungiButton);
+		TavolataPane.add(AggiungiButton);
 		
 		JButton ModificaButton = new JButton("Modifica");
 		ModificaButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		ModificaButton.setBounds(580, 358, 110, 40);
-		IMieiRistorantiPane.add(ModificaButton);
+		TavolataPane.add(ModificaButton);
 		
 		JButton EliminaButton = new JButton("Elimina");
 		EliminaButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		EliminaButton.setBounds(810, 358, 110, 40);
-		IMieiRistorantiPane.add(EliminaButton);
+		TavolataPane.add(EliminaButton);
 	}
 }

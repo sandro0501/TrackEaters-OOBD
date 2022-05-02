@@ -57,10 +57,10 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(RuoloBox.getSelectedIndex()==0) {
 					setVisible(false);
-					c.loginProprietario();
+					c.startLoginProprietario();
 				} else {
 					setVisible(false);
-					c.loginManager();
+					c.startLoginManager();
 				}
 			}
 		});

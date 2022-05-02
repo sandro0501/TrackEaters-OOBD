@@ -93,7 +93,7 @@ public class HomepageProprietario extends JFrame {
 		IMieiRistorantiButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.iMieiRistorantiProprietario();
+				c.startI_MieiRistorantiProprietario();
 			}
 		});
 		IMieiRistorantiButton.setBounds(104, 205, 130, 50);
@@ -104,7 +104,7 @@ public class HomepageProprietario extends JFrame {
 		PersonaleButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.personaleProprietario();
+				c.startPersonaleProprietario();
 			}
 		});
 		PersonaleButton.setBounds(338, 205, 130, 50);
@@ -112,23 +112,13 @@ public class HomepageProprietario extends JFrame {
 		HomepageProprietarioPane.add(PersonaleButton);
 		
 		JButton StatisticheButton = new JButton("Statistiche");
-		StatisticheButton.setBounds(806, 205, 130, 50);
+		StatisticheButton.setBounds(572, 205, 130, 50);
 		StatisticheButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		HomepageProprietarioPane.add(StatisticheButton);
 		
-		JButton CasiCovidButton = new JButton("Casi covid");
-		CasiCovidButton.setBounds(273, 313, 130, 50);
-		CasiCovidButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		HomepageProprietarioPane.add(CasiCovidButton);
-		
 		JButton ImpostazioniButton = new JButton("Impostazioni");
-		ImpostazioniButton.setBounds(664, 313, 130, 50);
+		ImpostazioniButton.setBounds(806, 205, 130, 50);
 		ImpostazioniButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		HomepageProprietarioPane.add(ImpostazioniButton);
-		
-		JButton RiepilogoTavolateButton = new JButton("Riepilogo tavolate");
-		RiepilogoTavolateButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		RiepilogoTavolateButton.setBounds(572, 205, 130, 50);
-		HomepageProprietarioPane.add(RiepilogoTavolateButton);
 	}
 }

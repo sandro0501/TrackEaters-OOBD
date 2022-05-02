@@ -8,12 +8,13 @@ import GUI.*;
 
 public class controller {
 	
-	Login ln;
-	RegistrazioneManager rgm;
-	HomepageProprietario hgpr;
-	HomepageManager hgmg;
-	IMieiRistoranti imrst;
-	Personale prspg;
+	Login loginPage;
+	Registrazione registrazioneManagerPage;
+	HomepageProprietario homepageProprietarioPage;
+	HomepageManager homepageManagerPage;
+	IMieiRistoranti iMieiRistorantiPage;
+	Personale personalePage;
+	Tavolate tavolatePage;
 	
 	public static void main (String[] args) {
 		controller c = new controller(); 
@@ -21,34 +22,39 @@ public class controller {
 	}
 	
 	public void login() {
-		ln = new Login(this);
-		ln.setVisible(true);
+		loginPage = new Login(this);
+		loginPage.setVisible(true);
 	}
 	
-	public void newUser() {
-		rgm = new RegistrazioneManager(this);
-		rgm.setVisible(true);
+	public void startRegistrazione() {
+		registrazioneManagerPage = new Registrazione(this);
+		registrazioneManagerPage.setVisible(true);
 	}
 	
-	public void loginProprietario() {
-		hgpr = new HomepageProprietario(this);
-		hgpr.setVisible(true);
+	public void startLoginProprietario() {
+		homepageProprietarioPage = new HomepageProprietario(this);
+		homepageProprietarioPage.setVisible(true);
 	}
 	
-	public void loginManager() {
-		hgmg = new HomepageManager(this);
-		hgmg.setVisible(true);
+	public void startLoginManager() {
+		homepageManagerPage = new HomepageManager(this);
+		homepageManagerPage.setVisible(true);
 	}
 
 	
-	public void iMieiRistorantiProprietario() {
-		imrst = new IMieiRistoranti(this);
-		imrst.setVisible(true);
+	public void startI_MieiRistorantiProprietario() {
+		iMieiRistorantiPage = new IMieiRistoranti(this);
+		iMieiRistorantiPage.setVisible(true);
 	}
 	
-	public void personaleProprietario() {
-		prspg = new Personale(this);
-		prspg.setVisible(true);
+	public void startPersonaleProprietario() {
+		personalePage = new Personale(this);
+		personalePage.setVisible(true);
+	}
+	
+	public void startTavolate() {
+		tavolatePage = new Tavolate(this);
+		tavolatePage.setVisible(true);
 	}
 
 }

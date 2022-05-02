@@ -27,8 +27,8 @@ public class Login extends JFrame {
 
 	private JPanel LoginPane;
 	private JTextField UsernameField;
-	private controller theController;
 	private JPasswordField passwordField;
+	private controller theController;
 	
 	public Login(controller c) {
 		theController = c;
@@ -59,8 +59,8 @@ public class Login extends JFrame {
 					setVisible(false);
 					c.loginProprietario();
 				} else {
-					c.loginManager();
 					setVisible(false);
+					c.loginManager();
 				}
 			}
 		});
@@ -97,15 +97,5 @@ public class Login extends JFrame {
 		passwordField = new JPasswordField();
 		passwordField.setBounds(249, 90, 160, 20);
 		LoginPane.add(passwordField);
-		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				c.loginProprietario();
-			}
-		});
-		btnNewButton.setBounds(144, 223, 89, 23);
-		LoginPane.add(btnNewButton);
 	}
 }

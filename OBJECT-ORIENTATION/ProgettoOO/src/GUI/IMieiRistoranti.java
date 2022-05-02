@@ -22,6 +22,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EtchedBorder;
 import java.awt.Cursor;
 import javax.swing.JScrollBar;
+import java.awt.Toolkit;
 
 public class IMieiRistoranti extends JFrame {
 
@@ -30,6 +31,8 @@ public class IMieiRistoranti extends JFrame {
 	private JTable RistornatiTable;
 
 	public IMieiRistoranti(controller c) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(IMieiRistoranti.class.getResource("/resources/icon.png")));
+		setTitle("SecuRisto");
 		theController = c;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,8 +74,6 @@ public class IMieiRistoranti extends JFrame {
 				{null, null, null, null, null, null, null, null},
 				{null, null, null, null, null, null, null, null},
 				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
 			},
 			new String[] {
 				"Denominazione", "Indirizzo", "Telefono", "Citt\u00E0", "Provincia", "CAP", "Email", "Sito Web"
@@ -84,12 +85,6 @@ public class IMieiRistoranti extends JFrame {
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
 		});
 		RistornatiTable.getColumnModel().getColumn(0).setPreferredWidth(110);
 		RistornatiTable.getColumnModel().getColumn(1).setPreferredWidth(110);
@@ -99,11 +94,11 @@ public class IMieiRistoranti extends JFrame {
 		RistornatiTable.getColumnModel().getColumn(5).setPreferredWidth(55);
 		RistornatiTable.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		RistornatiTable.setBackground(Color.WHITE);
-		RistornatiTable.setBounds(10, 124, 1007, 256);
+		RistornatiTable.setBounds(10, 124, 1007, 223);
 		IMieiRistorantiPane.add(RistornatiTable);
 		
 		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(1017, 124, 17, 256);
+		scrollBar.setBounds(1017, 124, 17, 223);
 		IMieiRistorantiPane.add(scrollBar);
 		
 		JPanel Navigation_panel = new JPanel();
@@ -113,7 +108,12 @@ public class IMieiRistoranti extends JFrame {
 		Navigation_panel.setLayout(null);
 		
 		JButton HomeButton = new JButton("Home");
-		HomeButton.setEnabled(false);
+		HomeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				c.loginProprietario();
+				setVisible(false);
+			}
+		});
 		HomeButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		HomeButton.setBounds(10, 11, 89, 30);
 		Navigation_panel.add(HomeButton);
@@ -134,11 +134,31 @@ public class IMieiRistoranti extends JFrame {
 		LogoutButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.logout();			
+				c.login();			
 			}
 		});
 		LogoutButton_2.setFont(new Font("Tahoma", Font.BOLD, 12));
 		LogoutButton_2.setBounds(945, 11, 89, 30);
 		Navigation_panel.add(LogoutButton_2);
+		
+		JButton GestireButton = new JButton("Gestisci");
+		GestireButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+		GestireButton.setBounds(120, 358, 110, 40);
+		IMieiRistorantiPane.add(GestireButton);
+		
+		JButton AggiungiButton = new JButton("Aggiungi");
+		AggiungiButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+		AggiungiButton.setBounds(350, 358, 110, 40);
+		IMieiRistorantiPane.add(AggiungiButton);
+		
+		JButton ModificaButton = new JButton("Modifica");
+		ModificaButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+		ModificaButton.setBounds(580, 358, 110, 40);
+		IMieiRistorantiPane.add(ModificaButton);
+		
+		JButton EliminaButton = new JButton("Elimina");
+		EliminaButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+		EliminaButton.setBounds(810, 358, 110, 40);
+		IMieiRistorantiPane.add(EliminaButton);
 	}
 }

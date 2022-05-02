@@ -67,7 +67,7 @@ public class HomepageManager extends JFrame {
 		LogoutButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.logout();			
+				c.login();			
 			}
 		});
 		LogoutButton_2.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -89,31 +89,32 @@ public class HomepageManager extends JFrame {
 		HomepageManagerPane.add(GestioneCasiCovid19Label);
 		
 		JButton InformazioniRistorantiButton = new JButton("Informazioni \r\nRistorante");
-		InformazioniRistorantiButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		InformazioniRistorantiButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		InformazioniRistorantiButton.setBounds(72, 205, 170, 50);
 		HomepageManagerPane.add(InformazioniRistorantiButton);
 		
 		JButton SaleTavoliButton = new JButton("Sale e Tavoli");
-		SaleTavoliButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		SaleTavoliButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		SaleTavoliButton.setBounds(314, 205, 170, 50);
 		HomepageManagerPane.add(SaleTavoliButton);
 		
 		JButton CamerieriButton = new JButton("Camerieri");
-		CamerieriButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		CamerieriButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		CamerieriButton.setBounds(556, 205, 170, 50);
 		HomepageManagerPane.add(CamerieriButton);
 		
 		JButton StatisticheButton = new JButton("Statistiche ");
-		StatisticheButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		StatisticheButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		StatisticheButton.setBounds(798, 205, 170, 50);
 		HomepageManagerPane.add(StatisticheButton);
 		
 		JButton ImpostazioniButton = new JButton("Casi");
-		ImpostazioniButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		ImpostazioniButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		ImpostazioniButton.setBounds(234, 313, 170, 50);
 		HomepageManagerPane.add(ImpostazioniButton);
 		
 		JButton TavolateButton = new JButton("Tavolate");
+		TavolateButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		TavolateButton.setBounds(638, 314, 170, 50);
 		HomepageManagerPane.add(TavolateButton);
 		

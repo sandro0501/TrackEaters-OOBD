@@ -17,15 +17,13 @@ public class controller {
 	
 	public static void main (String[] args) {
 		controller c = new controller(); 
-		
+		c.login();
 	}
 	
-	public controller() {
+	public void login() {
 		ln = new Login(this);
 		ln.setVisible(true);
 	}
-	
-
 	
 	public void newUser() {
 		rgm = new RegistrazioneManager(this);
@@ -41,11 +39,7 @@ public class controller {
 		hgmg = new HomepageManager(this);
 		hgmg.setVisible(true);
 	}
-	
-	public void logout() {
-		ln.setVisible(true);
-	}
-	
+
 	
 	public void iMieiRistorantiProprietario() {
 		imrst = new IMieiRistoranti(this);

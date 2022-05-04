@@ -6,7 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import Controller.controller;
+import Controller.Controller;
 import java.awt.Toolkit;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -26,7 +26,7 @@ import java.awt.Dialog.ModalExclusionType;
 public class Registrazione extends JFrame {
 
 	private JPanel RegistrazionePane;
-	private controller theController;
+	private Controller theController;
 	private JTextField UsernameField;
 	private JTextField nomeField;
 	private JTextField CognomeField;
@@ -35,7 +35,7 @@ public class Registrazione extends JFrame {
 	private JPasswordField passwordField;
 
 
-	public Registrazione(controller c) {
+	public Registrazione(Controller c) {
 		setAlwaysOnTop(true);
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Registrazione.class.getResource("/resources/icon.png")));

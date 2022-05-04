@@ -18,16 +18,16 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import Controller.controller;
+import Controller.Controller;
 
 public class HomepageManager extends JFrame {
 
 	private JPanel HomepageManagerPane;
-	private controller theController;
+	private Controller theController;
 
 	
 	
-	public HomepageManager(controller c) {
+	public HomepageManager(Controller c) {
 		setResizable(false);
 		theController = c;
 		setTitle("SecuRisto");

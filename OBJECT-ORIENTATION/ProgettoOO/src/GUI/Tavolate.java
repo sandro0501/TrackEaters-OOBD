@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import Controller.controller;
+import Controller.Controller;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -27,10 +27,10 @@ import java.awt.Toolkit;
 public class Tavolate extends JFrame {
 
 	private JPanel TavolataPane;
-	private controller theController;
+	private Controller theController;
 	private JTable TavolataTable;
 
-	public Tavolate(controller c) {
+	public Tavolate(Controller c) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(IMieiRistoranti.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		theController = c;

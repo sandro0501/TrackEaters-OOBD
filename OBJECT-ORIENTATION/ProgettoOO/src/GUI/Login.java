@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
-import Controller.controller;
+import Controller.Controller;
 import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.JPasswordField;
@@ -28,9 +28,9 @@ public class Login extends JFrame {
 	private JPanel LoginPane;
 	private JTextField UsernameField;
 	private JPasswordField passwordField;
-	private controller theController;
+	private Controller theController;
 	
-	public Login(controller c) {
+	public Login(Controller c) {
 		theController = c;
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/resources/icon.png")));
 		setResizable(false);

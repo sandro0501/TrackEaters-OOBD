@@ -21,16 +21,16 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-import Controller.controller;
+import Controller.Controller;
 import java.awt.Toolkit;
 
 public class Personale extends JFrame {
 
 	private JPanel PersonalePane;
 	private JTable PersonaleTable;
-	private controller theController;
+	private Controller theController;
 	
-	public Personale(controller c) {
+	public Personale(Controller c) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(IMieiRistoranti.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		theController = c;

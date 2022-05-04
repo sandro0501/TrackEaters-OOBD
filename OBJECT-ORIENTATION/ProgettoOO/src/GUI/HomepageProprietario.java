@@ -15,7 +15,7 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextPane;
 import java.awt.SystemColor;
-import Controller.controller;
+import Controller.Controller;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Component;
@@ -24,10 +24,10 @@ import javax.swing.Box;
 public class HomepageProprietario extends JFrame {
 
 	private JPanel HomepageProprietarioPane;
-	private controller theController = new controller();
+	private Controller theController = new Controller();
 
 	
-	public HomepageProprietario(controller c) {
+	public HomepageProprietario(Controller c) {
 		theController = c;
 		
 		setResizable(false);

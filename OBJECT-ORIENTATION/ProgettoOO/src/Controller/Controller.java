@@ -6,7 +6,7 @@ import javax.swing.*;
 
 import GUI.*;
 
-public class controller {
+public class Controller {
 	
 	Login loginPage;
 	Registrazione registrazioneManagerPage;
@@ -17,7 +17,7 @@ public class controller {
 	Tavolate tavolatePage;
 	
 	public static void main (String[] args) {
-		controller c = new controller(); 
+		Controller c = new Controller(); 
 		c.login();
 	}
 	

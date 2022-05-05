@@ -15,6 +15,7 @@ public class Controller {
 	IMieiRistoranti iMieiRistorantiPage;
 	Personale personalePage;
 	Tavolate tavolatePage;
+	Statistiche statistichePage;
 	
 	public static void main (String[] args) {
 		Controller c = new Controller(); 
@@ -55,6 +56,11 @@ public class Controller {
 	public void startTavolate() {
 		tavolatePage = new Tavolate(this);
 		tavolatePage.setVisible(true);
+	}
+	
+	public void startStatistiche() {
+		statistichePage = new Statistiche(this);
+		statistichePage.setVisible(true);
 	}
 
 }

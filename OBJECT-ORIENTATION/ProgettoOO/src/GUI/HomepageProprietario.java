@@ -112,6 +112,12 @@ public class HomepageProprietario extends JFrame {
 		HomepageProprietarioPane.add(PersonaleButton);
 		
 		JButton StatisticheButton = new JButton("Statistiche");
+		StatisticheButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				c.startStatistiche();
+				setVisible(false);
+			}
+		});
 		StatisticheButton.setBounds(572, 205, 130, 50);
 		StatisticheButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		HomepageProprietarioPane.add(StatisticheButton);

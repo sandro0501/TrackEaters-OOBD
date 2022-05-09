@@ -27,7 +27,7 @@ public class HomepageManager extends JFrame {
 
 	
 	
-	public HomepageManager(Controller c) {
+	public HomepageManager(Controller c, boolean flag) {
 		setResizable(false);
 		theController = c;
 		setTitle("SecuRisto");
@@ -46,13 +46,33 @@ public class HomepageManager extends JFrame {
 		Navigation_panel.setLayout(null);
 		
 		JButton HomeButton = new JButton("Home");
-		HomeButton.setEnabled(false);
+		HomeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startLoginProprietario();			
+			}
+		});
+		if(flag) {
+			HomeButton.setEnabled(false);
+		} else {
+			HomeButton.setEnabled(true);
+		}
 		HomeButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		HomeButton.setBounds(10, 11, 89, 30);
 		Navigation_panel.add(HomeButton);
 		
 		JButton IndietroButton = new JButton("Indietro");
-		IndietroButton.setEnabled(false);
+		IndietroButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startI_MieiRistorantiProprietario();		
+			}
+		});
+		if(flag) {
+			IndietroButton.setEnabled(false);
+		} else {
+			IndietroButton.setEnabled(true);
+		}
 		IndietroButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		IndietroButton.setBounds(109, 11, 89, 30);
 		Navigation_panel.add(IndietroButton);
@@ -89,6 +109,12 @@ public class HomepageManager extends JFrame {
 		HomepageManagerPane.add(GestioneCasiCovid19Label);
 		
 		JButton InformazioniRistorantiButton = new JButton("Informazioni \r\nRistorante");
+		InformazioniRistorantiButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				c.startInformazioniRistorante();
+				setVisible(false);
+			}
+		});
 		InformazioniRistorantiButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		InformazioniRistorantiButton.setBounds(72, 205, 170, 50);
 		HomepageManagerPane.add(InformazioniRistorantiButton);

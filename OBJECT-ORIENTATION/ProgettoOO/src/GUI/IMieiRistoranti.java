@@ -142,6 +142,12 @@ public class IMieiRistoranti extends JFrame {
 		Navigation_panel.add(LogoutButton_2);
 		
 		JButton GestireButton = new JButton("Gestisci");
+		GestireButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startLoginManager(false);
+			}
+		});
 		GestireButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GestireButton.setBounds(120, 358, 110, 40);
 		IMieiRistorantiPane.add(GestireButton);

@@ -16,6 +16,7 @@ public class Controller {
 	Personale personalePage;
 	Tavolate tavolatePage;
 	Statistiche statistichePage;
+	InformazioniRistorante informazioniRistorantePage;
 	
 	public static void main (String[] args) {
 		Controller c = new Controller(); 
@@ -37,8 +38,8 @@ public class Controller {
 		homepageProprietarioPage.setVisible(true);
 	}
 	
-	public void startLoginManager() {
-		homepageManagerPage = new HomepageManager(this);
+	public void startLoginManager(boolean flag) {
+		homepageManagerPage = new HomepageManager(this, flag);
 		homepageManagerPage.setVisible(true);
 	}
 
@@ -61,6 +62,11 @@ public class Controller {
 	public void startStatistiche() {
 		statistichePage = new Statistiche(this);
 		statistichePage.setVisible(true);
+	}
+	
+	public void startInformazioniRistorante() {
+		informazioniRistorantePage = new InformazioniRistorante(this);
+		informazioniRistorantePage.setVisible(true);
 	}
 
 }

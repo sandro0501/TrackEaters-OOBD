@@ -41,13 +41,8 @@ public class InformazioniRistorante extends JFrame {
 	JButton HomeButton = new JButton("Home");
 	HomeButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			if(flag) {
-				c.startLoginProprietario();
-				setVisible(false);
-			} else {
-				c.startLoginManager(flag)
-			}
-			
+			c.startLoginProprietario();
+			setVisible(false);	
 		}
 	});
 	HomeButton.setFont(new Font("Tahoma", Font.BOLD, 12));

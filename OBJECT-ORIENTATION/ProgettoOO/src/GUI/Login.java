@@ -60,7 +60,7 @@ public class Login extends JFrame {
 					c.startLoginProprietario();
 				} else {
 					setVisible(false);
-					c.startLoginManager(true);
+					c.startLoginManager(false);
 				}
 			}
 		});

@@ -53,9 +53,9 @@ public class HomepageManager extends JFrame {
 			}
 		});
 		if(flag) {
-			HomeButton.setEnabled(false);
-		} else {
 			HomeButton.setEnabled(true);
+		} else {
+			HomeButton.setEnabled(false);
 		}
 		HomeButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		HomeButton.setBounds(10, 11, 89, 30);
@@ -69,9 +69,9 @@ public class HomepageManager extends JFrame {
 			}
 		});
 		if(flag) {
-			IndietroButton.setEnabled(false);
-		} else {
 			IndietroButton.setEnabled(true);
+		} else {
+			IndietroButton.setEnabled(false);
 		}
 		IndietroButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		IndietroButton.setBounds(109, 11, 89, 30);
@@ -111,7 +111,7 @@ public class HomepageManager extends JFrame {
 		JButton InformazioniRistorantiButton = new JButton("Informazioni \r\nRistorante");
 		InformazioniRistorantiButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				c.startInformazioniRistorante();
+				c.startInformazioniRistorante(false);
 				setVisible(false);
 			}
 		});

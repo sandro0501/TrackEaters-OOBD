@@ -64,8 +64,8 @@ public class Controller {
 		statistichePage.setVisible(true);
 	}
 	
-	public void startInformazioniRistorante() {
-		informazioniRistorantePage = new InformazioniRistorante(this);
+	public void startInformazioniRistorante(boolean flag) {
+		informazioniRistorantePage = new InformazioniRistorante(this, flag);
 		informazioniRistorantePage.setVisible(true);
 	}
 

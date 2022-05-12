@@ -145,7 +145,7 @@ public class IMieiRistoranti extends JFrame {
 		GestireButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startLoginManager(false);
+				c.startLoginManager(true);
 			}
 		});
 		GestireButton.setFont(new Font("Tahoma", Font.BOLD, 12));

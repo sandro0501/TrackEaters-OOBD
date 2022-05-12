@@ -96,7 +96,7 @@ public class HomepageProprietario extends JFrame {
 				c.startI_MieiRistorantiProprietario();
 			}
 		});
-		IMieiRistorantiButton.setBounds(104, 205, 130, 50);
+		IMieiRistorantiButton.setBounds(350, 205, 130, 50);
 		IMieiRistorantiButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		HomepageProprietarioPane.add(IMieiRistorantiButton);
 		
@@ -107,24 +107,8 @@ public class HomepageProprietario extends JFrame {
 				c.startPersonaleProprietario();
 			}
 		});
-		PersonaleButton.setBounds(338, 205, 130, 50);
+		PersonaleButton.setBounds(584, 205, 130, 50);
 		PersonaleButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		HomepageProprietarioPane.add(PersonaleButton);
-		
-		JButton StatisticheButton = new JButton("Statistiche");
-		StatisticheButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				c.startStatistiche();
-				setVisible(false);
-			}
-		});
-		StatisticheButton.setBounds(572, 205, 130, 50);
-		StatisticheButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		HomepageProprietarioPane.add(StatisticheButton);
-		
-		JButton ImpostazioniButton = new JButton("Impostazioni");
-		ImpostazioniButton.setBounds(806, 205, 130, 50);
-		ImpostazioniButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		HomepageProprietarioPane.add(ImpostazioniButton);
 	}
 }

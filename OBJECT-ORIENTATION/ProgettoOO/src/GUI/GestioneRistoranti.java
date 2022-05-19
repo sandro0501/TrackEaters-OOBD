@@ -20,18 +20,18 @@ import javax.swing.border.LineBorder;
 
 import Controller.Controller;
 
-public class HomepageManager extends JFrame {
+public class GestioneRistoranti extends JFrame {
 
 	private JPanel HomepageManagerPane;
 	private Controller theController;
 
 	
 	
-	public HomepageManager(Controller c, boolean flag) {
+	public GestioneRistoranti(Controller c, boolean flag) {
 		setResizable(false);
 		theController = c;
 		setTitle("SecuRisto");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(HomepageManager.class.getResource("/resources/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(GestioneRistoranti.class.getResource("/resources/icon.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1060, 500);
 		HomepageManagerPane = new JPanel();
@@ -99,13 +99,13 @@ public class HomepageManager extends JFrame {
 		InfoManagerTxtPane.setBackground(SystemColor.control);
 		InfoManagerTxtPane.setFont(new Font("Tahoma", Font.BOLD, 12));
 		InfoManagerTxtPane.setText("Manager: \"Nome\" \"Cognome\"\r\n\"Telefono\"\r\n\"Email\"");
-		InfoManagerTxtPane.setBounds(798, 11, 236, 72);
+		InfoManagerTxtPane.setBounds(10, 11, 236, 72);
 		HomepageManagerPane.add(InfoManagerTxtPane);
 		
 		JLabel GestioneCasiCovid19Label = new JLabel("TRACCIAMENTO CONTATTI COVID-19");
-		GestioneCasiCovid19Label.setFont(new Font("Tahoma", Font.BOLD, 15));
+		GestioneCasiCovid19Label.setFont(new Font("Tahoma", Font.BOLD, 20));
 		GestioneCasiCovid19Label.setHorizontalAlignment(SwingConstants.CENTER);
-		GestioneCasiCovid19Label.setBounds(277, 94, 490, 52);
+		GestioneCasiCovid19Label.setBounds(278, 66, 490, 52);
 		HomepageManagerPane.add(GestioneCasiCovid19Label);
 		
 		JButton InformazioniRistorantiButton = new JButton("Informazioni \r\nRistorante");
@@ -116,44 +116,33 @@ public class HomepageManager extends JFrame {
 			}
 		});
 		InformazioniRistorantiButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		InformazioniRistorantiButton.setBounds(72, 205, 170, 50);
+		InformazioniRistorantiButton.setBounds(133, 205, 170, 50);
 		HomepageManagerPane.add(InformazioniRistorantiButton);
 		
-		JButton SaleTavoliButton = new JButton("Sale e Tavoli");
-		SaleTavoliButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		SaleTavoliButton.setBounds(314, 205, 170, 50);
-		HomepageManagerPane.add(SaleTavoliButton);
+		JButton SaleButton = new JButton("Sale");
+		SaleButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		SaleButton.setBounds(436, 205, 170, 50);
+		HomepageManagerPane.add(SaleButton);
 		
 		JButton CamerieriButton = new JButton("Camerieri");
 		CamerieriButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		CamerieriButton.setBounds(556, 205, 170, 50);
+		CamerieriButton.setBounds(739, 205, 170, 50);
 		HomepageManagerPane.add(CamerieriButton);
 		
 		JButton StatisticheButton = new JButton("Statistiche ");
 		StatisticheButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		StatisticheButton.setBounds(798, 205, 170, 50);
+		StatisticheButton.setBounds(234, 314, 170, 50);
 		HomepageManagerPane.add(StatisticheButton);
 		
 		JButton ImpostazioniButton = new JButton("Casi");
 		ImpostazioniButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		ImpostazioniButton.setBounds(234, 313, 170, 50);
+		ImpostazioniButton.setBounds(638, 314, 170, 50);
 		HomepageManagerPane.add(ImpostazioniButton);
 		
-		JButton TavolateButton = new JButton("Tavolate");
-		TavolateButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		TavolateButton.setBounds(638, 314, 170, 50);
-		HomepageManagerPane.add(TavolateButton);
-		
-		JLabel RistoranteLabel = new JLabel("RISTORANTE");
+		JLabel RistoranteLabel = new JLabel("RISTORANTE: \"Denominazione\"");
 		RistoranteLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
 		RistoranteLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		RistoranteLabel.setBounds(479, 35, 85, 20);
+		RistoranteLabel.setBounds(325, 35, 393, 20);
 		HomepageManagerPane.add(RistoranteLabel);
-		
-		JLabel DenominazioneLabel = new JLabel("\"Denominazione\"");
-		DenominazioneLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		DenominazioneLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		DenominazioneLabel.setBounds(277, 66, 490, 20);
-		HomepageManagerPane.add(DenominazioneLabel);
 	}
 }

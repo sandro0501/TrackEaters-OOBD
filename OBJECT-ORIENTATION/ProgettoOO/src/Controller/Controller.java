@@ -11,10 +11,10 @@ public class Controller {
 	Login loginPage;
 	Registrazione registrazioneManagerPage;
 	HomepageProprietario homepageProprietarioPage;
-	HomepageManager homepageManagerPage;
+	GestioneRistoranti homepageManagerPage;
 	IMieiRistoranti iMieiRistorantiPage;
 	Personale personalePage;
-	Tavolate tavolatePage;
+	ViusalizzaTavolate tavolatePage;
 	Statistiche statistichePage;
 	InformazioniRistorante informazioniRistorantePage;
 	
@@ -39,7 +39,7 @@ public class Controller {
 	}
 	
 	public void startLoginManager(boolean flag) {
-		homepageManagerPage = new HomepageManager(this, flag);
+		homepageManagerPage = new GestioneRistoranti(this, flag);
 		homepageManagerPage.setVisible(true);
 	}
 
@@ -55,7 +55,7 @@ public class Controller {
 	}
 	
 	public void startTavolate() {
-		tavolatePage = new Tavolate(this);
+		tavolatePage = new ViusalizzaTavolate(this);
 		tavolatePage.setVisible(true);
 	}
 	

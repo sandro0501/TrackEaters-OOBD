@@ -1,0 +1,81 @@
+package GUI;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Toolkit;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+public class ModificaCaso extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField dataPositivit‡textField;
+
+	public ModificaCaso() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(AggiungiTavolata.class.getResource("/resources/icon.png")));
+		setTitle("SecuRisto");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 500, 480);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JButton annullaButton = new JButton("Annulla");
+		annullaButton.setBounds(84, 379, 117, 40);
+		contentPane.add(annullaButton);
+		
+		JButton modificaButton = new JButton("Modifica");
+		modificaButton.setBounds(284, 379, 117, 40);
+		contentPane.add(modificaButton);
+		
+		JLabel modificaCasoLabel = new JLabel("MODIFICA CASO");
+		modificaCasoLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+		modificaCasoLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		modificaCasoLabel.setBounds(137, 23, 209, 40);
+		contentPane.add(modificaCasoLabel);
+		
+		JComboBox ruolo_comboBox = new JComboBox();
+		ruolo_comboBox.setBounds(92, 92, 300, 20);
+		contentPane.add(ruolo_comboBox);
+		
+		JComboBox numeroDocumento_comboBox = new JComboBox();
+		numeroDocumento_comboBox.setBounds(92, 147, 300, 20);
+		contentPane.add(numeroDocumento_comboBox);
+		
+		dataPositivit‡textField = new JTextField();
+		dataPositivit‡textField.setBounds(92, 206, 300, 20);
+		contentPane.add(dataPositivit‡textField);
+		dataPositivit‡textField.setColumns(10);
+		
+		JTextArea note_textArea = new JTextArea();
+		note_textArea.setBounds(92, 267, 300, 82);
+		contentPane.add(note_textArea);
+		
+		JLabel ruoloLabel = new JLabel("Ruolo");
+		ruoloLabel.setBounds(92, 78, 46, 14);
+		contentPane.add(ruoloLabel);
+		
+		JLabel numeroDocumentoLabel = new JLabel("Numero documento");
+		numeroDocumentoLabel.setBounds(92, 131, 111, 14);
+		contentPane.add(numeroDocumentoLabel);
+		
+		JLabel dataPositivit‡Label = new JLabel("Data positivit\u00E0");
+		dataPositivit‡Label.setBounds(92, 193, 111, 14);
+		contentPane.add(dataPositivit‡Label);
+		
+		JLabel noteLabel = new JLabel("Note");
+		noteLabel.setBounds(92, 253, 46, 14);
+		contentPane.add(noteLabel);
+	}
+
+}

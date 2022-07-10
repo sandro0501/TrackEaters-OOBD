@@ -24,8 +24,8 @@ public class ModificaAvventori extends JFrame {
 	private JTextField nomeField;
 	private JTextField dataNascitaField;
 	private JTextField numeroDocumentoField;
-	private JTextField citt‡NataleField;
-	private JTextField citt‡ResidenzaField;
+	private JTextField cittaNataleField;
+	private JTextField cittaResidenzaField;
 	private JTextField telefonoField;
 	private JTextField emailField;
 	private JTextField cognomeField_8;
@@ -69,15 +69,15 @@ public class ModificaAvventori extends JFrame {
 		contentPane.add(numeroDocumentoField);
 		numeroDocumentoField.setColumns(10);
 		
-		citt‡NataleField = new JTextField();
-		citt‡NataleField.setBounds(27, 291, 170, 20);
-		contentPane.add(citt‡NataleField);
-		citt‡NataleField.setColumns(10);
+		cittaNataleField = new JTextField();
+		cittaNataleField.setBounds(27, 291, 170, 20);
+		contentPane.add(cittaNataleField);
+		cittaNataleField.setColumns(10);
 		
-		citt‡ResidenzaField = new JTextField();
-		citt‡ResidenzaField.setBounds(27, 355, 170, 20);
-		contentPane.add(citt‡ResidenzaField);
-		citt‡ResidenzaField.setColumns(10);
+		cittaResidenzaField = new JTextField();
+		cittaResidenzaField.setBounds(27, 355, 170, 20);
+		contentPane.add(cittaResidenzaField);
+		cittaResidenzaField.setColumns(10);
 		
 		telefonoField = new JTextField();
 		telefonoField.setBounds(27, 483, 316, 20);
@@ -138,9 +138,9 @@ public class ModificaAvventori extends JFrame {
 		provinciaNataleLabel.setBounds(258, 277, 100, 14);
 		contentPane.add(provinciaNataleLabel);
 		
-		JLabel citt‡ResidenzaLabel = new JLabel("Citt\u00E0 residenza");
-		citt‡ResidenzaLabel.setBounds(27, 341, 100, 14);
-		contentPane.add(citt‡ResidenzaLabel);
+		JLabel cittaResidenzaLabel = new JLabel("Citt\u00E0 residenza");
+		cittaResidenzaLabel.setBounds(27, 341, 100, 14);
+		contentPane.add(cittaResidenzaLabel);
 		
 		JLabel provinciaResidenzaLabel = new JLabel("Provincia residenza");
 		provinciaResidenzaLabel.setBounds(258, 341, 100, 14);

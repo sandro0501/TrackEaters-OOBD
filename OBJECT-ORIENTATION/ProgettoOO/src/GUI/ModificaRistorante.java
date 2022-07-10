@@ -21,7 +21,7 @@ public class ModificaRistorante extends JFrame {
 	private JTextField denominazioneField;
 	private JTextField indirizzoField;
 	private JTextField telefonoField;
-	private JTextField citt‡Field;
+	private JTextField cittaField;
 	private JTextField capField;
 	private JTextField sitoWebField;
 	private JTextField emailField;
@@ -63,10 +63,10 @@ public class ModificaRistorante extends JFrame {
 		contentPane.add(telefonoField);
 		telefonoField.setColumns(10);
 		
-		citt‡Field = new JTextField();
-		citt‡Field.setBounds(26, 329, 170, 20);
-		contentPane.add(citt‡Field);
-		citt‡Field.setColumns(10);
+		cittaField = new JTextField();
+		cittaField.setBounds(26, 329, 170, 20);
+		contentPane.add(cittaField);
+		cittaField.setColumns(10);
 		
 		capField = new JTextField();
 		capField.setBounds(26, 393, 170, 20);
@@ -108,9 +108,9 @@ public class ModificaRistorante extends JFrame {
 		provinciaNataleLabel.setBounds(257, 315, 100, 14);
 		contentPane.add(provinciaNataleLabel);
 		
-		JLabel citt‡ResidenzaLabel = new JLabel("CAP");
-		citt‡ResidenzaLabel.setBounds(26, 379, 100, 14);
-		contentPane.add(citt‡ResidenzaLabel);
+		JLabel cittaResidenzaLabel = new JLabel("CAP");
+		cittaResidenzaLabel.setBounds(26, 379, 100, 14);
+		contentPane.add(cittaResidenzaLabel);
 		
 		JLabel emailLabel = new JLabel("Email");
 		emailLabel.setBounds(26, 445, 46, 14);

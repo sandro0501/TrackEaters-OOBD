@@ -18,7 +18,7 @@ import javax.swing.JTextArea;
 public class AggiungiCaso extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField dataPositivit‡textField;
+	private JTextField dataPositivitatextField;
 
 	public AggiungiCaso() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(AggiungiTavolata.class.getResource("/resources/icon.png")));
@@ -52,10 +52,10 @@ public class AggiungiCaso extends JFrame {
 		numeroDocumento_comboBox.setBounds(92, 147, 300, 20);
 		contentPane.add(numeroDocumento_comboBox);
 		
-		dataPositivit‡textField = new JTextField();
-		dataPositivit‡textField.setBounds(92, 206, 300, 20);
-		contentPane.add(dataPositivit‡textField);
-		dataPositivit‡textField.setColumns(10);
+		dataPositivitatextField = new JTextField();
+		dataPositivitatextField.setBounds(92, 206, 300, 20);
+		contentPane.add(dataPositivitatextField);
+		dataPositivitatextField.setColumns(10);
 		
 		JTextArea note_textArea = new JTextArea();
 		note_textArea.setBounds(92, 267, 300, 82);
@@ -69,9 +69,9 @@ public class AggiungiCaso extends JFrame {
 		numeroDocumentoLabel.setBounds(92, 131, 111, 14);
 		contentPane.add(numeroDocumentoLabel);
 		
-		JLabel dataPositivit‡Label = new JLabel("Data positivit\u00E0");
-		dataPositivit‡Label.setBounds(92, 193, 111, 14);
-		contentPane.add(dataPositivit‡Label);
+		JLabel dataPositivitaLabel = new JLabel("Data positivit\u00E0");
+		dataPositivitaLabel.setBounds(92, 193, 111, 14);
+		contentPane.add(dataPositivitaLabel);
 		
 		JLabel noteLabel = new JLabel("Note");
 		noteLabel.setBounds(92, 253, 46, 14);

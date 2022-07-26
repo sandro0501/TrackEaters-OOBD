@@ -8,15 +8,13 @@ import GUI.*;
 
 public class Controller {
 	
-	Login loginPage;
-	Registrazione registrazioneManagerPage;
-	HomepageProprietario homepageProprietarioPage;
-	GestioneRistoranti homepageManagerPage;
-	IMieiRistoranti iMieiRistorantiPage;
-	Personale personalePage;
-	ViusalizzaTavolate tavolatePage;
+	Schermata_Login loginPage;
+	Homepage_Proprietario homepageProprietarioPage;
+	Ristorante homepageManagerPage;
+	Ristoranti iMieiRistorantiPage;
+	Tavolate tavolatePage;
 	Statistiche statistichePage;
-	InformazioniRistorante informazioniRistorantePage;
+	Ristorante informazioniRistorantePage;
 	
 	public static void main (String[] args) {
 		Controller c = new Controller(); 
@@ -24,38 +22,30 @@ public class Controller {
 	}
 	
 	public void login() {
-		loginPage = new Login(this);
+		loginPage = new Schermata_Login(this);
 		loginPage.setVisible(true);
 	}
 	
-	public void startRegistrazione() {
-		registrazioneManagerPage = new Registrazione(this);
-		registrazioneManagerPage.setVisible(true);
-	}
 	
 	public void startLoginProprietario() {
-		homepageProprietarioPage = new HomepageProprietario(this);
+		homepageProprietarioPage = new Homepage_Proprietario(this);
 		homepageProprietarioPage.setVisible(true);
 	}
 	
-	public void startLoginManager(boolean flag) {
-		homepageManagerPage = new GestioneRistoranti(this, flag);
+	public void startLoginManager() {
+		homepageManagerPage = new Ristorante(this);
 		homepageManagerPage.setVisible(true);
 	}
 
 	
 	public void startI_MieiRistorantiProprietario() {
-		iMieiRistorantiPage = new IMieiRistoranti(this);
+		iMieiRistorantiPage = new Ristoranti(this);
 		iMieiRistorantiPage.setVisible(true);
 	}
 	
-	public void startPersonaleProprietario() {
-		personalePage = new Personale(this);
-		personalePage.setVisible(true);
-	}
 	
 	public void startTavolate() {
-		tavolatePage = new ViusalizzaTavolate(this);
+		tavolatePage = new Tavolate(this);
 		tavolatePage.setVisible(true);
 	}
 	
@@ -64,8 +54,8 @@ public class Controller {
 		statistichePage.setVisible(true);
 	}
 	
-	public void startInformazioniRistorante(boolean flag) {
-		informazioniRistorantePage = new InformazioniRistorante(this, flag);
+	public void startInformazioniRistorante() {
+		informazioniRistorantePage = new Ristorante(this);
 		informazioniRistorantePage.setVisible(true);
 	}
 

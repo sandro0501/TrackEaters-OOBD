@@ -20,18 +20,18 @@ import javax.swing.border.LineBorder;
 
 import Controller.Controller;
 
-public class GestioneRistoranti extends JFrame {
+public class Ristorante extends JFrame {
 
 	private JPanel HomepageManagerPane;
 	private Controller theController;
 
 	
 	
-	public GestioneRistoranti(Controller c, boolean flag) {
+	public Ristorante(Controller c) {
 		setResizable(false);
 		theController = c;
 		setTitle("SecuRisto");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(GestioneRistoranti.class.getResource("/resources/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Ristorante.class.getResource("/resources/icon.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1060, 500);
 		HomepageManagerPane = new JPanel();
@@ -46,33 +46,11 @@ public class GestioneRistoranti extends JFrame {
 		Navigation_panel.setLayout(null);
 		
 		JButton HomeButton = new JButton("Home");
-		HomeButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				c.startLoginProprietario();			
-			}
-		});
-		if(flag) {
-			HomeButton.setEnabled(true);
-		} else {
-			HomeButton.setEnabled(false);
-		}
 		HomeButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		HomeButton.setBounds(10, 11, 89, 30);
 		Navigation_panel.add(HomeButton);
 		
 		JButton IndietroButton = new JButton("Indietro");
-		IndietroButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				c.startI_MieiRistorantiProprietario();		
-			}
-		});
-		if(flag) {
-			IndietroButton.setEnabled(true);
-		} else {
-			IndietroButton.setEnabled(false);
-		}
 		IndietroButton.setFont(new Font("Tahoma", Font.BOLD, 12));
 		IndietroButton.setBounds(109, 11, 89, 30);
 		Navigation_panel.add(IndietroButton);
@@ -111,7 +89,7 @@ public class GestioneRistoranti extends JFrame {
 		JButton InformazioniRistorantiButton = new JButton("Informazioni \r\nRistorante");
 		InformazioniRistorantiButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				c.startInformazioniRistorante(false);
+				c.startInformazioniRistorante();
 				setVisible(false);
 			}
 		});

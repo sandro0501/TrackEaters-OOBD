@@ -21,18 +21,18 @@ import java.awt.event.ActionEvent;
 import java.awt.Component;
 import javax.swing.Box;
 
-public class HomepageProprietario extends JFrame {
+public class Homepage_Proprietario extends JFrame {
 
 	private JPanel HomepageProprietarioPane;
 	private Controller theController = new Controller();
 
 	
-	public HomepageProprietario(Controller c) {
+	public Homepage_Proprietario(Controller c) {
 		theController = c;
 		
 		setResizable(false);
 		setTitle("SecuRisto");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(HomepageProprietario.class.getResource("/resources/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Homepage_Proprietario.class.getResource("/resources/icon.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1060, 500);
 		HomepageProprietarioPane = new JPanel();
@@ -101,12 +101,6 @@ public class HomepageProprietario extends JFrame {
 		HomepageProprietarioPane.add(IMieiRistorantiButton);
 		
 		JButton PersonaleButton = new JButton("Personale");
-		PersonaleButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				c.startPersonaleProprietario();
-			}
-		});
 		PersonaleButton.setBounds(584, 205, 130, 50);
 		PersonaleButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		HomepageProprietarioPane.add(PersonaleButton);

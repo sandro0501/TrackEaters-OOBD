@@ -23,16 +23,16 @@ import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
 
 
-public class Login extends JFrame {
+public class Schermata_Login extends JFrame {
 
 	private JPanel LoginPane;
 	private JTextField UsernameField;
 	private JPasswordField passwordField;
 	private Controller theController;
 	
-	public Login(Controller c) {
+	public Schermata_Login(Controller c) {
 		theController = c;
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/resources/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Schermata_Login.class.getResource("/resources/icon.png")));
 		setResizable(false);
 		setTitle("SecuRisto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,7 +60,7 @@ public class Login extends JFrame {
 					c.startLoginProprietario();
 				} else {
 					setVisible(false);
-					c.startLoginManager(false);
+					c.startLoginManager();
 				}
 			}
 		});

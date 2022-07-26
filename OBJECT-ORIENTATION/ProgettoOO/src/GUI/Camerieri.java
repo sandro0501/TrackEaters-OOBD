@@ -31,7 +31,7 @@ public class Camerieri extends JFrame {
 	private JTable avventoriTable;
 
 	public Camerieri(Controller c) {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(IMieiRistoranti.class.getResource("/resources/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Ristoranti.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		theController = c;
 		setResizable(false);

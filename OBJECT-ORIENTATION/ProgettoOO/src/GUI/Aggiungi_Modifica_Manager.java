@@ -24,7 +24,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.Window.Type;
 import java.awt.Dialog.ModalExclusionType;
 
-public class AggiungiManager extends JFrame {
+public class Aggiungi_Modifica_Manager extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField nomeField;
@@ -36,9 +36,9 @@ public class AggiungiManager extends JFrame {
 	private JTextField textField_1;
 
 	
-	public AggiungiManager(Controller c) {
+	public Aggiungi_Modifica_Manager(Controller c) {
 		thecontroller = c;
-		setIconImage(Toolkit.getDefaultToolkit().getImage(AggiungiAvventori.class.getResource("/resources/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Aggiungi_Modifica_Avventori.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 490, 700);

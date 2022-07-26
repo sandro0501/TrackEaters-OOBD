@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import Controller.Controller;
 
-public class ModificaRistorante extends JFrame {
+public class Aggiunigi_Modifica_Ristorante extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField denominazioneField;
@@ -29,9 +29,9 @@ public class ModificaRistorante extends JFrame {
 	private Controller thecontroller;
 
 	
-	public ModificaRistorante(Controller c) {
+	public Aggiunigi_Modifica_Ristorante(Controller c) {
 		thecontroller = c;
-		setIconImage(Toolkit.getDefaultToolkit().getImage(AggiungiAvventori.class.getResource("/resources/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Aggiungi_Modifica_Avventori.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 490, 700);
@@ -44,9 +44,9 @@ public class ModificaRistorante extends JFrame {
 		annullaButton.setBounds(80, 610, 117, 40);
 		contentPane.add(annullaButton);
 		
-		JButton modificaButton = new JButton("Modifica");
-		modificaButton.setBounds(277, 610, 117, 40);
-		contentPane.add(modificaButton);
+		JButton aggiungiButton = new JButton("Aggiungi");
+		aggiungiButton.setBounds(277, 610, 117, 40);
+		contentPane.add(aggiungiButton);
 		
 		denominazioneField = new JTextField();
 		denominazioneField.setBounds(26, 121, 170, 20);
@@ -120,12 +120,11 @@ public class ModificaRistorante extends JFrame {
 		sitoWebLabel.setBounds(26, 507, 59, 14);
 		contentPane.add(sitoWebLabel);
 		
-		JLabel modificaRistoranteLabel = new JLabel("MODIFICA RISTORANTE");
-		modificaRistoranteLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-		modificaRistoranteLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		modificaRistoranteLabel.setBounds(108, 43, 257, 30);
-		contentPane.add(modificaRistoranteLabel);
+		JLabel aggiungiRistoranteLabel = new JLabel("AGGIUNGI RISTORANTE");
+		aggiungiRistoranteLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+		aggiungiRistoranteLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		aggiungiRistoranteLabel.setBounds(108, 43, 257, 30);
+		contentPane.add(aggiungiRistoranteLabel);
 	}
-
 
 }

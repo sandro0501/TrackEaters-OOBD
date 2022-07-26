@@ -24,14 +24,14 @@ import javax.swing.table.DefaultTableModel;
 
 import Controller.Controller;
 
-public class VisualizzaTavoli extends JFrame {
+public class Tavoli extends JFrame {
 
 	private JPanel TavolataPane;
 	private Controller theController;
 	private JTable TavoliTable;
 
-	public VisualizzaTavoli(Controller c) {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(IMieiRistoranti.class.getResource("/resources/icon.png")));
+	public Tavoli(Controller c) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Ristoranti.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		theController = c;
 		setResizable(false);

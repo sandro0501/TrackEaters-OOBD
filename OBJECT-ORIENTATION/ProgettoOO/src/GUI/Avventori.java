@@ -1,37 +1,37 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.EventQueue;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import Controller.Controller;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JTable;
-import java.awt.Color;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.ListSelectionModel;
-import javax.swing.border.EtchedBorder;
-import java.awt.Cursor;
-import javax.swing.JScrollBar;
-import java.awt.Toolkit;
 
-public class ViusalizzaTavolate extends JFrame {
+import Controller.Controller;
+
+public class Avventori extends JFrame {
 
 	private JPanel TavolataPane;
 	private Controller theController;
-	private JTable tavolateTable;
+	private JTable avventoriTable;
 
-	public ViusalizzaTavolate(Controller c) {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(IMieiRistoranti.class.getResource("/resources/icon.png")));
+	public Avventori(Controller c) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Ristoranti.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		theController = c;
 		setResizable(false);
@@ -42,11 +42,11 @@ public class ViusalizzaTavolate extends JFrame {
 		setContentPane(TavolataPane);
 		TavolataPane.setLayout(null);
 		
-		JLabel tavolateLabel = new JLabel("TAVOLATE");
-		tavolateLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-		tavolateLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		tavolateLabel.setBounds(277, 50, 490, 52);
-		TavolataPane.add(tavolateLabel);
+		JLabel avventoriLabel = new JLabel("AVVENTORI");
+		avventoriLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+		avventoriLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		avventoriLabel.setBounds(277, 50, 490, 52);
+		TavolataPane.add(avventoriLabel);
 		
 		JLabel ristoranteLabel = new JLabel("Ristorante: \"Denominazione\"");
 		ristoranteLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -54,12 +54,12 @@ public class ViusalizzaTavolate extends JFrame {
 		ristoranteLabel.setBounds(277, 28, 490, 20);
 		TavolataPane.add(ristoranteLabel);
 		
-		tavolateTable = new JTable();
-		tavolateTable.setColumnSelectionAllowed(true);
-		tavolateTable.setCellSelectionEnabled(true);
-		tavolateTable.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		tavolateTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tavolateTable.setModel(new DefaultTableModel(
+		avventoriTable = new JTable();
+		avventoriTable.setColumnSelectionAllowed(true);
+		avventoriTable.setCellSelectionEnabled(true);
+		avventoriTable.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		avventoriTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		avventoriTable.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null, null, null, null, null},
 				{null, null, null, null, null, null, null, null},
@@ -87,16 +87,16 @@ public class ViusalizzaTavolate extends JFrame {
 				return columnTypes[columnIndex];
 			}
 		});
-		tavolateTable.getColumnModel().getColumn(0).setPreferredWidth(110);
-		tavolateTable.getColumnModel().getColumn(1).setPreferredWidth(110);
-		tavolateTable.getColumnModel().getColumn(2).setPreferredWidth(85);
-		tavolateTable.getColumnModel().getColumn(3).setPreferredWidth(90);
-		tavolateTable.getColumnModel().getColumn(4).setPreferredWidth(65);
-		tavolateTable.getColumnModel().getColumn(5).setPreferredWidth(55);
-		tavolateTable.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		tavolateTable.setBackground(Color.WHITE);
-		tavolateTable.setBounds(10, 124, 1007, 223);
-		TavolataPane.add(tavolateTable);
+		avventoriTable.getColumnModel().getColumn(0).setPreferredWidth(110);
+		avventoriTable.getColumnModel().getColumn(1).setPreferredWidth(110);
+		avventoriTable.getColumnModel().getColumn(2).setPreferredWidth(85);
+		avventoriTable.getColumnModel().getColumn(3).setPreferredWidth(90);
+		avventoriTable.getColumnModel().getColumn(4).setPreferredWidth(65);
+		avventoriTable.getColumnModel().getColumn(5).setPreferredWidth(55);
+		avventoriTable.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		avventoriTable.setBackground(Color.WHITE);
+		avventoriTable.setBounds(10, 124, 1007, 223);
+		TavolataPane.add(avventoriTable);
 		
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(1017, 124, 17, 223);
@@ -142,24 +142,20 @@ public class ViusalizzaTavolate extends JFrame {
 		LogoutButton_2.setBounds(945, 11, 89, 30);
 		Navigation_panel.add(LogoutButton_2);
 		
-		JButton visualizzaAvventoriButton = new JButton("Visualizza avventori");
-		visualizzaAvventoriButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		visualizzaAvventoriButton.setBounds(82, 358, 158, 40);
-		TavolataPane.add(visualizzaAvventoriButton);
-		
 		JButton aggiungiButton = new JButton("Aggiungi");
 		aggiungiButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		aggiungiButton.setBounds(322, 358, 158, 40);
+		aggiungiButton.setBounds(142, 358, 158, 40);
 		TavolataPane.add(aggiungiButton);
 		
 		JButton modificaButton = new JButton("Modifica");
 		modificaButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		modificaButton.setBounds(562, 358, 158, 40);
+		modificaButton.setBounds(442, 358, 158, 40);
 		TavolataPane.add(modificaButton);
 		
 		JButton eliminaButton = new JButton("Elimina");
 		eliminaButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		eliminaButton.setBounds(802, 358, 158, 40);
+		eliminaButton.setBounds(742, 358, 158, 40);
 		TavolataPane.add(eliminaButton);
 	}
+
 }

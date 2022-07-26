@@ -15,15 +15,15 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-public class AggiungiSala extends JFrame {
+public class Aggiungi_Modifica_Sala extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField denominazioneField;
 	private JTextField capienzaAvventoriField;
 	private JTextField dimensioneMqField;
 
-	public AggiungiSala() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(AggiungiTavolata.class.getResource("/resources/icon.png")));
+	public Aggiungi_Modifica_Sala() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Aggiungi_Modifica_Tavolata.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 480);

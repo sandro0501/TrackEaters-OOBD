@@ -24,14 +24,14 @@ import java.awt.Cursor;
 import javax.swing.JScrollBar;
 import java.awt.Toolkit;
 
-public class IMieiRistoranti extends JFrame {
+public class Ristoranti extends JFrame {
 
 	private JPanel IMieiRistorantiPane;
 	private Controller theController;
 	private JTable RistornatiTable;
 
-	public IMieiRistoranti(Controller c) {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(IMieiRistoranti.class.getResource("/resources/icon.png")));
+	public Ristoranti(Controller c) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Ristoranti.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		theController = c;
 		setResizable(false);
@@ -145,7 +145,7 @@ public class IMieiRistoranti extends JFrame {
 		GestireButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startLoginManager(true);
+				c.startLoginManager();
 			}
 		});
 		GestireButton.setFont(new Font("Tahoma", Font.BOLD, 12));

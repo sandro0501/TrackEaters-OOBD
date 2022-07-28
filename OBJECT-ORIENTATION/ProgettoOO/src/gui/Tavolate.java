@@ -1,33 +1,35 @@
-package GUI;
+package gui;
+
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JTable;
+import java.awt.Color;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.EtchedBorder;
+import java.awt.Cursor;
+import javax.swing.JScrollBar;
+import java.awt.Toolkit;
 
-public class Camerieri extends JFrame {
-	
+public class Tavolate extends JFrame {
+
 	private JPanel pannello_Principale;
-	private JTable tabella_Camerieri;
+	private JTable tabella_Tavolate;
 
-	public Camerieri() {
+	public Tavolate() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Ristoranti.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		setResizable(false);
@@ -44,18 +46,18 @@ public class Camerieri extends JFrame {
 		etichetta_Ristorante.setBounds(277, 28, 490, 20);
 		pannello_Principale.add(etichetta_Ristorante);
 		
-		JLabel etichetta_Camerieri = new JLabel("CAMERIERI");
-		etichetta_Camerieri.setFont(new Font("Tahoma", Font.BOLD, 20));
-		etichetta_Camerieri.setHorizontalAlignment(SwingConstants.CENTER);
-		etichetta_Camerieri.setBounds(277, 50, 490, 52);
-		pannello_Principale.add(etichetta_Camerieri);
+		JLabel etichetta_Tavolate = new JLabel("TAVOLATE");
+		etichetta_Tavolate.setFont(new Font("Tahoma", Font.BOLD, 20));
+		etichetta_Tavolate.setHorizontalAlignment(SwingConstants.CENTER);
+		etichetta_Tavolate.setBounds(277, 50, 490, 52);
+		pannello_Principale.add(etichetta_Tavolate);
 		
-		tabella_Camerieri = new JTable();
-		tabella_Camerieri.setColumnSelectionAllowed(true);
-		tabella_Camerieri.setCellSelectionEnabled(true);
-		tabella_Camerieri.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		tabella_Camerieri.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tabella_Camerieri.setModel(new DefaultTableModel(
+		tabella_Tavolate = new JTable();
+		tabella_Tavolate.setColumnSelectionAllowed(true);
+		tabella_Tavolate.setCellSelectionEnabled(true);
+		tabella_Tavolate.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		tabella_Tavolate.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tabella_Tavolate.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null, null, null, null, null},
 				{null, null, null, null, null, null, null, null},
@@ -83,34 +85,39 @@ public class Camerieri extends JFrame {
 				return columnTypes[columnIndex];
 			}
 		});
-		tabella_Camerieri.getColumnModel().getColumn(0).setPreferredWidth(110);
-		tabella_Camerieri.getColumnModel().getColumn(1).setPreferredWidth(110);
-		tabella_Camerieri.getColumnModel().getColumn(2).setPreferredWidth(85);
-		tabella_Camerieri.getColumnModel().getColumn(3).setPreferredWidth(90);
-		tabella_Camerieri.getColumnModel().getColumn(4).setPreferredWidth(65);
-		tabella_Camerieri.getColumnModel().getColumn(5).setPreferredWidth(55);
-		tabella_Camerieri.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		tabella_Camerieri.setBackground(Color.WHITE);
-		tabella_Camerieri.setBounds(10, 124, 1007, 223);
-		pannello_Principale.add(tabella_Camerieri);
+		tabella_Tavolate.getColumnModel().getColumn(0).setPreferredWidth(110);
+		tabella_Tavolate.getColumnModel().getColumn(1).setPreferredWidth(110);
+		tabella_Tavolate.getColumnModel().getColumn(2).setPreferredWidth(85);
+		tabella_Tavolate.getColumnModel().getColumn(3).setPreferredWidth(90);
+		tabella_Tavolate.getColumnModel().getColumn(4).setPreferredWidth(65);
+		tabella_Tavolate.getColumnModel().getColumn(5).setPreferredWidth(55);
+		tabella_Tavolate.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		tabella_Tavolate.setBackground(Color.WHITE);
+		tabella_Tavolate.setBounds(10, 124, 1007, 223);
+		pannello_Principale.add(tabella_Tavolate);
 		
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(1017, 124, 17, 223);
 		pannello_Principale.add(scrollBar);
 		
+		JButton bottone_VisualizzaAvventori = new JButton("Visualizza avventori");
+		bottone_VisualizzaAvventori.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		bottone_VisualizzaAvventori.setBounds(82, 358, 158, 40);
+		pannello_Principale.add(bottone_VisualizzaAvventori);
+		
 		JButton bottone_Aggiungi = new JButton("Aggiungi");
 		bottone_Aggiungi.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		bottone_Aggiungi.setBounds(142, 358, 158, 40);
+		bottone_Aggiungi.setBounds(322, 358, 158, 40);
 		pannello_Principale.add(bottone_Aggiungi);
 		
 		JButton bottone_Modifica = new JButton("Modifica");
 		bottone_Modifica.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		bottone_Modifica.setBounds(442, 358, 158, 40);
+		bottone_Modifica.setBounds(562, 358, 158, 40);
 		pannello_Principale.add(bottone_Modifica);
 		
 		JButton bottone_Elimina = new JButton("Elimina");
 		bottone_Elimina.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		bottone_Elimina.setBounds(742, 358, 158, 40);
+		bottone_Elimina.setBounds(802, 358, 158, 40);
 		pannello_Principale.add(bottone_Elimina);
 		
 		JPanel pannello_Navigazione = new JPanel();
@@ -119,26 +126,25 @@ public class Camerieri extends JFrame {
 		pannello_Principale.add(pannello_Navigazione);
 		pannello_Navigazione.setLayout(null);
 		
-		JButton HomeButton = new JButton("Home");
-		HomeButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		HomeButton.setBounds(10, 11, 89, 30);
-		pannello_Navigazione.add(HomeButton);
+		JButton bottone_Home = new JButton("Home");
+		bottone_Home.setFont(new Font("Tahoma", Font.BOLD, 12));
+		bottone_Home.setBounds(10, 11, 89, 30);
+		pannello_Navigazione.add(bottone_Home);
 		
-		JButton IndietroButton = new JButton("Indietro");
-		IndietroButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		IndietroButton.setBounds(109, 11, 89, 30);
-		pannello_Navigazione.add(IndietroButton);
+		JButton bottone_Indietro = new JButton("Indietro");
+		bottone_Indietro.setFont(new Font("Tahoma", Font.BOLD, 12));
+		bottone_Indietro.setBounds(109, 11, 89, 30);
+		pannello_Navigazione.add(bottone_Indietro);
 		
-		JLabel OrarioLabel = new JLabel("------");
-		OrarioLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		OrarioLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		OrarioLabel.setBounds(412, 11, 220, 30);
-		pannello_Navigazione.add(OrarioLabel);
+		JLabel etichetta_Orario = new JLabel("------");
+		etichetta_Orario.setFont(new Font("Tahoma", Font.BOLD, 12));
+		etichetta_Orario.setHorizontalAlignment(SwingConstants.CENTER);
+		etichetta_Orario.setBounds(412, 11, 220, 30);
+		pannello_Navigazione.add(etichetta_Orario);
 		
-		JButton LogoutButton_2 = new JButton("Logout");
-		LogoutButton_2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		LogoutButton_2.setBounds(945, 11, 89, 30);
-		pannello_Navigazione.add(LogoutButton_2);
+		JButton bottone_Logout = new JButton("Logout");
+		bottone_Logout.setFont(new Font("Tahoma", Font.BOLD, 12));
+		bottone_Logout.setBounds(945, 11, 89, 30);
+		pannello_Navigazione.add(bottone_Logout);
 	}
-
 }

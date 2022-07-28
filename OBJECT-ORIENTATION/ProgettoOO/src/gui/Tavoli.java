@@ -1,4 +1,5 @@
-package GUI;
+package gui;
+
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -21,14 +22,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JRadioButton;
 
-public class Casi extends JFrame {
+public class Tavoli extends JFrame {
 
 	private JPanel pannello_Principale;
-	private JTable tabella_Casi;
+	private JTable tabella_Tavoli;
 
-	public Casi() {
+	public Tavoli() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Ristoranti.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		setResizable(false);
@@ -45,18 +45,18 @@ public class Casi extends JFrame {
 		etichetta_Ristorante.setBounds(277, 28, 490, 20);
 		pannello_Principale.add(etichetta_Ristorante);
 		
-		JLabel etichetta_Casi = new JLabel("CASI");
-		etichetta_Casi.setFont(new Font("Tahoma", Font.BOLD, 20));
-		etichetta_Casi.setHorizontalAlignment(SwingConstants.CENTER);
-		etichetta_Casi.setBounds(277, 50, 490, 52);
-		pannello_Principale.add(etichetta_Casi);
+		JLabel etichetta_Tavoli = new JLabel("TAVOLI");
+		etichetta_Tavoli.setFont(new Font("Tahoma", Font.BOLD, 20));
+		etichetta_Tavoli.setHorizontalAlignment(SwingConstants.CENTER);
+		etichetta_Tavoli.setBounds(277, 50, 490, 52);
+		pannello_Principale.add(etichetta_Tavoli);
 		
-		tabella_Casi = new JTable();
-		tabella_Casi.setColumnSelectionAllowed(true);
-		tabella_Casi.setCellSelectionEnabled(true);
-		tabella_Casi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		tabella_Casi.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tabella_Casi.setModel(new DefaultTableModel(
+		tabella_Tavoli = new JTable();
+		tabella_Tavoli.setColumnSelectionAllowed(true);
+		tabella_Tavoli.setCellSelectionEnabled(true);
+		tabella_Tavoli.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		tabella_Tavoli.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tabella_Tavoli.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null, null, null, null, null},
 				{null, null, null, null, null, null, null, null},
@@ -84,39 +84,35 @@ public class Casi extends JFrame {
 				return columnTypes[columnIndex];
 			}
 		});
-		tabella_Casi.getColumnModel().getColumn(0).setPreferredWidth(110);
-		tabella_Casi.getColumnModel().getColumn(1).setPreferredWidth(110);
-		tabella_Casi.getColumnModel().getColumn(2).setPreferredWidth(85);
-		tabella_Casi.getColumnModel().getColumn(3).setPreferredWidth(90);
-		tabella_Casi.getColumnModel().getColumn(4).setPreferredWidth(65);
-		tabella_Casi.getColumnModel().getColumn(5).setPreferredWidth(55);
-		tabella_Casi.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		tabella_Casi.setBackground(Color.WHITE);
-		tabella_Casi.setBounds(10, 124, 1007, 223);
-		pannello_Principale.add(tabella_Casi);
+		tabella_Tavoli.getColumnModel().getColumn(0).setPreferredWidth(110);
+		tabella_Tavoli.getColumnModel().getColumn(1).setPreferredWidth(110);
+		tabella_Tavoli.getColumnModel().getColumn(2).setPreferredWidth(85);
+		tabella_Tavoli.getColumnModel().getColumn(3).setPreferredWidth(90);
+		tabella_Tavoli.getColumnModel().getColumn(4).setPreferredWidth(65);
+		tabella_Tavoli.getColumnModel().getColumn(5).setPreferredWidth(55);
+		tabella_Tavoli.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		tabella_Tavoli.setBackground(Color.WHITE);
+		tabella_Tavoli.setBounds(10, 124, 1007, 223);
+		pannello_Principale.add(tabella_Tavoli);
 		
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(1017, 124, 17, 223);
 		pannello_Principale.add(scrollBar);
 		
-		JButton bottone_Aggiungi = new JButton("Aggiungi");
-		bottone_Aggiungi.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		bottone_Aggiungi.setBounds(82, 358, 158, 40);
-		pannello_Principale.add(bottone_Aggiungi);
-		
-		JButton bottone_Modifica = new JButton("Modifica");
-		bottone_Modifica.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		bottone_Modifica.setBounds(322, 358, 158, 40);
-		pannello_Principale.add(bottone_Modifica);
-		
 		JButton bottone_Elimina = new JButton("Elimina");
 		bottone_Elimina.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		bottone_Elimina.setBounds(562, 358, 158, 40);
+		bottone_Elimina.setBounds(746, 358, 145, 40);
 		pannello_Principale.add(bottone_Elimina);
 		
-		JRadioButton radioButton_Risolto = new JRadioButton("Risolto");
-		radioButton_Risolto.setBounds(802, 358, 158, 40);
-		pannello_Principale.add(radioButton_Risolto);
+		JButton bottone_Elimina_1 = new JButton("Gestisci");
+		bottone_Elimina_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		bottone_Elimina_1.setBounds(449, 358, 145, 40);
+		pannello_Principale.add(bottone_Elimina_1);
+		
+		JButton bottone_Elimina_2 = new JButton("Visualizza Tavolata");
+		bottone_Elimina_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		bottone_Elimina_2.setBounds(152, 358, 145, 40);
+		pannello_Principale.add(bottone_Elimina_2);
 		
 		JPanel pannello_Navigazione = new JPanel();
 		pannello_Navigazione.setBounds(0, 409, 1044, 52);

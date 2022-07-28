@@ -1,4 +1,5 @@
-package GUI;
+package gui;
+
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -21,13 +22,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JRadioButton;
 
-public class Sale extends JFrame {
+public class Casi extends JFrame {
 
 	private JPanel pannello_Principale;
-	private JTable tabella_Sale;
+	private JTable tabella_Casi;
 
-	public Sale() {
+	public Casi() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Ristoranti.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		setResizable(false);
@@ -44,18 +46,18 @@ public class Sale extends JFrame {
 		etichetta_Ristorante.setBounds(277, 28, 490, 20);
 		pannello_Principale.add(etichetta_Ristorante);
 		
-		JLabel etichetta_Sale = new JLabel("SALE");
-		etichetta_Sale.setFont(new Font("Tahoma", Font.BOLD, 20));
-		etichetta_Sale.setHorizontalAlignment(SwingConstants.CENTER);
-		etichetta_Sale.setBounds(277, 50, 490, 52);
-		pannello_Principale.add(etichetta_Sale);
+		JLabel etichetta_Casi = new JLabel("CASI");
+		etichetta_Casi.setFont(new Font("Tahoma", Font.BOLD, 20));
+		etichetta_Casi.setHorizontalAlignment(SwingConstants.CENTER);
+		etichetta_Casi.setBounds(277, 50, 490, 52);
+		pannello_Principale.add(etichetta_Casi);
 		
-		tabella_Sale = new JTable();
-		tabella_Sale.setColumnSelectionAllowed(true);
-		tabella_Sale.setCellSelectionEnabled(true);
-		tabella_Sale.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		tabella_Sale.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tabella_Sale.setModel(new DefaultTableModel(
+		tabella_Casi = new JTable();
+		tabella_Casi.setColumnSelectionAllowed(true);
+		tabella_Casi.setCellSelectionEnabled(true);
+		tabella_Casi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		tabella_Casi.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tabella_Casi.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null, null, null, null, null},
 				{null, null, null, null, null, null, null, null},
@@ -83,40 +85,39 @@ public class Sale extends JFrame {
 				return columnTypes[columnIndex];
 			}
 		});
-		tabella_Sale.getColumnModel().getColumn(0).setPreferredWidth(110);
-		tabella_Sale.getColumnModel().getColumn(1).setPreferredWidth(110);
-		tabella_Sale.getColumnModel().getColumn(2).setPreferredWidth(85);
-		tabella_Sale.getColumnModel().getColumn(3).setPreferredWidth(90);
-		tabella_Sale.getColumnModel().getColumn(4).setPreferredWidth(65);
-		tabella_Sale.getColumnModel().getColumn(5).setPreferredWidth(55);
-		tabella_Sale.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		tabella_Sale.setBackground(Color.WHITE);
-		tabella_Sale.setBounds(10, 124, 1007, 223);
-		pannello_Principale.add(tabella_Sale);
+		tabella_Casi.getColumnModel().getColumn(0).setPreferredWidth(110);
+		tabella_Casi.getColumnModel().getColumn(1).setPreferredWidth(110);
+		tabella_Casi.getColumnModel().getColumn(2).setPreferredWidth(85);
+		tabella_Casi.getColumnModel().getColumn(3).setPreferredWidth(90);
+		tabella_Casi.getColumnModel().getColumn(4).setPreferredWidth(65);
+		tabella_Casi.getColumnModel().getColumn(5).setPreferredWidth(55);
+		tabella_Casi.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		tabella_Casi.setBackground(Color.WHITE);
+		tabella_Casi.setBounds(10, 124, 1007, 223);
+		pannello_Principale.add(tabella_Casi);
 		
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(1017, 124, 17, 223);
 		pannello_Principale.add(scrollBar);
 		
-		JButton bottone_VisualizzaTavoli = new JButton("Visualizza tavoli");
-		bottone_VisualizzaTavoli.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		bottone_VisualizzaTavoli.setBounds(107, 358, 127, 40);
-		pannello_Principale.add(bottone_VisualizzaTavoli);
-		
 		JButton bottone_Aggiungi = new JButton("Aggiungi");
 		bottone_Aggiungi.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		bottone_Aggiungi.setBounds(341, 358, 127, 40);
+		bottone_Aggiungi.setBounds(82, 358, 158, 40);
 		pannello_Principale.add(bottone_Aggiungi);
 		
 		JButton bottone_Modifica = new JButton("Modifica");
 		bottone_Modifica.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		bottone_Modifica.setBounds(575, 358, 127, 40);
+		bottone_Modifica.setBounds(322, 358, 158, 40);
 		pannello_Principale.add(bottone_Modifica);
 		
 		JButton bottone_Elimina = new JButton("Elimina");
 		bottone_Elimina.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		bottone_Elimina.setBounds(809, 358, 127, 40);
+		bottone_Elimina.setBounds(562, 358, 158, 40);
 		pannello_Principale.add(bottone_Elimina);
+		
+		JRadioButton radioButton_Risolto = new JRadioButton("Risolto");
+		radioButton_Risolto.setBounds(802, 358, 158, 40);
+		pannello_Principale.add(radioButton_Risolto);
 		
 		JPanel pannello_Navigazione = new JPanel();
 		pannello_Navigazione.setBounds(0, 409, 1044, 52);
@@ -145,5 +146,4 @@ public class Sale extends JFrame {
 		bottone_Logout.setBounds(945, 11, 89, 30);
 		pannello_Navigazione.add(bottone_Logout);
 	}
-
 }

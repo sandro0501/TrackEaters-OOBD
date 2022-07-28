@@ -1,4 +1,5 @@
-package Database;
+package database;
+
 import java.sql.*;
 
 //Connessione al database implementata mediante singleton pattern

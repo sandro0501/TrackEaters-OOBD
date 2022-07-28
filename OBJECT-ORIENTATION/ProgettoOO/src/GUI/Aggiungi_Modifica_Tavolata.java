@@ -6,7 +6,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import Controller.Controller;
 import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -17,69 +16,70 @@ import java.awt.Font;
 
 public class Aggiungi_Modifica_Tavolata extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField dataArrivoField;
-	private JTextField oraArrivoField;
-	private JTextField oraUscitaField;
+	private JPanel pannello_Principale;
+	private JTextField campo_DataArrivo;
+	private JTextField campo_OraArrivo;
+	private JTextField campo_OraUscita;
 
 	public Aggiungi_Modifica_Tavolata() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Aggiungi_Modifica_Tavolata.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 480);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		pannello_Principale = new JPanel();
+		pannello_Principale.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(pannello_Principale);
+		pannello_Principale.setLayout(null);
+		
+		JLabel etichetta_Tavolata = new JLabel("TAVOLATA");
+		etichetta_Tavolata.setFont(new Font("Tahoma", Font.BOLD, 20));
+		etichetta_Tavolata.setHorizontalAlignment(SwingConstants.CENTER);
+		etichetta_Tavolata.setBounds(137, 36, 209, 40);
+		pannello_Principale.add(etichetta_Tavolata);
+		
+		JLabel etichetta_DataArrivo = new JLabel("Data Arrivo");
+		etichetta_DataArrivo.setBounds(84, 129, 100, 14);
+		pannello_Principale.add(etichetta_DataArrivo);
+		
+		JLabel etichetta_OraArrivo = new JLabel("Ora Arrivo");
+		etichetta_OraArrivo.setBounds(84, 203, 100, 14);
+		pannello_Principale.add(etichetta_OraArrivo);
+		
+		JLabel etichetta_OraUscita = new JLabel("Ora Uscita");
+		etichetta_OraUscita.setBounds(301, 203, 100, 14);
+		pannello_Principale.add(etichetta_OraUscita);
+		
+		JLabel etichetta_cameriereAssociato = new JLabel("Cameriere associato");
+		etichetta_cameriereAssociato.setBounds(84, 282, 150, 14);
+		pannello_Principale.add(etichetta_cameriereAssociato);
+		
+		campo_DataArrivo = new JTextField();
+		campo_DataArrivo.setBounds(84, 143, 160, 20);
+		pannello_Principale.add(campo_DataArrivo);
+		campo_DataArrivo.setColumns(10);
+		
+		campo_OraArrivo = new JTextField();
+		campo_OraArrivo.setBounds(84, 217, 100, 20);
+		pannello_Principale.add(campo_OraArrivo);
+		campo_OraArrivo.setColumns(10);
+		
+		campo_OraUscita = new JTextField();
+		campo_OraUscita.setBounds(301, 217, 100, 20);
+		pannello_Principale.add(campo_OraUscita);
+		campo_OraUscita.setColumns(10);
+		
+		JComboBox comboBox_CameriereAssociato = new JComboBox();
+		comboBox_CameriereAssociato.setBounds(84, 296, 316, 22);
+		pannello_Principale.add(comboBox_CameriereAssociato);
 		
 		JButton annullaButton = new JButton("Annulla");
 		annullaButton.setBounds(84, 379, 117, 40);
-		contentPane.add(annullaButton);
+		pannello_Principale.add(annullaButton);
 		
-		JButton aggiungiButton = new JButton("Aggiungi");
+		JButton aggiungiButton = new JButton("Conferma");
 		aggiungiButton.setBounds(284, 379, 117, 40);
-		contentPane.add(aggiungiButton);
-		
-		dataArrivoField = new JTextField();
-		dataArrivoField.setBounds(84, 143, 160, 20);
-		contentPane.add(dataArrivoField);
-		dataArrivoField.setColumns(10);
-		
-		oraArrivoField = new JTextField();
-		oraArrivoField.setBounds(84, 217, 100, 20);
-		contentPane.add(oraArrivoField);
-		oraArrivoField.setColumns(10);
-		
-		oraUscitaField = new JTextField();
-		oraUscitaField.setBounds(301, 217, 100, 20);
-		contentPane.add(oraUscitaField);
-		oraUscitaField.setColumns(10);
-		
-		JComboBox cameriereAssociatoComboBox = new JComboBox();
-		cameriereAssociatoComboBox.setBounds(84, 296, 316, 22);
-		contentPane.add(cameriereAssociatoComboBox);
-		
-		JLabel dataArrivoLabel = new JLabel("Data Arrivo");
-		dataArrivoLabel.setBounds(84, 129, 100, 14);
-		contentPane.add(dataArrivoLabel);
-		
-		JLabel oraArrivoLabel = new JLabel("Ora Arrivo");
-		oraArrivoLabel.setBounds(84, 203, 100, 14);
-		contentPane.add(oraArrivoLabel);
-		
-		JLabel oraUscitaLabel = new JLabel("Ora Uscita");
-		oraUscitaLabel.setBounds(301, 203, 100, 14);
-		contentPane.add(oraUscitaLabel);
-		
-		JLabel cameriereAssociatoLabel = new JLabel("Cameriere associato");
-		cameriereAssociatoLabel.setBounds(84, 282, 150, 14);
-		contentPane.add(cameriereAssociatoLabel);
-		
-		JLabel aggiungiTavolataLabel = new JLabel("Aggiungi tavolata");
-		aggiungiTavolataLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-		aggiungiTavolataLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		aggiungiTavolataLabel.setBounds(137, 36, 209, 40);
-		contentPane.add(aggiungiTavolataLabel);
+		pannello_Principale.add(aggiungiButton);
 	}
 
 }

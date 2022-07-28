@@ -17,68 +17,69 @@ import javax.swing.border.EmptyBorder;
 
 public class Aggiungi_Modifica_Sala extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField denominazioneField;
-	private JTextField capienzaAvventoriField;
-	private JTextField dimensioneMqField;
+	private JPanel pannello_Principale;
+	private JTextField campo_Denominazione;
+	private JTextField campo_CapienzaAvventori;
+	private JTextField campo_DimensioneMq;
 
 	public Aggiungi_Modifica_Sala() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Aggiungi_Modifica_Tavolata.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 480);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		pannello_Principale = new JPanel();
+		pannello_Principale.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(pannello_Principale);
+		pannello_Principale.setLayout(null);
 		
-		JButton annullaButton = new JButton("Annulla");
-		annullaButton.setBounds(84, 379, 117, 40);
-		contentPane.add(annullaButton);
+		JLabel etichetta_Sala = new JLabel("SALA");
+		etichetta_Sala.setFont(new Font("Tahoma", Font.BOLD, 20));
+		etichetta_Sala.setHorizontalAlignment(SwingConstants.CENTER);
+		etichetta_Sala.setBounds(137, 23, 209, 40);
+		pannello_Principale.add(etichetta_Sala);
 		
-		JButton aggiungiButton = new JButton("Aggiungi");
-		aggiungiButton.setBounds(284, 379, 117, 40);
-		contentPane.add(aggiungiButton);
+		JLabel etichetta_Denominazione = new JLabel("Denominazione");
+		etichetta_Denominazione.setBounds(92, 110, 109, 14);
+		pannello_Principale.add(etichetta_Denominazione);
 		
-		JLabel aggiungiSalaLabel = new JLabel("AGGIUNGI SALA");
-		aggiungiSalaLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-		aggiungiSalaLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		aggiungiSalaLabel.setBounds(137, 23, 209, 40);
-		contentPane.add(aggiungiSalaLabel);
+		JLabel etichetta_CapienzaAvventori = new JLabel("Capienza avventori");
+		etichetta_CapienzaAvventori.setBounds(92, 163, 109, 14);
+		pannello_Principale.add(etichetta_CapienzaAvventori);
 		
-		JLabel denominazioneLabel = new JLabel("Denominazione");
-		denominazioneLabel.setBounds(92, 78, 109, 14);
-		contentPane.add(denominazioneLabel);
+		JLabel etichetta_DimensioneMq = new JLabel("Dimensione (Mq)");
+		etichetta_DimensioneMq.setBounds(92, 221, 109, 14);
+		pannello_Principale.add(etichetta_DimensioneMq);
 		
-		JLabel capienzaAvventoriLabel = new JLabel("Capienza avventori");
-		capienzaAvventoriLabel.setBounds(92, 131, 109, 14);
-		contentPane.add(capienzaAvventoriLabel);
+		JLabel etichetta_Tipo = new JLabel("Tipo");
+		etichetta_Tipo.setBounds(92, 287, 46, 14);
+		pannello_Principale.add(etichetta_Tipo);
 		
-		denominazioneField = new JTextField();
-		denominazioneField.setBounds(92, 91, 300, 20);
-		contentPane.add(denominazioneField);
-		denominazioneField.setColumns(10);
+		campo_Denominazione = new JTextField();
+		campo_Denominazione.setBounds(92, 123, 300, 20);
+		pannello_Principale.add(campo_Denominazione);
+		campo_Denominazione.setColumns(10);
 		
-		capienzaAvventoriField = new JTextField();
-		capienzaAvventoriField.setColumns(10);
-		capienzaAvventoriField.setBounds(92, 144, 300, 20);
-		contentPane.add(capienzaAvventoriField);
+		campo_CapienzaAvventori = new JTextField();
+		campo_CapienzaAvventori.setColumns(10);
+		campo_CapienzaAvventori.setBounds(92, 176, 300, 20);
+		pannello_Principale.add(campo_CapienzaAvventori);
 		
-		JLabel lblDimensionemq = new JLabel("Dimensione (Mq)");
-		lblDimensionemq.setBounds(92, 189, 109, 14);
-		contentPane.add(lblDimensionemq);
+		campo_DimensioneMq = new JTextField();
+		campo_DimensioneMq.setColumns(10);
+		campo_DimensioneMq.setBounds(92, 234, 300, 20);
+		pannello_Principale.add(campo_DimensioneMq);
 		
-		dimensioneMqField = new JTextField();
-		dimensioneMqField.setColumns(10);
-		dimensioneMqField.setBounds(92, 202, 300, 20);
-		contentPane.add(dimensioneMqField);
+		JComboBox comboBox_Tipo = new JComboBox();
+		comboBox_Tipo.setBounds(92, 301, 300, 20);
+		pannello_Principale.add(comboBox_Tipo);
 		
-		JLabel lblTipo = new JLabel("Tipo");
-		lblTipo.setBounds(92, 255, 46, 14);
-		contentPane.add(lblTipo);
+		JButton bottone_Annulla = new JButton("Annulla");
+		bottone_Annulla.setBounds(84, 379, 117, 40);
+		pannello_Principale.add(bottone_Annulla);
 		
-		JComboBox tipo_comboBox = new JComboBox();
-		tipo_comboBox.setBounds(92, 269, 300, 20);
-		contentPane.add(tipo_comboBox);
+		JButton bottone_Conferma = new JButton("Conferma");
+		bottone_Conferma.setBounds(284, 379, 117, 40);
+		pannello_Principale.add(bottone_Conferma);
 	}
 }

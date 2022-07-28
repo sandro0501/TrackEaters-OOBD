@@ -7,7 +7,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import Controller.Controller;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -26,39 +25,38 @@ import java.awt.Toolkit;
 
 public class Ristoranti extends JFrame {
 
-	private JPanel IMieiRistorantiPane;
-	private Controller theController;
-	private JTable RistornatiTable;
+	private JPanel pannello_Principale;
+	private JTable tabella_Ristornati;
 
-	public Ristoranti(Controller c) {
+	public Ristoranti() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Ristoranti.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
-		theController = c;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1060, 500);
-		IMieiRistorantiPane = new JPanel();
-		IMieiRistorantiPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(IMieiRistorantiPane);
-		IMieiRistorantiPane.setLayout(null);
+		pannello_Principale = new JPanel();
+		pannello_Principale.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(pannello_Principale);
+		pannello_Principale.setLayout(null);
 		
-		JLabel IMieiRistorantiLabel = new JLabel("I MIEI RISTORANTI");
-		IMieiRistorantiLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		IMieiRistorantiLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		IMieiRistorantiLabel.setBounds(277, 11, 490, 52);
-		IMieiRistorantiPane.add(IMieiRistorantiLabel);
+		JLabel etichetta_NomeECognome = new JLabel("\"Nome\" \"Cognome\"");
+		etichetta_NomeECognome.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		etichetta_NomeECognome.setHorizontalAlignment(SwingConstants.CENTER);
+		etichetta_NomeECognome.setBounds(277, 18, 490, 20);
+		pannello_Principale.add(etichetta_NomeECognome);
 		
-		JLabel NomeECognomeLabel = new JLabel("\"Nome\" \"Cognome\"");
-		NomeECognomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		NomeECognomeLabel.setBounds(277, 74, 490, 20);
-		IMieiRistorantiPane.add(NomeECognomeLabel);
+		JLabel etichetta_IMieiRistoranti = new JLabel("I MIEI RISTORANTI");
+		etichetta_IMieiRistoranti.setFont(new Font("Tahoma", Font.BOLD, 20));
+		etichetta_IMieiRistoranti.setHorizontalAlignment(SwingConstants.CENTER);
+		etichetta_IMieiRistoranti.setBounds(277, 45, 490, 52);
+		pannello_Principale.add(etichetta_IMieiRistoranti);
 		
-		RistornatiTable = new JTable();
-		RistornatiTable.setColumnSelectionAllowed(true);
-		RistornatiTable.setCellSelectionEnabled(true);
-		RistornatiTable.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		RistornatiTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		RistornatiTable.setModel(new DefaultTableModel(
+		tabella_Ristornati = new JTable();
+		tabella_Ristornati.setColumnSelectionAllowed(true);
+		tabella_Ristornati.setCellSelectionEnabled(true);
+		tabella_Ristornati.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		tabella_Ristornati.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tabella_Ristornati.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null, null, null, null, null},
 				{null, null, null, null, null, null, null, null},
@@ -86,85 +84,66 @@ public class Ristoranti extends JFrame {
 				return columnTypes[columnIndex];
 			}
 		});
-		RistornatiTable.getColumnModel().getColumn(0).setPreferredWidth(110);
-		RistornatiTable.getColumnModel().getColumn(1).setPreferredWidth(110);
-		RistornatiTable.getColumnModel().getColumn(2).setPreferredWidth(85);
-		RistornatiTable.getColumnModel().getColumn(3).setPreferredWidth(90);
-		RistornatiTable.getColumnModel().getColumn(4).setPreferredWidth(65);
-		RistornatiTable.getColumnModel().getColumn(5).setPreferredWidth(55);
-		RistornatiTable.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		RistornatiTable.setBackground(Color.WHITE);
-		RistornatiTable.setBounds(10, 124, 1007, 223);
-		IMieiRistorantiPane.add(RistornatiTable);
+		tabella_Ristornati.getColumnModel().getColumn(0).setPreferredWidth(110);
+		tabella_Ristornati.getColumnModel().getColumn(1).setPreferredWidth(110);
+		tabella_Ristornati.getColumnModel().getColumn(2).setPreferredWidth(85);
+		tabella_Ristornati.getColumnModel().getColumn(3).setPreferredWidth(90);
+		tabella_Ristornati.getColumnModel().getColumn(4).setPreferredWidth(65);
+		tabella_Ristornati.getColumnModel().getColumn(5).setPreferredWidth(55);
+		tabella_Ristornati.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		tabella_Ristornati.setBackground(Color.WHITE);
+		tabella_Ristornati.setBounds(10, 124, 1007, 223);
+		pannello_Principale.add(tabella_Ristornati);
 		
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(1017, 124, 17, 223);
-		IMieiRistorantiPane.add(scrollBar);
+		pannello_Principale.add(scrollBar);
 		
-		JPanel Navigation_panel = new JPanel();
-		Navigation_panel.setBounds(0, 409, 1044, 52);
-		Navigation_panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		IMieiRistorantiPane.add(Navigation_panel);
-		Navigation_panel.setLayout(null);
+		JButton bottone_Gestisci = new JButton("Gestisci");
+		bottone_Gestisci.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		bottone_Gestisci.setBounds(120, 358, 110, 40);
+		pannello_Principale.add(bottone_Gestisci);
 		
-		JButton HomeButton = new JButton("Home");
-		HomeButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				c.startLoginProprietario();
-				setVisible(false);
-			}
-		});
-		HomeButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		HomeButton.setBounds(10, 11, 89, 30);
-		Navigation_panel.add(HomeButton);
+		JButton bottone_Aggiungi = new JButton("Aggiungi");
+		bottone_Aggiungi.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		bottone_Aggiungi.setBounds(350, 358, 110, 40);
+		pannello_Principale.add(bottone_Aggiungi);
 		
-		JButton IndietroButton = new JButton("Indietro");
-		IndietroButton.setEnabled(false);
-		IndietroButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		IndietroButton.setBounds(109, 11, 89, 30);
-		Navigation_panel.add(IndietroButton);
+		JButton bottone_Modifica = new JButton("Modifica");
+		bottone_Modifica.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		bottone_Modifica.setBounds(580, 358, 110, 40);
+		pannello_Principale.add(bottone_Modifica);
 		
-		JLabel OrarioLabel = new JLabel("------");
-		OrarioLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		OrarioLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		OrarioLabel.setBounds(412, 11, 220, 30);
-		Navigation_panel.add(OrarioLabel);
+		JButton bottone_Elimina = new JButton("Elimina");
+		bottone_Elimina.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		bottone_Elimina.setBounds(810, 358, 110, 40);
+		pannello_Principale.add(bottone_Elimina);
 		
-		JButton LogoutButton_2 = new JButton("Logout");
-		LogoutButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				c.login();			
-			}
-		});
-		LogoutButton_2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		LogoutButton_2.setBounds(945, 11, 89, 30);
-		Navigation_panel.add(LogoutButton_2);
+		JPanel pannello_Navigazione = new JPanel();
+		pannello_Navigazione.setBounds(0, 409, 1044, 52);
+		pannello_Navigazione.setBorder(new LineBorder(new Color(0, 0, 0)));
+		pannello_Principale.add(pannello_Navigazione);
+		pannello_Navigazione.setLayout(null);
 		
-		JButton GestireButton = new JButton("Gestisci");
-		GestireButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				c.startLoginManager();
-			}
-		});
-		GestireButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		GestireButton.setBounds(120, 358, 110, 40);
-		IMieiRistorantiPane.add(GestireButton);
+		JButton bottone_Home = new JButton("Home");
+		bottone_Home.setFont(new Font("Tahoma", Font.BOLD, 12));
+		bottone_Home.setBounds(10, 11, 89, 30);
+		pannello_Navigazione.add(bottone_Home);
 		
-		JButton AggiungiButton = new JButton("Aggiungi");
-		AggiungiButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		AggiungiButton.setBounds(350, 358, 110, 40);
-		IMieiRistorantiPane.add(AggiungiButton);
+		JButton bottone_Indietro = new JButton("Indietro");
+		bottone_Indietro.setFont(new Font("Tahoma", Font.BOLD, 12));
+		bottone_Indietro.setBounds(109, 11, 89, 30);
+		pannello_Navigazione.add(bottone_Indietro);
 		
-		JButton ModificaButton = new JButton("Modifica");
-		ModificaButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		ModificaButton.setBounds(580, 358, 110, 40);
-		IMieiRistorantiPane.add(ModificaButton);
+		JLabel etichetta_Orario = new JLabel("------");
+		etichetta_Orario.setFont(new Font("Tahoma", Font.BOLD, 12));
+		etichetta_Orario.setHorizontalAlignment(SwingConstants.CENTER);
+		etichetta_Orario.setBounds(412, 11, 220, 30);
+		pannello_Navigazione.add(etichetta_Orario);
 		
-		JButton EliminaButton = new JButton("Elimina");
-		EliminaButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		EliminaButton.setBounds(810, 358, 110, 40);
-		IMieiRistorantiPane.add(EliminaButton);
+		JButton bottone_Logout = new JButton("Logout");
+		bottone_Logout.setFont(new Font("Tahoma", Font.BOLD, 12));
+		bottone_Logout.setBounds(945, 11, 89, 30);
+		pannello_Navigazione.add(bottone_Logout);
 	}
 }

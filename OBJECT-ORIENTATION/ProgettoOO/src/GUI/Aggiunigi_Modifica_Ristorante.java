@@ -13,118 +13,115 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import Controller.Controller;
-
 public class Aggiunigi_Modifica_Ristorante extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField denominazioneField;
-	private JTextField indirizzoField;
-	private JTextField telefonoField;
-	private JTextField cittaField;
-	private JTextField capField;
-	private JTextField sitoWebField;
-	private JTextField emailField;
-	private JTextField provinciaField;
-	private Controller thecontroller;
+	private JPanel pannello_Principale;
+	private JTextField campo_Denominazione;
+	private JTextField campo_Indirizzo;
+	private JTextField campo_Telefono;
+	private JTextField campo_Citta;
+	private JTextField campo_Cap;
+	private JTextField campo_SitoWeb;
+	private JTextField campo_Email;
+	private JTextField campo_Provincia;
 
 	
-	public Aggiunigi_Modifica_Ristorante(Controller c) {
-		thecontroller = c;
+	public Aggiunigi_Modifica_Ristorante() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Aggiungi_Modifica_Avventori.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 490, 700);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		pannello_Principale = new JPanel();
+		pannello_Principale.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(pannello_Principale);
+		pannello_Principale.setLayout(null);
 		
-		JButton annullaButton = new JButton("Annulla");
-		annullaButton.setBounds(80, 610, 117, 40);
-		contentPane.add(annullaButton);
+		JLabel etichetta_Ristorante = new JLabel("RISTORANTE");
+		etichetta_Ristorante.setFont(new Font("Tahoma", Font.BOLD, 20));
+		etichetta_Ristorante.setHorizontalAlignment(SwingConstants.CENTER);
+		etichetta_Ristorante.setBounds(108, 43, 257, 30);
+		pannello_Principale.add(etichetta_Ristorante);
 		
-		JButton aggiungiButton = new JButton("Aggiungi");
-		aggiungiButton.setBounds(277, 610, 117, 40);
-		contentPane.add(aggiungiButton);
+		JLabel etichetta_Denominazione = new JLabel("Denominazione");
+		etichetta_Denominazione.setBounds(26, 107, 100, 14);
+		pannello_Principale.add(etichetta_Denominazione);
 		
-		denominazioneField = new JTextField();
-		denominazioneField.setBounds(26, 121, 170, 20);
-		contentPane.add(denominazioneField);
-		denominazioneField.setColumns(10);
+		JLabel etichetta_Indirizzo = new JLabel("Indirizzo");
+		etichetta_Indirizzo.setBounds(26, 169, 144, 14);
+		pannello_Principale.add(etichetta_Indirizzo);
 		
-		indirizzoField = new JTextField();
-		indirizzoField.setBounds(26, 185, 170, 20);
-		contentPane.add(indirizzoField);
-		indirizzoField.setColumns(10);
+		JLabel etichetta_Telefono = new JLabel("Telefono");
+		etichetta_Telefono.setBounds(26, 243, 129, 14);
+		pannello_Principale.add(etichetta_Telefono);
 		
-		telefonoField = new JTextField();
-		telefonoField.setBounds(26, 258, 316, 20);
-		contentPane.add(telefonoField);
-		telefonoField.setColumns(10);
+		JLabel etichetta_Citta = new JLabel("Citt\u00E0");
+		etichetta_Citta.setBounds(26, 315, 100, 14);
+		pannello_Principale.add(etichetta_Citta);
 		
-		cittaField = new JTextField();
-		cittaField.setBounds(26, 329, 170, 20);
-		contentPane.add(cittaField);
-		cittaField.setColumns(10);
+		JLabel etichetta_Provincia = new JLabel("Provincia");
+		etichetta_Provincia.setBounds(257, 315, 100, 14);
+		pannello_Principale.add(etichetta_Provincia);
 		
-		capField = new JTextField();
-		capField.setBounds(26, 393, 170, 20);
-		contentPane.add(capField);
-		capField.setColumns(10);
+		JLabel etichetta_Cap = new JLabel("CAP");
+		etichetta_Cap.setBounds(26, 379, 100, 14);
+		pannello_Principale.add(etichetta_Cap);
 		
-		sitoWebField = new JTextField();
-		sitoWebField.setBounds(26, 521, 316, 20);
-		contentPane.add(sitoWebField);
-		sitoWebField.setColumns(10);
+		JLabel etichetta_Email = new JLabel("Email");
+		etichetta_Email.setBounds(26, 445, 46, 14);
+		pannello_Principale.add(etichetta_Email);
 		
-		emailField = new JTextField();
-		emailField.setBounds(26, 459, 316, 20);
-		contentPane.add(emailField);
-		emailField.setColumns(10);
+		JLabel etichetta_SitoWeb = new JLabel("Sito web");
+		etichetta_SitoWeb.setBounds(26, 507, 59, 14);
+		pannello_Principale.add(etichetta_SitoWeb);
 		
-		provinciaField = new JTextField();
-		provinciaField.setBounds(257, 329, 170, 20);
-		contentPane.add(provinciaField);
-		provinciaField.setColumns(10);
+		campo_Denominazione = new JTextField();
+		campo_Denominazione.setBounds(26, 121, 170, 20);
+		pannello_Principale.add(campo_Denominazione);
+		campo_Denominazione.setColumns(10);
 		
-		JLabel denominazioneLabel = new JLabel("Denominazione");
-		denominazioneLabel.setBounds(26, 107, 100, 14);
-		contentPane.add(denominazioneLabel);
+		campo_Indirizzo = new JTextField();
+		campo_Indirizzo.setBounds(26, 185, 170, 20);
+		pannello_Principale.add(campo_Indirizzo);
+		campo_Indirizzo.setColumns(10);
 		
-		JLabel indirizzoLabel = new JLabel("Indirizzo");
-		indirizzoLabel.setBounds(26, 169, 144, 14);
-		contentPane.add(indirizzoLabel);
+		campo_Telefono = new JTextField();
+		campo_Telefono.setBounds(26, 258, 316, 20);
+		pannello_Principale.add(campo_Telefono);
+		campo_Telefono.setColumns(10);
 		
-		JLabel telefonoLabel = new JLabel("Telefono");
-		telefonoLabel.setBounds(26, 243, 129, 14);
-		contentPane.add(telefonoLabel);
+		campo_Citta = new JTextField();
+		campo_Citta.setBounds(26, 329, 170, 20);
+		pannello_Principale.add(campo_Citta);
+		campo_Citta.setColumns(10);
 		
-		JLabel cittaLabel = new JLabel("Citt\u00E0");
-		cittaLabel.setBounds(26, 315, 100, 14);
-		contentPane.add(cittaLabel);
+		campo_Provincia = new JTextField();
+		campo_Provincia.setBounds(257, 329, 170, 20);
+		pannello_Principale.add(campo_Provincia);
+		campo_Provincia.setColumns(10);
 		
-		JLabel provinciaNataleLabel = new JLabel("Provincia");
-		provinciaNataleLabel.setBounds(257, 315, 100, 14);
-		contentPane.add(provinciaNataleLabel);
+		campo_Cap = new JTextField();
+		campo_Cap.setBounds(26, 393, 170, 20);
+		pannello_Principale.add(campo_Cap);
+		campo_Cap.setColumns(10);
 		
-		JLabel cittaResidenzaLabel = new JLabel("CAP");
-		cittaResidenzaLabel.setBounds(26, 379, 100, 14);
-		contentPane.add(cittaResidenzaLabel);
+		campo_Email = new JTextField();
+		campo_Email.setBounds(26, 459, 316, 20);
+		pannello_Principale.add(campo_Email);
+		campo_Email.setColumns(10);
 		
-		JLabel emailLabel = new JLabel("Email");
-		emailLabel.setBounds(26, 445, 46, 14);
-		contentPane.add(emailLabel);
+		campo_SitoWeb = new JTextField();
+		campo_SitoWeb.setBounds(26, 521, 316, 20);
+		pannello_Principale.add(campo_SitoWeb);
+		campo_SitoWeb.setColumns(10);
 		
-		JLabel sitoWebLabel = new JLabel("Sito web");
-		sitoWebLabel.setBounds(26, 507, 59, 14);
-		contentPane.add(sitoWebLabel);
+		JButton bottone_Annulla = new JButton("Annulla");
+		bottone_Annulla.setBounds(80, 610, 117, 40);
+		pannello_Principale.add(bottone_Annulla);
 		
-		JLabel aggiungiRistoranteLabel = new JLabel("AGGIUNGI RISTORANTE");
-		aggiungiRistoranteLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-		aggiungiRistoranteLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		aggiungiRistoranteLabel.setBounds(108, 43, 257, 30);
-		contentPane.add(aggiungiRistoranteLabel);
+		JButton bottone_Aggiungi = new JButton("Aggiungi");
+		bottone_Aggiungi.setBounds(277, 610, 117, 40);
+		pannello_Principale.add(bottone_Aggiungi);
 	}
 
 }

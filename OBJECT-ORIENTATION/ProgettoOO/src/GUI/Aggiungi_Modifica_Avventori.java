@@ -14,156 +14,154 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Toolkit;
-import Controller.Controller;
 
 public class Aggiungi_Modifica_Avventori extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField nomeField;
-	private JTextField dataNascitaField;
-	private JTextField numeroDocumentoField;
-	private JTextField cittaNataleField;
-	private JTextField cittaResidenzaField;
-	private JTextField telefonoField;
-	private JTextField emailField;
-	private JTextField cognomeField_8;
-	private JTextField provinciaNataleField;
-	private JTextField provinciaResidenzaField;
-	private JTextField temperaturaIngressoField;
-	private Controller thecontroller;
+	private JPanel pannello_Principale;
+	private JTextField campo_Nome;
+	private JTextField campo_DataNascita;
+	private JTextField campo_NumeroDocumento;
+	private JTextField campo_CittaNatale;
+	private JTextField campo_CittaResidenza;
+	private JTextField campo_Telefono;
+	private JTextField campo_email;
+	private JTextField campo_Cognome;
+	private JTextField campo_ProvinciaNatale;
+	private JTextField campo_ProvinciaResidenza;
+	private JTextField campo_TemperaturaIngresso;
 
 	
-	public Aggiungi_Modifica_Avventori(Controller c) {
-		thecontroller = c;
+	public Aggiungi_Modifica_Avventori() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Aggiungi_Modifica_Avventori.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 490, 700);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		pannello_Principale = new JPanel();
+		pannello_Principale.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(pannello_Principale);
+		pannello_Principale.setLayout(null);
 		
-		JButton annullaButton = new JButton("Annulla");
-		annullaButton.setBounds(80, 610, 117, 40);
-		contentPane.add(annullaButton);
+		campo_Nome = new JTextField();
+		campo_Nome.setBounds(27, 83, 170, 20);
+		pannello_Principale.add(campo_Nome);
+		campo_Nome.setColumns(10);
 		
-		JButton aggiungiButton = new JButton("Aggiungi");
-		aggiungiButton.setBounds(277, 610, 117, 40);
-		contentPane.add(aggiungiButton);
+		campo_Cognome = new JTextField();
+		campo_Cognome.setBounds(258, 83, 170, 20);
+		pannello_Principale.add(campo_Cognome);
+		campo_Cognome.setColumns(10);
 		
-		nomeField = new JTextField();
-		nomeField.setBounds(27, 83, 170, 20);
-		contentPane.add(nomeField);
-		nomeField.setColumns(10);
+		campo_DataNascita = new JTextField();
+		campo_DataNascita.setBounds(27, 147, 170, 20);
+		pannello_Principale.add(campo_DataNascita);
+		campo_DataNascita.setColumns(10);
 		
-		dataNascitaField = new JTextField();
-		dataNascitaField.setBounds(27, 147, 170, 20);
-		contentPane.add(dataNascitaField);
-		dataNascitaField.setColumns(10);
+		campo_NumeroDocumento = new JTextField();
+		campo_NumeroDocumento.setBounds(27, 220, 170, 20);
+		pannello_Principale.add(campo_NumeroDocumento);
+		campo_NumeroDocumento.setColumns(10);
 		
-		numeroDocumentoField = new JTextField();
-		numeroDocumentoField.setBounds(27, 220, 170, 20);
-		contentPane.add(numeroDocumentoField);
-		numeroDocumentoField.setColumns(10);
+		campo_CittaNatale = new JTextField();
+		campo_CittaNatale.setBounds(27, 291, 170, 20);
+		pannello_Principale.add(campo_CittaNatale);
+		campo_CittaNatale.setColumns(10);
 		
-		cittaNataleField = new JTextField();
-		cittaNataleField.setBounds(27, 291, 170, 20);
-		contentPane.add(cittaNataleField);
-		cittaNataleField.setColumns(10);
+		campo_ProvinciaNatale = new JTextField();
+		campo_ProvinciaNatale.setBounds(258, 291, 170, 20);
+		pannello_Principale.add(campo_ProvinciaNatale);
+		campo_ProvinciaNatale.setColumns(10);
 		
-		cittaResidenzaField = new JTextField();
-		cittaResidenzaField.setBounds(27, 355, 170, 20);
-		contentPane.add(cittaResidenzaField);
-		cittaResidenzaField.setColumns(10);
+		campo_CittaResidenza = new JTextField();
+		campo_CittaResidenza.setBounds(27, 355, 170, 20);
+		pannello_Principale.add(campo_CittaResidenza);
+		campo_CittaResidenza.setColumns(10);
 		
-		telefonoField = new JTextField();
-		telefonoField.setBounds(27, 483, 316, 20);
-		contentPane.add(telefonoField);
-		telefonoField.setColumns(10);
+		campo_ProvinciaResidenza = new JTextField();
+		campo_ProvinciaResidenza.setBounds(258, 355, 170, 20);
+		pannello_Principale.add(campo_ProvinciaResidenza);
+		campo_ProvinciaResidenza.setColumns(10);
 		
-		emailField = new JTextField();
-		emailField.setBounds(27, 421, 316, 20);
-		contentPane.add(emailField);
-		emailField.setColumns(10);
+		campo_email = new JTextField();
+		campo_email.setBounds(27, 421, 316, 20);
+		pannello_Principale.add(campo_email);
+		campo_email.setColumns(10);
 		
-		JComboBox greenPassComboBox = new JComboBox();
-		greenPassComboBox.setModel(new DefaultComboBoxModel(new String[] {"Si", "No"}));
-		greenPassComboBox.setBounds(27, 547, 170, 22);
-		contentPane.add(greenPassComboBox);
+		campo_Telefono = new JTextField();
+		campo_Telefono.setBounds(27, 483, 316, 20);
+		pannello_Principale.add(campo_Telefono);
+		campo_Telefono.setColumns(10);
 		
-		cognomeField_8 = new JTextField();
-		cognomeField_8.setBounds(258, 83, 170, 20);
-		contentPane.add(cognomeField_8);
-		cognomeField_8.setColumns(10);
+		JComboBox comboBox_Greenpass = new JComboBox();
+		comboBox_Greenpass.setModel(new DefaultComboBoxModel(new String[] {"Si", "No"}));
+		comboBox_Greenpass.setBounds(27, 547, 170, 22);
+		pannello_Principale.add(comboBox_Greenpass);
 		
-		provinciaNataleField = new JTextField();
-		provinciaNataleField.setBounds(258, 291, 170, 20);
-		contentPane.add(provinciaNataleField);
-		provinciaNataleField.setColumns(10);
+		campo_TemperaturaIngresso = new JTextField();
+		campo_TemperaturaIngresso.setBounds(258, 548, 170, 20);
+		pannello_Principale.add(campo_TemperaturaIngresso);
+		campo_TemperaturaIngresso.setColumns(10);
 		
-		provinciaResidenzaField = new JTextField();
-		provinciaResidenzaField.setBounds(258, 355, 170, 20);
-		contentPane.add(provinciaResidenzaField);
-		provinciaResidenzaField.setColumns(10);
+		JButton bottone_Annulla = new JButton("Annulla");
+		bottone_Annulla.setBounds(80, 610, 117, 40);
+		pannello_Principale.add(bottone_Annulla);
 		
-		temperaturaIngressoField = new JTextField();
-		temperaturaIngressoField.setBounds(258, 548, 170, 20);
-		contentPane.add(temperaturaIngressoField);
-		temperaturaIngressoField.setColumns(10);
+		JButton bottone_Conferma = new JButton("Conferma");
+		bottone_Conferma.setBounds(277, 610, 117, 40);
+		pannello_Principale.add(bottone_Conferma);
 		
-		JLabel NomeLabel = new JLabel("Nome");
-		NomeLabel.setBounds(27, 69, 46, 14);
-		contentPane.add(NomeLabel);
+		JLabel etichetta_Avventore = new JLabel("AVVENTORE");
+		etichetta_Avventore.setFont(new Font("Tahoma", Font.BOLD, 20));
+		etichetta_Avventore.setHorizontalAlignment(SwingConstants.CENTER);
+		etichetta_Avventore.setBounds(137, 20, 200, 30);
+		pannello_Principale.add(etichetta_Avventore);
 		
-		JLabel CognomeLabel = new JLabel("Cognome");
-		CognomeLabel.setBounds(258, 69, 59, 14);
-		contentPane.add(CognomeLabel);
+		JLabel etichetta_Nome = new JLabel("Nome");
+		etichetta_Nome.setBounds(27, 69, 46, 14);
+		pannello_Principale.add(etichetta_Nome);
 		
-		JLabel dataNascitaLabel = new JLabel("Data di nascita");
-		dataNascitaLabel.setBounds(27, 131, 144, 14);
-		contentPane.add(dataNascitaLabel);
+		JLabel etichetta_Cognome = new JLabel("Cognome");
+		etichetta_Cognome.setBounds(258, 69, 59, 14);
+		pannello_Principale.add(etichetta_Cognome);
 		
-		JLabel numeroDocumentoLabel = new JLabel("Numero Documento");
-		numeroDocumentoLabel.setBounds(27, 205, 129, 14);
-		contentPane.add(numeroDocumentoLabel);
+		JLabel etichetta_DataNascita = new JLabel("Data di nascita");
+		etichetta_DataNascita.setBounds(27, 131, 144, 14);
+		pannello_Principale.add(etichetta_DataNascita);
 		
-		JLabel cittaNataleLabel = new JLabel("Citt\u00E0 natale");
-		cittaNataleLabel.setBounds(27, 277, 100, 14);
-		contentPane.add(cittaNataleLabel);
+		JLabel etichetta_NumeroDocumento = new JLabel("Numero Documento");
+		etichetta_NumeroDocumento.setBounds(27, 205, 129, 14);
+		pannello_Principale.add(etichetta_NumeroDocumento);
 		
-		JLabel provinciaNataleLabel = new JLabel("Provincia natale");
-		provinciaNataleLabel.setBounds(258, 277, 100, 14);
-		contentPane.add(provinciaNataleLabel);
+		JLabel etichetta_CittaNatale = new JLabel("Citt\u00E0 natale");
+		etichetta_CittaNatale.setBounds(27, 277, 100, 14);
+		pannello_Principale.add(etichetta_CittaNatale);
 		
-		JLabel cittaResidenzaLabel = new JLabel("Citt\u00E0 residenza");
-		cittaResidenzaLabel.setBounds(27, 341, 100, 14);
-		contentPane.add(cittaResidenzaLabel);
+		JLabel etichetta_ProvinciaNatale = new JLabel("Provincia natale");
+		etichetta_ProvinciaNatale.setBounds(258, 277, 100, 14);
+		pannello_Principale.add(etichetta_ProvinciaNatale);
 		
-		JLabel provinciaResidenzaLabel = new JLabel("Provincia residenza");
-		provinciaResidenzaLabel.setBounds(258, 341, 100, 14);
-		contentPane.add(provinciaResidenzaLabel);
+		JLabel etichetta_CittaResidenza = new JLabel("Citt\u00E0 residenza");
+		etichetta_CittaResidenza.setBounds(27, 341, 100, 14);
+		pannello_Principale.add(etichetta_CittaResidenza);
 		
-		JLabel emailLabel = new JLabel("Email");
-		emailLabel.setBounds(27, 407, 46, 14);
-		contentPane.add(emailLabel);
+		JLabel etichetta_ProvinciaResidenza = new JLabel("Provincia residenza");
+		etichetta_ProvinciaResidenza.setBounds(258, 341, 100, 14);
+		pannello_Principale.add(etichetta_ProvinciaResidenza);
 		
-		JLabel telefonoLabel = new JLabel("Telefono");
-		telefonoLabel.setBounds(27, 469, 59, 14);
-		contentPane.add(telefonoLabel);
+		JLabel etichetta_Email = new JLabel("Email");
+		etichetta_Email.setBounds(27, 407, 46, 14);
+		pannello_Principale.add(etichetta_Email);
 		
-		JLabel greenPassLabel = new JLabel("GreenPass");
-		greenPassLabel.setBounds(27, 533, 100, 14);
-		contentPane.add(greenPassLabel);
+		JLabel etichetta_Telefono = new JLabel("Telefono");
+		etichetta_Telefono.setBounds(27, 469, 59, 14);
+		pannello_Principale.add(etichetta_Telefono);
 		
-		JLabel temperaturaIngressoLabel = new JLabel("Temperatura ingresso");
-		temperaturaIngressoLabel.setBounds(258, 533, 117, 14);
-		contentPane.add(temperaturaIngressoLabel);
+		JLabel etichetta_GreenPass = new JLabel("GreenPass");
+		etichetta_GreenPass.setBounds(27, 533, 100, 14);
+		pannello_Principale.add(etichetta_GreenPass);
 		
-		JLabel aggiungiAvventoreLabel = new JLabel("Aggiungi avventore");
-		aggiungiAvventoreLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-		aggiungiAvventoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		aggiungiAvventoreLabel.setBounds(137, 20, 200, 30);
-		contentPane.add(aggiungiAvventoreLabel);
+		JLabel etichetta_TemperaturaIngresso = new JLabel("Temperatura ingresso");
+		etichetta_TemperaturaIngresso.setBounds(258, 533, 117, 14);
+		pannello_Principale.add(etichetta_TemperaturaIngresso);
 	}
 }

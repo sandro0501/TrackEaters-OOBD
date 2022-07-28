@@ -14,7 +14,6 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
-import Controller.Controller;
 import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.JPasswordField;
@@ -25,77 +24,53 @@ import javax.swing.DefaultComboBoxModel;
 
 public class Schermata_Login extends JFrame {
 
-	private JPanel LoginPane;
-	private JTextField UsernameField;
-	private JPasswordField passwordField;
-	private Controller theController;
+	private JPanel pannello_Principale;
+	private JTextField campo_Username;
+	private JPasswordField password_Password;
 	
-	public Schermata_Login(Controller c) {
-		theController = c;
+	public Schermata_Login() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Schermata_Login.class.getResource("/resources/icon.png")));
 		setResizable(false);
 		setTitle("SecuRisto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		LoginPane = new JPanel();
-		LoginPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(LoginPane);
-		LoginPane.setLayout(null);
+		pannello_Principale = new JPanel();
+		pannello_Principale.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(pannello_Principale);
+		pannello_Principale.setLayout(null);
 		
-		UsernameField = new JTextField();
-		UsernameField.setBounds(249, 45, 160, 20);
-		LoginPane.add(UsernameField);
-		UsernameField.setColumns(10);
+		JLabel etichetta_Username = new JLabel("Username");
+		etichetta_Username.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		etichetta_Username.setBounds(138, 31, 77, 14);
+		pannello_Principale.add(etichetta_Username);
 		
-		JComboBox RuoloBox = new JComboBox();
-		RuoloBox.setModel(new DefaultComboBoxModel(new String[] {"Proprietario", "Manager"}));
-		RuoloBox.setBounds(249, 135, 160, 22);
-		LoginPane.add(RuoloBox);
+		JLabel etichetta_Password = new JLabel("Password");
+		etichetta_Password.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		etichetta_Password.setBounds(138, 76, 74, 14);
+		pannello_Principale.add(etichetta_Password);
 		
-		JButton LoginNewButton = new JButton("Login");
-		LoginNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(RuoloBox.getSelectedIndex()==0) {
-					setVisible(false);
-					c.startLoginProprietario();
-				} else {
-					setVisible(false);
-					c.startLoginManager();
-				}
-			}
-		});
-		LoginNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		LoginNewButton.setBounds(250, 172, 90, 40);
-		LoginPane.add(LoginNewButton);
+		JLabel etichetta_Ruolo = new JLabel("Ruolo");
+		etichetta_Ruolo.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		etichetta_Ruolo.setBounds(138, 121, 68, 14);
+		pannello_Principale.add(etichetta_Ruolo);
 		
-		JLabel UsernameLabel = new JLabel("Username");
-		UsernameLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		UsernameLabel.setBounds(249, 31, 77, 14);
-		LoginPane.add(UsernameLabel);
+		campo_Username = new JTextField();
+		campo_Username.setBounds(138, 45, 160, 20);
+		pannello_Principale.add(campo_Username);
+		campo_Username.setColumns(10);
 		
-		JLabel PasswordLabel = new JLabel("Password");
-		PasswordLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		PasswordLabel.setBounds(249, 76, 74, 14);
-		LoginPane.add(PasswordLabel);
+		password_Password = new JPasswordField();
+		password_Password.setBounds(138, 90, 160, 20);
+		pannello_Principale.add(password_Password);
 		
-		JLabel RuoloLabel = new JLabel("Ruolo");
-		RuoloLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		RuoloLabel.setBounds(249, 121, 68, 14);
-		LoginPane.add(RuoloLabel);
+		JComboBox comboBox_Ruolo = new JComboBox();
+		comboBox_Ruolo.setModel(new DefaultComboBoxModel(new String[] {"Proprietario", "Manager"}));
+		comboBox_Ruolo.setBounds(138, 135, 160, 22);
+		pannello_Principale.add(comboBox_Ruolo);
 		
-		JLabel PictureLabel = new JLabel("");
-		PictureLabel.setBounds(10, 16, 162, 145);
-		LoginPane.add(PictureLabel);
-		
-		JTextPane SistemaDiTracciamentotxtpn = new JTextPane();
-		SistemaDiTracciamentotxtpn.setBackground(SystemColor.control);
-		SistemaDiTracciamentotxtpn.setEditable(false);
-		SistemaDiTracciamentotxtpn.setText("Sistema di tracciamento contatti ristorante ");
-		SistemaDiTracciamentotxtpn.setBounds(10, 172, 162, 40);
-		LoginPane.add(SistemaDiTracciamentotxtpn);
-		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(249, 90, 160, 20);
-		LoginPane.add(passwordField);
+		JButton bottone_Login = new JButton("Login");
+		bottone_Login.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		bottone_Login.setBounds(172, 172, 90, 40);
+		pannello_Principale.add(bottone_Login);
 	}
 }

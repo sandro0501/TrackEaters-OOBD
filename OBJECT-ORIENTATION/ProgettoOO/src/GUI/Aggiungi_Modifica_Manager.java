@@ -6,7 +6,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import Controller.Controller;
 import java.awt.Toolkit;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -26,101 +25,98 @@ import java.awt.Dialog.ModalExclusionType;
 
 public class Aggiungi_Modifica_Manager extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField nomeField;
-	private JTextField telefonoField;
-	private JTextField emailField;
-	private JTextField cognomeField;
-	private Controller thecontroller;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JPanel pannello_Principale;
+	private JTextField campo_Nome;
+	private JTextField campo_Telefono;
+	private JTextField campo_Email;
+	private JTextField campo_Cognome;
+	private JPasswordField password_ConfermaPassword;
+	private JPasswordField password_Password;
 
 	
-	public Aggiungi_Modifica_Manager(Controller c) {
-		thecontroller = c;
+	public Aggiungi_Modifica_Manager() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Aggiungi_Modifica_Avventori.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 490, 700);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		pannello_Principale = new JPanel();
+		pannello_Principale.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(pannello_Principale);
+		pannello_Principale.setLayout(null);
 		
-		JButton annullaButton = new JButton("Annulla");
-		annullaButton.setBounds(80, 610, 117, 40);
-		contentPane.add(annullaButton);
+		JLabel etichetta_Manager = new JLabel("MANAGER");
+		etichetta_Manager.setFont(new Font("Tahoma", Font.BOLD, 20));
+		etichetta_Manager.setHorizontalAlignment(SwingConstants.CENTER);
+		etichetta_Manager.setBounds(108, 43, 257, 30);
+		pannello_Principale.add(etichetta_Manager);
 		
-		JButton aggiungiButton = new JButton("Aggiungi");
-		aggiungiButton.setBounds(277, 610, 117, 40);
-		contentPane.add(aggiungiButton);
+		JLabel etichetta_Nome = new JLabel("Nome");
+		etichetta_Nome.setBounds(26, 107, 46, 14);
+		pannello_Principale.add(etichetta_Nome);
 		
-		nomeField = new JTextField();
-		nomeField.setBounds(26, 121, 170, 20);
-		contentPane.add(nomeField);
-		nomeField.setColumns(10);
+		JLabel etichetta_Cognome = new JLabel("Cognome");
+		etichetta_Cognome.setBounds(257, 107, 59, 14);
+		pannello_Principale.add(etichetta_Cognome);
 		
-		telefonoField = new JTextField();
-		telefonoField.setBounds(26, 409, 316, 20);
-		contentPane.add(telefonoField);
-		telefonoField.setColumns(10);
+		JLabel etichetta_Email = new JLabel("Email");
+		etichetta_Email.setBounds(26, 180, 46, 14);
+		pannello_Principale.add(etichetta_Email);
 		
-		emailField = new JTextField();
-		emailField.setBounds(26, 193, 316, 20);
-		contentPane.add(emailField);
-		emailField.setColumns(10);
+		JLabel etichetta_Password = new JLabel("Password");
+		etichetta_Password.setBounds(26, 250, 117, 14);
+		pannello_Principale.add(etichetta_Password);
 		
-		cognomeField = new JTextField();
-		cognomeField.setBounds(257, 121, 170, 20);
-		contentPane.add(cognomeField);
-		cognomeField.setColumns(10);
+		JLabel etichetta_ConfermaPassword = new JLabel("Conferma password");
+		etichetta_ConfermaPassword.setBounds(26, 321, 117, 14);
+		pannello_Principale.add(etichetta_ConfermaPassword);
 		
-		JLabel NomeLabel = new JLabel("Nome");
-		NomeLabel.setBounds(26, 107, 46, 14);
-		contentPane.add(NomeLabel);
+		JLabel etichetta_Telefono = new JLabel("Telefono");
+		etichetta_Telefono.setBounds(26, 395, 59, 14);
+		pannello_Principale.add(etichetta_Telefono);
 		
-		JLabel CognomeLabel = new JLabel("Cognome");
-		CognomeLabel.setBounds(257, 107, 59, 14);
-		contentPane.add(CognomeLabel);
+		JLabel etichetta_Ristorante = new JLabel("Ristorante");
+		etichetta_Ristorante.setBounds(26, 477, 59, 14);
+		pannello_Principale.add(etichetta_Ristorante);
 		
-		JLabel emailLabel = new JLabel("Email");
-		emailLabel.setBounds(26, 180, 46, 14);
-		contentPane.add(emailLabel);
+		campo_Nome = new JTextField();
+		campo_Nome.setBounds(26, 121, 170, 20);
+		pannello_Principale.add(campo_Nome);
+		campo_Nome.setColumns(10);
 		
-		JLabel telefonoLabel = new JLabel("Telefono");
-		telefonoLabel.setBounds(26, 395, 59, 14);
-		contentPane.add(telefonoLabel);
+		campo_Cognome = new JTextField();
+		campo_Cognome.setBounds(257, 121, 170, 20);
+		pannello_Principale.add(campo_Cognome);
+		campo_Cognome.setColumns(10);
 		
-		JLabel aggiungiManagerLabel = new JLabel("AGGIUNGI MANAGER");
-		aggiungiManagerLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-		aggiungiManagerLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		aggiungiManagerLabel.setBounds(108, 43, 257, 30);
-		contentPane.add(aggiungiManagerLabel);
+		campo_Email = new JTextField();
+		campo_Email.setBounds(26, 193, 316, 20);
+		pannello_Principale.add(campo_Email);
+		campo_Email.setColumns(10);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(26, 264, 316, 20);
-		contentPane.add(textField);
+		password_Password = new JPasswordField();
+		password_Password.setBounds(26, 264, 316, 20);
+		pannello_Principale.add(password_Password);
 		
-		JLabel passwordLabel = new JLabel("Password");
-		passwordLabel.setBounds(26, 250, 117, 14);
-		contentPane.add(passwordLabel);
+		password_ConfermaPassword = new JPasswordField();
+		password_ConfermaPassword.setBounds(26, 335, 316, 20);
+		pannello_Principale.add(password_ConfermaPassword);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(26, 335, 316, 20);
-		contentPane.add(textField_1);
+		campo_Telefono = new JTextField();
+		campo_Telefono.setBounds(26, 409, 316, 20);
+		pannello_Principale.add(campo_Telefono);
+		campo_Telefono.setColumns(10);
 		
-		JLabel ConfermaPasswordLabel = new JLabel("Conferma password");
-		ConfermaPasswordLabel.setBounds(26, 321, 117, 14);
-		contentPane.add(ConfermaPasswordLabel);
+		JComboBox comboBox_Ristorante = new JComboBox();
+		comboBox_Ristorante.setBounds(26, 491, 316, 22);
+		pannello_Principale.add(comboBox_Ristorante);
 		
-		JComboBox ristorantecomboBox = new JComboBox();
-		ristorantecomboBox.setBounds(26, 491, 316, 22);
-		contentPane.add(ristorantecomboBox);
+		JButton bottone_Annulla = new JButton("Annulla");
+		bottone_Annulla.setBounds(80, 610, 117, 40);
+		pannello_Principale.add(bottone_Annulla);
 		
-		JLabel ristoranteLabel = new JLabel("Ristorante");
-		ristoranteLabel.setBounds(26, 477, 59, 14);
-		contentPane.add(ristoranteLabel);
+		JButton bottone_Conferma = new JButton("Conferma");
+		bottone_Conferma.setBounds(277, 610, 117, 40);
+		pannello_Principale.add(bottone_Conferma);
 	}
 }

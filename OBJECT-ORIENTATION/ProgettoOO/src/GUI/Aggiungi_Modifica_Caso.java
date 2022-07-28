@@ -17,64 +17,65 @@ import javax.swing.JTextArea;
 
 public class Aggiungi_Modifica_Caso extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField dataPositivitatextField;
+	private JPanel pannello_Principale;
+	private JTextField campo_DataPositivita;
 
 	public Aggiungi_Modifica_Caso() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Aggiungi_Modifica_Tavolata.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 480);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		pannello_Principale = new JPanel();
+		pannello_Principale.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(pannello_Principale);
+		pannello_Principale.setLayout(null);
 		
-		JButton annullaButton = new JButton("Annulla");
-		annullaButton.setBounds(84, 379, 117, 40);
-		contentPane.add(annullaButton);
+		JLabel etichetta_Caso = new JLabel("CASO");
+		etichetta_Caso.setFont(new Font("Tahoma", Font.BOLD, 20));
+		etichetta_Caso.setHorizontalAlignment(SwingConstants.CENTER);
+		etichetta_Caso.setBounds(137, 23, 209, 40);
+		pannello_Principale.add(etichetta_Caso);
 		
-		JButton aggiungiButton = new JButton("Aggiungi");
-		aggiungiButton.setBounds(284, 379, 117, 40);
-		contentPane.add(aggiungiButton);
+		JLabel etichetta_Ruolo = new JLabel("Ruolo");
+		etichetta_Ruolo.setBounds(92, 78, 46, 14);
+		pannello_Principale.add(etichetta_Ruolo);
 		
-		JLabel aggiungiCasoLabel = new JLabel("AGGIUNGI CASO");
-		aggiungiCasoLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-		aggiungiCasoLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		aggiungiCasoLabel.setBounds(137, 23, 209, 40);
-		contentPane.add(aggiungiCasoLabel);
+		JLabel etichetta_NumeroDocumento = new JLabel("Numero documento");
+		etichetta_NumeroDocumento.setBounds(92, 131, 111, 14);
+		pannello_Principale.add(etichetta_NumeroDocumento);
 		
-		JComboBox ruolo_comboBox = new JComboBox();
-		ruolo_comboBox.setBounds(92, 92, 300, 20);
-		contentPane.add(ruolo_comboBox);
+		JLabel etichetta_DataPositivita = new JLabel("Data positivit\u00E0");
+		etichetta_DataPositivita.setBounds(92, 193, 111, 14);
+		pannello_Principale.add(etichetta_DataPositivita);
 		
-		JComboBox numeroDocumento_comboBox = new JComboBox();
-		numeroDocumento_comboBox.setBounds(92, 147, 300, 20);
-		contentPane.add(numeroDocumento_comboBox);
+		JLabel etichetta_Note = new JLabel("Note");
+		etichetta_Note.setBounds(92, 253, 46, 14);
+		pannello_Principale.add(etichetta_Note);
 		
-		dataPositivitatextField = new JTextField();
-		dataPositivitatextField.setBounds(92, 206, 300, 20);
-		contentPane.add(dataPositivitatextField);
-		dataPositivitatextField.setColumns(10);
+		JComboBox comboBox_Ruolo = new JComboBox();
+		comboBox_Ruolo.setBounds(92, 92, 300, 20);
+		pannello_Principale.add(comboBox_Ruolo);
 		
-		JTextArea note_textArea = new JTextArea();
-		note_textArea.setBounds(92, 267, 300, 82);
-		contentPane.add(note_textArea);
+		JComboBox comboBox_NumeroDocumento = new JComboBox();
+		comboBox_NumeroDocumento.setBounds(92, 147, 300, 20);
+		pannello_Principale.add(comboBox_NumeroDocumento);
 		
-		JLabel ruoloLabel = new JLabel("Ruolo");
-		ruoloLabel.setBounds(92, 78, 46, 14);
-		contentPane.add(ruoloLabel);
+		campo_DataPositivita = new JTextField();
+		campo_DataPositivita.setBounds(92, 206, 300, 20);
+		pannello_Principale.add(campo_DataPositivita);
+		campo_DataPositivita.setColumns(10);
 		
-		JLabel numeroDocumentoLabel = new JLabel("Numero documento");
-		numeroDocumentoLabel.setBounds(92, 131, 111, 14);
-		contentPane.add(numeroDocumentoLabel);
+		JTextArea areaDiTesto_Note = new JTextArea();
+		areaDiTesto_Note.setBounds(92, 267, 300, 82);
+		pannello_Principale.add(areaDiTesto_Note);
 		
-		JLabel dataPositivitaLabel = new JLabel("Data positivit\u00E0");
-		dataPositivitaLabel.setBounds(92, 193, 111, 14);
-		contentPane.add(dataPositivitaLabel);
+		JButton bottone_Annulla = new JButton("Annulla");
+		bottone_Annulla.setBounds(84, 379, 117, 40);
+		pannello_Principale.add(bottone_Annulla);
 		
-		JLabel noteLabel = new JLabel("Note");
-		noteLabel.setBounds(92, 253, 46, 14);
-		contentPane.add(noteLabel);
+		JButton bottone_Conferma = new JButton("Conferma");
+		bottone_Conferma.setBounds(284, 379, 117, 40);
+		pannello_Principale.add(bottone_Conferma);
 	}
 }

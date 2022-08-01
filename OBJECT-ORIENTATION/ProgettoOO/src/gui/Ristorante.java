@@ -9,7 +9,6 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,11 +18,17 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import controller.Controller;
+
 public class Ristorante extends JFrame {
 
 	private JPanel pannello_Principale;	
+	private Controller theController;
 		
-	public Ristorante() {
+	public Ristorante(Controller c, boolean proprietario) {
+		
+		theController = c;
+		
 		setResizable(false);
 		setTitle("SecuRisto");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Ristorante.class.getResource("/resources/icon.png")));
@@ -86,11 +91,29 @@ public class Ristorante extends JFrame {
 		pannello_Navigazione.setLayout(null);
 		
 		JButton bottone_Home = new JButton("Home");
+		if (!proprietario) {
+			bottone_Home.setEnabled(false);
+		}
+		bottone_Home.addActionListener(new ActionListener( ) {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startHomepage_Proprietario();
+			}
+		});
 		bottone_Home.setFont(new Font("Tahoma", Font.BOLD, 12));
 		bottone_Home.setBounds(10, 11, 89, 30);
 		pannello_Navigazione.add(bottone_Home);
 		
 		JButton bottone_Indietro = new JButton("Indietro");
+		if (!proprietario) {
+			bottone_Indietro.setEnabled(false);
+		}
+		bottone_Indietro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startRistoranti();
+			}
+		});
 		bottone_Indietro.setFont(new Font("Tahoma", Font.BOLD, 12));
 		bottone_Indietro.setBounds(109, 11, 89, 30);
 		pannello_Navigazione.add(bottone_Indietro);
@@ -102,6 +125,12 @@ public class Ristorante extends JFrame {
 		pannello_Navigazione.add(etichetta_Orario);
 		
 		JButton bottone_Logout = new JButton("Logout");
+		bottone_Logout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startLogin();
+			}
+		});
 		bottone_Logout.setFont(new Font("Tahoma", Font.BOLD, 12));
 		bottone_Logout.setBounds(945, 11, 89, 30);
 		pannello_Navigazione.add(bottone_Logout);

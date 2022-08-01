@@ -3,7 +3,6 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,7 +12,6 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JTable;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
@@ -23,13 +21,18 @@ import javax.swing.border.EtchedBorder;
 import java.awt.Cursor;
 import javax.swing.JScrollBar;
 import java.awt.Toolkit;
+import controller.Controller;
 
 public class Ristoranti extends JFrame {
 
 	private JPanel pannello_Principale;
 	private JTable tabella_Ristornati;
+	private Controller theController;
 
-	public Ristoranti() {
+	public Ristoranti(Controller c) {
+		
+		theController=c;
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Ristoranti.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		setResizable(false);
@@ -101,6 +104,12 @@ public class Ristoranti extends JFrame {
 		pannello_Principale.add(scrollBar);
 		
 		JButton bottone_Gestisci = new JButton("Gestisci");
+		bottone_Gestisci.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startRistorante(c.accessoProprietario);
+			}
+		});
 		bottone_Gestisci.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		bottone_Gestisci.setBounds(120, 358, 110, 40);
 		pannello_Principale.add(bottone_Gestisci);

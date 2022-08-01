@@ -3,7 +3,6 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -21,11 +20,16 @@ import java.awt.event.ActionEvent;
 import java.awt.Component;
 import javax.swing.Box;
 
+import controller.Controller;
+
 public class Homepage_Proprietario extends JFrame {
 
 	private JPanel pannello_Principale;
+	private Controller theController;
 	
-	public Homepage_Proprietario() {
+	public Homepage_Proprietario(Controller c) {
+		
+		theController = c;
 				
 		setResizable(false);
 		setTitle("SecuRisto");
@@ -52,6 +56,13 @@ public class Homepage_Proprietario extends JFrame {
 		pannello_Principale.add(etichetta_TracciamentoContattiCovid);
 		
 		JButton IMieiRistorantiButton = new JButton("I miei ristoranti");
+		IMieiRistorantiButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startRistoranti();
+				
+			}
+		});
 		IMieiRistorantiButton.setBounds(350, 205, 130, 50);
 		IMieiRistorantiButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		pannello_Principale.add(IMieiRistorantiButton);
@@ -86,6 +97,12 @@ public class Homepage_Proprietario extends JFrame {
 		pannello_Navigazione.add(etichetta_Orario);
 		
 		JButton bottone_Logout = new JButton("Logout");
+		bottone_Logout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startLogin();
+			}
+		});
 		bottone_Logout.setFont(new Font("Tahoma", Font.BOLD, 12));
 		bottone_Logout.setBounds(945, 11, 89, 30);
 		pannello_Navigazione.add(bottone_Logout);

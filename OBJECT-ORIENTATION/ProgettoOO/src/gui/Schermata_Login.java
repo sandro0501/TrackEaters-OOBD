@@ -3,7 +3,6 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -22,14 +21,25 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
 
+import controller.Controller;
+
 
 public class Schermata_Login extends JFrame {
 
 	private JPanel pannello_Principale;
 	private JTextField campo_Username;
 	private JPasswordField password_Password;
+	private Controller theController;
+	private boolean accessoProprietario;
 	
-	public Schermata_Login() {
+	public boolean getaccessoProprietario() {
+		return accessoProprietario;
+	}
+	
+	public Schermata_Login(Controller c) {
+		
+		theController = c;
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Schermata_Login.class.getResource("/resources/icon.png")));
 		setResizable(false);
 		setTitle("SecuRisto");
@@ -66,10 +76,24 @@ public class Schermata_Login extends JFrame {
 		
 		JComboBox comboBox_Ruolo = new JComboBox();
 		comboBox_Ruolo.setModel(new DefaultComboBoxModel(new String[] {"Proprietario", "Manager"}));
+		comboBox_Ruolo.setSelectedIndex(0);
 		comboBox_Ruolo.setBounds(138, 135, 160, 22);
 		pannello_Principale.add(comboBox_Ruolo);
 		
 		JButton bottone_Login = new JButton("Login");
+		bottone_Login.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (comboBox_Ruolo.getSelectedIndex()==0){
+				accessoProprietario = true;
+				setVisible(false);
+				c.startHomepage_Proprietario();
+			} else {
+				accessoProprietario = false;
+				setVisible(false);
+				c.startRistorante(accessoProprietario);
+			}
+		}
+		});
 		bottone_Login.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		bottone_Login.setBounds(172, 172, 90, 40);
 		pannello_Principale.add(bottone_Login);

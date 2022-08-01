@@ -18,7 +18,7 @@ public class Controller {
 	}
 	
 	public void startHomepage_Proprietario() {
-		Homepage_Proprietario proprietarioPage = new Homepage_Proprietario(this);
+		Homepage_Proprietario proprietarioPage = new Homepage_Proprietario(this, accessoProprietario);
 		proprietarioPage.setVisible(true);
 	}
 	
@@ -31,12 +31,12 @@ public class Controller {
 	}
 	
 	public void startRistoranti() {
-		Ristoranti ristorantiPage = new Ristoranti(this);
+		Ristoranti ristorantiPage = new Ristoranti(this, accessoProprietario);
 		ristorantiPage.setVisible(true);
 	}
 	
 	public void startManager() {
-		Manager managerPage = new Manager(this);
+		Manager managerPage = new Manager(this, accessoProprietario);
 		managerPage.setVisible(true);
 	}
 

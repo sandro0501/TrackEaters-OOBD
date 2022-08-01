@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import controller.Controller;
+
 public class Aggiungi_Modifica_Cameriere extends JFrame {
 
 	private JPanel pannello_Principale;
@@ -28,9 +30,13 @@ public class Aggiungi_Modifica_Cameriere extends JFrame {
 	private JTextField campo_Cognome;
 	private JTextField campo_ProvinciaNatale;
 	private JTextField campo_ProvinciaResidenza;
+	private Controller theController;
 
 	
-	public Aggiungi_Modifica_Cameriere() {
+	public Aggiungi_Modifica_Cameriere(Controller c, boolean proprietario) {
+		
+		theController = c;
+		
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Aggiungi_Modifica_Avventori.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");

@@ -5,7 +5,6 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,6 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import controller.Controller;
 
 public class Aggiunigi_Modifica_Ristorante extends JFrame {
 
@@ -25,9 +26,13 @@ public class Aggiunigi_Modifica_Ristorante extends JFrame {
 	private JTextField campo_SitoWeb;
 	private JTextField campo_Email;
 	private JTextField campo_Provincia;
+	private Controller theController;
 
 	
-	public Aggiunigi_Modifica_Ristorante() {
+	public Aggiunigi_Modifica_Ristorante(Controller c, boolean proprietario) {
+		
+		theController = c;
+		
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Aggiungi_Modifica_Avventori.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");

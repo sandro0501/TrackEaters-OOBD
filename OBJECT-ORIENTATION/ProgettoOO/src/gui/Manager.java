@@ -30,7 +30,7 @@ public class Manager extends JFrame {
 	private JTable tabella_Avventori;
 	private Controller theController;
 
-	public Manager(Controller c) {
+	public Manager(Controller c, boolean proprietario) {
 		
 		theController = c;
 		

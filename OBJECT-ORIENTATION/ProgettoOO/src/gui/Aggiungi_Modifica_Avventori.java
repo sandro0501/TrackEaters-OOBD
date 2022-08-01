@@ -3,7 +3,6 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -15,6 +14,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Toolkit;
+
+import controller.Controller;
 
 public class Aggiungi_Modifica_Avventori extends JFrame {
 
@@ -30,9 +31,13 @@ public class Aggiungi_Modifica_Avventori extends JFrame {
 	private JTextField campo_ProvinciaNatale;
 	private JTextField campo_ProvinciaResidenza;
 	private JTextField campo_TemperaturaIngresso;
+	private Controller theController;
 
 	
-	public Aggiungi_Modifica_Avventori() {
+	public Aggiungi_Modifica_Avventori(Controller c, boolean proprietario) {
+		
+		theController = c;
+		
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Aggiungi_Modifica_Avventori.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");

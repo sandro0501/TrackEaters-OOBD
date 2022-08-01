@@ -3,7 +3,6 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -24,6 +23,8 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.Window.Type;
 import java.awt.Dialog.ModalExclusionType;
 
+import controller.Controller;
+
 public class Aggiungi_Modifica_Manager extends JFrame {
 
 	private JPanel pannello_Principale;
@@ -33,9 +34,13 @@ public class Aggiungi_Modifica_Manager extends JFrame {
 	private JTextField campo_Cognome;
 	private JPasswordField password_ConfermaPassword;
 	private JPasswordField password_Password;
+	private Controller theController;
 
 	
-	public Aggiungi_Modifica_Manager() {
+	public Aggiungi_Modifica_Manager(Controller c, boolean proprietario) {
+		
+		theController = c;
+		
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Aggiungi_Modifica_Avventori.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");

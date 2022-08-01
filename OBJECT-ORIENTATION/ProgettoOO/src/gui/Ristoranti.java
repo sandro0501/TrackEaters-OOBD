@@ -29,7 +29,7 @@ public class Ristoranti extends JFrame {
 	private JTable tabella_Ristornati;
 	private Controller theController;
 
-	public Ristoranti(Controller c) {
+	public Ristoranti(Controller c,boolean proprietario) {
 		
 		theController=c;
 		

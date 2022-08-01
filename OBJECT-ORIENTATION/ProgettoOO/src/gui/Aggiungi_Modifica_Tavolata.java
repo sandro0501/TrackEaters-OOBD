@@ -3,7 +3,6 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -15,14 +14,20 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
+import controller.Controller;
+
 public class Aggiungi_Modifica_Tavolata extends JFrame {
 
 	private JPanel pannello_Principale;
 	private JTextField campo_DataArrivo;
 	private JTextField campo_OraArrivo;
 	private JTextField campo_OraUscita;
+	private Controller theController;
 
-	public Aggiungi_Modifica_Tavolata() {
+	public Aggiungi_Modifica_Tavolata(Controller c, boolean proprietario) {
+		
+		theController = c;
+		
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Aggiungi_Modifica_Tavolata.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");

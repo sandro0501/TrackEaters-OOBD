@@ -5,7 +5,6 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -16,12 +15,18 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextArea;
 
+import controller.Controller;
+
 public class Aggiungi_Modifica_Caso extends JFrame {
 
 	private JPanel pannello_Principale;
 	private JTextField campo_DataPositivita;
+	private Controller theController;
 
-	public Aggiungi_Modifica_Caso() {
+	public Aggiungi_Modifica_Caso(Controller c, boolean proprietario) {
+		
+		theController = c;
+		
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Aggiungi_Modifica_Tavolata.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");

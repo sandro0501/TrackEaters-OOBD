@@ -5,7 +5,6 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -16,14 +15,20 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import controller.Controller;
+
 public class Aggiungi_Modifica_Sala extends JFrame {
 
 	private JPanel pannello_Principale;
 	private JTextField campo_Denominazione;
 	private JTextField campo_CapienzaAvventori;
 	private JTextField campo_DimensioneMq;
+	private Controller theController;
 
-	public Aggiungi_Modifica_Sala() {
+	public Aggiungi_Modifica_Sala(Controller c, boolean proprietario) {
+		
+		theController = c;
+		
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Aggiungi_Modifica_Tavolata.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");

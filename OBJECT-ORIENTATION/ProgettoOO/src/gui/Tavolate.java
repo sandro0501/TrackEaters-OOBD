@@ -3,7 +3,6 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,7 +12,6 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JTable;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
@@ -24,12 +22,18 @@ import java.awt.Cursor;
 import javax.swing.JScrollBar;
 import java.awt.Toolkit;
 
+import controller.Controller;
+
 public class Tavolate extends JFrame {
 
 	private JPanel pannello_Principale;
 	private JTable tabella_Tavolate;
+	private Controller theController;
 
-	public Tavolate() {
+	public Tavolate(Controller c, boolean proprietario) {
+		
+		theController = c;
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Ristoranti.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		setResizable(false);

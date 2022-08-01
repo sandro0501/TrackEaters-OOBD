@@ -9,7 +9,6 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,12 +22,18 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
+import controller.Controller;
+
 public class Avventori extends JFrame {
 
 	private JPanel pannello_Principale;
 	private JTable tabella_Avventori;
+	private Controller theController;
 
-	public Avventori() {
+	public Avventori(Controller c, boolean proprietario) {
+		
+		theController = c;
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Ristoranti.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		setResizable(false);

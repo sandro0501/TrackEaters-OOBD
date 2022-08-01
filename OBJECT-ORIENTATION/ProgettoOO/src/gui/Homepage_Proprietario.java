@@ -27,7 +27,7 @@ public class Homepage_Proprietario extends JFrame {
 	private JPanel pannello_Principale;
 	private Controller theController;
 	
-	public Homepage_Proprietario(Controller c) {
+	public Homepage_Proprietario(Controller c, boolean proprietario) {
 		
 		theController = c;
 				

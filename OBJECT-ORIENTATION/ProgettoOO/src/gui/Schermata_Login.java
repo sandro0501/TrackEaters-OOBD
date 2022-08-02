@@ -30,11 +30,6 @@ public class Schermata_Login extends JFrame {
 	private JTextField campo_Username;
 	private JPasswordField password_Password;
 	private Controller theController;
-	private boolean accessoProprietario;
-	
-	public boolean getaccessoProprietario() {
-		return accessoProprietario;
-	}
 	
 	public Schermata_Login(Controller c) {
 		
@@ -84,13 +79,11 @@ public class Schermata_Login extends JFrame {
 		bottone_Login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (comboBox_Ruolo.getSelectedIndex()==0){
-				accessoProprietario = true;
 				setVisible(false);
 				c.startHomepage_Proprietario();
-			} else {
-				accessoProprietario = false;
+			} else { 
 				setVisible(false);
-				c.startRistorante(accessoProprietario);
+				c.startRistorante(false);
 			}
 		}
 		});

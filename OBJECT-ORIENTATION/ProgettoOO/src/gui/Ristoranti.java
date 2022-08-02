@@ -29,7 +29,7 @@ public class Ristoranti extends JFrame {
 	private JTable tabella_Ristornati;
 	private Controller theController;
 
-	public Ristoranti(Controller c,boolean proprietario) {
+	public Ristoranti(Controller c) {
 		
 		theController=c;
 		
@@ -107,7 +107,7 @@ public class Ristoranti extends JFrame {
 		bottone_Gestisci.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startRistorante(c.accessoProprietario);
+				c.startRistorante(true);
 			}
 		});
 		bottone_Gestisci.setFont(new Font("Tahoma", Font.PLAIN, 12));

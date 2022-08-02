@@ -4,7 +4,7 @@ import gui.*;
 
 public class Controller { 
 	
-	public boolean accessoProprietario;
+	Schermata_Login loginPage;
 	
 	public static void main(String[] args) {
 		Controller c = new Controller();
@@ -12,18 +12,20 @@ public class Controller {
 	}
 	
 	public void startLogin(){
-		Schermata_Login loginPage = new Schermata_Login(this);
+		loginPage = new Schermata_Login(this);
+		//accessoProprietario = loginPage.getaccessoProprietario();
 		loginPage.setVisible(true);
-		accessoProprietario = loginPage.getaccessoProprietario();
+		
 	}
 	
 	public void startHomepage_Proprietario() {
-		Homepage_Proprietario proprietarioPage = new Homepage_Proprietario(this, accessoProprietario);
+		Homepage_Proprietario proprietarioPage = new Homepage_Proprietario(this);
 		proprietarioPage.setVisible(true);
 	}
 	
-	/*Ove presente, boolean proprietario indica se la pagina viene aperta da un proprietario 
-	(true) oppure da un manager (false).*/
+	/* Ove presente, boolean proprietario indica se la pagina viene aperta da: 	*
+	 * un proprietario (true) 													*
+	 * un manager (false).														*/
 	
 	public void startRistorante(boolean proprietario) {
 		Ristorante ristorantePage = new Ristorante(this, proprietario);
@@ -31,12 +33,12 @@ public class Controller {
 	}
 	
 	public void startRistoranti() {
-		Ristoranti ristorantiPage = new Ristoranti(this, accessoProprietario);
+		Ristoranti ristorantiPage = new Ristoranti(this);
 		ristorantiPage.setVisible(true);
 	}
 	
-	public void startManager() {
-		Manager managerPage = new Manager(this, accessoProprietario);
+	public void startManager(boolean proprietario) {
+		Manager managerPage = new Manager(this, proprietario);
 		managerPage.setVisible(true);
 	}
 

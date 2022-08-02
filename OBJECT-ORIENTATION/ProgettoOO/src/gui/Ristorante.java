@@ -91,9 +91,6 @@ public class Ristorante extends JFrame {
 		pannello_Navigazione.setLayout(null);
 		
 		JButton bottone_Home = new JButton("Home");
-		if (!proprietario) {
-			bottone_Home.setEnabled(false);
-		}
 		bottone_Home.addActionListener(new ActionListener( ) {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -103,11 +100,11 @@ public class Ristorante extends JFrame {
 		bottone_Home.setFont(new Font("Tahoma", Font.BOLD, 12));
 		bottone_Home.setBounds(10, 11, 89, 30);
 		pannello_Navigazione.add(bottone_Home);
+		if (!proprietario) {
+			bottone_Home.setEnabled(false);
+		}
 		
 		JButton bottone_Indietro = new JButton("Indietro");
-		if (!proprietario) {
-			bottone_Indietro.setEnabled(false);
-		}
 		bottone_Indietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -117,6 +114,9 @@ public class Ristorante extends JFrame {
 		bottone_Indietro.setFont(new Font("Tahoma", Font.BOLD, 12));
 		bottone_Indietro.setBounds(109, 11, 89, 30);
 		pannello_Navigazione.add(bottone_Indietro);
+		if (!proprietario) {
+			bottone_Indietro.setEnabled(false);
+		}
 		
 		JLabel etichetta_Orario = new JLabel("\"Data & Ora\"");
 		etichetta_Orario.setFont(new Font("Tahoma", Font.BOLD, 12));

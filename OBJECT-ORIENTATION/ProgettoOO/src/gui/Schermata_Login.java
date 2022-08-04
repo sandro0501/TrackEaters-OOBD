@@ -79,16 +79,17 @@ public class Schermata_Login extends JFrame {
 		bottone_Login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (comboBox_Ruolo.getSelectedIndex()==0){
-				setVisible(false);
-				c.startHomepage_Proprietario();
-			} else { 
-				setVisible(false);
-				c.startRistorante(false);
+					setVisible(false);
+					c.startHomepage_Proprietario();
+				} else {
+					setVisible(false);
+					c.startRistorante(false);
+				}
 			}
-		}
 		});
 		bottone_Login.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		bottone_Login.setBounds(172, 172, 90, 40);
 		pannello_Principale.add(bottone_Login);
 	}
+	
 }

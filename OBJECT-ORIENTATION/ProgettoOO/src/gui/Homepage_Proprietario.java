@@ -55,22 +55,44 @@ public class Homepage_Proprietario extends JFrame {
 		etichetta_TracciamentoContattiCovid.setHorizontalAlignment(SwingConstants.CENTER);
 		pannello_Principale.add(etichetta_TracciamentoContattiCovid);
 		
-		JButton IMieiRistorantiButton = new JButton("I miei ristoranti");
-		IMieiRistorantiButton.addActionListener(new ActionListener() {
+		JButton bottone_IMieiRistoranti = new JButton("I miei ristoranti");
+		bottone_IMieiRistoranti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				c.startRistoranti();
 				
 			}
 		});
-		IMieiRistorantiButton.setBounds(350, 205, 130, 50);
-		IMieiRistorantiButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		pannello_Principale.add(IMieiRistorantiButton);
+		bottone_IMieiRistoranti.setBounds(104, 205, 130, 50);
+		bottone_IMieiRistoranti.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		pannello_Principale.add(bottone_IMieiRistoranti);
 		
-		JButton PersonaleButton = new JButton("Personale");
-		PersonaleButton.setBounds(584, 205, 130, 50);
-		PersonaleButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		pannello_Principale.add(PersonaleButton);
+		JButton bottone_Manager = new JButton("Manager");
+		bottone_Manager.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startManager();
+			}
+		});
+		bottone_Manager.setBounds(338, 205, 130, 50);
+		bottone_Manager.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		pannello_Principale.add(bottone_Manager);
+		
+		JButton bottone_Statistiche = new JButton("Statistiche");
+		bottone_Statistiche.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startStatistiche(true, true);
+			}
+		});
+		bottone_Statistiche.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		bottone_Statistiche.setBounds(572, 205, 130, 50);
+		pannello_Principale.add(bottone_Statistiche);
+		
+		JButton bottone_Impostazioni = new JButton("Impostazioni");
+		bottone_Impostazioni.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		bottone_Impostazioni.setBounds(806, 205, 130, 50);
+		pannello_Principale.add(bottone_Impostazioni);
 		
 		JPanel pannello_Navigazione = new JPanel();
 		pannello_Navigazione.setBounds(0, 409, 1044, 52);

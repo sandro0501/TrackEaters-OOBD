@@ -30,7 +30,7 @@ public class Manager extends JFrame {
 	private JTable tabella_Avventori;
 	private Controller theController;
 
-	public Manager(Controller c, boolean proprietario) {
+	public Manager(Controller c) {
 		
 		theController = c;
 		
@@ -128,9 +128,17 @@ public class Manager extends JFrame {
 		JButton bottone_Home = new JButton("Home");
 		bottone_Home.setFont(new Font("Tahoma", Font.BOLD, 12));
 		bottone_Home.setBounds(10, 11, 89, 30);
+		bottone_Home.setEnabled(false);
 		pannello_Navigazione.add(bottone_Home);
 		
+		
 		JButton bottone_Indietro = new JButton("Indietro");
+		bottone_Indietro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startHomepage_Proprietario();
+			}
+		});
 		bottone_Indietro.setFont(new Font("Tahoma", Font.BOLD, 12));
 		bottone_Indietro.setBounds(109, 11, 89, 30);
 		pannello_Navigazione.add(bottone_Indietro);
@@ -142,6 +150,12 @@ public class Manager extends JFrame {
 		pannello_Navigazione.add(etichetta_Orario);
 		
 		JButton bottone_Logout = new JButton("Logout");
+		bottone_Logout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startLogin();
+			}
+		});
 		bottone_Logout.setFont(new Font("Tahoma", Font.BOLD, 12));
 		bottone_Logout.setBounds(945, 11, 89, 30);
 		pannello_Navigazione.add(bottone_Logout);

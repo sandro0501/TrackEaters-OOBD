@@ -75,6 +75,12 @@ public class Ristorante extends JFrame {
 		pannello_Principale.add(bottone_Camerieri);
 		
 		JButton bottone_Statistiche = new JButton("Statistiche ");
+		bottone_Statistiche.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startStatistiche(false, false);
+			}
+		});
 		bottone_Statistiche.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		bottone_Statistiche.setBounds(234, 314, 170, 50);
 		pannello_Principale.add(bottone_Statistiche);

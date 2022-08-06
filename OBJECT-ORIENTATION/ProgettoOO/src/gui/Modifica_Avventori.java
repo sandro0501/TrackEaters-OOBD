@@ -10,14 +10,17 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import controller.Controller;
 
-public class Aggiungi_Modifica_Avventori extends JFrame {
+public class Modifica_Avventori extends JFrame {
 
 	private JPanel pannello_Principale;
 	private JTextField campo_Nome;
@@ -34,12 +37,12 @@ public class Aggiungi_Modifica_Avventori extends JFrame {
 	private Controller theController;
 
 	
-	public Aggiungi_Modifica_Avventori(Controller c, boolean proprietario) {
+	public Modifica_Avventori(Controller c, boolean proprietario) {
 		
 		theController = c;
 		
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Aggiungi_Modifica_Avventori.class.getResource("/resources/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Modifica_Avventori.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 490, 700);
@@ -109,6 +112,14 @@ public class Aggiungi_Modifica_Avventori extends JFrame {
 		campo_TemperaturaIngresso.setColumns(10);
 		
 		JButton bottone_Annulla = new JButton("Annulla");
+		bottone_Annulla.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler annullare?")==0) {
+					setVisible(false);
+					c.startRistoranti();
+				}
+			}
+		});
 		bottone_Annulla.setBounds(80, 610, 117, 40);
 		pannello_Principale.add(bottone_Annulla);
 		

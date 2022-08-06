@@ -7,27 +7,31 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
 import controller.Controller;
 
-public class Aggiungi_Modifica_Tavolo extends JFrame {
+public class Aggiungi_Tavolo extends JFrame {
 
 	private JPanel pannello_Principale;
 	private JTextField campo_CapienzaTavolo;
 	private Controller theController;
 
-	public Aggiungi_Modifica_Tavolo(Controller c, boolean proprietario) {
+	public Aggiungi_Tavolo(Controller c, boolean proprietario) {
 		
 		theController = c;
 		
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Aggiungi_Modifica_Tavolata.class.getResource("/resources/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Modifica_Tavolata.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 480);
@@ -52,6 +56,14 @@ public class Aggiungi_Modifica_Tavolo extends JFrame {
 		campo_CapienzaTavolo.setColumns(10);
 		
 		JButton bottone_Annulla = new JButton("Annulla");
+		bottone_Annulla.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler annullare?")==0) {
+					setVisible(false);
+					c.startRistoranti();
+				}
+			}
+		});
 		bottone_Annulla.setBounds(84, 379, 117, 40);
 		pannello_Principale.add(bottone_Annulla);
 		

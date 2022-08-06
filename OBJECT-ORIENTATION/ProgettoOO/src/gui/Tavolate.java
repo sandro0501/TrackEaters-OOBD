@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -147,6 +148,14 @@ public class Tavolate extends JFrame {
 		pannello_Navigazione.add(etichetta_Orario);
 		
 		JButton bottone_Logout = new JButton("Logout");
+		bottone_Logout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler uscire?")==0) {
+					setVisible(false);
+					c.startLogin();
+				}
+			}
+		});
 		bottone_Logout.setFont(new Font("Tahoma", Font.BOLD, 12));
 		bottone_Logout.setBounds(945, 11, 89, 30);
 		pannello_Navigazione.add(bottone_Logout);

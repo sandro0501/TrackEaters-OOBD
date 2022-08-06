@@ -5,11 +5,15 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -17,7 +21,7 @@ import javax.swing.border.EmptyBorder;
 
 import controller.Controller;
 
-public class Aggiungi_Modifica_Cameriere extends JFrame {
+public class Modifica_Cameriere extends JFrame {
 
 	private JPanel pannello_Principale;
 	private JTextField campo_Nome;
@@ -33,12 +37,12 @@ public class Aggiungi_Modifica_Cameriere extends JFrame {
 	private Controller theController;
 
 	
-	public Aggiungi_Modifica_Cameriere(Controller c, boolean proprietario) {
+	public Modifica_Cameriere(Controller c, boolean proprietario) {
 		
 		theController = c;
 		
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Aggiungi_Modifica_Avventori.class.getResource("/resources/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Modifica_Avventori.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 490, 700);
@@ -144,6 +148,14 @@ public class Aggiungi_Modifica_Cameriere extends JFrame {
 		pannello_Principale.add(etichetta_Telefono);
 		
 		JButton bottone_Annulla = new JButton("Annulla");
+		bottone_Annulla.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler annullare?")==0) {
+					setVisible(false);
+					c.startRistoranti();
+				}
+			}
+		});
 		bottone_Annulla.setBounds(80, 610, 117, 40);
 		pannello_Principale.add(bottone_Annulla);
 		

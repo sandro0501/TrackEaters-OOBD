@@ -8,14 +8,16 @@ import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.*;
 
 import controller.Controller;
 
-public class Aggiunigi_Modifica_Ristorante extends JFrame {
+public class Modifica_Ristorante extends JFrame {
 
 	private JPanel pannello_Principale;
 	private JTextField campo_Denominazione;
@@ -29,12 +31,12 @@ public class Aggiunigi_Modifica_Ristorante extends JFrame {
 	private Controller theController;
 
 	
-	public Aggiunigi_Modifica_Ristorante(Controller c, boolean proprietario) {
+	public Modifica_Ristorante(Controller c) {
 		
 		theController = c;
 		
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Aggiungi_Modifica_Avventori.class.getResource("/resources/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Modifica_Avventori.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 490, 700);
@@ -122,6 +124,14 @@ public class Aggiunigi_Modifica_Ristorante extends JFrame {
 		campo_SitoWeb.setColumns(10);
 		
 		JButton bottone_Annulla = new JButton("Annulla");
+		bottone_Annulla.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler annullare?")==0) {
+					setVisible(false);
+					c.startRistoranti();
+				}
+			}
+		});
 		bottone_Annulla.setBounds(80, 610, 117, 40);
 		pannello_Principale.add(bottone_Annulla);
 		
@@ -131,3 +141,4 @@ public class Aggiunigi_Modifica_Ristorante extends JFrame {
 	}
 
 }
+

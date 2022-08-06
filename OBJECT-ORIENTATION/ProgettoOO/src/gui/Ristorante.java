@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
@@ -143,8 +144,10 @@ public class Ristorante extends JFrame {
 		JButton bottone_Logout = new JButton("Logout");
 		bottone_Logout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				c.startLogin();
+				if(JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler uscire?")==0) {
+					setVisible(false);
+					c.startLogin();
+				}
 			}
 		});
 		bottone_Logout.setFont(new Font("Tahoma", Font.BOLD, 12));

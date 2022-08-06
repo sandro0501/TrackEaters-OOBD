@@ -7,16 +7,20 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
 import controller.Controller;
 
-public class Aggiungi_Modifica_Tavolata extends JFrame {
+public class Aggiungi_Tavolata extends JFrame {
 
 	private JPanel pannello_Principale;
 	private JTextField campo_DataArrivo;
@@ -24,12 +28,12 @@ public class Aggiungi_Modifica_Tavolata extends JFrame {
 	private JTextField campo_OraUscita;
 	private Controller theController;
 
-	public Aggiungi_Modifica_Tavolata(Controller c, boolean proprietario) {
+	public Aggiungi_Tavolata(Controller c, boolean proprietario) {
 		
 		theController = c;
 		
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Aggiungi_Modifica_Tavolata.class.getResource("/resources/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Modifica_Tavolata.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 480);
@@ -79,13 +83,21 @@ public class Aggiungi_Modifica_Tavolata extends JFrame {
 		comboBox_CameriereAssociato.setBounds(84, 296, 316, 22);
 		pannello_Principale.add(comboBox_CameriereAssociato);
 		
-		JButton annullaButton = new JButton("Annulla");
-		annullaButton.setBounds(84, 379, 117, 40);
-		pannello_Principale.add(annullaButton);
+		JButton bottone_Annulla = new JButton("Annulla");
+		bottone_Annulla.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler annullare?")==0) {
+					setVisible(false);
+					c.startRistoranti();
+				}
+			}
+		});
+		bottone_Annulla.setBounds(84, 379, 117, 40);
+		pannello_Principale.add(bottone_Annulla);
 		
-		JButton aggiungiButton = new JButton("Conferma");
-		aggiungiButton.setBounds(284, 379, 117, 40);
-		pannello_Principale.add(aggiungiButton);
+		JButton bottone_Aggiungi = new JButton("Conferma");
+		bottone_Aggiungi.setBounds(284, 379, 117, 40);
+		pannello_Principale.add(bottone_Aggiungi);
 	}
 
 }

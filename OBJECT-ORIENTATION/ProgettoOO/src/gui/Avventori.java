@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JTable;
@@ -125,26 +126,34 @@ public class Avventori extends JFrame {
 		pannello_Principale.add(pannello_Navigazione);
 		pannello_Navigazione.setLayout(null);
 		
-		JButton HomeButton = new JButton("Home");
-		HomeButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		HomeButton.setBounds(10, 11, 89, 30);
-		pannello_Navigazione.add(HomeButton);
+		JButton botone_Home = new JButton("Home");
+		botone_Home.setFont(new Font("Tahoma", Font.BOLD, 12));
+		botone_Home.setBounds(10, 11, 89, 30);
+		pannello_Navigazione.add(botone_Home);
 		
-		JButton IndietroButton = new JButton("Indietro");
-		IndietroButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		IndietroButton.setBounds(109, 11, 89, 30);
-		pannello_Navigazione.add(IndietroButton);
+		JButton bottone_Indietro = new JButton("Indietro");
+		bottone_Indietro.setFont(new Font("Tahoma", Font.BOLD, 12));
+		bottone_Indietro.setBounds(109, 11, 89, 30);
+		pannello_Navigazione.add(bottone_Indietro);
 		
-		JLabel OrarioLabel = new JLabel("------");
-		OrarioLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		OrarioLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		OrarioLabel.setBounds(412, 11, 220, 30);
-		pannello_Navigazione.add(OrarioLabel);
+		JLabel etichetta_Orario = new JLabel("------");
+		etichetta_Orario.setFont(new Font("Tahoma", Font.BOLD, 12));
+		etichetta_Orario.setHorizontalAlignment(SwingConstants.CENTER);
+		etichetta_Orario.setBounds(412, 11, 220, 30);
+		pannello_Navigazione.add(etichetta_Orario);
 		
-		JButton LogoutButton_2 = new JButton("Logout");
-		LogoutButton_2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		LogoutButton_2.setBounds(945, 11, 89, 30);
-		pannello_Navigazione.add(LogoutButton_2);
+		JButton bottone_Logout = new JButton("Logout");
+		bottone_Logout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler uscire?")==0) {
+					setVisible(false);
+					c.startLogin();
+				}
+			}
+		});
+		bottone_Logout.setFont(new Font("Tahoma", Font.BOLD, 12));
+		bottone_Logout.setBounds(945, 11, 89, 30);
+		pannello_Navigazione.add(bottone_Logout);
 	}
 
 }

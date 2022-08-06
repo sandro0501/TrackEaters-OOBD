@@ -4,10 +4,12 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -22,11 +24,12 @@ import java.awt.Cursor;
 import javax.swing.JScrollBar;
 import java.awt.Toolkit;
 import controller.Controller;
+import javax.swing.JScrollPane;
 
 public class Ristoranti extends JFrame {
 
 	private JPanel pannello_Principale;
-	private JTable tabella_Ristornati;
+	private JTable tabella_Ristoranti;
 	private Controller theController;
 
 	public Ristoranti(Controller c) {
@@ -55,59 +58,36 @@ public class Ristoranti extends JFrame {
 		etichetta_IMieiRistoranti.setBounds(277, 45, 490, 52);
 		pannello_Principale.add(etichetta_IMieiRistoranti);
 		
-		tabella_Ristornati = new JTable();
-		tabella_Ristornati.setColumnSelectionAllowed(true);
-		tabella_Ristornati.setCellSelectionEnabled(true);
-		tabella_Ristornati.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		tabella_Ristornati.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tabella_Ristornati.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-			},
-			new String[] {
-				"Denominazione", "Indirizzo", "Telefono", "Citt\u00E0", "Provincia", "CAP", "Email", "Sito Web"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
-		tabella_Ristornati.getColumnModel().getColumn(0).setPreferredWidth(110);
-		tabella_Ristornati.getColumnModel().getColumn(1).setPreferredWidth(110);
-		tabella_Ristornati.getColumnModel().getColumn(2).setPreferredWidth(85);
-		tabella_Ristornati.getColumnModel().getColumn(3).setPreferredWidth(90);
-		tabella_Ristornati.getColumnModel().getColumn(4).setPreferredWidth(65);
-		tabella_Ristornati.getColumnModel().getColumn(5).setPreferredWidth(55);
-		tabella_Ristornati.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		tabella_Ristornati.setBackground(Color.WHITE);
-		tabella_Ristornati.setBounds(10, 124, 1007, 223);
-		pannello_Principale.add(tabella_Ristornati);
+		String[] nomeColonne = {"Denominazione", "Indirizzo", "Telefono", "Citt\u00E0", "Provincia", "CAP", "Email", "Sito Web"};
+		Object[][] dati = {{"prova", "prova", "prova", "prova", "prova", "prova", "prova", "prova"}, 
+				{"prova", "prova", "prova", "prova", "prova", "prova", "prova", "prova"}};
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(1017, 124, 17, 223);
-		pannello_Principale.add(scrollBar);
+		tabella_Ristoranti = new JTable(dati, nomeColonne);
+		tabella_Ristoranti.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		tabella_Ristoranti.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tabella_Ristoranti.getColumnModel().getColumn(0).setPreferredWidth(110);
+		tabella_Ristoranti.getColumnModel().getColumn(1).setPreferredWidth(110);
+		tabella_Ristoranti.getColumnModel().getColumn(2).setPreferredWidth(85);
+		tabella_Ristoranti.getColumnModel().getColumn(3).setPreferredWidth(90);
+		tabella_Ristoranti.getColumnModel().getColumn(4).setPreferredWidth(65);
+		tabella_Ristoranti.getColumnModel().getColumn(5).setPreferredWidth(55);
+		tabella_Ristoranti.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		tabella_Ristoranti.setBackground(Color.WHITE);
+		tabella_Ristoranti.setBounds(10, 124, 1007, 223);
+		
+		JScrollPane scrollPane_Tabella = new JScrollPane(tabella_Ristoranti);
+		scrollPane_Tabella.setBounds(10, 124, 1007, 223);
+		pannello_Principale.add(scrollPane_Tabella);
 		
 		JButton bottone_Gestisci = new JButton("Gestisci");
 		bottone_Gestisci.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				c.startRistorante(true);
+				if (tabella_Ristoranti.getSelectedRow()!=-1) {
+					setVisible(false);
+					c.startRistorante(true);
+				} else {
+					JOptionPane.showMessageDialog(pannello_Principale, "Nessun ristorante selezionato!");
+				}
 			}
 		});
 		bottone_Gestisci.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -115,11 +95,28 @@ public class Ristoranti extends JFrame {
 		pannello_Principale.add(bottone_Gestisci);
 		
 		JButton bottone_Aggiungi = new JButton("Aggiungi");
+		bottone_Aggiungi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					setVisible(false);
+					c.startAggiungi_Ristorante();
+			}
+		});
 		bottone_Aggiungi.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		bottone_Aggiungi.setBounds(350, 358, 110, 40);
 		pannello_Principale.add(bottone_Aggiungi);
 		
 		JButton bottone_Modifica = new JButton("Modifica");
+		bottone_Modifica.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (tabella_Ristoranti.getSelectedRow()!=-1) {
+					setVisible(false);
+					c.startModificaRistorante();
+				} else {
+					JOptionPane.showMessageDialog(pannello_Principale, "Nessun ristorante selezionato!");
+				}
+				
+			}
+		});
 		bottone_Modifica.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		bottone_Modifica.setBounds(580, 358, 110, 40);
 		pannello_Principale.add(bottone_Modifica);
@@ -161,8 +158,10 @@ public class Ristoranti extends JFrame {
 		JButton bottone_Logout = new JButton("Logout");
 		bottone_Logout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				c.startLogin();
+				if(JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler uscire?")==0) {
+					setVisible(false);
+					c.startLogin();
+				}
 			}
 		});
 		bottone_Logout.setFont(new Font("Tahoma", Font.BOLD, 12));

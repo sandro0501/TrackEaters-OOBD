@@ -11,6 +11,7 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextPane;
@@ -121,8 +122,10 @@ public class Homepage_Proprietario extends JFrame {
 		JButton bottone_Logout = new JButton("Logout");
 		bottone_Logout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				c.startLogin();
+				if(JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler uscire?")==0) {
+					setVisible(false);
+					c.startLogin();
+				}
 			}
 		});
 		bottone_Logout.setFont(new Font("Tahoma", Font.BOLD, 12));

@@ -42,5 +42,10 @@ public class Controller {
 		Statistiche statistichePage = new Statistiche(this, proprietario, generale);
 		statistichePage.setVisible(true);
 	}
+	
+	public void startSale(boolean proprietario) {
+		Sale salePage = new Sale(this, proprietario);
+		salePage.setVisible(true);
+	}
 
 }

@@ -131,11 +131,24 @@ public class Sale extends JFrame {
 		pannello_Navigazione.setLayout(null);
 		
 		JButton bottone_Home = new JButton("Home");
+		if(proprietario) {
+			setVisible(false);
+			c.startHomepage_Proprietario();
+		} else {
+			bottone_Home.setEnabled(false);
+		}
 		bottone_Home.setFont(new Font("Tahoma", Font.BOLD, 12));
 		bottone_Home.setBounds(10, 11, 89, 30);
 		pannello_Navigazione.add(bottone_Home);
 		
 		JButton bottone_Indietro = new JButton("Indietro");
+		if(!proprietario) {
+			setVisible(false);
+			c.startRistorante(proprietario);
+		} else {
+			setVisible(false);
+			c.startHomepage_Proprietario();
+		}
 		bottone_Indietro.setFont(new Font("Tahoma", Font.BOLD, 12));
 		bottone_Indietro.setBounds(109, 11, 89, 30);
 		pannello_Navigazione.add(bottone_Indietro);
@@ -147,6 +160,12 @@ public class Sale extends JFrame {
 		pannello_Navigazione.add(etichetta_Orario);
 		
 		JButton bottone_Logout = new JButton("Logout");
+		bottone_Logout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startLogin();
+			}
+		});
 		bottone_Logout.setFont(new Font("Tahoma", Font.BOLD, 12));
 		bottone_Logout.setBounds(945, 11, 89, 30);
 		pannello_Navigazione.add(bottone_Logout);

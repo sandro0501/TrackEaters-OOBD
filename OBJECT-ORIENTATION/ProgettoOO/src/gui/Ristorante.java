@@ -65,6 +65,16 @@ public class Ristorante extends JFrame {
 		pannello_Principale.add(bottone_InformazioniRistoranti);
 		
 		JButton bottone_Sale = new JButton("Sale");
+		bottone_Sale.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				if(proprietario) {
+					c.startSale(true);
+				} else {
+					c.startSale(false);
+				}
+			}
+		});
 		bottone_Sale.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		bottone_Sale.setBounds(436, 205, 170, 50);
 		pannello_Principale.add(bottone_Sale);

@@ -68,11 +68,12 @@ public class Ristorante extends JFrame {
 		JButton bottone_Sale = new JButton("Sale");
 		bottone_Sale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
 				if(proprietario) {
 					c.startSale(true);
+					setVisible(false);
 				} else {
 					c.startSale(false);
+					setVisible(false);
 				}
 			}
 		});
@@ -111,7 +112,7 @@ public class Ristorante extends JFrame {
 		bottone_Home.addActionListener(new ActionListener( ) {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startHomepage_Proprietario();
+				c.startHomepageProprietario();
 			}
 		});
 		bottone_Home.setFont(new Font("Tahoma", Font.BOLD, 12));

@@ -80,7 +80,7 @@ public class Schermata_Login extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (comboBox_Ruolo.getSelectedIndex()==0){
 					setVisible(false);
-					c.startHomepage_Proprietario();
+					c.startHomepageProprietario();
 				} else {
 					setVisible(false);
 					c.startRistorante(false);

@@ -53,7 +53,7 @@ public class Statistiche extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(generale && proprietario) {
 					setVisible(false);
-					c.startHomepage_Proprietario();
+					c.startHomepageProprietario();
 				} else if (!generale && proprietario) {
 					setVisible(false);
 					c.startRistorante(true);

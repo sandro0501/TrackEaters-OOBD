@@ -98,7 +98,7 @@ public class Ristoranti extends JFrame {
 		bottone_Aggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					setVisible(false);
-					c.startAggiungi_Ristorante();
+					c.startAggiungiRistorante();
 			}
 		});
 		bottone_Aggiungi.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -122,6 +122,16 @@ public class Ristoranti extends JFrame {
 		pannello_Principale.add(bottone_Modifica);
 		
 		JButton bottone_Elimina = new JButton("Elimina");
+		bottone_Elimina.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (tabella_Ristoranti.getSelectedRow()!=-1) {
+					JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler eliminare il ristorante selezionato?");
+				} else {
+					JOptionPane.showMessageDialog(pannello_Principale, "Nessun ristorante selezionato!");
+				}
+				
+			}
+		});
 		bottone_Elimina.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		bottone_Elimina.setBounds(810, 358, 110, 40);
 		pannello_Principale.add(bottone_Elimina);
@@ -142,7 +152,7 @@ public class Ristoranti extends JFrame {
 		bottone_Indietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startHomepage_Proprietario();
+				c.startHomepageProprietario();
 			}
 		});
 		bottone_Indietro.setFont(new Font("Tahoma", Font.BOLD, 12));

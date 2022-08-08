@@ -8,52 +8,62 @@ public class Controller {
 		Controller c = new Controller();
 		c.startLogin();
 	}
-	public void startAggiungi_Avventori(boolean proprietario) {
+	public void startAggiungiAvventori(boolean proprietario) {
 		Aggiungi_Avventori aggiungiAvventoriPage = new Aggiungi_Avventori(this, proprietario);
+		aggiungiAvventoriPage .setVisible(true);
 	}
 	
-	public void startAggiungi_Cameriere(boolean proprietario) {
+	public void startAggiungiCameriere(boolean proprietario) {
 		Aggiungi_Cameriere aggiungiCamerierePage = new Aggiungi_Cameriere(null, proprietario);
+		aggiungiCamerierePage.setVisible(true);
 	}
 	
-	public void startAggiungi_Caso(boolean proprietario) {
+	public void startAggiungiCaso(boolean proprietario) {
 		Aggiungi_Caso aggiungiCasoPage = new Aggiungi_Caso(this, proprietario);
+		aggiungiCasoPage.setVisible(true);
 	}
 	
-	public void startAggiungi_Manager(boolean proprietario) {
+	public void startAggiungiManager(boolean proprietario) {
 		Aggiungi_Manager aggiungiManagerPage = new Aggiungi_Manager(this, proprietario);
+		aggiungiManagerPage.setVisible(true);
 	}
 	
-	public void startAggiungi_Ristorante() {
+	public void startAggiungiRistorante() {
 		Aggiungi_Ristorante aggiungiPage = new Aggiungi_Ristorante(this);
 		aggiungiPage.setVisible(true);
 	}
 	
-	public void startAggiuni_Sala(boolean proprietario) {
+	public void startAggiuniSala(boolean proprietario) {
 		Aggiungi_Sala aggiungiSalaPage = new Aggiungi_Sala(this, proprietario);
+		aggiungiSalaPage.setVisible(true);
 	}
 	
-	public void startAggiungi_Tavolata(boolean proprietario) {
+	public void startAggiungiTavolata(boolean proprietario) {
 		Aggiungi_Tavolata aggiungiTavolataPage = new Aggiungi_Tavolata(this, proprietario);
+		aggiungiTavolataPage.setVisible(true);
 	}
 	
-	public void startAggiungi_Tavolo(boolean proprietario) {
+	public void startAggiungiTavolo(boolean proprietario) {
 		Aggiungi_Tavolo aggiungiTavoloPage = new Aggiungi_Tavolo(this, proprietario);
+		aggiungiTavoloPage.setVisible(true);
 	}
 	
 	public void startAvventori(boolean proprietario) {
 		Avventori avventoriPage = new Avventori(this, proprietario);
+		avventoriPage.setVisible(true);
 	}
 	
 	public void startCamerieri(boolean proprietario) {
 		Camerieri camerieriPage = new Camerieri(this, proprietario);
+		camerieriPage.setVisible(true);
 	}
 	
 	public void startCasi(boolean proprietario) {
 		Casi casiPage = new Casi(this, proprietario);
+		casiPage.setVisible(true);
 	}
 	
-	public void startHomepage_Proprietario() {
+	public void startHomepageProprietario() {
 		Homepage_Proprietario proprietarioPage = new Homepage_Proprietario(this);
 		proprietarioPage.setVisible(true);
 	}
@@ -65,34 +75,42 @@ public class Controller {
 	
 	public void startModificaAvventori(boolean proprietario) {
 		Modifica_Avventori modificaAvventoriPage = new Modifica_Avventori(this, proprietario);
+		modificaAvventoriPage.setVisible(true);
 	}
 	
 	public void startModificaCameriere(boolean proprietario) {
 		Modifica_Cameriere modificaCamerierePage = new Modifica_Cameriere(this, proprietario);
+		modificaCamerierePage.setVisible(true);
 	}
 	
 	public void startModificaCaso(boolean proprietario) {
-		Modifica_Caso modificaPage = new Modifica_Caso(this, proprietario);
+		Modifica_Caso modificaCasoPage = new Modifica_Caso(this, proprietario);
+		modificaCasoPage.setVisible(true);
 	}
 	
 	public void startModificaManager(boolean proprietario) {
-		Modifica_Manager modificaPage = new Modifica_Manager(this, proprietario);
+		Modifica_Manager modificaManagerPage = new Modifica_Manager(this, proprietario);
+		modificaManagerPage.setVisible(true);
 	}
 	
 	public void startModificaRistorante() {
-		Modifica_Ristorante modificaPage = new Modifica_Ristorante(this);
+		Modifica_Ristorante modificaRistorantePage = new Modifica_Ristorante(this);
+		modificaRistorantePage.setVisible(true);
 	}
 	
 	public void startModificaSala(boolean proprietario) {
-		Modifica_Sala modificaPage = new Modifica_Sala(this, proprietario);
+		Modifica_Sala modificaSalaPage = new Modifica_Sala(this, proprietario);
+		modificaSalaPage.setVisible(true);
 	}
 	
 	public void startModificaTavolata(boolean proprietario) {
-		Modifica_Tavolata modificaPage = new Modifica_Tavolata(this, proprietario);
+		Modifica_Tavolata modificaTavolataPage = new Modifica_Tavolata(this, proprietario);
+		modificaTavolataPage.setVisible(true);
 	}
 	
 	public void startModificaTavolo(boolean proprietario) {
-		Modifica_Tavolo modificaPage = new Modifica_Tavolo(this, proprietario);
+		Modifica_Tavolo modificaTavoloPage = new Modifica_Tavolo(this, proprietario);
+		modificaTavoloPage.setVisible(true);
 	}
 	
 	public void startRistorante(boolean proprietario) {
@@ -122,10 +140,12 @@ public class Controller {
 	
 	public void startTavolate(boolean proprietario) {
 		Tavolate tavolatePage = new Tavolate(this, proprietario);
+		tavolatePage.setVisible(true);
 	}
 	
 	public void startTavoli(boolean proprietario) {
-		Tavoli tavolatePage = new Tavoli(this, proprietario);
+		Tavoli tavoliPage = new Tavoli(this, proprietario);
+		tavoliPage.setVisible(true);
 	}
 	
 	

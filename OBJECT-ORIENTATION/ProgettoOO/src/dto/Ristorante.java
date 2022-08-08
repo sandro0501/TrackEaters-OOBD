@@ -15,6 +15,8 @@ public class Ristorante {
 	
 	private Proprietario proprietarioRistorante;
 	private List<ManagerRistorante> managersRistorante;
+	private List<Cameriere> camerieriRistorante;
+	private List<Avventore> accoglienzaAvventori;
 	
 	public Ristorante(String denominazione, String indirizzo, String telefono, String citta, String provincia,
 			String cap, String email, String sitoWeb) {
@@ -106,6 +108,22 @@ public class Ristorante {
 
 	public void setManagersRistorante(List<ManagerRistorante> managersRistorante) {
 		this.managersRistorante = managersRistorante;
+	}
+
+	public List<Cameriere> getCamerieriRistorante() {
+		return camerieriRistorante;
+	}
+
+	public void setCamerieriRistorante(List<Cameriere> camerieriRistorante) {
+		this.camerieriRistorante = camerieriRistorante;
+	}
+
+	public List<Avventore> getAccoglienzaAvventori() {
+		return accoglienzaAvventori;
+	}
+
+	public void setAccoglienzaAvventori(List<Avventore> accoglienzaAvventori) {
+		this.accoglienzaAvventori = accoglienzaAvventori;
 	}
 	
 }

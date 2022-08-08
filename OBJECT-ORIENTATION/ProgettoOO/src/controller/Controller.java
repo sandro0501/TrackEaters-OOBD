@@ -1,11 +1,37 @@
 package controller;
 
+import java.sql.*;
+
+import database.ConnessioneDatabase;
 import gui.*;
 
 public class Controller { 
 	
 	public static void main(String[] args) {
 		Controller c = new Controller();
+		
+/* test connessione database 
+		try {
+			Connection conn = ConnessioneDatabase.getIstanzaConnessione().getConnessione();
+			System.out.println("Connessione al database riuscita");
+			Statement stmt = conn.createStatement();
+			ResultSet rs;
+			String query = "SELECT * FROM RISTORANTE";
+			rs = stmt.executeQuery(query);
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int columnsNumber = rsmd.getColumnCount(); 
+			while(rs.next())
+			{
+				for(int i=1; i<=columnsNumber; i++){
+					System.out.print(rs.getString(i) + "|");
+				}
+				  System.out.println();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+*/
 		c.startLogin();
 	}
 	public void startAggiungiAvventori(boolean proprietario) {

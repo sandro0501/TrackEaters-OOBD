@@ -88,7 +88,7 @@ public class Aggiungi_Tavolata extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler annullare?")==0) {
 					setVisible(false);
-					c.startRistoranti();
+					c.startTavolate(proprietario);
 				}
 			}
 		});

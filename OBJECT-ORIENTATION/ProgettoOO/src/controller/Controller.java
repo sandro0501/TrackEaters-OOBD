@@ -23,8 +23,8 @@ public class Controller {
 		aggiungiCasoPage.setVisible(true);
 	}
 	
-	public void startAggiungiManager(boolean proprietario) {
-		Aggiungi_Manager aggiungiManagerPage = new Aggiungi_Manager(this, proprietario);
+	public void startAggiungiManager() {
+		Aggiungi_Manager aggiungiManagerPage = new Aggiungi_Manager(this);
 		aggiungiManagerPage.setVisible(true);
 	}
 	
@@ -33,7 +33,7 @@ public class Controller {
 		aggiungiPage.setVisible(true);
 	}
 	
-	public void startAggiuniSala(boolean proprietario) {
+	public void startAggiungiSala(boolean proprietario) {
 		Aggiungi_Sala aggiungiSalaPage = new Aggiungi_Sala(this, proprietario);
 		aggiungiSalaPage.setVisible(true);
 	}
@@ -68,6 +68,11 @@ public class Controller {
 		proprietarioPage.setVisible(true);
 	}
 	
+	public void startImpostazioni () {
+		Impostazioni impostazioniPage = new Impostazioni(this);
+		impostazioniPage.setVisible(true);
+	}
+	
 	public void startManager() {
 		Manager managerPage = new Manager(this);
 		managerPage.setVisible(true);
@@ -88,8 +93,8 @@ public class Controller {
 		modificaCasoPage.setVisible(true);
 	}
 	
-	public void startModificaManager(boolean proprietario) {
-		Modifica_Manager modificaManagerPage = new Modifica_Manager(this, proprietario);
+	public void startModificaManager() {
+		Modifica_Manager modificaManagerPage = new Modifica_Manager(this);
 		modificaManagerPage.setVisible(true);
 	}
 	

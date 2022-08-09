@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
@@ -58,39 +59,13 @@ public class Casi extends JFrame {
 		etichetta_Casi.setBounds(277, 50, 490, 52);
 		pannello_Principale.add(etichetta_Casi);
 		
-		tabella_Casi = new JTable();
-		tabella_Casi.setColumnSelectionAllowed(true);
-		tabella_Casi.setCellSelectionEnabled(true);
+		String[] nomeColonne = {"Denominazione", "Indirizzo", "Telefono", "Citt\u00E0", "Provincia", "CAP", "Email", "Sito Web"};
+		Object[][] dati = {{"prova", "prova", "prova", "prova", "prova", "prova", "prova", "prova"}, 
+				{"prova", "prova", "prova", "prova", "prova", "prova", "prova", "prova"}};
+		
+		tabella_Casi = new JTable(dati, nomeColonne);
 		tabella_Casi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		tabella_Casi.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tabella_Casi.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-			},
-			new String[] {
-				"Denominazione", "Indirizzo", "Telefono", "Citt\u00E0", "Provincia", "CAP", "Email", "Sito Web"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
 		tabella_Casi.getColumnModel().getColumn(0).setPreferredWidth(110);
 		tabella_Casi.getColumnModel().getColumn(1).setPreferredWidth(110);
 		tabella_Casi.getColumnModel().getColumn(2).setPreferredWidth(85);
@@ -100,18 +75,29 @@ public class Casi extends JFrame {
 		tabella_Casi.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		tabella_Casi.setBackground(Color.WHITE);
 		tabella_Casi.setBounds(10, 124, 1007, 223);
-		pannello_Principale.add(tabella_Casi);
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(1017, 124, 17, 223);
-		pannello_Principale.add(scrollBar);
+		JScrollPane scrollPane_Tabella = new JScrollPane(tabella_Casi);
+		scrollPane_Tabella.setBounds(10, 124, 1007, 223);
+		pannello_Principale.add(scrollPane_Tabella);
 		
 		JButton bottone_Aggiungi = new JButton("Aggiungi");
+		bottone_Aggiungi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startAggiungiCaso(proprietario);
+			}
+		});
 		bottone_Aggiungi.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		bottone_Aggiungi.setBounds(82, 358, 158, 40);
 		pannello_Principale.add(bottone_Aggiungi);
 		
 		JButton bottone_Modifica = new JButton("Modifica");
+		bottone_Modifica.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startModificaAvventori(proprietario);
+			}
+		});
 		bottone_Modifica.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		bottone_Modifica.setBounds(322, 358, 158, 40);
 		pannello_Principale.add(bottone_Modifica);

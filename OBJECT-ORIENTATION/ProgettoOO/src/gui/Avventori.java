@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
@@ -57,39 +58,13 @@ public class Avventori extends JFrame {
 		etichetta_Avventori.setBounds(277, 50, 490, 52);
 		pannello_Principale.add(etichetta_Avventori);
 		
-		tabella_Avventori = new JTable();
-		tabella_Avventori.setColumnSelectionAllowed(true);
-		tabella_Avventori.setCellSelectionEnabled(true);
+		String[] nomeColonne = {"Denominazione", "Indirizzo", "Telefono", "Citt\u00E0", "Provincia", "CAP", "Email", "Sito Web"};
+		Object[][] dati = {{"prova", "prova", "prova", "prova", "prova", "prova", "prova", "prova"}, 
+				{"prova", "prova", "prova", "prova", "prova", "prova", "prova", "prova"}};
+		
+		tabella_Avventori = new JTable(dati, nomeColonne);
 		tabella_Avventori.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		tabella_Avventori.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tabella_Avventori.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-			},
-			new String[] {
-				"Denominazione", "Indirizzo", "Telefono", "Citt\u00E0", "Provincia", "CAP", "Email", "Sito Web"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
 		tabella_Avventori.getColumnModel().getColumn(0).setPreferredWidth(110);
 		tabella_Avventori.getColumnModel().getColumn(1).setPreferredWidth(110);
 		tabella_Avventori.getColumnModel().getColumn(2).setPreferredWidth(85);
@@ -99,18 +74,33 @@ public class Avventori extends JFrame {
 		tabella_Avventori.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		tabella_Avventori.setBackground(Color.WHITE);
 		tabella_Avventori.setBounds(10, 124, 1007, 223);
-		pannello_Principale.add(tabella_Avventori);
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(1017, 124, 17, 223);
-		pannello_Principale.add(scrollBar);
+		JScrollPane scrollPane_Tabella = new JScrollPane(tabella_Avventori);
+		scrollPane_Tabella.setBounds(10, 124, 1007, 223);
+		pannello_Principale.add(scrollPane_Tabella);
 		
 		JButton bottone_Aggiungi = new JButton("Aggiungi");
+		bottone_Aggiungi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startAggiungiAvventori(proprietario);
+			}
+		});
 		bottone_Aggiungi.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		bottone_Aggiungi.setBounds(142, 358, 158, 40);
 		pannello_Principale.add(bottone_Aggiungi);
 		
 		JButton bottone_Modifica = new JButton("Modifica");
+		bottone_Modifica.addActionListener(new ActionListener () {
+			public void actionPerformed(ActionEvent e) {
+				if(tabella_Avventori.getSelectedRow()!=-1) {
+					setVisible(false);
+					c.startModificaAvventori(proprietario);
+				} else {
+					JOptionPane.showMessageDialog(pannello_Principale, "Nessun Avventore selezionato!");
+				}
+			}
+		});
 		bottone_Modifica.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		bottone_Modifica.setBounds(442, 358, 158, 40);
 		pannello_Principale.add(bottone_Modifica);
@@ -126,10 +116,21 @@ public class Avventori extends JFrame {
 		pannello_Principale.add(pannello_Navigazione);
 		pannello_Navigazione.setLayout(null);
 		
-		JButton botone_Home = new JButton("Home");
-		botone_Home.setFont(new Font("Tahoma", Font.BOLD, 12));
-		botone_Home.setBounds(10, 11, 89, 30);
-		pannello_Navigazione.add(botone_Home);
+		JButton bottone_Home = new JButton("Home");
+		bottone_Home.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (proprietario) {
+					setVisible(false);
+					c.startHomepageProprietario();
+				} else {
+					setVisible(false);
+					c.startRistorante(proprietario);
+				}
+			}
+		});
+		bottone_Home.setFont(new Font("Tahoma", Font.BOLD, 12));
+		bottone_Home.setBounds(10, 11, 89, 30);
+		pannello_Navigazione.add(bottone_Home);
 		
 		JButton bottone_Indietro = new JButton("Indietro");
 		bottone_Indietro.setFont(new Font("Tahoma", Font.BOLD, 12));

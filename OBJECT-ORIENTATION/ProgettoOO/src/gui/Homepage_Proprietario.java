@@ -91,6 +91,13 @@ public class Homepage_Proprietario extends JFrame {
 		pannello_Principale.add(bottone_Statistiche);
 		
 		JButton bottone_Impostazioni = new JButton("Impostazioni");
+		bottone_Impostazioni.addActionListener(new ActionListener () {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startImpostazioni();
+			}
+		});
+		
 		bottone_Impostazioni.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		bottone_Impostazioni.setBounds(806, 205, 130, 50);
 		pannello_Principale.add(bottone_Impostazioni);

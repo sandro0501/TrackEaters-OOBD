@@ -38,7 +38,7 @@ public class Modifica_Manager extends JFrame {
 	private Controller theController;
 
 	
-	public Modifica_Manager(Controller c, boolean proprietario) {
+	public Modifica_Manager(Controller c) {
 		
 		theController = c;
 		
@@ -123,7 +123,7 @@ public class Modifica_Manager extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler annullare?")==0) {
 					setVisible(false);
-					c.startRistoranti();
+					c.startManager();
 				}
 			}
 		});

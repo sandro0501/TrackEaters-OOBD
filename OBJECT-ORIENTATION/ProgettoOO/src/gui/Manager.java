@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
@@ -28,7 +29,7 @@ import controller.Controller;
 public class Manager extends JFrame {
 	
 	private JPanel pannello_Principale;
-	private JTable tabella_Avventori;
+	private JTable tabella_Manager;
 	private Controller theController;
 
 	public Manager(Controller c) {
@@ -57,60 +58,49 @@ public class Manager extends JFrame {
 		etichetta_Camerieri.setBounds(277, 50, 490, 52);
 		pannello_Principale.add(etichetta_Camerieri);
 		
-		tabella_Avventori = new JTable();
-		tabella_Avventori.setColumnSelectionAllowed(true);
-		tabella_Avventori.setCellSelectionEnabled(true);
-		tabella_Avventori.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		tabella_Avventori.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tabella_Avventori.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-			},
-			new String[] {
-				"Denominazione", "Indirizzo", "Telefono", "Citt\u00E0", "Provincia", "CAP", "Email", "Sito Web"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
-		tabella_Avventori.getColumnModel().getColumn(0).setPreferredWidth(110);
-		tabella_Avventori.getColumnModel().getColumn(1).setPreferredWidth(110);
-		tabella_Avventori.getColumnModel().getColumn(2).setPreferredWidth(85);
-		tabella_Avventori.getColumnModel().getColumn(3).setPreferredWidth(90);
-		tabella_Avventori.getColumnModel().getColumn(4).setPreferredWidth(65);
-		tabella_Avventori.getColumnModel().getColumn(5).setPreferredWidth(55);
-		tabella_Avventori.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		tabella_Avventori.setBackground(Color.WHITE);
-		tabella_Avventori.setBounds(10, 124, 1007, 223);
-		pannello_Principale.add(tabella_Avventori);
+		String[] nomeColonne = {"Denominazione", "Indirizzo", "Telefono", "Citt\u00E0", "Provincia", "CAP", "Email", "Sito Web"};
+		Object[][] dati = {{"prova", "prova", "prova", "prova", "prova", "prova", "prova", "prova"}, 
+				{"prova", "prova", "prova", "prova", "prova", "prova", "prova", "prova"}};
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(1017, 124, 17, 223);
-		pannello_Principale.add(scrollBar);
+		tabella_Manager = new JTable(dati, nomeColonne);
+		tabella_Manager.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		tabella_Manager.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tabella_Manager.getColumnModel().getColumn(0).setPreferredWidth(110);
+		tabella_Manager.getColumnModel().getColumn(1).setPreferredWidth(110);
+		tabella_Manager.getColumnModel().getColumn(2).setPreferredWidth(85);
+		tabella_Manager.getColumnModel().getColumn(3).setPreferredWidth(90);
+		tabella_Manager.getColumnModel().getColumn(4).setPreferredWidth(65);
+		tabella_Manager.getColumnModel().getColumn(5).setPreferredWidth(55);
+		tabella_Manager.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		tabella_Manager.setBackground(Color.WHITE);
+		tabella_Manager.setBounds(10, 124, 1007, 223);
+		
+		JScrollPane scrollPane_Tabella = new JScrollPane(tabella_Manager);
+		scrollPane_Tabella.setBounds(10, 124, 1007, 223);
+		pannello_Principale.add(scrollPane_Tabella);
 		
 		JButton bottone_Aggiungi = new JButton("Aggiungi");
+		bottone_Aggiungi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startAggiungiManager();
+			}
+		});
 		bottone_Aggiungi.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		bottone_Aggiungi.setBounds(142, 358, 158, 40);
 		pannello_Principale.add(bottone_Aggiungi);
 		
 		JButton bottone_Modifica = new JButton("Modifica");
+		bottone_Modifica.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (tabella_Manager.getSelectedRow()!=-1) {
+					setVisible(false);
+					c.startModificaManager();
+				} else {
+					JOptionPane.showMessageDialog(pannello_Principale, "Nessun manager selezionato!");
+				}
+			}
+		});
 		bottone_Modifica.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		bottone_Modifica.setBounds(442, 358, 158, 40);
 		pannello_Principale.add(bottone_Modifica);

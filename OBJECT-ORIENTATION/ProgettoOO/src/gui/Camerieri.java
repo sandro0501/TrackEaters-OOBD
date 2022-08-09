@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
@@ -57,39 +58,13 @@ public class Camerieri extends JFrame {
 		etichetta_Camerieri.setBounds(277, 50, 490, 52);
 		pannello_Principale.add(etichetta_Camerieri);
 		
-		tabella_Camerieri = new JTable();
-		tabella_Camerieri.setColumnSelectionAllowed(true);
-		tabella_Camerieri.setCellSelectionEnabled(true);
+		String[] nomeColonne = {"Denominazione", "Indirizzo", "Telefono", "Citt\u00E0", "Provincia", "CAP", "Email", "Sito Web"};
+		Object[][] dati = {{"prova", "prova", "prova", "prova", "prova", "prova", "prova", "prova"}, 
+				{"prova", "prova", "prova", "prova", "prova", "prova", "prova", "prova"}};
+		
+		tabella_Camerieri = new JTable(dati, nomeColonne);
 		tabella_Camerieri.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		tabella_Camerieri.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tabella_Camerieri.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-			},
-			new String[] {
-				"Denominazione", "Indirizzo", "Telefono", "Citt\u00E0", "Provincia", "CAP", "Email", "Sito Web"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
 		tabella_Camerieri.getColumnModel().getColumn(0).setPreferredWidth(110);
 		tabella_Camerieri.getColumnModel().getColumn(1).setPreferredWidth(110);
 		tabella_Camerieri.getColumnModel().getColumn(2).setPreferredWidth(85);
@@ -99,11 +74,10 @@ public class Camerieri extends JFrame {
 		tabella_Camerieri.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		tabella_Camerieri.setBackground(Color.WHITE);
 		tabella_Camerieri.setBounds(10, 124, 1007, 223);
-		pannello_Principale.add(tabella_Camerieri);
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(1017, 124, 17, 223);
-		pannello_Principale.add(scrollBar);
+		JScrollPane scrollPane_Tabella = new JScrollPane(tabella_Camerieri);
+		scrollPane_Tabella.setBounds(10, 124, 1007, 223);
+		pannello_Principale.add(scrollPane_Tabella);
 		
 		JButton bottone_Aggiungi = new JButton("Aggiungi");
 		bottone_Aggiungi.setFont(new Font("Tahoma", Font.PLAIN, 12));

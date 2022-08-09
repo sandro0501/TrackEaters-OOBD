@@ -68,13 +68,8 @@ public class Ristorante extends JFrame {
 		JButton bottone_Sale = new JButton("Sale");
 		bottone_Sale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(proprietario) {
-					c.startSale(true);
-					setVisible(false);
-				} else {
-					c.startSale(false);
-					setVisible(false);
-				}
+				setVisible(false);
+				c.startSale(proprietario);
 			}
 		});
 		bottone_Sale.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -82,6 +77,12 @@ public class Ristorante extends JFrame {
 		pannello_Principale.add(bottone_Sale);
 		
 		JButton bottone_Camerieri = new JButton("Camerieri");
+		bottone_Camerieri.addActionListener(new ActionListener () {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startCamerieri(proprietario);
+			}
+		});
 		bottone_Camerieri.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		bottone_Camerieri.setBounds(739, 205, 170, 50);
 		pannello_Principale.add(bottone_Camerieri);
@@ -98,6 +99,12 @@ public class Ristorante extends JFrame {
 		pannello_Principale.add(bottone_Statistiche);
 		
 		JButton bottone_Casi = new JButton("Casi");
+		bottone_Casi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startCasi(proprietario);
+			}
+		});
 		bottone_Casi.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		bottone_Casi.setBounds(638, 314, 170, 50);
 		pannello_Principale.add(bottone_Casi);

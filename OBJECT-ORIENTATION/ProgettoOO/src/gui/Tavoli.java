@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
@@ -57,39 +58,13 @@ public class Tavoli extends JFrame {
 		etichetta_Tavoli.setBounds(277, 50, 490, 52);
 		pannello_Principale.add(etichetta_Tavoli);
 		
-		tabella_Tavoli = new JTable();
-		tabella_Tavoli.setColumnSelectionAllowed(true);
-		tabella_Tavoli.setCellSelectionEnabled(true);
+		String[] nomeColonne = {"Denominazione", "Indirizzo", "Telefono", "Citt\u00E0", "Provincia", "CAP", "Email", "Sito Web"};
+		Object[][] dati = {{"prova", "prova", "prova", "prova", "prova", "prova", "prova", "prova"}, 
+				{"prova", "prova", "prova", "prova", "prova", "prova", "prova", "prova"}};
+		
+		tabella_Tavoli = new JTable(dati, nomeColonne);
 		tabella_Tavoli.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		tabella_Tavoli.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tabella_Tavoli.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null},
-			},
-			new String[] {
-				"Denominazione", "Indirizzo", "Telefono", "Citt\u00E0", "Provincia", "CAP", "Email", "Sito Web"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
 		tabella_Tavoli.getColumnModel().getColumn(0).setPreferredWidth(110);
 		tabella_Tavoli.getColumnModel().getColumn(1).setPreferredWidth(110);
 		tabella_Tavoli.getColumnModel().getColumn(2).setPreferredWidth(85);
@@ -99,26 +74,48 @@ public class Tavoli extends JFrame {
 		tabella_Tavoli.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		tabella_Tavoli.setBackground(Color.WHITE);
 		tabella_Tavoli.setBounds(10, 124, 1007, 223);
-		pannello_Principale.add(tabella_Tavoli);
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(1017, 124, 17, 223);
-		pannello_Principale.add(scrollBar);
+		JScrollPane scrollPane_Tabella = new JScrollPane(tabella_Tavoli);
+		scrollPane_Tabella.setBounds(10, 124, 1007, 223);
+		pannello_Principale.add(scrollPane_Tabella);
+		
+		JButton bottone_VisualizzaTavolata = new JButton("Visualizza Tavolata");
+		bottone_VisualizzaTavolata.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startTavolate(proprietario);
+			}
+		});
+		bottone_VisualizzaTavolata.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		bottone_VisualizzaTavolata.setBounds(92, 358, 145, 40);
+		pannello_Principale.add(bottone_VisualizzaTavolata);
+		
+		JButton bottone_Aggiungi = new JButton("Aggiungi");
+		bottone_Aggiungi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startAggiungiTavolo(proprietario);
+			}
+		});
+		bottone_Aggiungi.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		bottone_Aggiungi.setBounds(329, 358, 145, 40);
+		pannello_Principale.add(bottone_Aggiungi);
+		
+		JButton bottone_Modifica = new JButton("Modifica");
+		bottone_Modifica.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startModificaTavolo(proprietario);
+			}
+		});
+		bottone_Modifica.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		bottone_Modifica.setBounds(566, 358, 145, 40);
+		pannello_Principale.add(bottone_Modifica);
 		
 		JButton bottone_Elimina = new JButton("Elimina");
 		bottone_Elimina.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		bottone_Elimina.setBounds(746, 358, 145, 40);
+		bottone_Elimina.setBounds(803, 358, 145, 40);
 		pannello_Principale.add(bottone_Elimina);
-		
-		JButton bottone_Elimina_1 = new JButton("Gestisci");
-		bottone_Elimina_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		bottone_Elimina_1.setBounds(449, 358, 145, 40);
-		pannello_Principale.add(bottone_Elimina_1);
-		
-		JButton bottone_Elimina_2 = new JButton("Visualizza Tavolata");
-		bottone_Elimina_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		bottone_Elimina_2.setBounds(152, 358, 145, 40);
-		pannello_Principale.add(bottone_Elimina_2);
 		
 		JPanel pannello_Navigazione = new JPanel();
 		pannello_Navigazione.setBounds(0, 409, 1044, 52);
@@ -127,6 +124,17 @@ public class Tavoli extends JFrame {
 		pannello_Navigazione.setLayout(null);
 		
 		JButton bottone_Home = new JButton("Home");
+		bottone_Home.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (proprietario) {
+					setVisible(false);
+					c.startHomepageProprietario();
+				} else {
+					setVisible(false);
+					c.startRistorante(proprietario);
+				}
+			}
+		});
 		bottone_Home.setFont(new Font("Tahoma", Font.BOLD, 12));
 		bottone_Home.setBounds(10, 11, 89, 30);
 		pannello_Navigazione.add(bottone_Home);

@@ -116,7 +116,7 @@ public class Modifica_Avventori extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler annullare?")==0) {
 					setVisible(false);
-					c.startRistoranti();
+					c.startAvventori(proprietario);
 				}
 			}
 		});

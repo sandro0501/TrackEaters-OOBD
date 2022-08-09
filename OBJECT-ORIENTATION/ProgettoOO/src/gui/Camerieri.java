@@ -100,12 +100,28 @@ public class Camerieri extends JFrame {
 		pannello_Principale.add(pannello_Navigazione);
 		pannello_Navigazione.setLayout(null);
 		
-		JButton botone_Home = new JButton("Home");
-		botone_Home.setFont(new Font("Tahoma", Font.BOLD, 12));
-		botone_Home.setBounds(10, 11, 89, 30);
-		pannello_Navigazione.add(botone_Home);
+		JButton bottone_Home = new JButton("Home");
+		if (!proprietario) {
+			bottone_Home.setEnabled(false);
+		} else {
+			bottone_Home.addActionListener(new ActionListener () {
+				public void actionPerformed (ActionEvent e) {
+					setVisible(false);
+					c.startHomepageProprietario();
+				}
+			});
+		}
+		bottone_Home.setFont(new Font("Tahoma", Font.BOLD, 12));
+		bottone_Home.setBounds(10, 11, 89, 30);
+		pannello_Navigazione.add(bottone_Home);
 		
 		JButton bottone_Indietro = new JButton("Indietro");
+		bottone_Indietro.addActionListener(new ActionListener () {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startRistorante(proprietario);
+			}
+		});
 		bottone_Indietro.setFont(new Font("Tahoma", Font.BOLD, 12));
 		bottone_Indietro.setBounds(109, 11, 89, 30);
 		pannello_Navigazione.add(bottone_Indietro);

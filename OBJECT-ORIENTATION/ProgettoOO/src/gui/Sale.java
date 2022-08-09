@@ -139,14 +139,13 @@ public class Sale extends JFrame {
 		pannello_Navigazione.setLayout(null);
 		
 		JButton bottone_Home = new JButton("Home");
-		if(proprietario) {
-			bottone_Home.addActionListener(new ActionListener() {
-				public void actionPerformed (ActionEvent e) {
-					setVisible(false);
-					c.startHomepageProprietario();
-				}
-			});
-		} else {
+		bottone_Home.addActionListener(new ActionListener() {
+			public void actionPerformed (ActionEvent e) {
+				setVisible(false);
+				c.startHomepageProprietario();
+			}
+		});
+		 if (!proprietario) {
 			bottone_Home.setEnabled(false);
 		}
 		bottone_Home.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -156,13 +155,8 @@ public class Sale extends JFrame {
 		JButton bottone_Indietro = new JButton("Indietro");
 		bottone_Indietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!proprietario) {
-					setVisible(false);
-					c.startRistorante(proprietario);
-				} else {
-					setVisible(false);
-					c.startRistorante(proprietario);
-				}
+				setVisible(false);
+				c.startRistorante(proprietario);
 			}
 		});
 		bottone_Indietro.setFont(new Font("Tahoma", Font.BOLD, 12));

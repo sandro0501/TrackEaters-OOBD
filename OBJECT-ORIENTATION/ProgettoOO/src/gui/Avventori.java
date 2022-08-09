@@ -133,6 +133,12 @@ public class Avventori extends JFrame {
 		pannello_Navigazione.add(bottone_Home);
 		
 		JButton bottone_Indietro = new JButton("Indietro");
+		bottone_Indietro.addActionListener(new ActionListener () {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				c.startTavolate(proprietario);
+			}
+		});
 		bottone_Indietro.setFont(new Font("Tahoma", Font.BOLD, 12));
 		bottone_Indietro.setBounds(109, 11, 89, 30);
 		pannello_Navigazione.add(bottone_Indietro);

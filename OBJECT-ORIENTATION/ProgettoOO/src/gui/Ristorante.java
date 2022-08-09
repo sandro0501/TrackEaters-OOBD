@@ -91,7 +91,7 @@ public class Ristorante extends JFrame {
 		bottone_Statistiche.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startStatistiche(false, false);
+				c.startStatistiche(proprietario, false);
 			}
 		});
 		bottone_Statistiche.setFont(new Font("Tahoma", Font.PLAIN, 11));

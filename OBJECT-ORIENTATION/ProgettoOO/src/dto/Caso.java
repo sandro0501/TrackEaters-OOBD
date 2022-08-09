@@ -1,5 +1,69 @@
 package dto;
 
-public class Caso {
+import java.sql.Date;
 
+public class Caso {
+	
+	private Date dataRegistrazione;
+	private String stato;
+	private String note;
+	
+	private Avventore avventorePositivo;
+	private Cameriere camerierePositivo;
+	private Operatore tracciamentoOperatore;
+	
+	public Caso(Date dataRegistrazione, String stato, String note) {
+		this.dataRegistrazione = dataRegistrazione;
+		this.stato = stato;
+		this.note = note;
+	}
+
+	public Date getDataRegistrazione() {
+		return dataRegistrazione;
+	}
+
+	public void setDataRegistrazione(Date dataRegistrazione) {
+		this.dataRegistrazione = dataRegistrazione;
+	}
+
+	public String getStato() {
+		return stato;
+	}
+
+	public void setStato(String stato) {
+		this.stato = stato;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+	public Avventore getAvventorePositivo() {
+		return avventorePositivo;
+	}
+
+	public void setAvventorePositivo(Avventore avventorePositivo) {
+		this.avventorePositivo = avventorePositivo;
+	}
+
+	public Cameriere getCamerierePositivo() {
+		return camerierePositivo;
+	}
+
+	public void setCamerierePositivo(Cameriere camerierePositivo) {
+		this.camerierePositivo = camerierePositivo;
+	}
+
+	public Operatore getTracciamentoOperatore() {
+		return tracciamentoOperatore;
+	}
+
+	public void setTracciamentoOperatore(Operatore tracciamentoOperatore) {
+		this.tracciamentoOperatore = tracciamentoOperatore;
+	}
+	
 }

@@ -6,11 +6,15 @@ public class ManagerRistorante extends Operatore {
 	
 	private Ristorante ristoranteGestito;
 	
+	public ManagerRistorante() {
+		
+	}
+
 	public ManagerRistorante(String username, String password, String nome, String cognome, String email, String telefono) {
 		super(username, password, nome, cognome, email);
 		this.setTelefono(telefono);
 	}
-
+	
 	public String getTelefono() {
 		return telefono;
 	}

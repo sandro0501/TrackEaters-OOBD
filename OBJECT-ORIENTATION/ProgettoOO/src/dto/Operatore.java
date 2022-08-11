@@ -8,6 +8,10 @@ public class Operatore {
 	private String cognome;
 	private String email;
 	
+	public Operatore() {
+		
+	}
+	
 	public Operatore(String username, String password, String nome, String cognome, String email) {
 		this.username = username;
 		this.password = password;

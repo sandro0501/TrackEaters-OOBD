@@ -35,29 +35,38 @@ public class Controller {
 	private TavolataDAO tavolataDAO;
 	private TavoloDAO tavoloDAO;
 	
-	public Controller() {
-		/*
-		this.avventoreDAO = new AvventoreOracleImplementation();
-		this.cameriereDAO = new CameriereOracleImplementation();
-		this.casoDAO = new CasoOracleImplementation();
-		this.managerRistoranteDAO = new ManagerRistoranteOracleImplementation();
-		this.operatoreDAO = new OperatoreOracleImplementation();
-		this.proprietarioDAO = new ProprietarioOracleImplementation();
-		this.ristoranteDAO = new RistoranteOracleImplementation();
-		this.salaDAO = new SalaOracleImplementation();
-		this.tavolataDAO = new TavolataOracleImplementation();
-		this.tavoloDAO = new TavoloOracleImplementation(); */
+	private Schermata_Login loginPage;
+	
+	
+	private Controller() {
+		startLogin();
 	}
 	
 	public static void main(String[] args) {
-		try {
-			Controller c = new Controller();
-			c.startLogin();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		Controller c = new Controller();
 	}
 	
+	//starter login
+	public void startLogin(){
+		loginPage = new Schermata_Login(this);
+		loginPage.setVisible(true);
+	}
+	
+	//starter proprietario
+	public void startHomepageProprietario() {
+		loginPage.dispose();
+		Homepage_Proprietario proprietarioPage = new Homepage_Proprietario(this);
+		proprietarioPage.setVisible(true);
+	}
+	
+	//starter managerristorante
+	public void startHomepageRistorante(boolean proprietario) {
+		loginPage.dispose();
+		Homepage_Ristorante ristorantePage = new Homepage_Ristorante(this, proprietario);
+		ristorantePage.setVisible(true);
+	}
+	
+	/*------------------------------------------------------------------------------------------------*/
 	
 	
 	public void startAggiungiAvventori(boolean proprietario) {
@@ -113,11 +122,6 @@ public class Controller {
 	public void startCasi(boolean proprietario) {
 		Casi casiPage = new Casi(this, proprietario);
 		casiPage.setVisible(true);
-	}
-	
-	public void startHomepageProprietario() {
-		Homepage_Proprietario proprietarioPage = new Homepage_Proprietario(this);
-		proprietarioPage.setVisible(true);
 	}
 	
 	public void startImpostazioni () {
@@ -185,11 +189,6 @@ public class Controller {
 		salePage.setVisible(true);
 	}
 	
-	public void startLogin(){
-		Schermata_Login loginPage = new Schermata_Login(this);
-		loginPage.setVisible(true);
-	}
-	
 	public void startStatistiche(boolean proprietario, boolean generale) {
 		Statistiche statistichePage = new Statistiche(this, proprietario, generale);
 		statistichePage.setVisible(true);
@@ -205,12 +204,25 @@ public class Controller {
 		tavoliPage.setVisible(true);
 	}
 	
+/*------------------------------------------------------------------------------------------------------------------------*/
 	
-	
-	
-	
-	
-	
+	//metodo login
+	public void loginOperatore(String username, String password, String tipoOperatore) {
+		operatoreDAO = new OperatoreOracleImplementation();
+		try {
+			Operatore operatore = null;
+			operatore = operatoreDAO.getOperatore(username, password, tipoOperatore);
+			JOptionPane.showMessageDialog(null, "Login effettuato correttamente!\n Benvenuto, "+operatore.getUsername()+" - "+tipoOperatore,"Login", JOptionPane.INFORMATION_MESSAGE);
+			
+			if(tipoOperatore.equals("Proprietario"))
+				startHomepageProprietario();
+			else 
+				startHomepageRistorante(false);
+			
+		} catch (Exception e) { //da gestire!!!!
+			e.printStackTrace();
+		}
+	}
 	
 	
 

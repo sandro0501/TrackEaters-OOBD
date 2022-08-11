@@ -42,6 +42,7 @@ public class Schermata_Login extends JFrame {
 		setTitle("TrackEaters");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 601, 493);
+		setLocationRelativeTo(null);
 		pannello_Principale = new JPanel();
 		pannello_Principale.setBackground(new Color(176, 196, 222));
 		setContentPane(pannello_Principale);
@@ -90,13 +91,15 @@ public class Schermata_Login extends JFrame {
 		pannello_Principale.add(bottone_Login);
 		bottone_Login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (comboBox_Ruolo.getSelectedIndex()==0){
+				
+				/* if (comboBox_Ruolo.getSelectedIndex()==0){
 					setVisible(false);
 					c.startHomepageProprietario();
 				} else {
 					setVisible(false);
 					c.startRistorante(false);
-				}
+				} */
+				c.loginOperatore(campo_Username.getText(), password_Password.getText(), comboBox_Ruolo.getSelectedItem().toString());
 			}
 		});
 		
@@ -104,6 +107,8 @@ public class Schermata_Login extends JFrame {
 		lblMainlogoImage.setIcon(new ImageIcon(Schermata_Login.class.getResource("/resources/mainlogo.png")));
 		lblMainlogoImage.setBounds(20, 77, 271, 317);
 		pannello_Principale.add(lblMainlogoImage);
+		
+
 		
 	}
 }

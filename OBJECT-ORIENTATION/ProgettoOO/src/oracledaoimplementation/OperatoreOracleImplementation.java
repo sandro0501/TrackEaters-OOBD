@@ -22,23 +22,27 @@ public class OperatoreOracleImplementation implements OperatoreDAO {
 	}
 
 	@Override
-	public Operatore getOperatore(String username, String password, String ruoloOperatore) {
+	public Operatore getOperatore(String username, String password, String tipoOperatore) {
 		try {
-			String queryGetOperatore = "SELECT * FROM ? WHERE Username = ? AND Password = ?";
+			String queryGetOperatore = "SELECT * FROM "+tipoOperatore+" WHERE Username = ? AND Password = ?";
 			PreparedStatement getOperatore = connessione.prepareStatement(queryGetOperatore);
-			getOperatore.setString(1, ruoloOperatore);
-			getOperatore.setString(2, username);
-			getOperatore.setString(3, password);
+			getOperatore.setString(1, username);
+			getOperatore.setString(2, password);
 			ResultSet rs = getOperatore.executeQuery();
-			
+	
 			if(rs.next())
-            {
-				if (ruoloOperatore == "Proprietario")
+			{
+				if (tipoOperatore.equals("Proprietario"))
 					return estraiProprietarioFromResultSet(rs);
 				else
 					return estraiManagerRistoranteFromResultSet(rs);
-            }
-
+			}
+			else
+			{
+				//per debug
+				System.out.println("Nessun utente trovato nel DB");
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

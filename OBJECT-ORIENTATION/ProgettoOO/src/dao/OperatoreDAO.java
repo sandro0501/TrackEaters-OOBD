@@ -1,5 +1,7 @@
 package dao;
 
-public interface OperatoreDAO {
+import dto.Operatore;
 
+public interface OperatoreDAO {
+	Operatore getOperatore(String username, String password, String ruoloOperatore);
 }

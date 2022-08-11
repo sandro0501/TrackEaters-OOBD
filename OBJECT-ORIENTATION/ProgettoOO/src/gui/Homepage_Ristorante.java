@@ -21,18 +21,18 @@ import javax.swing.border.LineBorder;
 
 import controller.Controller;
 
-public class Ristorante extends JFrame {
+public class Homepage_Ristorante extends JFrame {
 
 	private JPanel pannello_Principale;	
 	private Controller theController;
 		
-	public Ristorante(Controller c, boolean proprietario) {
+	public Homepage_Ristorante(Controller c, boolean proprietario) {
 		
 		theController = c;
 		
 		setResizable(false);
 		setTitle("SecuRisto");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Ristorante.class.getResource("/resources/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Homepage_Ristorante.class.getResource("/resources/icon.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1060, 500);
 		pannello_Principale = new JPanel();

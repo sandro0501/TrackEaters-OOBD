@@ -1,39 +1,65 @@
 package controller;
 
-import java.sql.*;
+import dto.Avventore;
+import dto.Cameriere;
+import dto.Caso;
+import dto.ManagerRistorante;
+import dto.Operatore;
+import dto.Proprietario;
+import dto.Ristorante;
+import dto.Sala;
+import dto.Tavolata;
+import dto.Tavolo;
 
-import database.ConnessioneDatabase;
+import dao.*;
+import oracledaoimplementation.*;
+
+import javax.swing.*;
+import java.awt.*;
 import gui.*;
+
+import java.util.*;
+import java.sql.*;
+import database.ConnessioneDatabase;
 
 public class Controller { 
 	
-	public static void main(String[] args) {
-		Controller c = new Controller();
-		
-/* test connessione database 
-		try {
-			Connection conn = ConnessioneDatabase.getIstanzaConnessione().getConnessione();
-			System.out.println("Connessione al database riuscita");
-			Statement stmt = conn.createStatement();
-			ResultSet rs;
-			String query = "SELECT * FROM RISTORANTE";
-			rs = stmt.executeQuery(query);
-			ResultSetMetaData rsmd = rs.getMetaData();
-			int columnsNumber = rsmd.getColumnCount(); 
-			while(rs.next())
-			{
-				for(int i=1; i<=columnsNumber; i++){
-					System.out.print(rs.getString(i) + "|");
-				}
-				  System.out.println();
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-*/
-		c.startLogin();
+	private AvventoreDAO avventoreDAO;
+	private CameriereDAO cameriereDAO;
+	private CasoDAO casoDAO;
+	private ManagerRistoranteDAO managerRistoranteDAO;
+	private OperatoreDAO operatoreDAO;
+	private ProprietarioDAO proprietarioDAO;
+	private RistoranteDAO ristoranteDAO;
+	private SalaDAO salaDAO;
+	private TavolataDAO tavolataDAO;
+	private TavoloDAO tavoloDAO;
+	
+	public Controller() {
+		/*
+		this.avventoreDAO = new AvventoreOracleImplementation();
+		this.cameriereDAO = new CameriereOracleImplementation();
+		this.casoDAO = new CasoOracleImplementation();
+		this.managerRistoranteDAO = new ManagerRistoranteOracleImplementation();
+		this.operatoreDAO = new OperatoreOracleImplementation();
+		this.proprietarioDAO = new ProprietarioOracleImplementation();
+		this.ristoranteDAO = new RistoranteOracleImplementation();
+		this.salaDAO = new SalaOracleImplementation();
+		this.tavolataDAO = new TavolataOracleImplementation();
+		this.tavoloDAO = new TavoloOracleImplementation(); */
 	}
+	
+	public static void main(String[] args) {
+		try {
+			Controller c = new Controller();
+			c.startLogin();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
 	public void startAggiungiAvventori(boolean proprietario) {
 		Aggiungi_Avventori aggiungiAvventoriPage = new Aggiungi_Avventori(this, proprietario);
 		aggiungiAvventoriPage .setVisible(true);
@@ -145,7 +171,7 @@ public class Controller {
 	}
 	
 	public void startRistorante(boolean proprietario) {
-		Ristorante ristorantePage = new Ristorante(this, proprietario);
+		Homepage_Ristorante ristorantePage = new Homepage_Ristorante(this, proprietario);
 		ristorantePage.setVisible(true);
 	}
 	

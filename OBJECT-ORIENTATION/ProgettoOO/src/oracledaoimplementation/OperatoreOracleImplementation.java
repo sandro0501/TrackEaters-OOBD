@@ -40,7 +40,7 @@ public class OperatoreOracleImplementation implements OperatoreDAO {
 			else
 			{
 				//per debug
-				System.out.println("Errore: nessun utente trovato nel DB");
+				System.out.println("Errore: nessun utente trovato nel DB.");
 			}
 			
 		} catch (SQLException e) {

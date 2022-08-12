@@ -139,6 +139,7 @@ public class Schermata_Login extends JFrame {
 				} else {
 					//metodo login
 					c.loginOperatore(campo_Username.getText(), password_Password.getText(), comboBox_Ruolo.getSelectedItem().toString());
+					
 				}
 			}
 		});

@@ -39,6 +39,7 @@ public class Controller {
 	
 	
 	private Controller() {
+		System.setProperty( "sun.java2d.uiScale", "1.0" ); //fix dpi scaling ui
 		startLogin();
 	}
 	

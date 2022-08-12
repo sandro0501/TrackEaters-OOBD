@@ -213,18 +213,46 @@ public class Controller {
 		try {
 			Operatore operatore = null;
 			operatore = operatoreDAO.getOperatore(username, password, tipoOperatore);
-			JOptionPane.showMessageDialog(null, "Login effettuato correttamente!\n Benvenuto, "+operatore.getUsername()+" - "+tipoOperatore,"Login", JOptionPane.INFORMATION_MESSAGE);
 			
-			if(tipoOperatore.equals("Proprietario"))
+			if(tipoOperatore.equals("Proprietario")) 
+			{
+				mostraEsitoCorrettoLogin(tipoOperatore, operatore);
 				startHomepageProprietario();
-			else 
+			}
+			else
+			{
+				mostraEsitoCorrettoLogin(tipoOperatore, operatore);
 				startHomepageRistorante(false);
-			
-		} catch (Exception e) { //da gestire!!!!
-			e.printStackTrace();
+			}
+		} catch (Exception e) {
+			mostraErroreLogin();
 		}
 	}
+
+
+
+
 	
 	
+	
+	
+	
+	
+	
+	
+/* ----------------------------------------------------------------------------------------------------------------------------------------*/
+
+	//gestione delle message dialog utente 
+	private void mostraEsitoCorrettoLogin(String tipoOperatore, Operatore operatore) {
+		JLabel lblEsitoLogin = new JLabel("Login effettuato correttamente! Benvenuto, "+operatore.getUsername()+" - "+tipoOperatore);
+		lblEsitoLogin.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		JOptionPane.showMessageDialog(null,lblEsitoLogin,"Login",JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public void mostraErroreLogin() {
+		JLabel lblerroreLogin = new JLabel("ERRORE LOGIN: credenziali errate, utente inesistente o errore col DB.");
+		lblerroreLogin.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		JOptionPane.showMessageDialog(null,lblerroreLogin,"Errore Login",JOptionPane.ERROR_MESSAGE);
+	}
 
 }

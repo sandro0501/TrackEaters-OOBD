@@ -37,7 +37,8 @@ public class Controller {
 	
 	private Schermata_Login loginPage;
 	
-	
+	private String usernameOperatore;
+
 	private Controller() {
 		System.setProperty( "sun.java2d.uiScale", "1.0" ); //fix dpi scaling ui
 		startLogin();
@@ -210,27 +211,33 @@ public class Controller {
 	//metodo login
 	public void loginOperatore(String username, String password, String tipoOperatore) {
 		operatoreDAO = new OperatoreOracleImplementation();
+		Operatore operatore = null;
 		try {
-			Operatore operatore = null;
 			operatore = operatoreDAO.getOperatore(username, password, tipoOperatore);
 			
 			if(tipoOperatore.equals("Proprietario")) 
 			{
 				mostraEsitoCorrettoLogin(tipoOperatore, operatore);
+				usernameOperatore = operatore.getUsername();
+				System.out.println(usernameOperatore);
 				startHomepageProprietario();
 			}
 			else
 			{
 				mostraEsitoCorrettoLogin(tipoOperatore, operatore);
+				usernameOperatore = operatore.getUsername();
 				startHomepageRistorante(false);
 			}
 		} catch (Exception e) {
 			mostraErroreLogin();
 		}
 	}
+	
+	
 
-
-
+	
+	
+ 
 
 	
 	
@@ -253,5 +260,6 @@ public class Controller {
 		lblerroreLogin.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		JOptionPane.showMessageDialog(null,lblerroreLogin,"Errore Login",JOptionPane.ERROR_MESSAGE);
 	}
+/* ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 }

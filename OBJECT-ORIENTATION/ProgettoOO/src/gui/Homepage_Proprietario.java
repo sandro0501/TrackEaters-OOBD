@@ -17,6 +17,8 @@ import java.awt.Font;
 import javax.swing.JTextPane;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
 import java.awt.Component;
 import javax.swing.Box;
@@ -28,6 +30,11 @@ public class Homepage_Proprietario extends JFrame {
 
 	private JPanel pannello_Principale;
 	private Controller theController;
+	private JLabel lblNomeCognome;
+	private JLabel lblUsername;
+	private JLabel lblEmail;
+	private JLabel lblDataEOra;
+	
 	
 	public Homepage_Proprietario(Controller c) {
 		
@@ -53,7 +60,8 @@ public class Homepage_Proprietario extends JFrame {
 		etichetta_TracciamentoContattiCovid.setHorizontalAlignment(SwingConstants.CENTER);
 		pannello_Principale.add(etichetta_TracciamentoContattiCovid);
 		
-		JButton bottone_IMieiRistoranti = new JButton("I miei ristoranti");
+		JButton bottone_IMieiRistoranti = new JButton("");
+		bottone_IMieiRistoranti.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/btnIMieiRistoranti.png")));
 		bottone_IMieiRistoranti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -65,7 +73,8 @@ public class Homepage_Proprietario extends JFrame {
 		bottone_IMieiRistoranti.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		pannello_Principale.add(bottone_IMieiRistoranti);
 		
-		JButton bottone_Manager = new JButton("Manager");
+		JButton bottone_Manager = new JButton("");
+		bottone_Manager.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/btnGestionePersonale.png")));
 		bottone_Manager.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -76,7 +85,8 @@ public class Homepage_Proprietario extends JFrame {
 		bottone_Manager.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		pannello_Principale.add(bottone_Manager);
 		
-		JButton bottone_Statistiche = new JButton("Statistiche");
+		JButton bottone_Statistiche = new JButton("");
+		bottone_Statistiche.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/btnStatistiche.png")));
 		bottone_Statistiche.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -87,7 +97,8 @@ public class Homepage_Proprietario extends JFrame {
 		bottone_Statistiche.setBounds(422, 406, 420, 60);
 		pannello_Principale.add(bottone_Statistiche);
 		
-		JButton bottone_Impostazioni = new JButton("Impostazioni");
+		JButton bottone_Impostazioni = new JButton("");
+		bottone_Impostazioni.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/btnImpostazioni.png")));
 		bottone_Impostazioni.addActionListener(new ActionListener () {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -107,36 +118,30 @@ public class Homepage_Proprietario extends JFrame {
 		pannello_Principale.add(pannello_Navigazione);
 		pannello_Navigazione.setLayout(null);
 		
-		JButton bottone_Indietro = new JButton("Indietro");
+		JButton bottone_Indietro = new JButton("");
+		bottone_Indietro.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/btnIndietro.png")));
 		bottone_Indietro.setEnabled(false);
 		bottone_Indietro.setFont(new Font("Tahoma", Font.BOLD, 12));
 		bottone_Indietro.setBounds(191, 11, 160, 60);
 		pannello_Navigazione.add(bottone_Indietro);
 		
-		JButton bottone_Logout = new JButton("Logout");
+		JButton bottone_Logout = new JButton("");
+		bottone_Logout.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/btnLogout.png")));
 		bottone_Logout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler uscire?")==0) {
-					setVisible(false);
-					c.startLogin();
-				}
+				mostraLogoutDialog(c);
 			}
 		});
 		bottone_Logout.setFont(new Font("Tahoma", Font.BOLD, 12));
 		bottone_Logout.setBounds(1094, 11, 160, 60);
 		pannello_Navigazione.add(bottone_Logout);
 		
-		JButton bottone_Home = new JButton("Home");
+		JButton bottone_Home = new JButton("");
+		bottone_Home.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/btnHome.png")));
 		bottone_Home.setBounds(10, 11, 160, 60);
 		pannello_Navigazione.add(bottone_Home);
 		bottone_Home.setEnabled(false);
 		bottone_Home.setFont(new Font("Tahoma", Font.BOLD, 12));
-		
-		JLabel etichetta_Orario = new JLabel("------");
-		etichetta_Orario.setBounds(552, 26, 149, 30);
-		pannello_Navigazione.add(etichetta_Orario);
-		etichetta_Orario.setFont(new Font("Tahoma", Font.BOLD, 12));
-		etichetta_Orario.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel lblBenvenuto = new JLabel("Benvenuto su TrackEaters,\r\n");
 		lblBenvenuto.setForeground(new Color(0, 0, 128));
@@ -144,29 +149,85 @@ public class Homepage_Proprietario extends JFrame {
 		lblBenvenuto.setBounds(29, 26, 310, 40);
 		pannello_Principale.add(lblBenvenuto);
 		
-		JLabel lblNomeCognome = new JLabel("Nome Cognome\r\n");
+		lblDataEOra = new JLabel("");
+		lblDataEOra.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/DataEOraIcon.png")));
+		lblDataEOra.setForeground(new Color(0, 0, 128));
+		lblDataEOra.setBounds(420, 11, 429, 60);
+		pannello_Navigazione.add(lblDataEOra);
+		lblDataEOra.setFont(new Font("Segoe UI", Font.BOLD, 25));
+		lblDataEOra.setHorizontalAlignment(SwingConstants.CENTER);
+		this.mostraDataEOra();
+		
+		lblNomeCognome = new JLabel("");
 		lblNomeCognome.setForeground(new Color(0, 0, 128));
 		lblNomeCognome.setFont(new Font("Segoe UI", Font.BOLD, 25));
 		lblNomeCognome.setBounds(29, 64, 338, 39);
 		pannello_Principale.add(lblNomeCognome);
 		
-		JLabel lblUsername = new JLabel("Username");
+		lblUsername = new JLabel("");
 		lblUsername.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/usericon.png")));
 		lblUsername.setForeground(new Color(0, 0, 128));
 		lblUsername.setFont(new Font("Segoe UI", Font.BOLD, 22));
 		lblUsername.setBounds(980, 28, 274, 40);
 		pannello_Principale.add(lblUsername);
 		
-		JLabel lblNomeCognome_1_1 = new JLabel("mail@mail.it");
-		lblNomeCognome_1_1.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/mailicon.png")));
-		lblNomeCognome_1_1.setForeground(new Color(0, 0, 128));
-		lblNomeCognome_1_1.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		lblNomeCognome_1_1.setBounds(980, 63, 274, 40);
-		pannello_Principale.add(lblNomeCognome_1_1);
+		lblEmail = new JLabel("");
+		lblEmail.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/mailicon.png")));
+		lblEmail.setForeground(new Color(0, 0, 128));
+		lblEmail.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		lblEmail.setBounds(980, 63, 274, 40);
+		pannello_Principale.add(lblEmail);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/restaurantImage.png")));
-		lblNewLabel.setBounds(34, 224, 333, 333);
-		pannello_Principale.add(lblNewLabel);
+		JLabel lblImageRestaurant = new JLabel("");
+		lblImageRestaurant.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/restaurantImage.png")));
+		lblImageRestaurant.setBounds(34, 224, 333, 333);
+		pannello_Principale.add(lblImageRestaurant);
 	}
+	
+	public void setLblNomeCognome(String nome, String cognome) {
+		lblNomeCognome.setText(nome+" "+cognome);
+	}
+	
+	public void setLblUsername(String username) {
+		lblUsername.setText(username);
+	}
+	
+	public void setLblEmail(String email) {
+		lblEmail.setText(email);
+	}
+	
+	public void mostraDataEOra() {
+		Thread clock = new Thread() {
+			public void run() {
+				try {
+					for(;;) {
+						Calendar cal = new GregorianCalendar();
+						int giorno = cal.get(Calendar.DAY_OF_MONTH);
+						int mese = cal.get(Calendar.MONTH);
+						int anno = cal.get(Calendar.YEAR);
+						
+						int secondi = cal.get(Calendar.SECOND);
+						int minuti = cal.get(Calendar.MINUTE);
+						int ore = cal.get(Calendar.HOUR);
+						
+						lblDataEOra.setText(giorno+"/"+mese+"/"+anno+" - "+ore+":"+minuti+":"+secondi);
+						sleep(1000);
+					}
+				} catch (InterruptedException e) {
+					
+				}
+			}
+		};
+		clock.start();
+	}
+	
+	private void mostraLogoutDialog(Controller c) {
+		JLabel lblLogout = new JLabel("Sei sicuro di voler uscire?");
+		lblLogout.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		if(JOptionPane.showConfirmDialog(pannello_Principale, lblLogout)==0) {
+			setVisible(false);
+			c.startLogin();
+		}
+	}
+	
 }

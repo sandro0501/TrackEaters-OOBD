@@ -121,10 +121,10 @@ public class Schermata_Login extends JFrame {
 		lblMainlogoImage.setBounds(22, 40, 271, 317);
 		pannello_Principale.add(lblMainlogoImage);
 		
-		JButton bottone_Login = new JButton("LOGIN");
-		bottone_Login.setIcon(new ImageIcon(Schermata_Login.class.getResource("/resources/loginbutton.png")));
+		JButton bottone_Login = new JButton("");
+		bottone_Login.setIcon(new ImageIcon(Schermata_Login.class.getResource("/resources/btnLogin.png")));
 		bottone_Login.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		bottone_Login.setBounds(352, 340, 160, 40);
+		bottone_Login.setBounds(352, 340, 160, 60);
 		pannello_Principale.add(bottone_Login);
 		bottone_Login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

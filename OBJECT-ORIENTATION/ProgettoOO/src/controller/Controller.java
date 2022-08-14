@@ -36,11 +36,13 @@ public class Controller {
 	private TavoloDAO tavoloDAO;
 	
 	private Schermata_Login loginPage;
+	private Homepage_Proprietario proprietarioPage;
 	
-	private String usernameOperatore;
+	private Operatore operatore;
 
 	private Controller() {
-		System.setProperty( "sun.java2d.uiScale", "1.0" ); //fix dpi scaling ui
+		System.setProperty("sun.java2d.uiScale","1.0"); //fix dpi scaling ui
+		proprietarioPage = new Homepage_Proprietario(this); //da fixare indietro button!!!!
 		startLogin();
 	}
 	
@@ -48,28 +50,65 @@ public class Controller {
 		Controller c = new Controller();
 	}
 	
+	/*-----------------------------------------------------------------------------------------------------------------------------*/
+	//metodi di gestione
+	
+	//metodo login
+	public void loginOperatore(String username, String password, String tipoOperatore) {
+		Operatore operatore = null;
+		operatoreDAO = new OperatoreOracleImplementation();
+		
+		try {
+			operatore = operatoreDAO.getOperatore(username, password, tipoOperatore);
+			
+			if(tipoOperatore.equals("Proprietario")) 
+			{
+				mostraEsitoCorrettoLogin(tipoOperatore, operatore);
+				setHomepageProprietario(operatore);
+				startHomepageProprietario();
+				//setHomepageProprietario(operatore);
+			}
+			else
+			{
+				mostraEsitoCorrettoLogin(tipoOperatore, operatore);
+				startHomepageRistorante(false);
+			}
+		} catch (Exception e) {
+			mostraErroreLogin();
+		}
+	}
+	
+	//metodo che setta homepage proprietario con dati
+	public void setHomepageProprietario(Operatore operatore) {
+		proprietarioPage.setLblNomeCognome(operatore.getNome(), operatore.getCognome());
+		proprietarioPage.setLblUsername(operatore.getUsername());
+		proprietarioPage.setLblEmail(operatore.getEmail());
+	}
+	
+	
+
+	/*-----------------------------------------------------------------------------------------------------------------------------*/
+	/*STARTER*/
+	
 	//starter login
 	public void startLogin(){
 		loginPage = new Schermata_Login(this);
 		loginPage.setVisible(true);
 	}
-	
+		
 	//starter proprietario
 	public void startHomepageProprietario() {
 		loginPage.dispose();
-		Homepage_Proprietario proprietarioPage = new Homepage_Proprietario(this);
+		//proprietarioPage = new Homepage_Proprietario(this); da fixare (indietro button)!!!!
 		proprietarioPage.setVisible(true);
 	}
-	
+		
 	//starter managerristorante
 	public void startHomepageRistorante(boolean proprietario) {
 		loginPage.dispose();
 		Homepage_Ristorante ristorantePage = new Homepage_Ristorante(this, proprietario);
 		ristorantePage.setVisible(true);
 	}
-	
-	/*------------------------------------------------------------------------------------------------*/
-	
 	
 	public void startAggiungiAvventori(boolean proprietario) {
 		Aggiungi_Avventori aggiungiAvventoriPage = new Aggiungi_Avventori(this, proprietario);
@@ -206,49 +245,9 @@ public class Controller {
 		tavoliPage.setVisible(true);
 	}
 	
-/*------------------------------------------------------------------------------------------------------------------------*/
-	
-	//metodo login
-	public void loginOperatore(String username, String password, String tipoOperatore) {
-		operatoreDAO = new OperatoreOracleImplementation();
-		Operatore operatore = null;
-		try {
-			operatore = operatoreDAO.getOperatore(username, password, tipoOperatore);
-			
-			if(tipoOperatore.equals("Proprietario")) 
-			{
-				mostraEsitoCorrettoLogin(tipoOperatore, operatore);
-				usernameOperatore = operatore.getUsername();
-				System.out.println(usernameOperatore);
-				startHomepageProprietario();
-			}
-			else
-			{
-				mostraEsitoCorrettoLogin(tipoOperatore, operatore);
-				usernameOperatore = operatore.getUsername();
-				startHomepageRistorante(false);
-			}
-		} catch (Exception e) {
-			mostraErroreLogin();
-		}
-	}
-	
-	
-
-	
-	
- 
-
-	
-	
-	
-	
-	
-	
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------*/
-
+	/*------------------------------------------------------------------------------------------------------------------------*/
 	//gestione delle message dialog utente 
+	
 	private void mostraEsitoCorrettoLogin(String tipoOperatore, Operatore operatore) {
 		JLabel lblEsitoLogin = new JLabel("Login effettuato correttamente! Benvenuto, "+operatore.getUsername()+" - "+tipoOperatore);
 		lblEsitoLogin.setFont(new Font("Segoe UI", Font.BOLD, 15));
@@ -260,6 +259,6 @@ public class Controller {
 		lblerroreLogin.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		JOptionPane.showMessageDialog(null,lblerroreLogin,"Errore Login",JOptionPane.ERROR_MESSAGE);
 	}
-/* ----------------------------------------------------------------------------------------------------------------------------------------*/
-
+	
+	/*------------------------------------------------------------------------------------------------------------------------*/
 }

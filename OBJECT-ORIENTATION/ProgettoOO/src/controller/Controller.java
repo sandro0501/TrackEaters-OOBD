@@ -35,14 +35,14 @@ public class Controller {
 	private TavolataDAO tavolataDAO;
 	private TavoloDAO tavoloDAO;
 	
-	private Schermata_Login loginPage;
-	private Homepage_Proprietario proprietarioPage;
+	private LoginFrame loginPage;
+	private HomepageProprietarioFrame proprietarioPage;
 	
-	private Operatore operatore;
+	private String usernameOperatoreLoggato;
 
 	private Controller() {
 		System.setProperty("sun.java2d.uiScale","1.0"); //fix dpi scaling ui
-		proprietarioPage = new Homepage_Proprietario(this); //da fixare indietro button!!!!
+		proprietarioPage = new HomepageProprietarioFrame(this); //da fixare indietro button!!!!
 		startLogin();
 	}
 	
@@ -60,13 +60,12 @@ public class Controller {
 		
 		try {
 			operatore = operatoreDAO.getOperatore(username, password, tipoOperatore);
-			
+			usernameOperatoreLoggato = operatore.getUsername();
 			if(tipoOperatore.equals("Proprietario")) 
 			{
 				mostraEsitoCorrettoLogin(tipoOperatore, operatore);
 				setHomepageProprietario(operatore);
 				startHomepageProprietario();
-				//setHomepageProprietario(operatore);
 			}
 			else
 			{
@@ -85,6 +84,30 @@ public class Controller {
 		proprietarioPage.setLblEmail(operatore.getEmail());
 	}
 	
+	//metodo update proprietario
+	public void updateProprietario(String nome, String cognome, String newUsername, String email, String password) {
+		Operatore operatore = null;
+		proprietarioDAO = new ProprietarioOracleImplementation();
+		boolean esitoUpdate;
+		
+		try {
+			esitoUpdate = proprietarioDAO.updateProprietario(usernameOperatoreLoggato, nome, cognome, newUsername, email, password);
+			if(esitoUpdate) {
+				mostraEsitoCorrettoUpdate();
+				
+				//setta di nuovo la homepage del proprietario
+				operatore = operatoreDAO.getOperatore(newUsername, password, "Proprietario");
+				usernameOperatoreLoggato = operatore.getUsername();
+				setHomepageProprietario(operatore);
+			}
+		} catch (Exception e) {
+			mostraErroreDB();
+		}
+	}
+	
+	
+	
+	
 	
 
 	/*-----------------------------------------------------------------------------------------------------------------------------*/
@@ -92,7 +115,7 @@ public class Controller {
 	
 	//starter login
 	public void startLogin(){
-		loginPage = new Schermata_Login(this);
+		loginPage = new LoginFrame(this);
 		loginPage.setVisible(true);
 	}
 		
@@ -166,7 +189,7 @@ public class Controller {
 	}
 	
 	public void startImpostazioni () {
-		Impostazioni impostazioniPage = new Impostazioni(this);
+		ImpostazioniProprietarioFrame impostazioniPage = new ImpostazioniProprietarioFrame(this);
 		impostazioniPage.setVisible(true);
 	}
 	
@@ -260,5 +283,18 @@ public class Controller {
 		JOptionPane.showMessageDialog(null,lblerroreLogin,"Errore Login",JOptionPane.ERROR_MESSAGE);
 	}
 	
+	private void mostraEsitoCorrettoUpdate() {
+		JLabel lblEsitoUpdate = new JLabel("Modifiche effettuate correttamente!");
+		lblEsitoUpdate.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		JOptionPane.showMessageDialog(null,lblEsitoUpdate,"Modifiche effettuate",JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public void mostraErroreDB() {
+		JLabel lblerroreDB = new JLabel("ERRORE: errore col database");
+		lblerroreDB.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		JOptionPane.showMessageDialog(null,lblerroreDB,"Errore",JOptionPane.ERROR_MESSAGE);
+	}
+	
 	/*------------------------------------------------------------------------------------------------------------------------*/
+
 }

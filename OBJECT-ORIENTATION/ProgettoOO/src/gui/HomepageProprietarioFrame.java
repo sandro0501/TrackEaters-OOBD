@@ -26,7 +26,7 @@ import javax.swing.Box;
 import controller.Controller;
 import javax.swing.ImageIcon;
 
-public class Homepage_Proprietario extends JFrame {
+public class HomepageProprietarioFrame extends JFrame {
 
 	private JPanel pannello_Principale;
 	private Controller theController;
@@ -36,13 +36,13 @@ public class Homepage_Proprietario extends JFrame {
 	private JLabel lblDataEOra;
 	
 	
-	public Homepage_Proprietario(Controller c) {
+	public HomepageProprietarioFrame(Controller c) {
 		
 		theController = c;
 				
 		setResizable(false);
 		setTitle("TrackEaters - Homepage Proprietario");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Homepage_Proprietario.class.getResource("/resources/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(HomepageProprietarioFrame.class.getResource("/resources/icon.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1280, 720);
 		setLocationRelativeTo(null);
@@ -53,7 +53,7 @@ public class Homepage_Proprietario extends JFrame {
 		pannello_Principale.setLayout(null);
 		
 		JLabel etichetta_TracciamentoContattiCovid = new JLabel("");
-		etichetta_TracciamentoContattiCovid.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/lblTracciamento.png")));
+		etichetta_TracciamentoContattiCovid.setIcon(new ImageIcon(HomepageProprietarioFrame.class.getResource("/resources/lblTracciamento.png")));
 		etichetta_TracciamentoContattiCovid.setForeground(new Color(0, 0, 128));
 		etichetta_TracciamentoContattiCovid.setBounds(260, 142, 744, 55);
 		etichetta_TracciamentoContattiCovid.setFont(new Font("Segoe UI", Font.BOLD, 30));
@@ -61,7 +61,7 @@ public class Homepage_Proprietario extends JFrame {
 		pannello_Principale.add(etichetta_TracciamentoContattiCovid);
 		
 		JButton bottone_IMieiRistoranti = new JButton("");
-		bottone_IMieiRistoranti.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/btnIMieiRistoranti.png")));
+		bottone_IMieiRistoranti.setIcon(new ImageIcon(HomepageProprietarioFrame.class.getResource("/resources/btnIMieiRistoranti.png")));
 		bottone_IMieiRistoranti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -74,7 +74,7 @@ public class Homepage_Proprietario extends JFrame {
 		pannello_Principale.add(bottone_IMieiRistoranti);
 		
 		JButton bottone_Manager = new JButton("");
-		bottone_Manager.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/btnGestionePersonale.png")));
+		bottone_Manager.setIcon(new ImageIcon(HomepageProprietarioFrame.class.getResource("/resources/btnGestionePersonale.png")));
 		bottone_Manager.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -86,7 +86,7 @@ public class Homepage_Proprietario extends JFrame {
 		pannello_Principale.add(bottone_Manager);
 		
 		JButton bottone_Statistiche = new JButton("");
-		bottone_Statistiche.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/btnStatistiche.png")));
+		bottone_Statistiche.setIcon(new ImageIcon(HomepageProprietarioFrame.class.getResource("/resources/btnStatistiche.png")));
 		bottone_Statistiche.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -98,7 +98,7 @@ public class Homepage_Proprietario extends JFrame {
 		pannello_Principale.add(bottone_Statistiche);
 		
 		JButton bottone_Impostazioni = new JButton("");
-		bottone_Impostazioni.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/btnImpostazioni.png")));
+		bottone_Impostazioni.setIcon(new ImageIcon(HomepageProprietarioFrame.class.getResource("/resources/btnImpostazioni.png")));
 		bottone_Impostazioni.addActionListener(new ActionListener () {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -119,14 +119,14 @@ public class Homepage_Proprietario extends JFrame {
 		pannello_Navigazione.setLayout(null);
 		
 		JButton bottone_Indietro = new JButton("");
-		bottone_Indietro.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/btnIndietro.png")));
+		bottone_Indietro.setIcon(new ImageIcon(HomepageProprietarioFrame.class.getResource("/resources/btnIndietro.png")));
 		bottone_Indietro.setEnabled(false);
 		bottone_Indietro.setFont(new Font("Tahoma", Font.BOLD, 12));
 		bottone_Indietro.setBounds(191, 11, 160, 60);
 		pannello_Navigazione.add(bottone_Indietro);
 		
 		JButton bottone_Logout = new JButton("");
-		bottone_Logout.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/btnLogout.png")));
+		bottone_Logout.setIcon(new ImageIcon(HomepageProprietarioFrame.class.getResource("/resources/btnLogout.png")));
 		bottone_Logout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostraLogoutDialog(c);
@@ -137,7 +137,7 @@ public class Homepage_Proprietario extends JFrame {
 		pannello_Navigazione.add(bottone_Logout);
 		
 		JButton bottone_Home = new JButton("");
-		bottone_Home.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/btnHome.png")));
+		bottone_Home.setIcon(new ImageIcon(HomepageProprietarioFrame.class.getResource("/resources/btnHome.png")));
 		bottone_Home.setBounds(10, 11, 160, 60);
 		pannello_Navigazione.add(bottone_Home);
 		bottone_Home.setEnabled(false);
@@ -150,7 +150,7 @@ public class Homepage_Proprietario extends JFrame {
 		pannello_Principale.add(lblBenvenuto);
 		
 		lblDataEOra = new JLabel("");
-		lblDataEOra.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/DataEOraIcon.png")));
+		lblDataEOra.setIcon(new ImageIcon(HomepageProprietarioFrame.class.getResource("/resources/DataEOraIcon.png")));
 		lblDataEOra.setForeground(new Color(0, 0, 128));
 		lblDataEOra.setBounds(420, 11, 429, 60);
 		pannello_Navigazione.add(lblDataEOra);
@@ -165,21 +165,21 @@ public class Homepage_Proprietario extends JFrame {
 		pannello_Principale.add(lblNomeCognome);
 		
 		lblUsername = new JLabel("");
-		lblUsername.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/usericon.png")));
+		lblUsername.setIcon(new ImageIcon(HomepageProprietarioFrame.class.getResource("/resources/usericon.png")));
 		lblUsername.setForeground(new Color(0, 0, 128));
 		lblUsername.setFont(new Font("Segoe UI", Font.BOLD, 22));
 		lblUsername.setBounds(980, 28, 274, 40);
 		pannello_Principale.add(lblUsername);
 		
 		lblEmail = new JLabel("");
-		lblEmail.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/mailicon.png")));
+		lblEmail.setIcon(new ImageIcon(HomepageProprietarioFrame.class.getResource("/resources/mailicon.png")));
 		lblEmail.setForeground(new Color(0, 0, 128));
 		lblEmail.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		lblEmail.setBounds(980, 63, 274, 40);
 		pannello_Principale.add(lblEmail);
 		
 		JLabel lblImageRestaurant = new JLabel("");
-		lblImageRestaurant.setIcon(new ImageIcon(Homepage_Proprietario.class.getResource("/resources/restaurantImage.png")));
+		lblImageRestaurant.setIcon(new ImageIcon(HomepageProprietarioFrame.class.getResource("/resources/restaurantImage.png")));
 		lblImageRestaurant.setBounds(34, 224, 333, 333);
 		pannello_Principale.add(lblImageRestaurant);
 	}
@@ -203,12 +203,12 @@ public class Homepage_Proprietario extends JFrame {
 					for(;;) {
 						Calendar cal = new GregorianCalendar();
 						int giorno = cal.get(Calendar.DAY_OF_MONTH);
-						int mese = cal.get(Calendar.MONTH);
+						int mese = cal.get(Calendar.MONTH)+1;
 						int anno = cal.get(Calendar.YEAR);
 						
 						int secondi = cal.get(Calendar.SECOND);
 						int minuti = cal.get(Calendar.MINUTE);
-						int ore = cal.get(Calendar.HOUR);
+						int ore = cal.get(Calendar.HOUR_OF_DAY);
 						
 						lblDataEOra.setText(giorno+"/"+mese+"/"+anno+" - "+ore+":"+minuti+":"+secondi);
 						sleep(1000);

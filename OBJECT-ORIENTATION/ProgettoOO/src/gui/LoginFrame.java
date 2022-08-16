@@ -30,18 +30,18 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 
-public class Schermata_Login extends JFrame {
+public class LoginFrame extends JFrame {
 
 	private JPanel pannello_Principale;
 	private JTextField campo_Username;
 	private JPasswordField password_Password;
 	private Controller theController;
 	
-	public Schermata_Login(Controller c) {
+	public LoginFrame(Controller c) {
 		
 		theController = c;
 		
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Schermata_Login.class.getResource("/resources/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginFrame.class.getResource("/resources/icon.png")));
 		setResizable(false);
 		setTitle("TrackEaters");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,14 +53,14 @@ public class Schermata_Login extends JFrame {
 		pannello_Principale.setLayout(null);
 		
 		JLabel etichetta_Username = new JLabel("Username");
-		etichetta_Username.setIcon(new ImageIcon(Schermata_Login.class.getResource("/resources/usericon.png")));
+		etichetta_Username.setIcon(new ImageIcon(LoginFrame.class.getResource("/resources/usericon.png")));
 		etichetta_Username.setForeground(new Color(0, 0, 128));
 		etichetta_Username.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		etichetta_Username.setBounds(352, 40, 121, 27);
 		pannello_Principale.add(etichetta_Username);
 		
 		JLabel etichetta_Password = new JLabel("Password");
-		etichetta_Password.setIcon(new ImageIcon(Schermata_Login.class.getResource("/resources/passwordicon.png")));
+		etichetta_Password.setIcon(new ImageIcon(LoginFrame.class.getResource("/resources/passwordicon.png")));
 		etichetta_Password.setForeground(new Color(0, 0, 128));
 		etichetta_Password.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		etichetta_Password.setBounds(352, 132, 108, 27);
@@ -117,12 +117,12 @@ public class Schermata_Login extends JFrame {
 		pannello_Principale.add(comboBox_Ruolo);
 		
 		JLabel lblMainlogoImage = new JLabel("");
-		lblMainlogoImage.setIcon(new ImageIcon(Schermata_Login.class.getResource("/resources/mainlogo.png")));
+		lblMainlogoImage.setIcon(new ImageIcon(LoginFrame.class.getResource("/resources/mainlogo.png")));
 		lblMainlogoImage.setBounds(22, 40, 271, 317);
 		pannello_Principale.add(lblMainlogoImage);
 		
 		JButton bottone_Login = new JButton("");
-		bottone_Login.setIcon(new ImageIcon(Schermata_Login.class.getResource("/resources/btnLogin.png")));
+		bottone_Login.setIcon(new ImageIcon(LoginFrame.class.getResource("/resources/btnLogin.png")));
 		bottone_Login.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		bottone_Login.setBounds(352, 340, 160, 60);
 		pannello_Principale.add(bottone_Login);

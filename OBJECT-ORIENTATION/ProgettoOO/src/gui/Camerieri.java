@@ -36,7 +36,7 @@ public class Camerieri extends JFrame {
 		
 		theController = c;
 		
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Ristoranti.class.getResource("/resources/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(RistorantiProprietarioFrame.class.getResource("/resources/icon.png")));
 		setTitle("SecuRisto");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

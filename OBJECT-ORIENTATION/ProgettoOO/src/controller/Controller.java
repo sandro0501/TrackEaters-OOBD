@@ -244,7 +244,7 @@ public class Controller {
 	}
 	
 	public void startRistoranti() {
-		Ristoranti ristorantiPage = new Ristoranti(this);
+		RistorantiProprietarioFrame ristorantiPage = new RistorantiProprietarioFrame(this);
 		ristorantiPage.setVisible(true);
 	}
 	

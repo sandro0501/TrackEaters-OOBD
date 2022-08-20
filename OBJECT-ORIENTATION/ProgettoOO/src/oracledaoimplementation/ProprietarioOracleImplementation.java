@@ -39,6 +39,8 @@ public class ProprietarioOracleImplementation implements ProprietarioDAO {
 			if(esitoUpdate==1)
 				return true;
 			
+			updateProprietarioStatement.close();
+			
 		} catch (SQLException e) {
 			
 			if(e.getErrorCode()==20011) {

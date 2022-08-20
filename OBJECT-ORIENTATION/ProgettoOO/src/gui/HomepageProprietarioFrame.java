@@ -65,7 +65,7 @@ public class HomepageProprietarioFrame extends JFrame {
 		bottone_IMieiRistoranti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startRistoranti();
+				c.startRistorantiProprietario();
 				
 			}
 		});

@@ -15,6 +15,8 @@ import dao.*;
 import oracledaoimplementation.*;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import gui.*;
 
@@ -37,8 +39,9 @@ public class Controller {
 	
 	private LoginFrame loginPage;
 	private HomepageProprietarioFrame proprietarioPage;
+	private RistorantiProprietarioFrame ristorantiProprietarioPage;
 	
-	private String usernameOperatoreLoggato;
+	private String usernameProprietario;
 
 	private Controller() {
 		System.setProperty("sun.java2d.uiScale","1.0"); //fix dpi scaling ui
@@ -60,9 +63,9 @@ public class Controller {
 		
 		try {
 			operatore = operatoreDAO.getOperatore(username, password, tipoOperatore);
-			usernameOperatoreLoggato = operatore.getUsername();
 			if(tipoOperatore.equals("Proprietario")) 
 			{
+				usernameProprietario = operatore.getUsername();
 				mostraEsitoCorrettoLogin(tipoOperatore, operatore);
 				setHomepageProprietario(operatore);
 				startHomepageProprietario();
@@ -91,13 +94,13 @@ public class Controller {
 		boolean esitoUpdate;
 		
 		try {
-			esitoUpdate = proprietarioDAO.updateProprietario(usernameOperatoreLoggato, nome, cognome, newUsername, email, password);
+			esitoUpdate = proprietarioDAO.updateProprietario(usernameProprietario, nome, cognome, newUsername, email, password);
 			if(esitoUpdate) {
 				mostraEsitoCorrettoUpdate();
 				
 				//setta di nuovo la homepage del proprietario
 				operatore = operatoreDAO.getOperatore(newUsername, password, "Proprietario");
-				usernameOperatoreLoggato = operatore.getUsername();
+				usernameProprietario = operatore.getUsername();
 				setHomepageProprietario(operatore);
 			}
 		} catch (Exception e) {
@@ -105,7 +108,34 @@ public class Controller {
 		}
 	}
 	
-	
+	/* metodo riempi tabella ristoranti proprietario */
+	public void riempiTabellaRistorantiDiProprietario() {
+		ristoranteDAO = new RistoranteOracleImplementation();
+		
+		try {
+			ArrayList<Ristorante> listaRistoranti = ristoranteDAO.getRistorantiByUsernameProprietario(usernameProprietario);
+			DefaultTableModel model = ristorantiProprietarioPage.getModel();
+			model.getDataVector().removeAllElements();
+			
+			String[] rigaTabella = new String[8];
+			for(Ristorante ristorante : listaRistoranti) {
+				rigaTabella[0] = ristorante.getDenominazione();
+				rigaTabella[1] = ristorante.getIndirizzo();
+				rigaTabella[2] = ristorante.getTelefono();
+				rigaTabella[3] = ristorante.getCitta();
+				rigaTabella[4] = ristorante.getProvincia();
+				rigaTabella[5] = ristorante.getCap();
+				rigaTabella[6] = ristorante.getEmail();
+				rigaTabella[7] = ristorante.getSitoWeb();
+				model.addRow(rigaTabella);
+			}
+			
+			model.fireTableDataChanged();
+			ristorantiProprietarioPage.setModel(model);
+		} catch (Exception e) {
+			mostraErroreDB();
+		}
+	} 
 	
 	
 	
@@ -131,6 +161,13 @@ public class Controller {
 		loginPage.dispose();
 		Homepage_Ristorante ristorantePage = new Homepage_Ristorante(this, proprietario);
 		ristorantePage.setVisible(true);
+	}
+	
+	//starter ristoranti proprietario
+	public void startRistorantiProprietario() {
+		ristorantiProprietarioPage = new RistorantiProprietarioFrame(this);
+		ristorantiProprietarioPage.setVisible(true);
+		riempiTabellaRistorantiDiProprietario();
 	}
 	
 	public void startAggiungiAvventori(boolean proprietario) {
@@ -241,11 +278,6 @@ public class Controller {
 	public void startRistorante(boolean proprietario) {
 		Homepage_Ristorante ristorantePage = new Homepage_Ristorante(this, proprietario);
 		ristorantePage.setVisible(true);
-	}
-	
-	public void startRistoranti() {
-		RistorantiProprietarioFrame ristorantiPage = new RistorantiProprietarioFrame(this);
-		ristorantiPage.setVisible(true);
 	}
 	
 	public void startSale(boolean proprietario) {

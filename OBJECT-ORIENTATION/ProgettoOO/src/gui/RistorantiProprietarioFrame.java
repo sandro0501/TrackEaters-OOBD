@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -21,24 +22,32 @@ import javax.swing.JTable;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EtchedBorder;
 import java.awt.Cursor;
+import java.awt.Dimension;
+
 import javax.swing.JScrollBar;
 import java.awt.Toolkit;
 import controller.Controller;
+import dto.Ristorante;
+import oracledaoimplementation.RistoranteOracleImplementation;
+
 import javax.swing.JScrollPane;
 import javax.swing.ImageIcon;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.SoftBevelBorder;
 
 public class RistorantiProprietarioFrame extends JFrame {
 
 	private JPanel pannello_Principale;
-	private JTable tabella_Ristoranti;
 	private Controller theController;
-	private JTable table;
 	private JLabel lblDataEOra;
+	private DefaultTableModel modelloTabella = new DefaultTableModel();
+	private JTable tabellaRistoranti;
+	private JScrollPane scrollPaneTabellaRistoranti;
 
 	public RistorantiProprietarioFrame(Controller c) {
 		
@@ -60,21 +69,21 @@ public class RistorantiProprietarioFrame extends JFrame {
 		etichetta_IMieiRistoranti.setIcon(new ImageIcon(RistorantiProprietarioFrame.class.getResource("/resources/lblIMieiRistoranti.png")));
 		etichetta_IMieiRistoranti.setFont(new Font("Tahoma", Font.BOLD, 20));
 		etichetta_IMieiRistoranti.setHorizontalAlignment(SwingConstants.CENTER);
-		etichetta_IMieiRistoranti.setBounds(387, 45, 490, 52);
+		etichetta_IMieiRistoranti.setBounds(387, 28, 490, 52);
 		pannello_Principale.add(etichetta_IMieiRistoranti);
-		
-		
 		
 		JButton bottone_Gestisci = new JButton("");
 		bottone_Gestisci.setIcon(new ImageIcon(RistorantiProprietarioFrame.class.getResource("/resources/btnGestisci.png")));
 		bottone_Gestisci.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (tabella_Ristoranti.getSelectedRow()!=-1) {
+
+				if (tabellaRistoranti.getSelectedRow() != -1) {
 					setVisible(false);
 					c.startRistorante(true);
 				} else {
-					JOptionPane.showMessageDialog(pannello_Principale, "Nessun ristorante selezionato!");
+					mostraErroreSelezioneDialog();
 				}
+			
 			}
 		});
 		bottone_Gestisci.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -97,12 +106,14 @@ public class RistorantiProprietarioFrame extends JFrame {
 		bottone_Modifica.setIcon(new ImageIcon(RistorantiProprietarioFrame.class.getResource("/resources/btnModifica.png")));
 		bottone_Modifica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (tabella_Ristoranti.getSelectedRow()!=-1) {
+				
+				if (tabellaRistoranti.getSelectedRow()!=-1) {
 					setVisible(false);
 					c.startModificaRistorante();
 				} else {
-					JOptionPane.showMessageDialog(pannello_Principale, "Nessun ristorante selezionato!");
+					mostraErroreSelezioneDialog();
 				}
+				
 				
 			}
 		});
@@ -114,10 +125,11 @@ public class RistorantiProprietarioFrame extends JFrame {
 		bottone_Elimina.setIcon(new ImageIcon(RistorantiProprietarioFrame.class.getResource("/resources/btnElimina.png")));
 		bottone_Elimina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (tabella_Ristoranti.getSelectedRow()!=-1) {
+				
+				if (tabellaRistoranti.getSelectedRow()!=-1) {
 					JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler eliminare il ristorante selezionato?");
 				} else {
-					JOptionPane.showMessageDialog(pannello_Principale, "Nessun ristorante selezionato!");
+					mostraErroreSelezioneDialog();
 				}
 				
 			}
@@ -184,11 +196,48 @@ public class RistorantiProprietarioFrame extends JFrame {
 		lblUsername.setBounds(10, 11, 274, 40);
 		pannello_Principale.add(lblUsername);
 		
-		table = new JTable();
-		table.setBounds(26, 126, 1211, 348);
-		pannello_Principale.add(table);
-		
-		
+		setTabellaRistoranti();
+
+	}
+
+	private void setTabellaRistoranti() {
+		scrollPaneTabellaRistoranti = new JScrollPane();
+		scrollPaneTabellaRistoranti.setViewportBorder(null);
+		scrollPaneTabellaRistoranti.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPaneTabellaRistoranti.setBounds(10, 119, 1244, 346);
+		scrollPaneTabellaRistoranti.getViewport().setBackground(new Color(176, 196, 222));
+		pannello_Principale.add(scrollPaneTabellaRistoranti);
+		tabellaRistoranti = new JTable();
+		tabellaRistoranti.setForeground(new Color(0, 0, 128));
+		tabellaRistoranti.setBackground(Color.WHITE);
+		tabellaRistoranti.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		modelloTabella.addColumn("Denominazione");
+		modelloTabella.addColumn("Indirizzo");
+		modelloTabella.addColumn("Telefono");
+		modelloTabella.addColumn("Città");
+		modelloTabella.addColumn("Provincia");
+		modelloTabella.addColumn("CAP");
+		modelloTabella.addColumn("Email");
+		modelloTabella.addColumn("Sito Web");
+		tabellaRistoranti.setModel(modelloTabella);
+		tabellaRistoranti.getTableHeader().setAlignmentX(CENTER_ALIGNMENT);
+		tabellaRistoranti.getTableHeader().setBackground(new Color(0, 0, 128));
+		tabellaRistoranti.getTableHeader().setForeground(Color.WHITE);
+		tabellaRistoranti.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
+		tabellaRistoranti.getTableHeader().setReorderingAllowed(false);
+		tabellaRistoranti.setSelectionBackground(new Color(245, 245, 220));
+		tabellaRistoranti.setRowHeight(30);
+		tabellaRistoranti.setDefaultEditor(Object.class, null);
+		tabellaRistoranti.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPaneTabellaRistoranti.setViewportView(tabellaRistoranti);
+	}
+	
+	public void setModel(DefaultTableModel model) {
+		this.modelloTabella = model;
+	}
+
+	public DefaultTableModel getModel() {
+		return modelloTabella;
 	}
 	
 	public void mostraDataEOra() {
@@ -223,5 +272,12 @@ public class RistorantiProprietarioFrame extends JFrame {
 			setVisible(false);
 			c.startLogin();
 		}
+	}
+	
+	private void mostraErroreSelezioneDialog() {
+		JLabel lblErrore = new JLabel("Attenzione: nessun ristorante selezionato!");
+		lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		JOptionPane.showMessageDialog(pannello_Principale, lblErrore, "Attenzione", JOptionPane.WARNING_MESSAGE);
+		
 	}
 }

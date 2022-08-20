@@ -134,7 +134,7 @@ public class Homepage_Ristorante extends JFrame {
 		bottone_Indietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startRistoranti();
+				c.startRistorantiProprietario();
 			}
 		});
 		bottone_Indietro.setFont(new Font("Tahoma", Font.BOLD, 12));

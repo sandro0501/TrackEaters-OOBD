@@ -36,6 +36,9 @@ public class OperatoreOracleImplementation implements OperatoreDAO {
 				//per debug
 				System.out.println("Errore: nessun utente trovato nel DB.");
 			
+			rs.close();
+			getOperatore.close();
+			
 		} catch (SQLException e) {
 			System.out.println("Codice errore SQL: "+e.getErrorCode()); 
 			System.out.println("SQL State: "+e.getSQLState()); 

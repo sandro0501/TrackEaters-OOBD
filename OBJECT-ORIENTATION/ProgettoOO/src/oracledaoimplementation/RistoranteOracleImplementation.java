@@ -1,10 +1,14 @@
 package oracledaoimplementation;
 
+import java.awt.Font;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import dao.RistoranteDAO;
 import database.ConnessioneDatabase;
@@ -26,7 +30,7 @@ public class RistoranteOracleImplementation implements RistoranteDAO {
 	public ArrayList<Ristorante> getRistorantiByUsernameProprietario(String usernameProprietario) {
 		ArrayList<Ristorante> ristoranti = new ArrayList<Ristorante>();
 		try {
-			String queryGetRistoranti = "SELECT R.Denominazione, R.Indirizzo, R.Telefono, R.Citta, R.Prov, R.Cap, R.Email, R.SitoWeb  FROM Ristorante R JOIN Proprietario P ON R.Proprietario = P.CodProprietario WHERE P.Username=?";
+			String queryGetRistoranti = "SELECT R.Denominazione, R.Indirizzo, R.Telefono, R.Citta, R.Prov, R.Cap, R.Email, R.SitoWeb  FROM Ristorante R JOIN Proprietario P ON R.Proprietario = P.CodProprietario WHERE P.Username=? ORDER BY R.CodRistorante";
 			PreparedStatement stmtGetRistoranti = connessione.prepareStatement(queryGetRistoranti);
 			stmtGetRistoranti.setString(1, usernameProprietario);
 			ResultSet rs = stmtGetRistoranti.executeQuery();
@@ -53,6 +57,57 @@ public class RistoranteOracleImplementation implements RistoranteDAO {
 		}
 		
 		return ristoranti;
+	}
+
+	@Override
+	public boolean insertRistorante(String denominazione, String indirizzo, String telefono, String citta, String prov,
+			String cap, String email, String sitoweb, int proprietario) {
+		
+		try {
+			String queryInsertRistorante = "INSERT INTO RISTORANTE (Denominazione, Indirizzo, Telefono, Citta, Prov, Cap, Email, SitoWeb, Proprietario) VALUES (?,?,?,?,?,?,?,?,?)";
+			PreparedStatement insertRistoranteStatement = connessione.prepareStatement(queryInsertRistorante);
+			insertRistoranteStatement.setString(1, denominazione);
+			insertRistoranteStatement.setString(2, indirizzo);
+			insertRistoranteStatement.setString(3, telefono);
+			insertRistoranteStatement.setString(4, citta);
+			insertRistoranteStatement.setString(5, prov);
+			insertRistoranteStatement.setString(6, cap);
+			insertRistoranteStatement.setString(7, email);
+			insertRistoranteStatement.setString(8, sitoweb);
+			insertRistoranteStatement.setInt(9, proprietario);
+			
+			int esitoUpdate = insertRistoranteStatement.executeUpdate();
+			if(esitoUpdate==1)
+				return true;
+			
+			insertRistoranteStatement.close();
+			
+		} catch (SQLException e) {
+			
+			if(e.getErrorCode()==20010) {
+				JLabel lblErrore = new JLabel("Numero di telefono non valido! Sono ammesse cifre numeriche ed il carattere +. Riprova.");
+				lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
+				JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);	
+			} else if (e.getErrorCode()==20012) {
+				JLabel lblErrore = new JLabel("CAP non valido! Sono ammesse al massimo 5 cifre numeriche. Riprova.");
+				lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
+				JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);	
+			} else if (e.getMessage().toString().contains("SITO_WEB_LEGALE")){
+				JLabel lblErrore = new JLabel("Sito web non valido! Non rispetta la forma 'www.example.domain'. Riprova.");
+				lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
+				JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);
+			} else if (e.getMessage().toString().contains("EMAIL_LEGALE")){
+				JLabel lblErrore = new JLabel("Email non valida! Non rispetta la forma 'example@mail.domain'. Riprova.");
+				lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
+				JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);	
+			} else {
+				System.out.println("Codice errore SQL: "+e.getErrorCode()); 
+				System.out.println("SQL State: "+e.getSQLState()); 
+				System.out.println("Messaggio: " +e.getMessage());
+			}
+		}
+	
+		return false;
 	}
 	
 	

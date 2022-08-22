@@ -3,6 +3,7 @@ package oracledaoimplementation;
 import java.awt.Font;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JLabel;
@@ -21,6 +22,29 @@ public class ProprietarioOracleImplementation implements ProprietarioDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public int getCodiceProprietarioFromUsername(String usernameProprietario) {
+		try {
+			String queryGetCodice = "SELECT CodProprietario FROM Proprietario WHERE Proprietario.Username = ?";
+			PreparedStatement getCodiceStmt = connessione.prepareStatement(queryGetCodice);
+			getCodiceStmt.setString(1, usernameProprietario);
+			ResultSet rs = getCodiceStmt.executeQuery();
+	
+			if(rs.next())
+				return rs.getInt("CodProprietario");
+			
+			
+			rs.close();
+			getCodiceStmt.close();
+			
+		} catch (SQLException e) {
+			System.out.println("Codice errore SQL: "+e.getErrorCode()); 
+			System.out.println("SQL State: "+e.getSQLState()); 
+			System.out.println("Messaggio: " +e.getMessage());
+		}
+		return 0;
 	}
 	
 	@Override
@@ -48,11 +72,14 @@ public class ProprietarioOracleImplementation implements ProprietarioDAO {
 				lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
 				JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);	
 			} else {
-				e.printStackTrace();
+				System.out.println("Codice errore SQL: "+e.getErrorCode()); 
+				System.out.println("SQL State: "+e.getSQLState()); 
+				System.out.println("Messaggio: " +e.getMessage());
 			}
 		}
 		
 		return false;
 	}
+
 	
 }

@@ -259,11 +259,11 @@ public class ImpostazioniProprietarioFrame extends JFrame {
 		bottone_Conferma.setBounds(337, 607, 160, 60);
 		pannello_Principale.add(bottone_Conferma);
 		
-		JLabel lblNewLabel = new JLabel("* Deve contenere almeno 8 caratteri, una lettera e un numero");
-		lblNewLabel.setForeground(new Color(0, 0, 128));
-		lblNewLabel.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 13));
-		lblNewLabel.setBounds(24, 458, 449, 27);
-		pannello_Principale.add(lblNewLabel);
+		JLabel lblDescrizionePassword = new JLabel("* Deve contenere almeno 8 caratteri, una lettera e un numero");
+		lblDescrizionePassword.setForeground(new Color(0, 0, 128));
+		lblDescrizionePassword.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 13));
+		lblDescrizionePassword.setBounds(24, 458, 449, 27);
+		pannello_Principale.add(lblDescrizionePassword);
 	}
 	
 	private void flushTextfields() {

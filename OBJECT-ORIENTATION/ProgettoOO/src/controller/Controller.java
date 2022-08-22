@@ -77,6 +77,7 @@ public class Controller {
 				mostraEsitoCorrettoLogin(tipoOperatore, proprietario);
 				setHomepageProprietario(proprietario);
 				startHomepageProprietario();
+				
 			}
 			else
 			{
@@ -156,8 +157,25 @@ public class Controller {
 		} catch (Exception e) {
 			mostraErroreDB();
 		}
-	} 
+	}
 	
+	/* metodo inserisci ristorante */
+	public void insertRistorante(String denominazione, String indirizzo, String telefono, String citta, String prov, String cap, String email, String sitoweb) {
+		boolean esitoInsert;
+		proprietarioDAO = new ProprietarioOracleImplementation();
+		int codProprietario = proprietarioDAO.getCodiceProprietarioFromUsername(proprietario.getUsername());
+		
+		try {
+			esitoInsert = ristoranteDAO.insertRistorante(denominazione, indirizzo, telefono, citta, prov, cap, email, sitoweb, codProprietario);
+			if(esitoInsert) {
+				mostraEsitoCorrettoInsert();
+				//aggiorna la tabella dei ristoranti del proprietario
+				riempiTabellaRistorantiDiProprietario();
+			}
+		} catch (Exception e) {
+			mostraErroreDB();
+		}
+	}
 	
 	
 
@@ -212,7 +230,7 @@ public class Controller {
 	}
 	
 	public void startAggiungiRistorante() {
-		Aggiungi_Ristorante aggiungiPage = new Aggiungi_Ristorante(this);
+		AggiungiRistoranteFrame aggiungiPage = new AggiungiRistoranteFrame(this);
 		aggiungiPage.setVisible(true);
 	}
 	
@@ -340,6 +358,12 @@ public class Controller {
 		JLabel lblEsitoUpdate = new JLabel("Modifiche effettuate correttamente!");
 		lblEsitoUpdate.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		JOptionPane.showMessageDialog(null,lblEsitoUpdate,"Modifiche effettuate",JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	private void mostraEsitoCorrettoInsert() {
+		JLabel lblEsitoInserimento = new JLabel("Inserimento effettuato correttamente!");
+		lblEsitoInserimento.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		JOptionPane.showMessageDialog(null,lblEsitoInserimento,"Inserimento effettuato",JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public void mostraErroreDB() {

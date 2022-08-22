@@ -10,9 +10,8 @@ public class ManagerRistorante extends Operatore {
 		
 	}
 
-	public ManagerRistorante(String username, String password, String nome, String cognome, String email, String telefono) {
+	public ManagerRistorante(String username, String password, String nome, String cognome, String email) {
 		super(username, password, nome, cognome, email);
-		this.setTelefono(telefono);
 	}
 	
 	public String getTelefono() {

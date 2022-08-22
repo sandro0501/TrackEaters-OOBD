@@ -41,7 +41,9 @@ public class Controller {
 	private HomepageProprietarioFrame proprietarioPage;
 	private RistorantiProprietarioFrame ristorantiProprietarioPage;
 	
-	private String usernameProprietario;
+	private Operatore operatore;
+	private Proprietario proprietario;
+	private ManagerRistorante managerRistorante;
 
 	private Controller() {
 		System.setProperty("sun.java2d.uiScale","1.0"); //fix dpi scaling ui
@@ -58,20 +60,33 @@ public class Controller {
 	
 	//metodo login
 	public void loginOperatore(String username, String password, String tipoOperatore) {
-		Operatore operatore = null;
+		operatore = null;
 		operatoreDAO = new OperatoreOracleImplementation();
 		
 		try {
 			operatore = operatoreDAO.getOperatore(username, password, tipoOperatore);
 			if(tipoOperatore.equals("Proprietario")) 
 			{
-				usernameProprietario = operatore.getUsername();
-				mostraEsitoCorrettoLogin(tipoOperatore, operatore);
-				setHomepageProprietario(operatore);
+				//loggato come proprietario
+				proprietario = new Proprietario(operatore.getUsername(), 
+												operatore.getPassword(), 
+												operatore.getNome(), 
+												operatore.getCognome(), 
+												operatore.getEmail());
+				
+				mostraEsitoCorrettoLogin(tipoOperatore, proprietario);
+				setHomepageProprietario(proprietario);
 				startHomepageProprietario();
 			}
 			else
 			{
+				//loggato come manager ristorante
+				managerRistorante = new ManagerRistorante(operatore.getUsername(), 
+														  operatore.getPassword(), 
+														  operatore.getNome(), 
+														  operatore.getCognome(), 
+														  operatore.getEmail());
+				
 				mostraEsitoCorrettoLogin(tipoOperatore, operatore);
 				startHomepageRistorante(false);
 			}
@@ -81,27 +96,31 @@ public class Controller {
 	}
 	
 	//metodo che setta homepage proprietario con dati
-	public void setHomepageProprietario(Operatore operatore) {
-		proprietarioPage.setLblNomeCognome(operatore.getNome(), operatore.getCognome());
-		proprietarioPage.setLblUsername(operatore.getUsername());
-		proprietarioPage.setLblEmail(operatore.getEmail());
+	public void setHomepageProprietario(Proprietario p) {
+		proprietarioPage.setLblNomeCognome(p.getNome(), p.getCognome());
+		proprietarioPage.setLblUsername(p.getUsername());
+		proprietarioPage.setLblEmail(p.getEmail());
 	}
 	
 	//metodo update proprietario
 	public void updateProprietario(String nome, String cognome, String newUsername, String email, String password) {
-		Operatore operatore = null;
+		operatore = null;
 		proprietarioDAO = new ProprietarioOracleImplementation();
 		boolean esitoUpdate;
 		
 		try {
-			esitoUpdate = proprietarioDAO.updateProprietario(usernameProprietario, nome, cognome, newUsername, email, password);
+			esitoUpdate = proprietarioDAO.updateProprietario(proprietario.getUsername(), nome, cognome, newUsername, email, password);
 			if(esitoUpdate) {
 				mostraEsitoCorrettoUpdate();
 				
 				//setta di nuovo la homepage del proprietario
 				operatore = operatoreDAO.getOperatore(newUsername, password, "Proprietario");
-				usernameProprietario = operatore.getUsername();
-				setHomepageProprietario(operatore);
+				proprietario.setUsername(operatore.getUsername());
+				proprietario.setPassword(operatore.getPassword());
+				proprietario.setNome(operatore.getNome());
+				proprietario.setCognome(operatore.getCognome());
+				proprietario.setEmail(operatore.getEmail());
+				setHomepageProprietario(proprietario);
 			}
 		} catch (Exception e) {
 			mostraErroreDB();
@@ -113,12 +132,14 @@ public class Controller {
 		ristoranteDAO = new RistoranteOracleImplementation();
 		
 		try {
-			ArrayList<Ristorante> listaRistoranti = ristoranteDAO.getRistorantiByUsernameProprietario(usernameProprietario);
+			ArrayList<Ristorante> listaRistoranti = ristoranteDAO.getRistorantiByUsernameProprietario(proprietario.getUsername());
+			proprietario.setRistorantiAmministrati(listaRistoranti);
+			
 			DefaultTableModel model = ristorantiProprietarioPage.getModel();
 			model.getDataVector().removeAllElements();
 			
 			String[] rigaTabella = new String[8];
-			for(Ristorante ristorante : listaRistoranti) {
+			for(Ristorante ristorante : proprietario.getRistorantiAmministrati()) {
 				rigaTabella[0] = ristorante.getDenominazione();
 				rigaTabella[1] = ristorante.getIndirizzo();
 				rigaTabella[2] = ristorante.getTelefono();

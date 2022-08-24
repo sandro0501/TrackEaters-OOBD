@@ -141,6 +141,8 @@ public class Controller {
 			
 			String[] rigaTabella = new String[8];
 			for(Ristorante ristorante : proprietario.getRistorantiAmministrati()) {
+				ristorante.setProprietarioRistorante(proprietario);
+				
 				rigaTabella[0] = ristorante.getDenominazione();
 				rigaTabella[1] = ristorante.getIndirizzo();
 				rigaTabella[2] = ristorante.getTelefono();
@@ -169,6 +171,23 @@ public class Controller {
 			esitoInsert = ristoranteDAO.insertRistorante(denominazione, indirizzo, telefono, citta, prov, cap, email, sitoweb, codProprietario);
 			if(esitoInsert) {
 				mostraEsitoCorrettoInsert();
+				//aggiorna la tabella dei ristoranti del proprietario
+				riempiTabellaRistorantiDiProprietario();
+			}
+		} catch (Exception e) {
+			mostraErroreDB();
+		}
+	}
+	
+	/*metodo elimina ristorante*/
+	public void deleteRistorante(String denominazioneRistorante) {
+		boolean esitoDelete;
+
+		try {
+			esitoDelete = ristoranteDAO.deleteRistorante(denominazioneRistorante);
+			
+			if(esitoDelete) {
+				mostraEsitoCorrettoDelete();
 				//aggiorna la tabella dei ristoranti del proprietario
 				riempiTabellaRistorantiDiProprietario();
 			}
@@ -364,6 +383,12 @@ public class Controller {
 		JLabel lblEsitoInserimento = new JLabel("Inserimento effettuato correttamente!");
 		lblEsitoInserimento.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		JOptionPane.showMessageDialog(null,lblEsitoInserimento,"Inserimento effettuato",JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	private void mostraEsitoCorrettoDelete() {
+		JLabel lblEsitoInserimento = new JLabel("Eliminazione effettuata correttamente!");
+		lblEsitoInserimento.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		JOptionPane.showMessageDialog(null,lblEsitoInserimento,"Eliminazione effettuata",JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public void mostraErroreDB() {

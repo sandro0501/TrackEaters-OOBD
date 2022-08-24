@@ -121,13 +121,17 @@ public class RistorantiProprietarioFrame extends JFrame {
 		bottone_Modifica.setBounds(692, 503, 160, 60);
 		pannello_Principale.add(bottone_Modifica);
 		
+		JLabel lblElimina = new JLabel("<html>Sei sicuro di voler eliminare il ristorante selezionato?<br/>Verranno cancellate tutte le informazioni ad esso collegate.</html>");
+		lblElimina.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		JButton bottone_Elimina = new JButton("");
 		bottone_Elimina.setIcon(new ImageIcon(RistorantiProprietarioFrame.class.getResource("/resources/btnElimina.png")));
 		bottone_Elimina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				if (tabellaRistoranti.getSelectedRow()!=-1) {
-					JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler eliminare il ristorante selezionato?");
+					if(JOptionPane.showConfirmDialog(pannello_Principale,lblElimina) == 0) {
+						c.deleteRistorante(tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString());
+					}
 				} else {
 					mostraErroreSelezioneDialog();
 				}

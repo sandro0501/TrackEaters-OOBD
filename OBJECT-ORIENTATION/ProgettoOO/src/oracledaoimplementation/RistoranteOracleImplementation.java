@@ -84,29 +84,59 @@ public class RistoranteOracleImplementation implements RistoranteDAO {
 			
 		} catch (SQLException e) {
 			
-			if(e.getErrorCode()==20010) {
+			if(e.getErrorCode()==20010) 
+			{
 				JLabel lblErrore = new JLabel("Numero di telefono non valido! Sono ammesse cifre numeriche ed il carattere +. Riprova.");
 				lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
 				JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);	
-			} else if (e.getErrorCode()==20012) {
+			} 
+			else if (e.getErrorCode()==20012) 
+			{
 				JLabel lblErrore = new JLabel("CAP non valido! Sono ammesse al massimo 5 cifre numeriche. Riprova.");
 				lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
 				JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);	
-			} else if (e.getMessage().toString().contains("SITO_WEB_LEGALE")){
+			} 
+			else if (e.getMessage().toString().contains("SITO_WEB_LEGALE"))
+			{
 				JLabel lblErrore = new JLabel("Sito web non valido! Non rispetta la forma 'www.example.domain'. Riprova.");
 				lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
 				JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);
-			} else if (e.getMessage().toString().contains("EMAIL_LEGALE")){
+			} 
+			else if (e.getMessage().toString().contains("EMAIL_LEGALE"))
+			{
 				JLabel lblErrore = new JLabel("Email non valida! Non rispetta la forma 'example@mail.domain'. Riprova.");
 				lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
 				JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);	
-			} else {
+			} 
+			else 
+			{
 				System.out.println("Codice errore SQL: "+e.getErrorCode()); 
 				System.out.println("SQL State: "+e.getSQLState()); 
 				System.out.println("Messaggio: " +e.getMessage());
 			}
 		}
 	
+		return false;
+	}
+
+	@Override
+	public boolean deleteRistorante(String denominazione) {
+		try {
+			String queryDeleteRistorante = "DELETE FROM Ristorante WHERE Ristorante.Denominazione = ?";
+			PreparedStatement deleteRistoranteStatement = connessione.prepareStatement(queryDeleteRistorante);
+			deleteRistoranteStatement.setString(1, denominazione);
+			
+			int esitoDelete = deleteRistoranteStatement.executeUpdate();
+			if(esitoDelete==1)
+				return true;
+			
+			deleteRistoranteStatement.close();
+			
+		} catch (SQLException e) { 
+			System.out.println("Codice errore SQL: "+e.getErrorCode()); 
+			System.out.println("SQL State: "+e.getSQLState()); 
+			System.out.println("Messaggio: " +e.getMessage());
+		}
 		return false;
 	}
 	

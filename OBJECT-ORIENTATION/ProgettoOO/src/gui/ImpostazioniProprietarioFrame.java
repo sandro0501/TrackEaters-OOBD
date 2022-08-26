@@ -33,15 +33,14 @@ import java.awt.event.KeyEvent;
 public class ImpostazioniProprietarioFrame extends JFrame {
 
 	private JPanel pannello_Principale;
+	private JTextField campo_Username;
 	private JTextField campo_Nome;
 	private JTextField campo_Email;
 	private JTextField campo_Cognome;
 	private JPasswordField password_Password;
 	private JPasswordField password_ConfermaPassword;
 	private Controller theController;
-	private JTextField campo_Username;
 
-	
 	public ImpostazioniProprietarioFrame(Controller c) {
 		
 		theController = c;

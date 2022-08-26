@@ -47,6 +47,15 @@ public class RistorantiProprietarioFrame extends JFrame {
 	private JLabel lblDataEOra;
 	private DefaultTableModel modelloTabella = new DefaultTableModel();
 	private JTable tabellaRistoranti;
+	
+	public JTable getTabellaRistoranti() {
+		return tabellaRistoranti;
+	}
+
+	public void setTabellaRistoranti(JTable tabellaRistoranti) {
+		this.tabellaRistoranti = tabellaRistoranti;
+	}
+
 	private JScrollPane scrollPaneTabellaRistoranti;
 
 	public RistorantiProprietarioFrame(Controller c) {
@@ -110,6 +119,7 @@ public class RistorantiProprietarioFrame extends JFrame {
 				if (tabellaRistoranti.getSelectedRow()!=-1) {
 					setVisible(false);
 					c.startModificaRistorante();
+					c.riempiCampiModificaRistorantePage();
 				} else {
 					mostraErroreSelezioneDialog();
 				}
@@ -130,7 +140,8 @@ public class RistorantiProprietarioFrame extends JFrame {
 				
 				if (tabellaRistoranti.getSelectedRow()!=-1) {
 					if(JOptionPane.showConfirmDialog(pannello_Principale,lblElimina) == 0) {
-						c.deleteRistorante(tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString());
+						c.deleteRistorante(	tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString(), 	//denominazione 
+										 	tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 1).toString());	//indirizzo
 					}
 				} else {
 					mostraErroreSelezioneDialog();
@@ -253,10 +264,11 @@ public class RistorantiProprietarioFrame extends JFrame {
 						int giorno = cal.get(Calendar.DAY_OF_MONTH);
 						int mese = cal.get(Calendar.MONTH)+1;
 						int anno = cal.get(Calendar.YEAR);
-						
-						int secondi = cal.get(Calendar.SECOND);
-						int minuti = cal.get(Calendar.MINUTE);
+						int sec = cal.get(Calendar.SECOND);
+						int min = cal.get(Calendar.MINUTE);
 						int ore = cal.get(Calendar.HOUR_OF_DAY);
+						String minuti = String.format("%02d", min);
+						String secondi = String.format("%02d", sec);
 						
 						lblDataEOra.setText(giorno+"/"+mese+"/"+anno+" - "+ore+":"+minuti+":"+secondi);
 						sleep(1000);

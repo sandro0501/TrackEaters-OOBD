@@ -39,15 +39,23 @@ public class Controller {
 	
 	private LoginFrame loginPage;
 	private HomepageProprietarioFrame proprietarioPage;
+	private ImpostazioniProprietarioFrame impostazioniProprietarioPage;
 	private RistorantiProprietarioFrame ristorantiProprietarioPage;
+	private ModificaRistoranteFrame modificaRistorantePage;
 	
 	private Operatore operatore;
 	private Proprietario proprietario;
 	private ManagerRistorante managerRistorante;
 
 	private Controller() {
-		System.setProperty("sun.java2d.uiScale","1.0"); //fix dpi scaling ui
+		System.setProperty("sun.java2d.uiScale","1.0"); //fix dpi scaling gui
+		
 		proprietarioPage = new HomepageProprietarioFrame(this); //da fixare indietro button!!!!
+		
+		ristoranteDAO = new RistoranteOracleImplementation();
+		operatoreDAO = new OperatoreOracleImplementation();
+		proprietarioDAO = new ProprietarioOracleImplementation();
+		
 		startLogin();
 	}
 	
@@ -60,34 +68,20 @@ public class Controller {
 	
 	//metodo login
 	public void loginOperatore(String username, String password, String tipoOperatore) {
-		operatore = null;
-		operatoreDAO = new OperatoreOracleImplementation();
-		
 		try {
 			operatore = operatoreDAO.getOperatore(username, password, tipoOperatore);
 			if(tipoOperatore.equals("Proprietario")) 
 			{
 				//loggato come proprietario
-				proprietario = new Proprietario(operatore.getUsername(), 
-												operatore.getPassword(), 
-												operatore.getNome(), 
-												operatore.getCognome(), 
-												operatore.getEmail());
-				
+				proprietario = new Proprietario(operatore.getUsername(),operatore.getPassword(),operatore.getNome(),operatore.getCognome(),operatore.getEmail());
 				mostraEsitoCorrettoLogin(tipoOperatore, proprietario);
 				setHomepageProprietario(proprietario);
 				startHomepageProprietario();
-				
 			}
 			else
 			{
 				//loggato come manager ristorante
-				managerRistorante = new ManagerRistorante(operatore.getUsername(), 
-														  operatore.getPassword(), 
-														  operatore.getNome(), 
-														  operatore.getCognome(), 
-														  operatore.getEmail());
-				
+				managerRistorante = new ManagerRistorante(operatore.getUsername(),operatore.getPassword(),operatore.getNome(),operatore.getCognome(),operatore.getEmail());
 				mostraEsitoCorrettoLogin(tipoOperatore, operatore);
 				startHomepageRistorante(false);
 			}
@@ -105,15 +99,12 @@ public class Controller {
 	
 	//metodo update proprietario
 	public void updateProprietario(String nome, String cognome, String newUsername, String email, String password) {
-		operatore = null;
-		proprietarioDAO = new ProprietarioOracleImplementation();
 		boolean esitoUpdate;
 		
 		try {
 			esitoUpdate = proprietarioDAO.updateProprietario(proprietario.getUsername(), nome, cognome, newUsername, email, password);
 			if(esitoUpdate) {
 				mostraEsitoCorrettoUpdate();
-				
 				//setta di nuovo la homepage del proprietario
 				operatore = operatoreDAO.getOperatore(newUsername, password, "Proprietario");
 				proprietario.setUsername(operatore.getUsername());
@@ -130,19 +121,16 @@ public class Controller {
 	
 	/* metodo riempi tabella ristoranti proprietario */
 	public void riempiTabellaRistorantiDiProprietario() {
-		ristoranteDAO = new RistoranteOracleImplementation();
 		
 		try {
 			ArrayList<Ristorante> listaRistoranti = ristoranteDAO.getRistorantiByUsernameProprietario(proprietario.getUsername());
 			proprietario.setRistorantiAmministrati(listaRistoranti);
-			
 			DefaultTableModel model = ristorantiProprietarioPage.getModel();
 			model.getDataVector().removeAllElements();
-			
 			String[] rigaTabella = new String[8];
+			
 			for(Ristorante ristorante : proprietario.getRistorantiAmministrati()) {
 				ristorante.setProprietarioRistorante(proprietario);
-				
 				rigaTabella[0] = ristorante.getDenominazione();
 				rigaTabella[1] = ristorante.getIndirizzo();
 				rigaTabella[2] = ristorante.getTelefono();
@@ -164,15 +152,13 @@ public class Controller {
 	/* metodo inserisci ristorante */
 	public void insertRistorante(String denominazione, String indirizzo, String telefono, String citta, String prov, String cap, String email, String sitoweb) {
 		boolean esitoInsert;
-		proprietarioDAO = new ProprietarioOracleImplementation();
 		int codProprietario = proprietarioDAO.getCodiceProprietarioFromUsername(proprietario.getUsername());
-		
+
 		try {
 			esitoInsert = ristoranteDAO.insertRistorante(denominazione, indirizzo, telefono, citta, prov, cap, email, sitoweb, codProprietario);
 			if(esitoInsert) {
 				mostraEsitoCorrettoInsert();
-				//aggiorna la tabella dei ristoranti del proprietario
-				riempiTabellaRistorantiDiProprietario();
+				riempiTabellaRistorantiDiProprietario(); //aggiorna la tabella dei ristoranti
 			}
 		} catch (Exception e) {
 			mostraErroreDB();
@@ -180,21 +166,74 @@ public class Controller {
 	}
 	
 	/*metodo elimina ristorante*/
-	public void deleteRistorante(String denominazioneRistorante) {
+	public void deleteRistorante(String denominazioneRistorante, String indirizzoRistorante) {
+		int codRistorante;
 		boolean esitoDelete;
-
+		
 		try {
-			esitoDelete = ristoranteDAO.deleteRistorante(denominazioneRistorante);
-			
+			codRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(denominazioneRistorante, indirizzoRistorante);
+			esitoDelete = ristoranteDAO.deleteRistorante(codRistorante);
 			if(esitoDelete) {
 				mostraEsitoCorrettoDelete();
-				//aggiorna la tabella dei ristoranti del proprietario
-				riempiTabellaRistorantiDiProprietario();
+				riempiTabellaRistorantiDiProprietario(); //aggiorna la tabella dei ristoranti del proprietario
 			}
 		} catch (Exception e) {
 			mostraErroreDB();
 		}
 	}
+	
+	/*metodo che riempie textfield modifica ristorante con campi della tabella*/
+	public void riempiCampiModificaRistorantePage() {
+		JTable tabellaRistoranti = ristorantiProprietarioPage.getTabellaRistoranti();
+		
+		String currentDenominazione = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString();
+		String currentIndirizzo = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 1).toString();
+		String currentTelefono = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 2).toString();
+		String currentCitta = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 3).toString();
+		String currentProvincia = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 4).toString();
+		String currentCap = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 5).toString();
+		String currentEmail = "";
+		String currentSitoWeb = "";
+		
+		if(!(tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 6) == null)) {
+			currentEmail = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 6).toString();
+		}
+		if(!(tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 7) == null)) {
+			currentSitoWeb = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 7).toString();
+		}
+		
+		modificaRistorantePage.getCampo_Denominazione().setText(currentDenominazione);
+		modificaRistorantePage.getCampo_Indirizzo().setText(currentIndirizzo);
+		modificaRistorantePage.getCampo_Telefono().setText(currentTelefono);
+		modificaRistorantePage.getCampo_Citta().setText(currentCitta);
+		modificaRistorantePage.getCampo_Provincia().setSelectedItem(currentProvincia);
+		modificaRistorantePage.getCampo_Cap().setText(currentCap);
+		modificaRistorantePage.getCampo_Email().setText(currentEmail);
+		modificaRistorantePage.getCampo_SitoWeb().setText(currentSitoWeb);
+	}
+	
+	/*metodo update ristorante*/
+	public void updateRistorante(String denominazione,String indirizzo, String telefono, String citta,String prov,String cap,String email,String sitoweb) {
+		int codRistorante;
+		boolean esitoUpdate;
+		
+		JTable tabellaRistoranti = ristorantiProprietarioPage.getTabellaRistoranti();
+		String currentDenominazione = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString();
+		String currentIndirizzo = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 1).toString();
+		
+		try {
+			codRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(currentDenominazione, currentIndirizzo);
+			esitoUpdate = ristoranteDAO.updateRistorante(codRistorante, denominazione, indirizzo, telefono, citta, prov, cap, email, sitoweb);
+			
+			if(esitoUpdate) {
+				mostraEsitoCorrettoUpdate();
+				riempiTabellaRistorantiDiProprietario(); //aggiorna la tabella dei ristoranti del proprietario
+			}
+		} catch (Exception e) {
+			mostraErroreDB();
+		}
+	}
+	
 	
 	
 
@@ -226,6 +265,11 @@ public class Controller {
 		ristorantiProprietarioPage = new RistorantiProprietarioFrame(this);
 		ristorantiProprietarioPage.setVisible(true);
 		riempiTabellaRistorantiDiProprietario();
+	}
+	
+	public void startModificaRistorante() {
+		modificaRistorantePage = new ModificaRistoranteFrame(this);
+		modificaRistorantePage.setVisible(true);
 	}
 	
 	public void startAggiungiAvventori(boolean proprietario) {
@@ -311,11 +355,6 @@ public class Controller {
 	public void startModificaManager() {
 		Modifica_Manager modificaManagerPage = new Modifica_Manager(this);
 		modificaManagerPage.setVisible(true);
-	}
-	
-	public void startModificaRistorante() {
-		Modifica_Ristorante modificaRistorantePage = new Modifica_Ristorante(this);
-		modificaRistorantePage.setVisible(true);
 	}
 	
 	public void startModificaSala(boolean proprietario) {

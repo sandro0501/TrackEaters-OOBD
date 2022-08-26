@@ -218,14 +218,14 @@ public class AggiungiRistoranteFrame extends JFrame {
 		
 		campo_Email = new JTextField();
 		campo_Email.setToolTipText("Deve rispettare la forma 'example@mail.domain'");
-		campo_Email.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+		campo_Email.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		campo_Email.setBounds(20, 467, 316, 27);
 		pannello_Principale.add(campo_Email);
 		campo_Email.setColumns(10);
 		
 		campo_SitoWeb = new JTextField();
 		campo_SitoWeb.setToolTipText("Deve rispettare la forma 'www.example.domain'");
-		campo_SitoWeb.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+		campo_SitoWeb.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		campo_SitoWeb.setBounds(20, 536, 316, 27);
 		pannello_Principale.add(campo_SitoWeb);
 		campo_SitoWeb.setColumns(10);
@@ -269,7 +269,8 @@ public class AggiungiRistoranteFrame extends JFrame {
 											campo_Telefono.getText(),
 											campo_Citta.getText(),
 											campo_Provincia.getSelectedItem().toString(),
-											campo_Cap.getText(),campo_Email.getText(),
+											campo_Cap.getText(),
+											campo_Email.getText(),
 											campo_SitoWeb.getText());
 						flushTextfields();
 						setVisible(false);
@@ -278,8 +279,7 @@ public class AggiungiRistoranteFrame extends JFrame {
 				}
 			}
 		});
-		JLabel lblConferma = new JLabel("Sei sicuro di voler confermare le modifiche?");
-		lblConferma.setFont(new Font("Segoe UI", Font.BOLD, 15));
+
 		bottone_Aggiungi.setIcon(new ImageIcon(AggiungiRistoranteFrame.class.getResource("/resources/btnAggiungi.png")));
 		bottone_Aggiungi.setBounds(337, 607, 160, 60);
 		pannello_Principale.add(bottone_Aggiungi);
@@ -304,7 +304,7 @@ public class AggiungiRistoranteFrame extends JFrame {
 	}
 	
 	private void mostraAnnullaDialog(Controller c) {
-		JLabel lblAnnulla = new JLabel("Sei sicuro di voler annullare?");
+		JLabel lblAnnulla = new JLabel("Sei sicuro di voler annullare l'inserimento del nuovo ristorante?");
 		lblAnnulla.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		if (JOptionPane.showConfirmDialog(pannello_Principale, lblAnnulla)==0) {
 			setVisible(false);

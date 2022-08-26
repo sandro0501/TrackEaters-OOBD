@@ -36,27 +36,41 @@ public class RistoranteOracleImplementation implements RistoranteDAO {
 			ResultSet rs = stmtGetRistoranti.executeQuery();
 			
 			while(rs.next()) {
-				Ristorante r = new Ristorante(	rs.getString(1),
-											  	rs.getString(2),
-											  	rs.getString(3),
-											  	rs.getString(4),
-											 	rs.getString(5),
-											 	rs.getString(6),
-											 	rs.getString(7),
-											 	rs.getString(8));
+				Ristorante r = new Ristorante(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8));
 				ristoranti.add(r);
-				}
-
+			}
 			    rs.close();
 			    stmtGetRistoranti.close();	
+			    
+		} catch (SQLException e) {
+			System.out.println("Codice errore SQL: "+e.getErrorCode()); 
+			System.out.println("SQL State: "+e.getSQLState()); 
+			System.out.println("Messaggio: " +e.getMessage());
+		}
+		return ristoranti;
+	}
+	
+	@Override
+	public int getCodiceRistoranteByDenominazioneAndIndirizzo(String denominazione, String indirizzo) {
+		try {
+			String queryGetCodiceRistorante = "SELECT R.CodRistorante FROM Ristorante R WHERE R.Denominazione = ? AND R.Indirizzo = ?";
+			PreparedStatement getCodiceRistoranteStatement = connessione.prepareStatement(queryGetCodiceRistorante);
+			getCodiceRistoranteStatement.setString(1, denominazione);
+			getCodiceRistoranteStatement.setString(2, indirizzo);
+			ResultSet rs = getCodiceRistoranteStatement.executeQuery();
+
+			if(rs.next())
+				return rs.getInt("CodRistorante");
+			
+			rs.close();
+			getCodiceRistoranteStatement.close();
 			
 		} catch (SQLException e) {
 			System.out.println("Codice errore SQL: "+e.getErrorCode()); 
 			System.out.println("SQL State: "+e.getSQLState()); 
 			System.out.println("Messaggio: " +e.getMessage());
 		}
-		
-		return ristoranti;
+		return 0;
 	}
 
 	@Override
@@ -83,48 +97,48 @@ public class RistoranteOracleImplementation implements RistoranteDAO {
 			insertRistoranteStatement.close();
 			
 		} catch (SQLException e) {
-			
-			if(e.getErrorCode()==20010) 
-			{
-				JLabel lblErrore = new JLabel("Numero di telefono non valido! Sono ammesse cifre numeriche ed il carattere +. Riprova.");
-				lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
-				JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);	
-			} 
-			else if (e.getErrorCode()==20012) 
-			{
-				JLabel lblErrore = new JLabel("CAP non valido! Sono ammesse al massimo 5 cifre numeriche. Riprova.");
-				lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
-				JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);	
-			} 
-			else if (e.getMessage().toString().contains("SITO_WEB_LEGALE"))
-			{
-				JLabel lblErrore = new JLabel("Sito web non valido! Non rispetta la forma 'www.example.domain'. Riprova.");
-				lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
-				JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);
-			} 
-			else if (e.getMessage().toString().contains("EMAIL_LEGALE"))
-			{
-				JLabel lblErrore = new JLabel("Email non valida! Non rispetta la forma 'example@mail.domain'. Riprova.");
-				lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
-				JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);	
-			} 
-			else 
-			{
-				System.out.println("Codice errore SQL: "+e.getErrorCode()); 
-				System.out.println("SQL State: "+e.getSQLState()); 
-				System.out.println("Messaggio: " +e.getMessage());
-			}
+			gestisciErroriInserimentoDati(e);
 		}
 	
 		return false;
 	}
+	
+	@Override
+	public boolean updateRistorante(int codRistorante,String denominazione, String indirizzo, String telefono, String citta, String prov, 
+			String cap, String email, String sitoweb) {
+		
+		try {
+			String queryUpdateRistorante = "UPDATE Ristorante SET Denominazione=?,Indirizzo=?,Telefono=?,Citta=?,Prov=?,Cap=?,Email=?,SitoWeb=? WHERE CodRistorante=?";
+			PreparedStatement updateRistoranteStatement = connessione.prepareStatement(queryUpdateRistorante);
+			updateRistoranteStatement.setString(1, denominazione);
+			updateRistoranteStatement.setString(2, indirizzo);
+			updateRistoranteStatement.setString(3, telefono);
+			updateRistoranteStatement.setString(4, citta);
+			updateRistoranteStatement.setString(5, prov);
+			updateRistoranteStatement.setString(6, cap);
+			updateRistoranteStatement.setString(7, email);
+			updateRistoranteStatement.setString(8, sitoweb);
+			updateRistoranteStatement.setInt(9, codRistorante);
+			
+			int esitoUpdate = updateRistoranteStatement.executeUpdate();
+			
+			if(esitoUpdate==1)
+				return true;
+			
+			updateRistoranteStatement.close();
+			
+		} catch (SQLException e) {
+			gestisciErroriInserimentoDati(e);
+		}
+		return false;
+	}
 
 	@Override
-	public boolean deleteRistorante(String denominazione) {
+	public boolean deleteRistorante(int codRistorante) {
 		try {
-			String queryDeleteRistorante = "DELETE FROM Ristorante WHERE Ristorante.Denominazione = ?";
+			String queryDeleteRistorante = "DELETE FROM Ristorante WHERE Ristorante.CodRistorante = ?";
 			PreparedStatement deleteRistoranteStatement = connessione.prepareStatement(queryDeleteRistorante);
-			deleteRistoranteStatement.setString(1, denominazione);
+			deleteRistoranteStatement.setInt(1, codRistorante);
 			
 			int esitoDelete = deleteRistoranteStatement.executeUpdate();
 			if(esitoDelete==1)
@@ -140,5 +154,37 @@ public class RistoranteOracleImplementation implements RistoranteDAO {
 		return false;
 	}
 	
-	
+	private void gestisciErroriInserimentoDati(SQLException e) {
+		if(e.getErrorCode()==20010) 
+		{
+			JLabel lblErrore = new JLabel("Numero di telefono non valido! Sono ammesse cifre numeriche ed il carattere +. Riprova.");
+			lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
+			JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);	
+		} 
+		else if (e.getErrorCode()==20012) 
+		{
+			JLabel lblErrore = new JLabel("CAP non valido! Sono ammesse al massimo 5 cifre numeriche. Riprova.");
+			lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
+			JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);	
+		} 
+		else if (e.getMessage().toString().contains("SITO_WEB_LEGALE"))
+		{
+			JLabel lblErrore = new JLabel("Sito web non valido! Non rispetta la forma 'www.example.domain'. Riprova.");
+			lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
+			JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);
+		} 
+		else if (e.getMessage().toString().contains("EMAIL_LEGALE"))
+		{
+			JLabel lblErrore = new JLabel("Email non valida! Non rispetta la forma 'example@mail.domain'. Riprova.");
+			lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
+			JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);	
+		} 
+		else 
+		{
+			System.out.println("Codice errore SQL: "+e.getErrorCode()); 
+			System.out.println("SQL State: "+e.getSQLState()); 
+			System.out.println("Messaggio: " +e.getMessage());
+		}
+	}
+
 }

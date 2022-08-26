@@ -205,10 +205,11 @@ public class HomepageProprietarioFrame extends JFrame {
 						int giorno = cal.get(Calendar.DAY_OF_MONTH);
 						int mese = cal.get(Calendar.MONTH)+1;
 						int anno = cal.get(Calendar.YEAR);
-						
-						int secondi = cal.get(Calendar.SECOND);
-						int minuti = cal.get(Calendar.MINUTE);
+						int sec = cal.get(Calendar.SECOND);
+						int min = cal.get(Calendar.MINUTE);
 						int ore = cal.get(Calendar.HOUR_OF_DAY);
+						String minuti = String.format("%02d", min);
+						String secondi = String.format("%02d", sec);
 						
 						lblDataEOra.setText(giorno+"/"+mese+"/"+anno+" - "+ore+":"+minuti+":"+secondi);
 						sleep(1000);

@@ -42,6 +42,8 @@ public class Controller {
 	private ImpostazioniProprietarioFrame impostazioniProprietarioPage;
 	private RistorantiProprietarioFrame ristorantiProprietarioPage;
 	private ModificaRistoranteFrame modificaRistorantePage;
+	private AggiungiRistoranteFrame aggiungiRistorantePage;
+	private HomepageGestioneRistoranteFrame gestioneRistorantePage; 
 	
 	private Operatore operatore;
 	private Proprietario proprietario;
@@ -50,17 +52,22 @@ public class Controller {
 	private Controller() {
 		System.setProperty("sun.java2d.uiScale","1.0"); //fix dpi scaling gui
 		
-		proprietarioPage = new HomepageProprietarioFrame(this); //da fixare indietro button!!!!
-		
-		ristoranteDAO = new RistoranteOracleImplementation();
+		proprietarioPage = new HomepageProprietarioFrame(this); 
+		avventoreDAO = new AvventoreOracleImplementation();
+		cameriereDAO = new CameriereOracleImplementation();
+		casoDAO = new CasoOracleImplementation();
+		managerRistoranteDAO = new ManagerRistoranteOracleImplementation();
 		operatoreDAO = new OperatoreOracleImplementation();
 		proprietarioDAO = new ProprietarioOracleImplementation();
-		
-		startLogin();
+		ristoranteDAO = new RistoranteOracleImplementation();
+		salaDAO = new SalaOracleImplementation();
+		tavolataDAO = new TavolataOracleImplementation();
+
 	}
 	
 	public static void main(String[] args) {
 		Controller c = new Controller();
+		c.startLogin();
 	}
 	
 	/*-----------------------------------------------------------------------------------------------------------------------------*/
@@ -75,15 +82,15 @@ public class Controller {
 				//loggato come proprietario
 				proprietario = new Proprietario(operatore.getUsername(),operatore.getPassword(),operatore.getNome(),operatore.getCognome(),operatore.getEmail());
 				mostraEsitoCorrettoLogin(tipoOperatore, proprietario);
-				setHomepageProprietario(proprietario);
-				startHomepageProprietario();
+				startHomepageProprietario();	
 			}
 			else
 			{
 				//loggato come manager ristorante
 				managerRistorante = new ManagerRistorante(operatore.getUsername(),operatore.getPassword(),operatore.getNome(),operatore.getCognome(),operatore.getEmail());
 				mostraEsitoCorrettoLogin(tipoOperatore, operatore);
-				startHomepageRistorante(false);
+				startHomepageGestioneRistorante(false);
+				setHomepageGestioneRistoranteManager(managerRistorante);		
 			}
 		} catch (Exception e) {
 			mostraErroreLogin();
@@ -234,6 +241,18 @@ public class Controller {
 		}
 	}
 	
+	//metodo che setta homepage ristorante con dati
+	public void setHomepageGestioneRistoranteProprietario() {
+		JTable tabellaRistoranti = ristorantiProprietarioPage.getTabellaRistoranti();
+		String denominazione = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString();
+		gestioneRistorantePage.setLblDenominazioneRistorante("Ristorante "+"\""+denominazione+"\"");
+	}
+	
+	public void setHomepageGestioneRistoranteManager(ManagerRistorante manager) {
+		//gestioneRistorantePage.setLblDenominazioneRistorante("Ristorante "+"\""+manager.getRistoranteGestito()+"\"");
+	}
+
+		
 	
 	
 
@@ -249,28 +268,46 @@ public class Controller {
 	//starter proprietario
 	public void startHomepageProprietario() {
 		loginPage.dispose();
-		//proprietarioPage = new Homepage_Proprietario(this); da fixare (indietro button)!!!!
+		setHomepageProprietario(proprietario);
 		proprietarioPage.setVisible(true);
 	}
 		
-	//starter managerristorante
-	public void startHomepageRistorante(boolean proprietario) {
+	//starter gestione ristorante (hompage manager)
+	public void startHomepageGestioneRistorante(boolean proprietario) {
 		loginPage.dispose();
-		Homepage_Ristorante ristorantePage = new Homepage_Ristorante(this, proprietario);
-		ristorantePage.setVisible(true);
+		gestioneRistorantePage = new HomepageGestioneRistoranteFrame(this, proprietario);
+		gestioneRistorantePage.setVisible(true);
 	}
 	
 	//starter ristoranti proprietario
 	public void startRistorantiProprietario() {
+		proprietarioPage.dispose();
 		ristorantiProprietarioPage = new RistorantiProprietarioFrame(this);
 		ristorantiProprietarioPage.setVisible(true);
 		riempiTabellaRistorantiDiProprietario();
 	}
 	
+	//starter pagina modifica ristorante
 	public void startModificaRistorante() {
+		ristorantiProprietarioPage.dispose();
 		modificaRistorantePage = new ModificaRistoranteFrame(this);
 		modificaRistorantePage.setVisible(true);
 	}
+	
+	//starter pagina aggiungi risotrante
+	public void startAggiungiRistorante() {
+		ristorantiProprietarioPage.dispose();
+		aggiungiRistorantePage = new AggiungiRistoranteFrame(this);
+		aggiungiRistorantePage.setVisible(true);
+	}
+	
+	//starter pagina gestisci ristorante
+	public void startGestisciRistorante(boolean proprietario) {
+		ristorantiProprietarioPage.dispose();
+		gestioneRistorantePage = new HomepageGestioneRistoranteFrame(this, proprietario);
+		gestioneRistorantePage.setVisible(true);
+	}
+	
 	
 	public void startAggiungiAvventori(boolean proprietario) {
 		Aggiungi_Avventori aggiungiAvventoriPage = new Aggiungi_Avventori(this, proprietario);
@@ -290,11 +327,6 @@ public class Controller {
 	public void startAggiungiManager() {
 		Aggiungi_Manager aggiungiManagerPage = new Aggiungi_Manager(this);
 		aggiungiManagerPage.setVisible(true);
-	}
-	
-	public void startAggiungiRistorante() {
-		AggiungiRistoranteFrame aggiungiPage = new AggiungiRistoranteFrame(this);
-		aggiungiPage.setVisible(true);
 	}
 	
 	public void startAggiungiSala(boolean proprietario) {
@@ -371,12 +403,7 @@ public class Controller {
 		Modifica_Tavolo modificaTavoloPage = new Modifica_Tavolo(this, proprietario);
 		modificaTavoloPage.setVisible(true);
 	}
-	
-	public void startRistorante(boolean proprietario) {
-		Homepage_Ristorante ristorantePage = new Homepage_Ristorante(this, proprietario);
-		ristorantePage.setVisible(true);
-	}
-	
+
 	public void startSale(boolean proprietario) {
 		Sale salePage = new Sale(this, proprietario);
 		salePage.setVisible(true);

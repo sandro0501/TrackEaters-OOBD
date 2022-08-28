@@ -139,7 +139,7 @@ public class Casi extends JFrame {
 					c.startHomepageProprietario();
 				} else {
 					setVisible(false);
-					c.startRistorante(proprietario);
+					c.startGestisciRistorante(proprietario);
 				}
 			}
 		});

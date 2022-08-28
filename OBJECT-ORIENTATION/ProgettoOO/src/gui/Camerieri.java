@@ -119,7 +119,7 @@ public class Camerieri extends JFrame {
 		bottone_Indietro.addActionListener(new ActionListener () {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startRistorante(proprietario);
+				c.startGestisciRistorante(proprietario);
 			}
 		});
 		bottone_Indietro.setFont(new Font("Tahoma", Font.BOLD, 12));

@@ -56,10 +56,10 @@ public class Statistiche extends JFrame {
 					c.startHomepageProprietario();
 				} else if (!generale && proprietario) {
 					setVisible(false);
-					c.startRistorante(proprietario);
+					c.startGestisciRistorante(proprietario);
 				}else if (!proprietario) {
 					setVisible(false);
-					c.startRistorante(proprietario);
+					c.startGestisciRistorante(proprietario);
 				}
 			}
 		});

@@ -88,7 +88,8 @@ public class RistorantiProprietarioFrame extends JFrame {
 
 				if (tabellaRistoranti.getSelectedRow() != -1) {
 					setVisible(false);
-					c.startRistorante(true);
+					c.startGestisciRistorante(true);
+					c.setHomepageGestioneRistoranteProprietario();
 				} else {
 					mostraErroreSelezioneDialog();
 				}
@@ -264,11 +265,12 @@ public class RistorantiProprietarioFrame extends JFrame {
 						int giorno = cal.get(Calendar.DAY_OF_MONTH);
 						int mese = cal.get(Calendar.MONTH)+1;
 						int anno = cal.get(Calendar.YEAR);
-						int sec = cal.get(Calendar.SECOND);
-						int min = cal.get(Calendar.MINUTE);
-						int ore = cal.get(Calendar.HOUR_OF_DAY);
-						String minuti = String.format("%02d", min);
-						String secondi = String.format("%02d", sec);
+						int seconds = cal.get(Calendar.SECOND);
+						int minutes = cal.get(Calendar.MINUTE);
+						int hour = cal.get(Calendar.HOUR_OF_DAY);
+						String minuti = String.format("%02d", minutes);
+						String secondi = String.format("%02d", seconds);
+						String ore = String.format("%02d", hour);
 						
 						lblDataEOra.setText(giorno+"/"+mese+"/"+anno+" - "+ore+":"+minuti+":"+secondi);
 						sleep(1000);

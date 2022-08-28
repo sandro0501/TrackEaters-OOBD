@@ -124,7 +124,7 @@ public class Avventori extends JFrame {
 					c.startHomepageProprietario();
 				} else {
 					setVisible(false);
-					c.startRistorante(proprietario);
+					c.startGestisciRistorante(proprietario);
 				}
 			}
 		});

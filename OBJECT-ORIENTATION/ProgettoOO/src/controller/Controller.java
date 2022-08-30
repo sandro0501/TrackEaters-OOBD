@@ -44,6 +44,7 @@ public class Controller {
 	private ModificaRistoranteFrame modificaRistorantePage;
 	private AggiungiRistoranteFrame aggiungiRistorantePage;
 	private HomepageGestioneRistoranteFrame gestioneRistorantePage; 
+	private InfoRistoranteFrame infoRistorantePage;
 	
 	private Operatore operatore;
 	private Proprietario proprietario;
@@ -51,8 +52,7 @@ public class Controller {
 
 	private Controller() {
 		System.setProperty("sun.java2d.uiScale","1.0"); //fix dpi scaling gui
-		
-		proprietarioPage = new HomepageProprietarioFrame(this); 
+	
 		avventoreDAO = new AvventoreOracleImplementation();
 		cameriereDAO = new CameriereOracleImplementation();
 		casoDAO = new CasoOracleImplementation();
@@ -88,6 +88,9 @@ public class Controller {
 			{
 				//loggato come manager ristorante
 				managerRistorante = new ManagerRistorante(operatore.getUsername(),operatore.getPassword(),operatore.getNome(),operatore.getCognome(),operatore.getEmail());
+				managerRistorante.setTelefono(managerRistoranteDAO.getTelefonoManagerByUsername(managerRistorante.getUsername()));
+				Ristorante r = ristoranteDAO.getRistoranteFromUsernameManager(managerRistorante.getUsername());
+				managerRistorante.setRistoranteGestito(r);
 				mostraEsitoCorrettoLogin(tipoOperatore, operatore);
 				startHomepageGestioneRistorante(false);
 				setHomepageGestioneRistoranteManager(managerRistorante);		
@@ -241,15 +244,34 @@ public class Controller {
 		}
 	}
 	
-	//metodo che setta homepage ristorante con dati
 	public void setHomepageGestioneRistoranteProprietario() {
 		JTable tabellaRistoranti = ristorantiProprietarioPage.getTabellaRistoranti();
 		String denominazione = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString();
+		String indirizzo = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 1).toString();
+		
+		int codRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(denominazione,indirizzo);
+		ManagerRistorante manager = managerRistoranteDAO.getInformazioniManagerByCodRistorante(codRistorante);
+		
 		gestioneRistorantePage.setLblDenominazioneRistorante("Ristorante "+"\""+denominazione+"\"");
+		if(manager != null) {
+			gestioneRistorantePage.getLblUsernameManager().setText(manager.getUsername()+" - "+manager.getNome()+" "+manager.getCognome());
+			gestioneRistorantePage.getLblEmailManager().setText(manager.getEmail());
+			gestioneRistorantePage.getLblTelefonoManager().setText(managerRistoranteDAO.getTelefonoManagerByUsername(manager.getUsername()));
+		}
+		else {
+			gestioneRistorantePage.getLblInfoManager().setVisible(false);
+			gestioneRistorantePage.getLblUsernameManager().setVisible(false);
+			gestioneRistorantePage.getLblEmailManager().setVisible(false);
+			gestioneRistorantePage.getLblTelefonoManager().setVisible(false);
+		}
+		
 	}
 	
 	public void setHomepageGestioneRistoranteManager(ManagerRistorante manager) {
-		//gestioneRistorantePage.setLblDenominazioneRistorante("Ristorante "+"\""+manager.getRistoranteGestito()+"\"");
+		gestioneRistorantePage.setLblDenominazioneRistorante("Ristorante "+"\""+manager.getRistoranteGestito().getDenominazione()+"\"");
+		gestioneRistorantePage.getLblUsernameManager().setText(manager.getUsername()+" - "+manager.getNome()+" "+manager.getCognome());
+		gestioneRistorantePage.getLblEmailManager().setText(manager.getEmail());
+		gestioneRistorantePage.getLblTelefonoManager().setText(manager.getTelefono());
 	}
 
 		
@@ -268,8 +290,13 @@ public class Controller {
 	//starter proprietario
 	public void startHomepageProprietario() {
 		loginPage.dispose();
+		proprietarioPage = new HomepageProprietarioFrame(this); 
 		setHomepageProprietario(proprietario);
 		proprietarioPage.setVisible(true);
+	}
+	
+	public void mostraHomepageProprietarioFrame() { 
+		proprietarioPage.setVisible(true); 
 	}
 		
 	//starter gestione ristorante (hompage manager)
@@ -308,6 +335,16 @@ public class Controller {
 		gestioneRistorantePage.setVisible(true);
 	}
 	
+	public void mostraGestisciRistoranteFrame() { 
+		gestioneRistorantePage.setVisible(true); 
+	}
+	
+	//starter pagina informazioni ristorante
+	public void startInformazioniRistorante(boolean proprietario) {
+		gestioneRistorantePage.dispose();
+		infoRistorantePage = new InfoRistoranteFrame(this, proprietario);
+		infoRistorantePage.setVisible(true);
+	}
 	
 	public void startAggiungiAvventori(boolean proprietario) {
 		Aggiungi_Avventori aggiungiAvventoriPage = new Aggiungi_Avventori(this, proprietario);
@@ -405,7 +442,7 @@ public class Controller {
 	}
 
 	public void startSale(boolean proprietario) {
-		Sale salePage = new Sale(this, proprietario);
+		GestioneSaleETavolateFrame salePage = new GestioneSaleETavolateFrame(this, proprietario);
 		salePage.setVisible(true);
 	}
 	

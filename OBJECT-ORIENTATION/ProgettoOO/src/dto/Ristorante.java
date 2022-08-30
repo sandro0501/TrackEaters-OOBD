@@ -14,7 +14,6 @@ public class Ristorante {
 	private String sitoWeb;
 	
 	private Proprietario proprietarioRistorante;
-	private List<ManagerRistorante> managersRistorante;
 	private List<Cameriere> camerieriRistorante;
 	private List<Avventore> accoglienzaAvventori;
 	
@@ -100,14 +99,6 @@ public class Ristorante {
 
 	public void setProprietarioRistorante(Proprietario proprietarioRistorante) {
 		this.proprietarioRistorante = proprietarioRistorante;
-	}
-
-	public List<ManagerRistorante> getManagersRistorante() {
-		return managersRistorante;
-	}
-
-	public void setManagersRistorante(List<ManagerRistorante> managersRistorante) {
-		this.managersRistorante = managersRistorante;
 	}
 
 	public List<Cameriere> getCamerieriRistorante() {

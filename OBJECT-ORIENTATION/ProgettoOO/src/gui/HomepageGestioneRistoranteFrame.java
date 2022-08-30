@@ -31,6 +31,10 @@ public class HomepageGestioneRistoranteFrame extends JFrame {
 	private Controller theController;
 	private JLabel lblDenominazioneRistorante;
 	private JLabel lblDataEOra;
+	private JLabel lblUsernameManager;
+	private JLabel lblEmailManager;
+	private JLabel lblTelefonoManager;
+	private JLabel lblInfoManager;
 		
 	public HomepageGestioneRistoranteFrame(Controller c, boolean proprietario) {
 		
@@ -122,23 +126,33 @@ public class HomepageGestioneRistoranteFrame extends JFrame {
 		lblDenominazioneRistorante.setBounds(26, 22, 782, 62);
 		pannello_Principale.add(lblDenominazioneRistorante);
 		
-		JButton bottone_InformazioniRistoranti = new JButton("");
-		bottone_InformazioniRistoranti.setIcon(new ImageIcon(HomepageGestioneRistoranteFrame.class.getResource("/resources/btnInformazioniRistorante.png")));
-		bottone_InformazioniRistoranti.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		bottone_InformazioniRistoranti.setBounds(422, 224, 420, 60);
-		pannello_Principale.add(bottone_InformazioniRistoranti);
+		JButton bottone_InformazioniRistorante = new JButton("");
+		bottone_InformazioniRistorante.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				if(!proprietario) {
+					c.startInformazioniRistorante(false);
+				} else {
+					c.startInformazioniRistorante(true);
+				}
+			}
+		});
+		bottone_InformazioniRistorante.setIcon(new ImageIcon(HomepageGestioneRistoranteFrame.class.getResource("/resources/btnInformazioniRistorante.png")));
+		bottone_InformazioniRistorante.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		bottone_InformazioniRistorante.setBounds(422, 224, 420, 60);
+		pannello_Principale.add(bottone_InformazioniRistorante);
 		
-		JButton bottone_Sale = new JButton("");
-		bottone_Sale.setIcon(new ImageIcon(HomepageGestioneRistoranteFrame.class.getResource("/resources/btnGestioneSaleTavolate.png")));
-		bottone_Sale.addActionListener(new ActionListener() {
+		JButton bottone_SaleETavolate = new JButton("");
+		bottone_SaleETavolate.setIcon(new ImageIcon(HomepageGestioneRistoranteFrame.class.getResource("/resources/btnGestioneSaleTavolate.png")));
+		bottone_SaleETavolate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				c.startSale(proprietario);
 			}
 		});
-		bottone_Sale.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		bottone_Sale.setBounds(422, 315, 420, 60);
-		pannello_Principale.add(bottone_Sale);
+		bottone_SaleETavolate.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		bottone_SaleETavolate.setBounds(422, 315, 420, 60);
+		pannello_Principale.add(bottone_SaleETavolate);
 		
 		JButton bottone_Statistiche = new JButton("");
 		bottone_Statistiche.setIcon(new ImageIcon(HomepageGestioneRistoranteFrame.class.getResource("/resources/btnStatistiche.png")));
@@ -152,23 +166,48 @@ public class HomepageGestioneRistoranteFrame extends JFrame {
 		bottone_Statistiche.setBounds(422, 497, 420, 60);
 		pannello_Principale.add(bottone_Statistiche);
 		
-		JButton bottone_Casi = new JButton("");
-		bottone_Casi.setIcon(new ImageIcon(HomepageGestioneRistoranteFrame.class.getResource("/resources/btnGestioneCasiCovid.png")));
-		bottone_Casi.addActionListener(new ActionListener() {
+		JButton bottone_CasiCovid = new JButton("");
+		bottone_CasiCovid.setIcon(new ImageIcon(HomepageGestioneRistoranteFrame.class.getResource("/resources/btnGestioneCasiCovid.png")));
+		bottone_CasiCovid.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				c.startCasi(proprietario);
 			}
 		});
-		bottone_Casi.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		bottone_Casi.setBounds(422, 406, 420, 60);
-		pannello_Principale.add(bottone_Casi);
+		bottone_CasiCovid.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		bottone_CasiCovid.setBounds(422, 406, 420, 60);
+		pannello_Principale.add(bottone_CasiCovid);
 		
-		JLabel lblNewLabel = new JLabel("Info Manager");
-		lblNewLabel.setBounds(1050, 30, 140, 28);
-		pannello_Principale.add(lblNewLabel);
+		lblUsernameManager = new JLabel("");
+		lblUsernameManager.setIcon(new ImageIcon(HomepageGestioneRistoranteFrame.class.getResource("/resources/usericon.png")));
+		lblUsernameManager.setForeground(new Color(0, 0, 128));
+		lblUsernameManager.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		lblUsernameManager.setBounds(949, 28, 305, 40);
+		pannello_Principale.add(lblUsernameManager);
+		
+		lblEmailManager = new JLabel("");
+		lblEmailManager.setIcon(new ImageIcon(HomepageGestioneRistoranteFrame.class.getResource("/resources/mailicon.png")));
+		lblEmailManager.setForeground(new Color(0, 0, 128));
+		lblEmailManager.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		lblEmailManager.setBounds(949, 63, 305, 40);
+		pannello_Principale.add(lblEmailManager);
+		
+		lblTelefonoManager = new JLabel("");
+		lblTelefonoManager.setIcon(new ImageIcon(HomepageGestioneRistoranteFrame.class.getResource("/resources/telephoneIcon.png")));
+		lblTelefonoManager.setForeground(new Color(0, 0, 128));
+		lblTelefonoManager.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		lblTelefonoManager.setBounds(949, 103, 305, 40);
+		pannello_Principale.add(lblTelefonoManager);
+		
+		lblInfoManager = new JLabel("Info Manager:");
+		lblInfoManager.setHorizontalAlignment(SwingConstants.LEFT);
+		lblInfoManager.setForeground(new Color(0, 0, 128));
+		lblInfoManager.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 15));
+		lblInfoManager.setBounds(949, 11, 305, 22);
+		pannello_Principale.add(lblInfoManager);
 		
 		JLabel lblImageRestaurant = new JLabel("");
+		lblImageRestaurant.setIcon(new ImageIcon(HomepageGestioneRistoranteFrame.class.getResource("/resources/restaurantImage.png")));
 		lblImageRestaurant.setBounds(34, 224, 333, 333);
 		pannello_Principale.add(lblImageRestaurant);
 		
@@ -212,5 +251,21 @@ public class HomepageGestioneRistoranteFrame extends JFrame {
 			setVisible(false);
 			c.startLogin();
 		}
+	}
+
+	public JLabel getLblUsernameManager() {
+		return lblUsernameManager;
+	}
+
+	public JLabel getLblEmailManager() {
+		return lblEmailManager;
+	}
+
+	public JLabel getLblTelefonoManager() {
+		return lblTelefonoManager;
+	}
+
+	public JLabel getLblInfoManager() {
+		return lblInfoManager;
 	}
 }

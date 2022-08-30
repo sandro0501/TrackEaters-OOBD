@@ -39,8 +39,9 @@ public class RistoranteOracleImplementation implements RistoranteDAO {
 				Ristorante r = new Ristorante(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8));
 				ristoranti.add(r);
 			}
-			    rs.close();
-			    stmtGetRistoranti.close();	
+			
+			rs.close();
+			stmtGetRistoranti.close();	
 			    
 		} catch (SQLException e) {
 			System.out.println("Codice errore SQL: "+e.getErrorCode()); 
@@ -48,6 +49,33 @@ public class RistoranteOracleImplementation implements RistoranteDAO {
 			System.out.println("Messaggio: " +e.getMessage());
 		}
 		return ristoranti;
+	}
+	
+
+	@Override
+	public Ristorante getRistoranteFromUsernameManager(String usernameManager) {
+		Ristorante ristorante = null; 
+		
+		try {
+			String queryGetRistorante = "SELECT R.Denominazione, R.Indirizzo, R.Telefono, R.Citta, R.Prov, R.Cap, R.Email, R.SitoWeb  FROM Ristorante R JOIN  ManagerRistorante M ON R.CodRistorante=M.Ristorantegestito WHERE M.Username=?";
+			PreparedStatement stmtGetRistorante = connessione.prepareStatement(queryGetRistorante);
+			stmtGetRistorante.setString(1, usernameManager);
+			ResultSet rs = stmtGetRistorante.executeQuery();
+			
+			if(rs.next()) {
+				ristorante = new Ristorante(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8));
+			}
+			
+			rs.close();
+			stmtGetRistorante.close();
+			
+		} catch (SQLException e) {
+			System.out.println("Codice errore SQL: "+e.getErrorCode()); 
+			System.out.println("SQL State: "+e.getSQLState()); 
+			System.out.println("Messaggio: " +e.getMessage());
+		}	
+		
+		return ristorante;
 	}
 	
 	@Override

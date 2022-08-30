@@ -166,7 +166,7 @@ public class RistorantiProprietarioFrame extends JFrame {
 		bottone_Indietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startHomepageProprietario();
+				c.mostraHomepageProprietarioFrame();
 			}
 		});
 		bottone_Indietro.setIcon(new ImageIcon(RistorantiProprietarioFrame.class.getResource("/resources/btnIndietro.png")));
@@ -189,7 +189,7 @@ public class RistorantiProprietarioFrame extends JFrame {
 		bottone_Home.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startHomepageProprietario();
+				c.mostraHomepageProprietarioFrame();
 			}
 		});
 		bottone_Home.setIcon(new ImageIcon(RistorantiProprietarioFrame.class.getResource("/resources/btnHome.png")));

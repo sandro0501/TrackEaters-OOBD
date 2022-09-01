@@ -18,10 +18,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
 import controller.Controller;
 
@@ -30,7 +35,18 @@ public class InfoRistoranteFrame extends JFrame {
 	private JPanel pannello_Principale;
 	private Controller theController;
 	private JLabel lblDataEOra;
+	private DefaultTableModel modelloTabella = new DefaultTableModel();
+	private JScrollPane scrollPaneTabellaCamerieri;
+	private JTable tabellaCamerieri;
 		
+	public JTable getTabellaCamerieri() {
+		return tabellaCamerieri;
+	}
+
+	public void setTabellaCamerieri(JTable tabellaCamerieri) {
+		this.tabellaCamerieri = tabellaCamerieri;
+	}
+	
 	public InfoRistoranteFrame(Controller c, boolean proprietario) {
 		
 		theController = c;
@@ -98,8 +114,104 @@ public class InfoRistoranteFrame extends JFrame {
 		lblDataEOra.setFont(new Font("Segoe UI", Font.BOLD, 25));
 		lblDataEOra.setHorizontalAlignment(SwingConstants.CENTER);
 		this.mostraDataEOra();
+		setTabellaRistoranti();
+
+	}
+
+	private void setTabellaRistoranti() {
+		scrollPaneTabellaCamerieri = new JScrollPane();
+		scrollPaneTabellaCamerieri.setViewportBorder(null);
+		scrollPaneTabellaCamerieri.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPaneTabellaCamerieri.setBounds(10, 336, 1244, 250);
+		scrollPaneTabellaCamerieri.getViewport().setBackground(new Color(176, 196, 222));
+		pannello_Principale.add(scrollPaneTabellaCamerieri);
+		tabellaCamerieri = new JTable();
+		tabellaCamerieri.setForeground(new Color(0, 0, 128));
+		tabellaCamerieri.setBackground(Color.WHITE);
+		tabellaCamerieri.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		modelloTabella.addColumn("Documento");
+		modelloTabella.addColumn("Nome");
+		modelloTabella.addColumn("Cognome");
+		modelloTabella.addColumn("Data nascita");
+		modelloTabella.addColumn("Sesso");
+		modelloTabella.addColumn("Città nascita");
+		modelloTabella.addColumn("Provincia nascita");
+		modelloTabella.addColumn("Città residenza");
+		modelloTabella.addColumn("Provincia residenza");
+		modelloTabella.addColumn("Telefono");
+		modelloTabella.addColumn("Email");
+		tabellaCamerieri.setModel(modelloTabella);
+		tabellaCamerieri.getTableHeader().setAlignmentX(CENTER_ALIGNMENT);
+		tabellaCamerieri.getTableHeader().setBackground(new Color(0, 0, 128));
+		tabellaCamerieri.getTableHeader().setForeground(Color.WHITE);
+		tabellaCamerieri.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
+		tabellaCamerieri.getTableHeader().setReorderingAllowed(false);
+		tabellaCamerieri.setSelectionBackground(new Color(245, 245, 220));
+		tabellaCamerieri.setRowHeight(30);
+		tabellaCamerieri.setDefaultEditor(Object.class, null);
+		tabellaCamerieri.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPaneTabellaCamerieri.setViewportView(tabellaCamerieri);
 		
+		JLabel etichettaNome = new JLabel("Nome: ");
+		etichettaNome.setForeground(new Color(0, 0, 127));
+		etichettaNome.setFont(new Font("Segoe UI", Font.ITALIC, 27));
+		etichettaNome.setBounds(36, 69, 270, 30);
+		pannello_Principale.add(etichettaNome);
 		
+		JLabel etichettaIndirizzo = new JLabel("Indirizzo:");
+		etichettaIndirizzo.setForeground(new Color(0, 0, 127));
+		etichettaIndirizzo.setFont(new Font("Segoe UI", Font.ITALIC, 27));
+		etichettaIndirizzo.setBounds(36, 135, 317, 30);
+		pannello_Principale.add(etichettaIndirizzo);
+		
+		JLabel etichettaCittà = new JLabel("Città:");
+		etichettaCittà.setForeground(new Color(0, 0, 127));
+		etichettaCittà.setFont(new Font("Segoe UI", Font.ITALIC, 27));
+		etichettaCittà.setBounds(394, 135, 304, 30);
+		pannello_Principale.add(etichettaCittà);
+		
+		JLabel etichettaProvincia = new JLabel("Provincia:");
+		etichettaProvincia.setForeground(new Color(0, 0, 127));
+		etichettaProvincia.setFont(new Font("Segoe UI", Font.ITALIC, 27));
+		etichettaProvincia.setBounds(748, 135, 297, 30);
+		pannello_Principale.add(etichettaProvincia);
+		
+		JLabel etichettaCap = new JLabel("Cap:");
+		etichettaCap.setForeground(new Color(0, 0, 127));
+		etichettaCap.setFont(new Font("Segoe UI", Font.ITALIC, 27));
+		etichettaCap.setBounds(1083, 135, 155, 30);
+		pannello_Principale.add(etichettaCap);
+		
+		JLabel etichettaTelefono = new JLabel("Telefono:");
+		etichettaTelefono.setForeground(new Color(0, 0, 127));
+		etichettaTelefono.setFont(new Font("Segoe UI", Font.ITALIC, 27));
+		etichettaTelefono.setBounds(36, 205, 304, 30);
+		pannello_Principale.add(etichettaTelefono);
+		
+		JLabel etichettaEmail = new JLabel("Email:");
+		etichettaEmail.setForeground(new Color(0, 0, 127));
+		etichettaEmail.setFont(new Font("Segoe UI", Font.ITALIC, 27));
+		etichettaEmail.setBounds(394, 205, 304, 30);
+		pannello_Principale.add(etichettaEmail);
+		
+		JLabel etichettaSitoWeb = new JLabel("Sito Web");
+		etichettaSitoWeb.setForeground(new Color(0, 0, 127));
+		etichettaSitoWeb.setFont(new Font("Segoe UI", Font.ITALIC, 27));
+		etichettaSitoWeb.setBounds(748, 205, 371, 30);
+		pannello_Principale.add(etichettaSitoWeb);
+		
+		JLabel etichettaCamerieri = new JLabel("Camerieri");
+		etichettaCamerieri.setHorizontalAlignment(SwingConstants.CENTER);
+		etichettaCamerieri.setBounds(497, 295, 270, 30);
+		pannello_Principale.add(etichettaCamerieri);
+	}
+	
+	public void setModel(DefaultTableModel model) {
+		this.modelloTabella = model;
+	}
+
+	public DefaultTableModel getModel() {
+		return modelloTabella;
 	}
 	
 	public void mostraDataEOra() {
@@ -137,5 +249,4 @@ public class InfoRistoranteFrame extends JFrame {
 			c.startLogin();
 		}
 	}
-
 }

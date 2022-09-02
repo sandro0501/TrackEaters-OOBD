@@ -18,6 +18,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
+
 import gui.*;
 
 import java.util.*;
@@ -500,6 +502,42 @@ public class Controller {
 		JOptionPane.showMessageDialog(null,lblerroreDB,"Errore",JOptionPane.ERROR_MESSAGE);
 	}
 	
-	/*------------------------------------------------------------------------------------------------------------------------*/
+	public void mostraErroreSelezioneDialog(JPanel pannello_Principale) {
+		JLabel lblErrore = new JLabel("Attenzione: nessun ristorante selezionato!");
+		lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		JOptionPane.showMessageDialog(pannello_Principale, lblErrore, "Attenzione", JOptionPane.WARNING_MESSAGE);
+	}
+	
+/*------------------------------------------------------------------------------------------------------------------------*/
+	
+	//mostra data e ora
+	public void mostraDataEOra(JLabel lblDataEOra) {
+		Thread clock = new Thread() {
+			public void run() {
+				try {
+					for(;;) {
+						Calendar cal = new GregorianCalendar();
+						int giorno = cal.get(Calendar.DAY_OF_MONTH);
+						int mese = cal.get(Calendar.MONTH)+1;
+						int anno = cal.get(Calendar.YEAR);
+						int seconds = cal.get(Calendar.SECOND);
+						int minutes = cal.get(Calendar.MINUTE);
+						int hour = cal.get(Calendar.HOUR_OF_DAY);
+						String minuti = String.format("%02d", minutes);
+						String secondi = String.format("%02d", seconds);
+						String ore = String.format("%02d", hour);
+						
+						lblDataEOra.setText(giorno+"/"+mese+"/"+anno+" - "+ore+":"+minuti+":"+secondi);
+						sleep(1000);
+					}
+				} catch (InterruptedException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		};
+		clock.start();
+	}
+	
+/*------------------------------------------------------------------------------------------------------------------------*/	
 
 }

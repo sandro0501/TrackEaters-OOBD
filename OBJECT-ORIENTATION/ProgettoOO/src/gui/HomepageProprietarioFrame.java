@@ -156,7 +156,7 @@ public class HomepageProprietarioFrame extends JFrame {
 		pannello_Navigazione.add(lblDataEOra);
 		lblDataEOra.setFont(new Font("Segoe UI", Font.BOLD, 25));
 		lblDataEOra.setHorizontalAlignment(SwingConstants.CENTER);
-		this.mostraDataEOra();
+		c.mostraDataEOra(lblDataEOra);
 		
 		lblNomeCognome = new JLabel("");
 		lblNomeCognome.setForeground(new Color(0, 0, 128));
@@ -194,33 +194,6 @@ public class HomepageProprietarioFrame extends JFrame {
 	
 	public void setLblEmail(String email) {
 		lblEmail.setText(email);
-	}
-	
-	public void mostraDataEOra() {
-		Thread clock = new Thread() {
-			public void run() {
-				try {
-					for(;;) {
-						Calendar cal = new GregorianCalendar();
-						int giorno = cal.get(Calendar.DAY_OF_MONTH);
-						int mese = cal.get(Calendar.MONTH)+1;
-						int anno = cal.get(Calendar.YEAR);
-						int seconds = cal.get(Calendar.SECOND);
-						int minutes = cal.get(Calendar.MINUTE);
-						int hour = cal.get(Calendar.HOUR_OF_DAY);
-						String minuti = String.format("%02d", minutes);
-						String secondi = String.format("%02d", seconds);
-						String ore = String.format("%02d", hour);
-						
-						lblDataEOra.setText(giorno+"/"+mese+"/"+anno+" - "+ore+":"+minuti+":"+secondi);
-						sleep(1000);
-					}
-				} catch (InterruptedException e) {
-					
-				}
-			}
-		};
-		clock.start();
 	}
 	
 	private void mostraLogoutDialog(Controller c) {

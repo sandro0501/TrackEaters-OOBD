@@ -47,15 +47,6 @@ public class RistorantiProprietarioFrame extends JFrame {
 	private JLabel lblDataEOra;
 	private DefaultTableModel modelloTabella = new DefaultTableModel();
 	private JTable tabellaRistoranti;
-	
-	public JTable getTabellaRistoranti() {
-		return tabellaRistoranti;
-	}
-
-	public void setTabellaRistoranti(JTable tabellaRistoranti) {
-		this.tabellaRistoranti = tabellaRistoranti;
-	}
-
 	private JScrollPane scrollPaneTabellaRistoranti;
 
 	public RistorantiProprietarioFrame(Controller c) {
@@ -91,7 +82,7 @@ public class RistorantiProprietarioFrame extends JFrame {
 					c.startGestisciRistorante(true);
 					c.setHomepageGestioneRistoranteProprietario();
 				} else {
-					mostraErroreSelezioneDialog();
+					c.mostraErroreSelezioneDialog(pannello_Principale);
 				}
 			
 			}
@@ -122,7 +113,7 @@ public class RistorantiProprietarioFrame extends JFrame {
 					c.startModificaRistorante();
 					c.riempiCampiModificaRistorantePage();
 				} else {
-					mostraErroreSelezioneDialog();
+					c.mostraErroreSelezioneDialog(pannello_Principale);
 				}
 				
 				
@@ -145,7 +136,7 @@ public class RistorantiProprietarioFrame extends JFrame {
 										 	tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 1).toString());	//indirizzo
 					}
 				} else {
-					mostraErroreSelezioneDialog();
+					c.mostraErroreSelezioneDialog(pannello_Principale);
 				}
 				
 			}
@@ -204,7 +195,7 @@ public class RistorantiProprietarioFrame extends JFrame {
 		lblDataEOra.setFont(new Font("Segoe UI", Font.BOLD, 25));
 		lblDataEOra.setBounds(420, 11, 429, 60);
 		pannello_Navigazione.add(lblDataEOra);
-		this.mostraDataEOra();
+		c.mostraDataEOra(lblDataEOra);
 		
 		JLabel lblUsername = new JLabel("");
 		lblUsername.setForeground(new Color(0, 0, 128));
@@ -248,41 +239,6 @@ public class RistorantiProprietarioFrame extends JFrame {
 		scrollPaneTabellaRistoranti.setViewportView(tabellaRistoranti);
 	}
 	
-	public void setModel(DefaultTableModel model) {
-		this.modelloTabella = model;
-	}
-
-	public DefaultTableModel getModel() {
-		return modelloTabella;
-	}
-	
-	public void mostraDataEOra() {
-		Thread clock = new Thread() {
-			public void run() {
-				try {
-					for(;;) {
-						Calendar cal = new GregorianCalendar();
-						int giorno = cal.get(Calendar.DAY_OF_MONTH);
-						int mese = cal.get(Calendar.MONTH)+1;
-						int anno = cal.get(Calendar.YEAR);
-						int seconds = cal.get(Calendar.SECOND);
-						int minutes = cal.get(Calendar.MINUTE);
-						int hour = cal.get(Calendar.HOUR_OF_DAY);
-						String minuti = String.format("%02d", minutes);
-						String secondi = String.format("%02d", seconds);
-						String ore = String.format("%02d", hour);
-						
-						lblDataEOra.setText(giorno+"/"+mese+"/"+anno+" - "+ore+":"+minuti+":"+secondi);
-						sleep(1000);
-					}
-				} catch (InterruptedException e) {
-					
-				}
-			}
-		};
-		clock.start();
-	}
-	
 	private void mostraLogoutDialog(Controller c) {
 		JLabel lblLogout = new JLabel("Sei sicuro di voler uscire?");
 		lblLogout.setFont(new Font("Segoe UI", Font.BOLD, 15));
@@ -292,10 +248,19 @@ public class RistorantiProprietarioFrame extends JFrame {
 		}
 	}
 	
-	private void mostraErroreSelezioneDialog() {
-		JLabel lblErrore = new JLabel("Attenzione: nessun ristorante selezionato!");
-		lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		JOptionPane.showMessageDialog(pannello_Principale, lblErrore, "Attenzione", JOptionPane.WARNING_MESSAGE);
-		
+	public JTable getTabellaRistoranti() {
+		return tabellaRistoranti;
+	}
+
+	public void setTabellaRistoranti(JTable tabellaRistoranti) {
+		this.tabellaRistoranti = tabellaRistoranti;
+	}
+	
+	public DefaultTableModel getModel() {
+		return modelloTabella;
+	}
+	
+	public void setModel(DefaultTableModel model) {
+		this.modelloTabella = model;
 	}
 }

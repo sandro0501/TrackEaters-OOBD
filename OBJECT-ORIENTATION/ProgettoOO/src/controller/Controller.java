@@ -51,6 +51,7 @@ public class Controller {
 	private Operatore operatore;
 	private Proprietario proprietario;
 	private ManagerRistorante managerRistorante;
+	
 
 	private Controller() {
 		System.setProperty("sun.java2d.uiScale","1.0"); //fix dpi scaling gui
@@ -246,6 +247,17 @@ public class Controller {
 		}
 	}
 	
+	public void setInformazioniRistorante(Ristorante ristorante) {
+		infoRistorantePage.setNome(ristorante.getDenominazione());
+		infoRistorantePage.setIndirizzo(ristorante.getIndirizzo());
+		infoRistorantePage.setCittà(ristorante.getCitta());
+		infoRistorantePage.setProvincia(ristorante.getProvincia());
+		infoRistorantePage.setCap(ristorante.getCap());
+		infoRistorantePage.setTelefono(ristorante.getTelefono());
+		infoRistorantePage.setEmail(ristorante.getEmail());
+		infoRistorantePage.setSitoWeb(ristorante.getSitoWeb());
+	}
+	
 	public void setHomepageGestioneRistoranteProprietario() {
 		JTable tabellaRistoranti = ristorantiProprietarioPage.getTabellaRistoranti();
 		String denominazione = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString();
@@ -339,13 +351,25 @@ public class Controller {
 	
 	public void mostraGestisciRistoranteFrame() { 
 		gestioneRistorantePage.setVisible(true); 
+		setInformazioniRistorante(null);
 	}
 	
 	//starter pagina informazioni ristorante
 	public void startInformazioniRistorante(boolean proprietario) {
+		JTable tabellaRistoranti = ristorantiProprietarioPage.getTabellaRistoranti();
+		Ristorante ristorante;
 		gestioneRistorantePage.dispose();
+		if (proprietario) {
+			String denominazione = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString();
+			String indirizzo = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 1).toString();
+			ristorante = ristoranteDAO.getRistoranteByDenominazioneAndIndirizzo(denominazione, indirizzo);
+		} else {
+			ristorante = ristoranteDAO.getRistoranteFromUsernameManager(managerRistorante.getUsername());
+		}
 		infoRistorantePage = new InfoRistoranteFrame(this, proprietario);
+		setInformazioniRistorante(ristorante);
 		infoRistorantePage.setVisible(true);
+		
 	}
 	
 	public void startAggiungiAvventori(boolean proprietario) {

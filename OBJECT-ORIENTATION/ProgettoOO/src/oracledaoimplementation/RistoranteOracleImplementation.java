@@ -215,4 +215,31 @@ public class RistoranteOracleImplementation implements RistoranteDAO {
 		}
 	}
 
+	@Override
+	public Ristorante getRistoranteByDenominazioneAndIndirizzo(String denominazione, String indirizzo) {
+		
+		Ristorante ristorante = null;
+		
+		try {
+			String queryRistoranteByDenominazioneAndIndirizzo = "SELECT  R.Denominazione, R.Indirizzo, R.Telefono, R.Citta, R.Prov, R.Cap, R.Email, R.SitoWeb FROM Ristorante R WHERE R.denominazione= ? AND R.indirizzo = ?";
+			PreparedStatement RistoranteByDenominazioneAndIndirizzo = connessione.prepareStatement(queryRistoranteByDenominazioneAndIndirizzo);
+			RistoranteByDenominazioneAndIndirizzo.setString(1, denominazione);
+			RistoranteByDenominazioneAndIndirizzo.setString(2, indirizzo);
+			ResultSet rs = RistoranteByDenominazioneAndIndirizzo.executeQuery();
+			
+			if (rs.next()) {
+				ristorante = new Ristorante(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8));
+			}
+			
+			rs.close();
+			RistoranteByDenominazioneAndIndirizzo.close();
+			
+		} catch (SQLException e) {
+			System.out.println("Codice errore SQL: "+e.getErrorCode()); 
+			System.out.println("SQL State: "+e.getSQLState()); 
+			System.out.println("Messaggio: " +e.getMessage());
+		}
+		return ristorante;
+	}
+
 }

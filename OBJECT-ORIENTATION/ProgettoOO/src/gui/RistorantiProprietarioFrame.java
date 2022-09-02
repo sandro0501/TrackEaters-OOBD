@@ -79,8 +79,8 @@ public class RistorantiProprietarioFrame extends JFrame {
 
 				if (tabellaRistoranti.getSelectedRow() != -1) {
 					setVisible(false);
-					c.startGestisciRistorante(true);
-					c.setHomepageGestioneRistoranteProprietario();
+					c.startHomepageGestioneRistoranteFrame(true);
+					c.setHomepageGestioneRistorante(true);
 				} else {
 					c.mostraErroreSelezioneDialog(pannello_Principale);
 				}
@@ -96,7 +96,7 @@ public class RistorantiProprietarioFrame extends JFrame {
 		bottone_Aggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					setVisible(false);
-					c.startAggiungiRistorante();
+					c.startAggiungiRistoranteFrame();
 			}
 		});
 		bottone_Aggiungi.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -110,7 +110,7 @@ public class RistorantiProprietarioFrame extends JFrame {
 				
 				if (tabellaRistoranti.getSelectedRow()!=-1) {
 					setVisible(false);
-					c.startModificaRistorante();
+					c.startModificaRistoranteFrame();
 					c.riempiCampiModificaRistorantePage();
 				} else {
 					c.mostraErroreSelezioneDialog(pannello_Principale);
@@ -244,7 +244,7 @@ public class RistorantiProprietarioFrame extends JFrame {
 		lblLogout.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		if(JOptionPane.showConfirmDialog(pannello_Principale, lblLogout)==0) {
 			setVisible(false);
-			c.startLogin();
+			c.startLoginFrame();
 		}
 	}
 	

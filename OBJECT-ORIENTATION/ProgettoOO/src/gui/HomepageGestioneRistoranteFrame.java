@@ -72,7 +72,7 @@ public class HomepageGestioneRistoranteFrame extends JFrame {
 		bottone_Indietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startRistorantiProprietario();
+				c.startRistorantiProprietarioFrame();
 			}
 		});
 		bottone_Indietro.setIcon(new ImageIcon(HomepageProprietarioFrame.class.getResource("/resources/btnIndietro.png")));
@@ -98,7 +98,7 @@ public class HomepageGestioneRistoranteFrame extends JFrame {
 		bottone_Home.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startHomepageProprietario();
+				c.startHomepageProprietarioFrame();
 			}
 		});
 		bottone_Home.setIcon(new ImageIcon(HomepageProprietarioFrame.class.getResource("/resources/btnHome.png")));
@@ -132,8 +132,10 @@ public class HomepageGestioneRistoranteFrame extends JFrame {
 				setVisible(false);
 				if(!proprietario) {
 					c.startInformazioniRistorante(false);
+					c.setInformazioniRistorante(false);
 				} else {
 					c.startInformazioniRistorante(true);
+					c.setInformazioniRistorante(true);
 				}
 			}
 		});
@@ -218,7 +220,7 @@ public class HomepageGestioneRistoranteFrame extends JFrame {
 		lblLogout.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		if(JOptionPane.showConfirmDialog(pannello_Principale, lblLogout)==0) {
 			setVisible(false);
-			c.startLogin();
+			c.startLoginFrame();
 		}
 	}
 	

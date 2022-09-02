@@ -65,7 +65,7 @@ public class HomepageProprietarioFrame extends JFrame {
 		bottone_IMieiRistoranti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startRistorantiProprietario();
+				c.startRistorantiProprietarioFrame();
 				
 			}
 		});
@@ -201,7 +201,7 @@ public class HomepageProprietarioFrame extends JFrame {
 		lblLogout.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		if(JOptionPane.showConfirmDialog(pannello_Principale, lblLogout)==0) {
 			setVisible(false);
-			c.startLogin();
+			c.startLoginFrame();
 		}
 	}
 	

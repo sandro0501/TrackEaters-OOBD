@@ -47,15 +47,6 @@ public class InfoRistoranteFrame extends JFrame {
 	private JLabel etichettaEmail;
 	private JLabel etichettaSitoWeb;
 	
-		
-	public JTable getTabellaCamerieri() {
-		return tabellaCamerieri;
-	}
-
-	public void setTabellaCamerieri(JTable tabellaCamerieri) {
-		this.tabellaCamerieri = tabellaCamerieri;
-	}
-	
 	public InfoRistoranteFrame(Controller c, boolean proprietario) {
 		
 		theController = c;
@@ -84,7 +75,7 @@ public class InfoRistoranteFrame extends JFrame {
 		bottone_Indietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.mostraGestisciRistoranteFrame();
+				c.mostraGestioneRistoranteFrame();
 			}
 		});
 		bottone_Indietro.setIcon(new ImageIcon(HomepageProprietarioFrame.class.getResource("/resources/btnIndietro.png")));
@@ -107,7 +98,7 @@ public class InfoRistoranteFrame extends JFrame {
 		bottone_Home.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.mostraGestisciRistoranteFrame();
+				c.mostraGestioneRistoranteFrame();
 			}
 		});
 		bottone_Home.setIcon(new ImageIcon(HomepageProprietarioFrame.class.getResource("/resources/btnHome.png")));
@@ -122,7 +113,64 @@ public class InfoRistoranteFrame extends JFrame {
 		pannello_Navigazione.add(lblDataEOra);
 		lblDataEOra.setFont(new Font("Segoe UI", Font.BOLD, 25));
 		lblDataEOra.setHorizontalAlignment(SwingConstants.CENTER);
-		this.mostraDataEOra();
+		c.mostraDataEOra(lblDataEOra);
+		
+		etichettaNome = new JLabel("denominazione");
+		etichettaNome.setIcon(new ImageIcon(InfoRistoranteFrame.class.getResource("/resources/restaurantIcon.png")));
+		etichettaNome.setForeground(new Color(0, 0, 127));
+		etichettaNome.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		etichettaNome.setBounds(36, 91, 851, 30);
+		pannello_Principale.add(etichettaNome);
+		
+		etichettaIndirizzo = new JLabel("indirizzo");
+		etichettaIndirizzo.setIcon(new ImageIcon(InfoRistoranteFrame.class.getResource("/resources/addressIcon.png")));
+		etichettaIndirizzo.setForeground(new Color(0, 0, 127));
+		etichettaIndirizzo.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		etichettaIndirizzo.setBounds(36, 131, 469, 30);
+		pannello_Principale.add(etichettaIndirizzo);
+		
+		etichettaCitta = new JLabel("citta");
+		etichettaCitta.setIcon(new ImageIcon(InfoRistoranteFrame.class.getResource("/resources/cityIcon.png")));
+		etichettaCitta.setForeground(new Color(0, 0, 127));
+		etichettaCitta.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		etichettaCitta.setBounds(522, 131, 292, 30);
+		pannello_Principale.add(etichettaCitta);
+		
+		etichettaProvincia = new JLabel("provincia");
+		etichettaProvincia.setIcon(new ImageIcon(InfoRistoranteFrame.class.getResource("/resources/cityIcon.png")));
+		etichettaProvincia.setForeground(new Color(0, 0, 127));
+		etichettaProvincia.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		etichettaProvincia.setBounds(839, 131, 200, 30);
+		pannello_Principale.add(etichettaProvincia);
+		
+		etichettaCap = new JLabel("cap");
+		etichettaCap.setIcon(new ImageIcon(InfoRistoranteFrame.class.getResource("/resources/capIcon.png")));
+		etichettaCap.setForeground(new Color(0, 0, 127));
+		etichettaCap.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		etichettaCap.setBounds(1049, 131, 161, 30);
+		pannello_Principale.add(etichettaCap);
+		
+		etichettaTelefono = new JLabel("telefono");
+		etichettaTelefono.setIcon(new ImageIcon(InfoRistoranteFrame.class.getResource("/resources/telephoneIcon.png")));
+		etichettaTelefono.setForeground(new Color(0, 0, 127));
+		etichettaTelefono.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		etichettaTelefono.setBounds(36, 171, 696, 30);
+		pannello_Principale.add(etichettaTelefono);
+		
+		etichettaEmail = new JLabel("email");
+		etichettaEmail.setIcon(new ImageIcon(InfoRistoranteFrame.class.getResource("/resources/mailicon.png")));
+		etichettaEmail.setForeground(new Color(0, 0, 127));
+		etichettaEmail.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		etichettaEmail.setBounds(36, 211, 682, 30);
+		pannello_Principale.add(etichettaEmail);
+		
+		etichettaSitoWeb = new JLabel("sitoweb");
+		etichettaSitoWeb.setIcon(new ImageIcon(InfoRistoranteFrame.class.getResource("/resources/websiteIcon.png")));
+		etichettaSitoWeb.setForeground(new Color(0, 0, 127));
+		etichettaSitoWeb.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		etichettaSitoWeb.setBounds(36, 251, 798, 30);
+		pannello_Principale.add(etichettaSitoWeb);
+		
 		setTabellaCamerieri();
 
 	}
@@ -138,15 +186,15 @@ public class InfoRistoranteFrame extends JFrame {
 		tabellaCamerieri.setForeground(new Color(0, 0, 128));
 		tabellaCamerieri.setBackground(Color.WHITE);
 		tabellaCamerieri.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		modelloTabella.addColumn("Documento");
+		modelloTabella.addColumn("N.CID");
 		modelloTabella.addColumn("Nome");
 		modelloTabella.addColumn("Cognome");
 		modelloTabella.addColumn("Data nascita");
 		modelloTabella.addColumn("Sesso");
-		modelloTabella.addColumn("Città nascita");
-		modelloTabella.addColumn("Provincia nascita");
-		modelloTabella.addColumn("Città residenza");
-		modelloTabella.addColumn("Provincia residenza");
+		modelloTabella.addColumn("Citta' nascita");
+		modelloTabella.addColumn("Prov. nascita");
+		modelloTabella.addColumn("Citta' residenza");
+		modelloTabella.addColumn("Prov. residenza");
 		modelloTabella.addColumn("Telefono");
 		modelloTabella.addColumn("Email");
 		tabellaCamerieri.setModel(modelloTabella);
@@ -161,58 +209,28 @@ public class InfoRistoranteFrame extends JFrame {
 		tabellaCamerieri.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPaneTabellaCamerieri.setViewportView(tabellaCamerieri);
 		
-		etichettaNome = new JLabel("");
-		etichettaNome.setForeground(new Color(0, 0, 127));
-		etichettaNome.setFont(new Font("Segoe UI", Font.ITALIC, 27));
-		etichettaNome.setBounds(36, 69, 400, 30);
-		pannello_Principale.add(etichettaNome);
+		JLabel etichetta_InfoRistorante = new JLabel("");
+		etichetta_InfoRistorante.setIcon(new ImageIcon(InfoRistoranteFrame.class.getResource("/resources/InformazioniRistorante_Title.png")));
+		etichetta_InfoRistorante.setHorizontalAlignment(SwingConstants.CENTER);
+		etichetta_InfoRistorante.setFont(new Font("Tahoma", Font.BOLD, 20));
+		etichetta_InfoRistorante.setBounds(387, 28, 490, 52);
+		pannello_Principale.add(etichetta_InfoRistorante);
 		
-		etichettaIndirizzo = new JLabel("");
-		etichettaIndirizzo.setForeground(new Color(0, 0, 127));
-		etichettaIndirizzo.setFont(new Font("Segoe UI", Font.ITALIC, 27));
-		etichettaIndirizzo.setBounds(36, 135, 317, 30);
-		pannello_Principale.add(etichettaIndirizzo);
-		
-		etichettaCitta = new JLabel("");
-		etichettaCitta.setForeground(new Color(0, 0, 127));
-		etichettaCitta.setFont(new Font("Segoe UI", Font.ITALIC, 27));
-		etichettaCitta.setBounds(394, 135, 304, 30);
-		pannello_Principale.add(etichettaCitta);
-		
-		etichettaProvincia = new JLabel("");
-		etichettaProvincia.setForeground(new Color(0, 0, 127));
-		etichettaProvincia.setFont(new Font("Segoe UI", Font.ITALIC, 27));
-		etichettaProvincia.setBounds(748, 135, 297, 30);
-		pannello_Principale.add(etichettaProvincia);
-		
-		etichettaCap = new JLabel("");
-		etichettaCap.setForeground(new Color(0, 0, 127));
-		etichettaCap.setFont(new Font("Segoe UI", Font.ITALIC, 27));
-		etichettaCap.setBounds(1083, 135, 155, 30);
-		pannello_Principale.add(etichettaCap);
-		
-		etichettaTelefono = new JLabel("");
-		etichettaTelefono.setForeground(new Color(0, 0, 127));
-		etichettaTelefono.setFont(new Font("Segoe UI", Font.ITALIC, 27));
-		etichettaTelefono.setBounds(36, 196, 286, 30);
-		pannello_Principale.add(etichettaTelefono);
-		
-		etichettaEmail = new JLabel("");
-		etichettaEmail.setForeground(new Color(0, 0, 127));
-		etichettaEmail.setFont(new Font("Segoe UI", Font.ITALIC, 27));
-		etichettaEmail.setBounds(338, 194, 400, 35);
-		pannello_Principale.add(etichettaEmail);
-		
-		etichettaSitoWeb = new JLabel("");
-		etichettaSitoWeb.setForeground(new Color(0, 0, 127));
-		etichettaSitoWeb.setFont(new Font("Segoe UI", Font.ITALIC, 27));
-		etichettaSitoWeb.setBounds(748, 196, 450, 30);
-		pannello_Principale.add(etichettaSitoWeb);
-		
-		JLabel etichettaCamerieri = new JLabel("Camerieri");
-		etichettaCamerieri.setHorizontalAlignment(SwingConstants.CENTER);
-		etichettaCamerieri.setBounds(497, 295, 270, 30);
-		pannello_Principale.add(etichettaCamerieri);
+		JLabel etichetta_InfoRistorante_1 = new JLabel("");
+		etichetta_InfoRistorante_1.setIcon(new ImageIcon(InfoRistoranteFrame.class.getResource("/resources/Camerieri_Title.png")));
+		etichetta_InfoRistorante_1.setHorizontalAlignment(SwingConstants.CENTER);
+		etichetta_InfoRistorante_1.setFont(new Font("Tahoma", Font.BOLD, 20));
+		etichetta_InfoRistorante_1.setBounds(387, 280, 490, 52);
+		pannello_Principale.add(etichetta_InfoRistorante_1);
+	}
+	
+	private void mostraLogoutDialog(Controller c) {
+		JLabel lblLogout = new JLabel("Sei sicuro di voler uscire?");
+		lblLogout.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		if(JOptionPane.showConfirmDialog(pannello_Principale, lblLogout)==0) {
+			setVisible(false);
+			c.startLoginFrame();
+		}
 	}
 	
 	public void setModel(DefaultTableModel model) {
@@ -223,16 +241,25 @@ public class InfoRistoranteFrame extends JFrame {
 		return modelloTabella;
 	}
 	
+	public JTable getTabellaCamerieri() {
+		return tabellaCamerieri;
+	}
+
+	public void setTabellaCamerieri(JTable tabellaCamerieri) {
+		this.tabellaCamerieri = tabellaCamerieri;
+	}
+	
+	
 	public void setNome(String nomeRistorante) {
-		etichettaNome.setText("Nome: "+ nomeRistorante);
+		etichettaNome.setText("Denominazione: "+ nomeRistorante);
 	}
 	
 	public void setIndirizzo(String indirizzoRistorante) {
 		etichettaIndirizzo.setText("Indirizzo: "+ indirizzoRistorante);
 	}
 	
-	public void setCittà(String cittàRistorante) {
-		etichettaCitta.setText("Citta\': "+ cittàRistorante);
+	public void setCitta(String cittaRistorante) {
+		etichettaCitta.setText("Citta\': "+ cittaRistorante);
 	}
 	
 	public void setProvincia(String provinciaRistorante) {
@@ -253,41 +280,5 @@ public class InfoRistoranteFrame extends JFrame {
 	
 	public void setSitoWeb(String sitoWebRistorante) {
 		etichettaSitoWeb.setText("Sito Web: "+ sitoWebRistorante);
-	}
-	
-	public void mostraDataEOra() {
-		Thread clock = new Thread() {
-			public void run() {
-				try {
-					for(;;) {
-						Calendar cal = new GregorianCalendar();
-						int giorno = cal.get(Calendar.DAY_OF_MONTH);
-						int mese = cal.get(Calendar.MONTH)+1;
-						int anno = cal.get(Calendar.YEAR);
-						int seconds = cal.get(Calendar.SECOND);
-						int minutes = cal.get(Calendar.MINUTE);
-						int hour = cal.get(Calendar.HOUR_OF_DAY);
-						String minuti = String.format("%02d", minutes);
-						String secondi = String.format("%02d", seconds);
-						String ore = String.format("%02d", hour);
-						
-						lblDataEOra.setText(giorno+"/"+mese+"/"+anno+" - "+ore+":"+minuti+":"+secondi);
-						sleep(1000);
-					}
-				} catch (InterruptedException e) {
-					
-				}
-			}
-		};
-		clock.start();
-	}
-	
-	private void mostraLogoutDialog(Controller c) {
-		JLabel lblLogout = new JLabel("Sei sicuro di voler uscire?");
-		lblLogout.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		if(JOptionPane.showConfirmDialog(pannello_Principale, lblLogout)==0) {
-			setVisible(false);
-			c.startLogin();
-		}
 	}
 }

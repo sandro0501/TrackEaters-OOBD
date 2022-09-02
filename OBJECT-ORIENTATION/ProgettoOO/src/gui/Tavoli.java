@@ -128,10 +128,10 @@ public class Tavoli extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (proprietario) {
 					setVisible(false);
-					c.startHomepageProprietario();
+					c.startHomepageProprietarioFrame();
 				} else {
 					setVisible(false);
-					c.startGestisciRistorante(proprietario);
+					c.startHomepageGestioneRistoranteFrame(proprietario);
 				}
 			}
 		});
@@ -161,7 +161,7 @@ public class Tavoli extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler uscire?")==0) {
 					setVisible(false);
-					c.startLogin();
+					c.startLoginFrame();
 				}
 			}
 		});

@@ -272,7 +272,7 @@ public class ModificaRistoranteFrame extends JFrame {
 											campo_SitoWeb.getText());
 						flushTextfields();
 						setVisible(false);
-						c.startRistorantiProprietario();
+						c.startRistorantiProprietarioFrame();
 					}
 				}
 			}
@@ -305,7 +305,7 @@ public class ModificaRistoranteFrame extends JFrame {
 		lblAnnulla.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		if (JOptionPane.showConfirmDialog(pannello_Principale, lblAnnulla)==0) {
 			setVisible(false);
-			c.startRistorantiProprietario();
+			c.startRistorantiProprietarioFrame();
 		}
 	}
 

@@ -59,7 +59,7 @@ public class GestioneSaleETavolateFrame extends JFrame {
 		bottone_Indietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.mostraGestisciRistoranteFrame();
+				c.mostraGestioneRistoranteFrame();
 			}
 		});
 		bottone_Indietro.setIcon(new ImageIcon(HomepageProprietarioFrame.class.getResource("/resources/btnIndietro.png")));
@@ -82,7 +82,7 @@ public class GestioneSaleETavolateFrame extends JFrame {
 		bottone_Home.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);				
-				c.mostraGestisciRistoranteFrame();
+				c.mostraGestioneRistoranteFrame();
 			}
 		});
 		bottone_Home.setIcon(new ImageIcon(HomepageProprietarioFrame.class.getResource("/resources/btnHome.png")));
@@ -134,7 +134,7 @@ public class GestioneSaleETavolateFrame extends JFrame {
 		lblLogout.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		if(JOptionPane.showConfirmDialog(pannello_Principale, lblLogout)==0) {
 			setVisible(false);
-			c.startLogin();
+			c.startLoginFrame();
 		}
 	}
 

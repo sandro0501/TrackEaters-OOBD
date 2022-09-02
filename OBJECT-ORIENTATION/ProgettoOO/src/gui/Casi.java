@@ -121,7 +121,7 @@ public class Casi extends JFrame {
 		bottone_Home.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				setVisible(false);
-				c.startHomepageProprietario();
+				c.startHomepageProprietarioFrame();
 			}
 		});
 		if (!proprietario) {
@@ -136,10 +136,10 @@ public class Casi extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(!proprietario) {
 					setVisible(false);
-					c.startHomepageProprietario();
+					c.startHomepageProprietarioFrame();
 				} else {
 					setVisible(false);
-					c.startGestisciRistorante(proprietario);
+					c.startHomepageGestioneRistoranteFrame(proprietario);
 				}
 			}
 		});
@@ -158,7 +158,7 @@ public class Casi extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler uscire?")==0) {
 					setVisible(false);
-					c.startLogin();
+					c.startLoginFrame();
 				}
 			}
 		});

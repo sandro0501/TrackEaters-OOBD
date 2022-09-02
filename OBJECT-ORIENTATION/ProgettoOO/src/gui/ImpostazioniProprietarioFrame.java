@@ -249,7 +249,7 @@ public class ImpostazioniProprietarioFrame extends JFrame {
 						c.updateProprietario(campo_Nome.getText(), campo_Cognome.getText(), campo_Username.getText(), campo_Email.getText(), password_Password.getText());
 						flushTextfields();
 						setVisible(false);
-						c.startHomepageProprietario();
+						c.startHomepageProprietarioFrame();
 					}
 				}
 			}
@@ -287,7 +287,7 @@ public class ImpostazioniProprietarioFrame extends JFrame {
 		lblAnnulla.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		if (JOptionPane.showConfirmDialog(pannello_Principale, lblAnnulla)==0) {
 			setVisible(false);
-			c.startHomepageProprietario();
+			c.startHomepageProprietarioFrame();
 		}
 	}
 

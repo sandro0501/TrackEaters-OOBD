@@ -107,7 +107,7 @@ public class Camerieri extends JFrame {
 			bottone_Home.addActionListener(new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
 					setVisible(false);
-					c.startHomepageProprietario();
+					c.startHomepageProprietarioFrame();
 				}
 			});
 		}
@@ -119,7 +119,7 @@ public class Camerieri extends JFrame {
 		bottone_Indietro.addActionListener(new ActionListener () {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startGestisciRistorante(proprietario);
+				c.startHomepageGestioneRistoranteFrame(proprietario);
 			}
 		});
 		bottone_Indietro.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -137,7 +137,7 @@ public class Camerieri extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler uscire?")==0) {
 					setVisible(false);
-					c.startLogin();
+					c.startLoginFrame();
 				}
 			}
 		});

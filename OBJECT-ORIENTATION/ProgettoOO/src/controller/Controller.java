@@ -70,7 +70,7 @@ public class Controller {
 	
 	public static void main(String[] args) {
 		Controller c = new Controller();
-		c.startLogin();
+		c.startLoginFrame();
 	}
 	
 	/*-----------------------------------------------------------------------------------------------------------------------------*/
@@ -85,7 +85,7 @@ public class Controller {
 				//loggato come proprietario
 				proprietario = new Proprietario(operatore.getUsername(),operatore.getPassword(),operatore.getNome(),operatore.getCognome(),operatore.getEmail());
 				mostraEsitoCorrettoLogin(tipoOperatore, proprietario);
-				startHomepageProprietario();	
+				startHomepageProprietarioFrame();	
 			}
 			else
 			{
@@ -95,8 +95,10 @@ public class Controller {
 				Ristorante r = ristoranteDAO.getRistoranteFromUsernameManager(managerRistorante.getUsername());
 				managerRistorante.setRistoranteGestito(r);
 				mostraEsitoCorrettoLogin(tipoOperatore, operatore);
-				startHomepageGestioneRistorante(false);
-				setHomepageGestioneRistoranteManager(managerRistorante);		
+				
+				//avvio homepage managerRistorante
+				startHomepageGestioneRistoranteFrame(false);
+				setHomepageGestioneRistorante(false);		
 			}
 		} catch (Exception e) {
 			mostraErroreLogin();
@@ -247,10 +249,60 @@ public class Controller {
 		}
 	}
 	
-	public void setInformazioniRistorante(Ristorante ristorante) {
+	/*metodo che setta homepage gestione ristorante per manager e proprietario*/
+	public void setHomepageGestioneRistorante(boolean isProprietario) {
+		ManagerRistorante manager = null;
+		
+		if(isProprietario)
+		{
+			JTable tabellaRistoranti = ristorantiProprietarioPage.getTabellaRistoranti();
+			String denominazione = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString();
+			String indirizzo = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 1).toString();
+			int codRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(denominazione,indirizzo);
+			manager = managerRistoranteDAO.getInformazioniManagerByCodRistorante(codRistorante);
+			
+			gestioneRistorantePage.setLblDenominazioneRistorante("Ristorante "+"\""+denominazione+"\"");
+			if(manager != null) 
+			{
+				gestioneRistorantePage.getLblUsernameManager().setText(manager.getUsername()+" - "+manager.getNome()+" "+manager.getCognome());
+				gestioneRistorantePage.getLblEmailManager().setText(manager.getEmail());
+				gestioneRistorantePage.getLblTelefonoManager().setText(managerRistoranteDAO.getTelefonoManagerByUsername(manager.getUsername()));
+			}
+			else //il ristorante non ha manager
+			{
+				gestioneRistorantePage.getLblInfoManager().setVisible(false);
+				gestioneRistorantePage.getLblUsernameManager().setVisible(false);
+				gestioneRistorantePage.getLblEmailManager().setVisible(false);
+				gestioneRistorantePage.getLblTelefonoManager().setVisible(false);
+			}
+		}
+		else //loggato come manager
+		{
+			gestioneRistorantePage.setLblDenominazioneRistorante("Ristorante "+"\""+managerRistorante.getRistoranteGestito().getDenominazione()+"\"");
+			gestioneRistorantePage.getLblUsernameManager().setText(managerRistorante.getUsername()+" - "+managerRistorante.getNome()+" "+managerRistorante.getCognome());
+			gestioneRistorantePage.getLblEmailManager().setText(managerRistorante.getEmail());
+			gestioneRistorantePage.getLblTelefonoManager().setText(managerRistorante.getTelefono());
+		}
+	}
+
+	/*metodo che setta informazioni ristorante page per manager e proprietario*/
+	public void setInformazioniRistorante(boolean isProprietario) {
+		Ristorante ristorante = null;
+		if (isProprietario) {
+			JTable tabellaRistoranti = ristorantiProprietarioPage.getTabellaRistoranti();
+			String denominazione = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString();
+			String indirizzo = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 1).toString();
+			ristorante = ristoranteDAO.getRistoranteByDenominazioneAndIndirizzo(denominazione, indirizzo);
+			setLabelsInformazioniRistorante(ristorante);
+		} else {
+			setLabelsInformazioniRistorante(managerRistorante.getRistoranteGestito());
+		}
+	}
+
+	private void setLabelsInformazioniRistorante(Ristorante ristorante) {
 		infoRistorantePage.setNome(ristorante.getDenominazione());
 		infoRistorantePage.setIndirizzo(ristorante.getIndirizzo());
-		infoRistorantePage.setCittà(ristorante.getCitta());
+		infoRistorantePage.setCitta(ristorante.getCitta());
 		infoRistorantePage.setProvincia(ristorante.getProvincia());
 		infoRistorantePage.setCap(ristorante.getCap());
 		infoRistorantePage.setTelefono(ristorante.getTelefono());
@@ -258,36 +310,6 @@ public class Controller {
 		infoRistorantePage.setSitoWeb(ristorante.getSitoWeb());
 	}
 	
-	public void setHomepageGestioneRistoranteProprietario() {
-		JTable tabellaRistoranti = ristorantiProprietarioPage.getTabellaRistoranti();
-		String denominazione = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString();
-		String indirizzo = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 1).toString();
-		
-		int codRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(denominazione,indirizzo);
-		ManagerRistorante manager = managerRistoranteDAO.getInformazioniManagerByCodRistorante(codRistorante);
-		
-		gestioneRistorantePage.setLblDenominazioneRistorante("Ristorante "+"\""+denominazione+"\"");
-		if(manager != null) {
-			gestioneRistorantePage.getLblUsernameManager().setText(manager.getUsername()+" - "+manager.getNome()+" "+manager.getCognome());
-			gestioneRistorantePage.getLblEmailManager().setText(manager.getEmail());
-			gestioneRistorantePage.getLblTelefonoManager().setText(managerRistoranteDAO.getTelefonoManagerByUsername(manager.getUsername()));
-		}
-		else {
-			gestioneRistorantePage.getLblInfoManager().setVisible(false);
-			gestioneRistorantePage.getLblUsernameManager().setVisible(false);
-			gestioneRistorantePage.getLblEmailManager().setVisible(false);
-			gestioneRistorantePage.getLblTelefonoManager().setVisible(false);
-		}
-		
-	}
-	
-	public void setHomepageGestioneRistoranteManager(ManagerRistorante manager) {
-		gestioneRistorantePage.setLblDenominazioneRistorante("Ristorante "+"\""+manager.getRistoranteGestito().getDenominazione()+"\"");
-		gestioneRistorantePage.getLblUsernameManager().setText(manager.getUsername()+" - "+manager.getNome()+" "+manager.getCognome());
-		gestioneRistorantePage.getLblEmailManager().setText(manager.getEmail());
-		gestioneRistorantePage.getLblTelefonoManager().setText(manager.getTelefono());
-	}
-
 		
 	
 	
@@ -296,13 +318,13 @@ public class Controller {
 	/*STARTER*/
 	
 	//starter login
-	public void startLogin(){
+	public void startLoginFrame(){
 		loginPage = new LoginFrame(this);
 		loginPage.setVisible(true);
 	}
 		
 	//starter proprietario
-	public void startHomepageProprietario() {
+	public void startHomepageProprietarioFrame() {
 		loginPage.dispose();
 		proprietarioPage = new HomepageProprietarioFrame(this); 
 		setHomepageProprietario(proprietario);
@@ -312,16 +334,9 @@ public class Controller {
 	public void mostraHomepageProprietarioFrame() { 
 		proprietarioPage.setVisible(true); 
 	}
-		
-	//starter gestione ristorante (hompage manager)
-	public void startHomepageGestioneRistorante(boolean proprietario) {
-		loginPage.dispose();
-		gestioneRistorantePage = new HomepageGestioneRistoranteFrame(this, proprietario);
-		gestioneRistorantePage.setVisible(true);
-	}
 	
 	//starter ristoranti proprietario
-	public void startRistorantiProprietario() {
+	public void startRistorantiProprietarioFrame() {
 		proprietarioPage.dispose();
 		ristorantiProprietarioPage = new RistorantiProprietarioFrame(this);
 		ristorantiProprietarioPage.setVisible(true);
@@ -329,47 +344,44 @@ public class Controller {
 	}
 	
 	//starter pagina modifica ristorante
-	public void startModificaRistorante() {
+	public void startModificaRistoranteFrame() {
 		ristorantiProprietarioPage.dispose();
 		modificaRistorantePage = new ModificaRistoranteFrame(this);
 		modificaRistorantePage.setVisible(true);
 	}
 	
 	//starter pagina aggiungi risotrante
-	public void startAggiungiRistorante() {
+	public void startAggiungiRistoranteFrame() {
 		ristorantiProprietarioPage.dispose();
 		aggiungiRistorantePage = new AggiungiRistoranteFrame(this);
 		aggiungiRistorantePage.setVisible(true);
 	}
 	
-	//starter pagina gestisci ristorante
-	public void startGestisciRistorante(boolean proprietario) {
-		ristorantiProprietarioPage.dispose();
-		gestioneRistorantePage = new HomepageGestioneRistoranteFrame(this, proprietario);
-		gestioneRistorantePage.setVisible(true);
+	//starter pagina gestione ristorante (per manager e ristorante)
+	public void startHomepageGestioneRistoranteFrame(boolean isProprietario) {
+		if(isProprietario) 
+		{
+			ristorantiProprietarioPage.dispose();
+			gestioneRistorantePage = new HomepageGestioneRistoranteFrame(this, isProprietario);
+			gestioneRistorantePage.setVisible(true);
+		}
+		else
+		{
+			loginPage.dispose();
+			gestioneRistorantePage = new HomepageGestioneRistoranteFrame(this, isProprietario);
+			gestioneRistorantePage.setVisible(true);
+		}
 	}
 	
-	public void mostraGestisciRistoranteFrame() { 
+	public void mostraGestioneRistoranteFrame() { 
 		gestioneRistorantePage.setVisible(true); 
-		setInformazioniRistorante(null);
 	}
 	
 	//starter pagina informazioni ristorante
-	public void startInformazioniRistorante(boolean proprietario) {
-		JTable tabellaRistoranti = ristorantiProprietarioPage.getTabellaRistoranti();
-		Ristorante ristorante;
+	public void startInformazioniRistorante(boolean isProprietario) {
 		gestioneRistorantePage.dispose();
-		if (proprietario) {
-			String denominazione = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString();
-			String indirizzo = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 1).toString();
-			ristorante = ristoranteDAO.getRistoranteByDenominazioneAndIndirizzo(denominazione, indirizzo);
-		} else {
-			ristorante = ristoranteDAO.getRistoranteFromUsernameManager(managerRistorante.getUsername());
-		}
-		infoRistorantePage = new InfoRistoranteFrame(this, proprietario);
-		setInformazioniRistorante(ristorante);
+		infoRistorantePage = new InfoRistoranteFrame(this, isProprietario);
 		infoRistorantePage.setVisible(true);
-		
 	}
 	
 	public void startAggiungiAvventori(boolean proprietario) {

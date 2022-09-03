@@ -221,7 +221,7 @@ public class RistorantiProprietarioFrame extends JFrame {
 		modelloTabella.addColumn("Denominazione");
 		modelloTabella.addColumn("Indirizzo");
 		modelloTabella.addColumn("Telefono");
-		modelloTabella.addColumn("Citt‡");
+		modelloTabella.addColumn("Citt√†");
 		modelloTabella.addColumn("Provincia");
 		modelloTabella.addColumn("CAP");
 		modelloTabella.addColumn("Email");

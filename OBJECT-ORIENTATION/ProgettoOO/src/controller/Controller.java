@@ -165,6 +165,57 @@ public class Controller {
 		}
 	}
 	
+	
+	/*Metodo che riempie la tabella dei camerieri nella infoRistorantePage*/
+	public void riempiTabellaCamerieriPerRistorante(Boolean proprietario) {
+		
+		try {
+			ArrayList<Cameriere> listaCamerieri;
+			Ristorante ristorante;
+			
+			if (proprietario) {
+				JTable tabellaRistoranti = ristorantiProprietarioPage.getTabellaRistoranti();
+				String currentDenominazione = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString();
+				String currentIndirizzo = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 1).toString();
+				listaCamerieri = cameriereDAO.getCamerieriRistorante(getCodRistoranteForProprietarioByTabellaRistoranti());
+				ristorante = ristoranteDAO.getRistoranteByDenominazioneAndIndirizzo(currentDenominazione, currentIndirizzo);
+			} else {
+				String currentDenominazione = managerRistorante.getRistoranteGestito().getDenominazione();
+				String currentIndirizzo = managerRistorante.getRistoranteGestito().getIndirizzo();
+				listaCamerieri = cameriereDAO.getCamerieriRistorante(ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(currentDenominazione, currentIndirizzo));
+				ristorante = ristoranteDAO.getRistoranteFromUsernameManager(managerRistorante.getUsername());
+			}
+			
+			ristorante.setCamerieriRistorante(listaCamerieri);
+			DefaultTableModel model = infoRistorantePage.getModel();
+			model.getDataVector().removeAllElements();
+			String[] rigaTabella = new String[11];
+			
+			for (Cameriere cameriere : ristorante.getCamerieriRistorante()) {
+				cameriere.setLavoratoreRistorante(ristorante);
+				rigaTabella [0] = cameriere.getNumeroCid();
+				rigaTabella [1] = cameriere.getNome();
+				rigaTabella [2] = cameriere.getCognome();
+				rigaTabella [3] = cameriere.getDataDiNascita().toString();
+				rigaTabella [4] = cameriere.getSesso();
+				rigaTabella [5] = cameriere.getCittaDiNascita();
+				rigaTabella [6] = cameriere.getProvinciaDiNascita();
+				rigaTabella [7] = cameriere.getCittaDiResidenza();
+				rigaTabella [8] = cameriere.getProvinciaDiResidenza();
+				rigaTabella [9] = cameriere.getTelefono();
+				rigaTabella [10] = cameriere.getEmail();
+				model.addRow(rigaTabella);
+			}
+			
+			model.fireTableDataChanged();
+			infoRistorantePage.setModel(model);
+			
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+	
+	
 	/*metodo che recupera il codice del ristorante selezionato dalla tabella per il proprietario*/
 	public int getCodRistoranteForProprietarioByTabellaRistoranti() {
 		int codRistorante = 0;

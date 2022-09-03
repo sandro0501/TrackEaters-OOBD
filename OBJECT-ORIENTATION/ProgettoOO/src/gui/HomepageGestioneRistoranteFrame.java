@@ -133,9 +133,11 @@ public class HomepageGestioneRistoranteFrame extends JFrame {
 				if(!proprietario) {
 					c.startInfoRistoranteFrame(false);
 					c.setInformazioniRistorante(false);
+					c.riempiTabellaCamerieriPerRistorante(false);
 				} else {
 					c.startInfoRistoranteFrame(true);
 					c.setInformazioniRistorante(true);
+					c.riempiTabellaCamerieriPerRistorante(true);
 				}
 			}
 		});

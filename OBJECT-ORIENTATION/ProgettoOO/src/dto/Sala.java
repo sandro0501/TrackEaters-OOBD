@@ -4,7 +4,7 @@ public class Sala {
 	
 	private String denominazione;
 	private int capienza;
-	private Integer dimensioneInMq; //usato tipo Wrapper dato che l'attributo può essere NULL
+	private int dimensioneInMq; 
 	private String tipoSala;
 	
 	private Ristorante appartenenzaRistorante;

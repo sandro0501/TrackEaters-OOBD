@@ -20,7 +20,9 @@ public class ProprietarioOracleImplementation implements ProprietarioDAO {
 		try {
 			connessione = ConnessioneDatabase.getIstanzaConnessione().getConnessione();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Codice errore SQL: "+e.getErrorCode()); 
+			System.out.println("SQL State: "+e.getSQLState()); 
+			System.out.println("Messaggio: " +e.getMessage());
 		}
 	}
 	

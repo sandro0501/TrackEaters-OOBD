@@ -131,10 +131,10 @@ public class HomepageGestioneRistoranteFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				if(!proprietario) {
-					c.startInformazioniRistorante(false);
+					c.startInfoRistoranteFrame(false);
 					c.setInformazioniRistorante(false);
 				} else {
-					c.startInformazioniRistorante(true);
+					c.startInfoRistoranteFrame(true);
 					c.setInformazioniRistorante(true);
 				}
 			}
@@ -149,7 +149,12 @@ public class HomepageGestioneRistoranteFrame extends JFrame {
 		bottone_SaleETavolate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startSale(proprietario);
+				c.startGestioneSaleETavolateFrame(proprietario);
+				if(proprietario) {
+					c.riempiTabellaSaleRistoranteForProprietario();
+				} else {
+					c.riempiTabellaSaleRistoranteForManager();
+				}
 			}
 		});
 		bottone_SaleETavolate.setFont(new Font("Tahoma", Font.PLAIN, 11));

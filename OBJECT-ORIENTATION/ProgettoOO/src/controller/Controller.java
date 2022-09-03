@@ -47,6 +47,7 @@ public class Controller {
 	private AggiungiRistoranteFrame aggiungiRistorantePage;
 	private HomepageGestioneRistoranteFrame gestioneRistorantePage; 
 	private InfoRistoranteFrame infoRistorantePage;
+	private GestioneSaleETavolateFrame gestioneSaleETavolatePage;
 	
 	private Operatore operatore;
 	private Proprietario proprietario;
@@ -130,7 +131,7 @@ public class Controller {
 				setHomepageProprietario(proprietario);
 			}
 		} catch (Exception e) {
-			mostraErroreDB();
+			mostraErrore(e);
 		}
 	}
 	
@@ -160,8 +161,24 @@ public class Controller {
 			model.fireTableDataChanged();
 			ristorantiProprietarioPage.setModel(model);
 		} catch (Exception e) {
-			mostraErroreDB();
+			mostraErrore(e);
 		}
+	}
+	
+	/*metodo che recupera il codice del ristorante selezionato dalla tabella per il proprietario*/
+	public int getCodRistoranteForProprietarioByTabellaRistoranti() {
+		int codRistorante = 0;
+		JTable tabellaRistoranti = ristorantiProprietarioPage.getTabellaRistoranti();
+		String currentDenominazione = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString();
+		String currentIndirizzo = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 1).toString();
+		
+		try {
+			codRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(currentDenominazione,currentIndirizzo);
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+		
+		return codRistorante;
 	}
 	
 	/* metodo inserisci ristorante */
@@ -176,7 +193,7 @@ public class Controller {
 				riempiTabellaRistorantiDiProprietario(); //aggiorna la tabella dei ristoranti
 			}
 		} catch (Exception e) {
-			mostraErroreDB();
+			mostraErrore(e);
 		}
 	}
 	
@@ -193,14 +210,13 @@ public class Controller {
 				riempiTabellaRistorantiDiProprietario(); //aggiorna la tabella dei ristoranti del proprietario
 			}
 		} catch (Exception e) {
-			mostraErroreDB();
+			mostraErrore(e);
 		}
 	}
 	
 	/*metodo che riempie textfield modifica ristorante con campi della tabella*/
 	public void riempiCampiModificaRistorantePage() {
 		JTable tabellaRistoranti = ristorantiProprietarioPage.getTabellaRistoranti();
-		
 		String currentDenominazione = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString();
 		String currentIndirizzo = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 1).toString();
 		String currentTelefono = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 2).toString();
@@ -232,12 +248,8 @@ public class Controller {
 		int codRistorante;
 		boolean esitoUpdate;
 		
-		JTable tabellaRistoranti = ristorantiProprietarioPage.getTabellaRistoranti();
-		String currentDenominazione = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString();
-		String currentIndirizzo = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 1).toString();
-		
 		try {
-			codRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(currentDenominazione, currentIndirizzo);
+			codRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
 			esitoUpdate = ristoranteDAO.updateRistorante(codRistorante, denominazione, indirizzo, telefono, citta, prov, cap, email, sitoweb);
 			
 			if(esitoUpdate) {
@@ -245,7 +257,7 @@ public class Controller {
 				riempiTabellaRistorantiDiProprietario(); //aggiorna la tabella dei ristoranti del proprietario
 			}
 		} catch (Exception e) {
-			mostraErroreDB();
+			mostraErrore(e);
 		}
 	}
 	
@@ -257,8 +269,7 @@ public class Controller {
 		{
 			JTable tabellaRistoranti = ristorantiProprietarioPage.getTabellaRistoranti();
 			String denominazione = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString();
-			String indirizzo = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 1).toString();
-			int codRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(denominazione,indirizzo);
+			int codRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
 			manager = managerRistoranteDAO.getInformazioniManagerByCodRistorante(codRistorante);
 			
 			gestioneRistorantePage.setLblDenominazioneRistorante("Ristorante "+"\""+denominazione+"\"");
@@ -308,6 +319,65 @@ public class Controller {
 		infoRistorantePage.setTelefono(ristorante.getTelefono());
 		infoRistorantePage.setEmail(ristorante.getEmail());
 		infoRistorantePage.setSitoWeb(ristorante.getSitoWeb());
+	}
+	
+	public void riempiTabellaSaleRistoranteForProprietario() {
+		JTable tabellaRistoranti = ristorantiProprietarioPage.getTabellaRistoranti();
+		String denominazioneRistorante = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString();
+		String indirizzoRistorante = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 1).toString();
+		
+		try {
+			int codRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(denominazioneRistorante, indirizzoRistorante);
+			Ristorante ristoranteOfSale = ristoranteDAO.getRistoranteByDenominazioneAndIndirizzo(denominazioneRistorante, indirizzoRistorante);
+			ArrayList<Sala> saleRistorante = salaDAO.getSaleByCodRistorante(codRistorante);
+			DefaultTableModel modellotabella = gestioneSaleETavolatePage.getModel();
+			modellotabella.getDataVector().removeAllElements();
+			Object[] rigaTabella = new Object[4];
+					
+			for(Sala sala : saleRistorante) {
+				sala.setAppartenenzaRistorante(ristoranteOfSale);	
+				rigaTabella[0] = sala.getDenominazione();
+				rigaTabella[1] = sala.getCapienza();
+				if(sala.getDimensioneInMq().equals(0)) {
+					rigaTabella[2] = "-";
+				} else {
+					rigaTabella[2] = sala.getDimensioneInMq();
+				}
+					rigaTabella[3] = sala.getTipoSala();
+					modellotabella.addRow(rigaTabella);
+			}
+			modellotabella.fireTableDataChanged();
+			gestioneSaleETavolatePage.setModel(modellotabella);
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+	
+	public void riempiTabellaSaleRistoranteForManager() {
+		Ristorante ristoranteOfSale = managerRistorante.getRistoranteGestito();
+		try {
+			int codRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(ristoranteOfSale.getDenominazione(),ristoranteOfSale.getIndirizzo());
+			ArrayList<Sala> saleRistorante = salaDAO.getSaleByCodRistorante(codRistorante);
+			DefaultTableModel modellotabella = gestioneSaleETavolatePage.getModel();
+			modellotabella.getDataVector().removeAllElements();
+			Object[] rigaTabella = new Object[4];
+			for(Sala sala : saleRistorante) {
+				sala.setAppartenenzaRistorante(ristoranteOfSale);	
+				rigaTabella[0] = sala.getDenominazione();
+				rigaTabella[1] = sala.getCapienza();
+				if(sala.getDimensioneInMq().equals(0)) {
+					rigaTabella[2] = "-";
+				} else {
+					rigaTabella[2] = sala.getDimensioneInMq(); 
+				}
+				rigaTabella[3] = sala.getTipoSala();
+				modellotabella.addRow(rigaTabella);
+			}
+			modellotabella.fireTableDataChanged();
+			gestioneSaleETavolatePage.setModel(modellotabella);
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
 	}
 	
 		
@@ -378,10 +448,17 @@ public class Controller {
 	}
 	
 	//starter pagina informazioni ristorante
-	public void startInformazioniRistorante(boolean isProprietario) {
+	public void startInfoRistoranteFrame(boolean isProprietario) {
 		gestioneRistorantePage.dispose();
 		infoRistorantePage = new InfoRistoranteFrame(this, isProprietario);
 		infoRistorantePage.setVisible(true);
+	}
+	
+	//starter pagina gestione sale
+	public void startGestioneSaleETavolateFrame(boolean proprietario) {
+		gestioneRistorantePage.dispose();
+		gestioneSaleETavolatePage = new GestioneSaleETavolateFrame(this, proprietario);
+		gestioneSaleETavolatePage.setVisible(true);
 	}
 	
 	public void startAggiungiAvventori(boolean proprietario) {
@@ -478,11 +555,6 @@ public class Controller {
 		Modifica_Tavolo modificaTavoloPage = new Modifica_Tavolo(this, proprietario);
 		modificaTavoloPage.setVisible(true);
 	}
-
-	public void startSale(boolean proprietario) {
-		GestioneSaleETavolateFrame salePage = new GestioneSaleETavolateFrame(this, proprietario);
-		salePage.setVisible(true);
-	}
 	
 	public void startStatistiche(boolean proprietario, boolean generale) {
 		Statistiche statistichePage = new Statistiche(this, proprietario, generale);
@@ -532,14 +604,14 @@ public class Controller {
 		JOptionPane.showMessageDialog(null,lblEsitoInserimento,"Eliminazione effettuata",JOptionPane.INFORMATION_MESSAGE);
 	}
 	
-	public void mostraErroreDB() {
-		JLabel lblerroreDB = new JLabel("ERRORE: errore col database");
+	public void mostraErrore(Exception e) {
+		JLabel lblerroreDB = new JLabel("ERRORE GENERICO: "+e.getMessage());
 		lblerroreDB.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		JOptionPane.showMessageDialog(null,lblerroreDB,"Errore",JOptionPane.ERROR_MESSAGE);
 	}
 	
 	public void mostraErroreSelezioneDialog(JPanel pannello_Principale) {
-		JLabel lblErrore = new JLabel("Attenzione: nessun ristorante selezionato!");
+		JLabel lblErrore = new JLabel("Attenzione: non hai selezionato una riga della tabella per cui effettuare l'operazione!");
 		lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		JOptionPane.showMessageDialog(pannello_Principale, lblErrore, "Attenzione", JOptionPane.WARNING_MESSAGE);
 	}

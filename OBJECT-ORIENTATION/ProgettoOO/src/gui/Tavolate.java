@@ -148,7 +148,7 @@ public class Tavolate extends JFrame {
 		bottone_Indietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startTavoli(proprietario);
+				c.startGestioneTavoliFrame(proprietario);
 			}
 		});
 		bottone_Indietro.setFont(new Font("Tahoma", Font.BOLD, 12));

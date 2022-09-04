@@ -41,13 +41,15 @@ public class Controller {
 	
 	private LoginFrame loginPage;
 	private HomepageProprietarioFrame proprietarioPage;
-	private ImpostazioniProprietarioFrame impostazioniProprietarioPage;
 	private RistorantiProprietarioFrame ristorantiProprietarioPage;
 	private ModificaRistoranteFrame modificaRistorantePage;
 	private AggiungiRistoranteFrame aggiungiRistorantePage;
 	private HomepageGestioneRistoranteFrame gestioneRistorantePage; 
 	private InfoRistoranteFrame infoRistorantePage;
 	private GestioneSaleETavolateFrame gestioneSaleETavolatePage;
+	private AggiungiSalaFrame aggiungiSalaPage;
+	private ModificaSalaFrame modificaSalaPage;
+	private GestioneTavoliFrame tavoliPage;
 	
 	private Operatore operatore;
 	private Proprietario proprietario;
@@ -389,13 +391,9 @@ public class Controller {
 				sala.setAppartenenzaRistorante(ristoranteOfSale);	
 				rigaTabella[0] = sala.getDenominazione();
 				rigaTabella[1] = sala.getCapienza();
-				if(sala.getDimensioneInMq().equals(0)) {
-					rigaTabella[2] = "-";
-				} else {
-					rigaTabella[2] = sala.getDimensioneInMq();
-				}
-					rigaTabella[3] = sala.getTipoSala();
-					modellotabella.addRow(rigaTabella);
+				rigaTabella[2] = sala.getDimensioneInMq();
+				rigaTabella[3] = sala.getTipoSala();
+				modellotabella.addRow(rigaTabella);
 			}
 			modellotabella.fireTableDataChanged();
 			gestioneSaleETavolatePage.setModel(modellotabella);
@@ -416,11 +414,7 @@ public class Controller {
 				sala.setAppartenenzaRistorante(ristoranteOfSale);	
 				rigaTabella[0] = sala.getDenominazione();
 				rigaTabella[1] = sala.getCapienza();
-				if(sala.getDimensioneInMq().equals(0)) {
-					rigaTabella[2] = "-";
-				} else {
-					rigaTabella[2] = sala.getDimensioneInMq(); 
-				}
+				rigaTabella[2] = sala.getDimensioneInMq(); 
 				rigaTabella[3] = sala.getTipoSala();
 				modellotabella.addRow(rigaTabella);
 			}
@@ -430,6 +424,77 @@ public class Controller {
 			mostraErrore(e);
 		}
 	}
+	
+	/* metodo inserisci sala */
+	public void insertSala(String denominazione, int capienza, int dimensioneMq, String tipologia) {
+		boolean esitoInsert;
+		int codRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
+
+		try {
+			esitoInsert = salaDAO.insertSala(denominazione, capienza, dimensioneMq, tipologia, codRistorante);
+			if(esitoInsert) {
+				mostraEsitoCorrettoInsert();
+				riempiTabellaSaleRistoranteForProprietario(); //aggiorna la tabella 
+			}
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+	
+	public void riempiCampiModificaSalaPage() {
+		JTable tabellaSale = gestioneSaleETavolatePage.getTabellaSaleRistorante();
+		String currentDenominazione = tabellaSale.getModel().getValueAt(tabellaSale.getSelectedRow(), 0).toString();
+		int currentCapienza =  (int) tabellaSale.getModel().getValueAt(tabellaSale.getSelectedRow(), 1);
+		int currentDimensione = (int) tabellaSale.getModel().getValueAt(tabellaSale.getSelectedRow(), 2);
+		String currentTipologia = tabellaSale.getModel().getValueAt(tabellaSale.getSelectedRow(), 3).toString();
+		
+		modificaSalaPage.getCampo_Denominazione().setText(currentDenominazione);
+		modificaSalaPage.getCampo_CapienzaAvventori().setValue(currentCapienza);
+		modificaSalaPage.getCampo_DimensioneMq().setValue(currentDimensione);
+		modificaSalaPage.getCampo_TipologiaSala().setSelectedItem(currentTipologia);
+		
+	}
+	
+	/* metodo modifica sala */
+	public void updateSala(String denominazione, int capienza, int dimensioneMq, String tipologia) {
+		int codSala;
+		boolean esitoUpdate;
+		JTable tabellaSale = gestioneSaleETavolatePage.getTabellaSaleRistorante();
+		String currentDenominazione = tabellaSale.getModel().getValueAt(tabellaSale.getSelectedRow(), 0).toString();
+		int currentCapienza =  (int) tabellaSale.getModel().getValueAt(tabellaSale.getSelectedRow(), 1);
+		
+		try {
+			codSala = salaDAO.getCodiceSalaByDenominazioneAndCapienza(currentDenominazione, currentCapienza);
+			esitoUpdate = salaDAO.updateSala(codSala, denominazione, capienza, dimensioneMq, tipologia);
+			
+			if(esitoUpdate) {
+				mostraEsitoCorrettoUpdate();
+				riempiTabellaSaleRistoranteForProprietario(); //aggiorna la tabella 
+			}
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+	
+	/*metodo elimina sala*/
+	public void deleteSala(String denominazione, int capienza) {
+		int codSala;
+		boolean esitoDelete;
+		
+		try {
+			codSala = salaDAO.getCodiceSalaByDenominazioneAndCapienza(denominazione,capienza);
+			esitoDelete = salaDAO.deleteSala(codSala);
+			
+			if(esitoDelete) {
+				mostraEsitoCorrettoDelete();
+				riempiTabellaSaleRistoranteForProprietario(); //aggiorna la tabella 
+			}
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+	
+	
 	
 		
 	
@@ -506,11 +571,41 @@ public class Controller {
 	}
 	
 	//starter pagina gestione sale
-	public void startGestioneSaleETavolateFrame(boolean proprietario) {
+	public void startGestioneSaleETavolateFrame(boolean isProprietario) {
 		gestioneRistorantePage.dispose();
-		gestioneSaleETavolatePage = new GestioneSaleETavolateFrame(this, proprietario);
+		gestioneSaleETavolatePage = new GestioneSaleETavolateFrame(this, isProprietario);
 		gestioneSaleETavolatePage.setVisible(true);
 	}
+	
+	public void mostraGestioneSaleETavolateFrame() { 
+		gestioneSaleETavolatePage.setVisible(true); 
+	}
+	
+	//starter pagina aggiungi sala 
+	public void startAggiungiSalaFrame(boolean isProprietario) {
+		gestioneSaleETavolatePage.dispose();
+		aggiungiSalaPage = new AggiungiSalaFrame(this,isProprietario);
+		aggiungiSalaPage.setVisible(true);
+	}
+	
+	//starter pagina modifica sala 
+	public void startModificaSalaFrame(boolean isProprietario) {
+		gestioneSaleETavolatePage.dispose();
+		modificaSalaPage = new ModificaSalaFrame(this, isProprietario);
+		modificaSalaPage.setVisible(true);
+	}
+	
+	//starter pagina gestione tavoli
+	public void startGestioneTavoliFrame(boolean isProprietario) {
+		gestioneSaleETavolatePage.dispose();
+		tavoliPage = new GestioneTavoliFrame(this, isProprietario);
+		tavoliPage.setVisible(true);
+	}
+	
+	public void mostraGestioneTavoliFrame() { 
+		tavoliPage.setVisible(true); 
+	}
+	
 	
 	public void startAggiungiAvventori(boolean proprietario) {
 		Aggiungi_Avventori aggiungiAvventoriPage = new Aggiungi_Avventori(this, proprietario);
@@ -532,11 +627,7 @@ public class Controller {
 		aggiungiManagerPage.setVisible(true);
 	}
 	
-	public void startAggiungiSala(boolean proprietario) {
-		Aggiungi_Sala aggiungiSalaPage = new Aggiungi_Sala(this, proprietario);
-		aggiungiSalaPage.setVisible(true);
-	}
-	
+
 	public void startAggiungiTavolata(boolean proprietario) {
 		Aggiungi_Tavolata aggiungiTavolataPage = new Aggiungi_Tavolata(this, proprietario);
 		aggiungiTavolataPage.setVisible(true);
@@ -592,11 +683,6 @@ public class Controller {
 		modificaManagerPage.setVisible(true);
 	}
 	
-	public void startModificaSala(boolean proprietario) {
-		Modifica_Sala modificaSalaPage = new Modifica_Sala(this, proprietario);
-		modificaSalaPage.setVisible(true);
-	}
-	
 	public void startModificaTavolata(boolean proprietario) {
 		Modifica_Tavolata modificaTavolataPage = new Modifica_Tavolata(this, proprietario);
 		modificaTavolataPage.setVisible(true);
@@ -617,10 +703,7 @@ public class Controller {
 		tavolatePage.setVisible(true);
 	}
 	
-	public void startTavoli(boolean proprietario) {
-		Tavoli tavoliPage = new Tavoli(this, proprietario);
-		tavoliPage.setVisible(true);
-	}
+
 	
 	/*------------------------------------------------------------------------------------------------------------------------*/
 	//gestione delle message dialog utente 

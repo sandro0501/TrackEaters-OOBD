@@ -30,7 +30,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.Controller;
 
-public class GestioneSaleETavolateFrame extends JFrame {
+public class GestioneTavoliFrame extends JFrame {
 
 	private JPanel pannello_Principale;
 	private Controller theController;
@@ -39,12 +39,12 @@ public class GestioneSaleETavolateFrame extends JFrame {
 	private JTable tabellaSaleRistorante;
 	private JScrollPane scrollPaneTabellaSaleRistorante;
 		
-	public GestioneSaleETavolateFrame(Controller c, boolean proprietario) {
+	public GestioneTavoliFrame(Controller c, boolean proprietario) {
 		
 		theController = c;
 		
 		setResizable(false);
-		setTitle("TrackEaters - Gestione Sale e Tavolate - Sale Ristorante");
+		setTitle("TrackEaters - Gestione Sale e Tavolate - Tavoli Ristorante");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(HomepageProprietarioFrame.class.getResource("/resources/icon.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1280, 720);
@@ -56,7 +56,7 @@ public class GestioneSaleETavolateFrame extends JFrame {
 		pannello_Principale.setLayout(null);
 		
 		JLabel etichetta_GestioneSale = new JLabel("");
-		etichetta_GestioneSale.setIcon(new ImageIcon(GestioneSaleETavolateFrame.class.getResource("/resources/SaleRistorante_Title.png")));
+		etichetta_GestioneSale.setIcon(new ImageIcon(GestioneTavoliFrame.class.getResource("/resources/tavoliRistoranteTitle.png")));
 		etichetta_GestioneSale.setFont(new Font("Tahoma", Font.BOLD, 20));
 		etichetta_GestioneSale.setHorizontalAlignment(SwingConstants.CENTER);
 		etichetta_GestioneSale.setBounds(387, 28, 490, 52);
@@ -115,13 +115,14 @@ public class GestioneSaleETavolateFrame extends JFrame {
 		c.mostraDataEOra(lblDataEOra);
 		
 		JButton bottone_VisualizzaTavoli = new JButton("");
-		bottone_VisualizzaTavoli.setIcon(new ImageIcon(GestioneSaleETavolateFrame.class.getResource("/resources/btnVisualizzaTavoli.png")));
+		bottone_VisualizzaTavoli.setIcon(new ImageIcon(GestioneTavoliFrame.class.getResource("/resources/btnTavolate.png")));
 		bottone_VisualizzaTavoli.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		
 				if (tabellaSaleRistorante.getSelectedRow() != -1) {
-					setVisible(false);
-					c.startGestioneTavoliFrame(proprietario);
+					//setVisible(false);
+					//c.startHomepageGestioneRistoranteFrame(true);
+					//c.setHomepageGestioneRistorante(true);
 				} else {
 					c.mostraErroreSelezioneDialog(pannello_Principale);
 				} 
@@ -137,7 +138,7 @@ public class GestioneSaleETavolateFrame extends JFrame {
 		bottone_Aggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					setVisible(false);
-					c.startAggiungiSalaFrame(proprietario);
+					//c.startAggiungiSalaFrame(proprietario);
 			}
 		});
 		bottone_Aggiungi.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -154,8 +155,8 @@ public class GestioneSaleETavolateFrame extends JFrame {
 				
 				if (tabellaSaleRistorante.getSelectedRow()!=-1) {
 					setVisible(false);
-					c.startModificaSalaFrame(proprietario);
-					c.riempiCampiModificaSalaPage();
+					//c.startModificaSalaFrame(proprietario);
+					//c.riempiCampiModificaSalaPage();
 				} else {
 					c.mostraErroreSelezioneDialog(pannello_Principale);
 				}
@@ -180,8 +181,8 @@ public class GestioneSaleETavolateFrame extends JFrame {
 				if (tabellaSaleRistorante.getSelectedRow()!=-1) {
 					if(JOptionPane.showConfirmDialog(pannello_Principale,lblElimina) == 0) {
 						
-						c.deleteSala(tabellaSaleRistorante.getModel().getValueAt(tabellaSaleRistorante.getSelectedRow(), 0).toString(), //denominazione
-									(int)tabellaSaleRistorante.getModel().getValueAt(tabellaSaleRistorante.getSelectedRow(), 1)); //capienza
+						//c.deleteSala(tabellaSaleRistorante.getModel().getValueAt(tabellaSaleRistorante.getSelectedRow(), 0).toString(), //denominazione
+									//(int)tabellaSaleRistorante.getModel().getValueAt(tabellaSaleRistorante.getSelectedRow(), 1)); //capienza
 					}
 				} else {
 					c.mostraErroreSelezioneDialog(pannello_Principale);
@@ -210,10 +211,8 @@ public class GestioneSaleETavolateFrame extends JFrame {
 		tabellaSaleRistorante.setForeground(new Color(0, 0, 128));
 		tabellaSaleRistorante.setBackground(Color.WHITE);
 		tabellaSaleRistorante.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		modelloTabella.addColumn("Denominazione");
-		modelloTabella.addColumn("Capienza avventori");
-		modelloTabella.addColumn("Dimensione (mq)");
-		modelloTabella.addColumn("Tipologia");
+		modelloTabella.addColumn("Codice");
+		modelloTabella.addColumn("Numero massimo avventori");
 		tabellaSaleRistorante.setModel(modelloTabella);
 		tabellaSaleRistorante.getTableHeader().setAlignmentX(CENTER_ALIGNMENT);
 		tabellaSaleRistorante.getTableHeader().setBackground(new Color(0, 0, 128));

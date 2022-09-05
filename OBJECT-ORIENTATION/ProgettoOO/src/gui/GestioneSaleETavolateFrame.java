@@ -122,6 +122,7 @@ public class GestioneSaleETavolateFrame extends JFrame {
 				if (tabellaSaleRistorante.getSelectedRow() != -1) {
 					setVisible(false);
 					c.startGestioneTavoliFrame(proprietario);
+					c.riempiTabellaTavoliRistorante();
 				} else {
 					c.mostraErroreSelezioneDialog(pannello_Principale);
 				} 

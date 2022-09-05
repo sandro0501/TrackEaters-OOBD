@@ -26,6 +26,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import controller.Controller;
@@ -36,8 +37,8 @@ public class GestioneTavoliFrame extends JFrame {
 	private Controller theController;
 	private JLabel lblDataEOra;
 	private DefaultTableModel modelloTabella = new DefaultTableModel();
-	private JTable tabellaSaleRistorante;
-	private JScrollPane scrollPaneTabellaSaleRistorante;
+	private JTable tabellaTavoliRistorante;
+	private JScrollPane scrollPaneTabellaTavoliRistorante;
 		
 	public GestioneTavoliFrame(Controller c, boolean proprietario) {
 		
@@ -55,12 +56,12 @@ public class GestioneTavoliFrame extends JFrame {
 		setContentPane(pannello_Principale);
 		pannello_Principale.setLayout(null);
 		
-		JLabel etichetta_GestioneSale = new JLabel("");
-		etichetta_GestioneSale.setIcon(new ImageIcon(GestioneTavoliFrame.class.getResource("/resources/tavoliRistoranteTitle.png")));
-		etichetta_GestioneSale.setFont(new Font("Tahoma", Font.BOLD, 20));
-		etichetta_GestioneSale.setHorizontalAlignment(SwingConstants.CENTER);
-		etichetta_GestioneSale.setBounds(387, 28, 490, 52);
-		pannello_Principale.add(etichetta_GestioneSale);
+		JLabel etichetta_GestioneTavoli = new JLabel("");
+		etichetta_GestioneTavoli.setIcon(new ImageIcon(GestioneTavoliFrame.class.getResource("/resources/tavoliRistoranteTitle.png")));
+		etichetta_GestioneTavoli.setFont(new Font("Tahoma", Font.BOLD, 20));
+		etichetta_GestioneTavoli.setHorizontalAlignment(SwingConstants.CENTER);
+		etichetta_GestioneTavoli.setBounds(387, 28, 490, 52);
+		pannello_Principale.add(etichetta_GestioneTavoli);
 		
 		JPanel pannello_Navigazione = new JPanel();
 		pannello_Navigazione.setForeground(new Color(0, 0, 128));
@@ -86,7 +87,7 @@ public class GestioneTavoliFrame extends JFrame {
 		bottone_Indietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.mostraGestioneRistoranteFrame();
+				c.mostraGestioneSaleETavolateFrame();
 			}
 		});
 		bottone_Indietro.setIcon(new ImageIcon(HomepageProprietarioFrame.class.getResource("/resources/btnIndietro.png")));
@@ -119,7 +120,7 @@ public class GestioneTavoliFrame extends JFrame {
 		bottone_VisualizzaTavoli.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		
-				if (tabellaSaleRistorante.getSelectedRow() != -1) {
+				if (tabellaTavoliRistorante.getSelectedRow() != -1) {
 					//setVisible(false);
 					//c.startHomepageGestioneRistoranteFrame(true);
 					//c.setHomepageGestioneRistorante(true);
@@ -153,7 +154,7 @@ public class GestioneTavoliFrame extends JFrame {
 		bottone_Modifica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if (tabellaSaleRistorante.getSelectedRow()!=-1) {
+				if (tabellaTavoliRistorante.getSelectedRow()!=-1) {
 					setVisible(false);
 					//c.startModificaSalaFrame(proprietario);
 					//c.riempiCampiModificaSalaPage();
@@ -171,14 +172,14 @@ public class GestioneTavoliFrame extends JFrame {
 			bottone_Modifica.setEnabled(false); 
 		}
 		
-		JLabel lblElimina = new JLabel("<html>Sei sicuro di voler eliminare la sala selezionata?<br/>Verranno cancellate tutte le informazioni ad essa collegate.</html>");
+		JLabel lblElimina = new JLabel("<html>Sei sicuro di voler eliminare il tavolo selezionato?<br/>Verranno cancellate tutte le informazioni ad esso collegate.</html>");
 		lblElimina.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		JButton bottone_Elimina = new JButton("");
 		bottone_Elimina.setIcon(new ImageIcon(GestioneSaleETavolateFrame.class.getResource("/resources/btnElimina.png")));
 		bottone_Elimina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		
-				if (tabellaSaleRistorante.getSelectedRow()!=-1) {
+				if (tabellaTavoliRistorante.getSelectedRow()!=-1) {
 					if(JOptionPane.showConfirmDialog(pannello_Principale,lblElimina) == 0) {
 						
 						//c.deleteSala(tabellaSaleRistorante.getModel().getValueAt(tabellaSaleRistorante.getSelectedRow(), 0).toString(), //denominazione
@@ -201,29 +202,30 @@ public class GestioneTavoliFrame extends JFrame {
 	}
 	
 	private void setTabellaSaleRistorante() {
-		scrollPaneTabellaSaleRistorante = new JScrollPane();
-		scrollPaneTabellaSaleRistorante.setViewportBorder(null);
-		scrollPaneTabellaSaleRistorante.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPaneTabellaSaleRistorante.setBounds(10, 119, 1244, 346);
-		scrollPaneTabellaSaleRistorante.getViewport().setBackground(new Color(176, 196, 222));
-		pannello_Principale.add(scrollPaneTabellaSaleRistorante);
-		tabellaSaleRistorante = new JTable();
-		tabellaSaleRistorante.setForeground(new Color(0, 0, 128));
-		tabellaSaleRistorante.setBackground(Color.WHITE);
-		tabellaSaleRistorante.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		scrollPaneTabellaTavoliRistorante = new JScrollPane();
+		scrollPaneTabellaTavoliRistorante.setViewportBorder(null);
+		scrollPaneTabellaTavoliRistorante.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPaneTabellaTavoliRistorante.setBounds(332, 119, 600, 346);
+		scrollPaneTabellaTavoliRistorante.getViewport().setBackground(new Color(176, 196, 222));
+		pannello_Principale.add(scrollPaneTabellaTavoliRistorante);
+		tabellaTavoliRistorante = new JTable();
+		tabellaTavoliRistorante.setForeground(new Color(0, 0, 128));
+		tabellaTavoliRistorante.setBackground(Color.WHITE);
+		tabellaTavoliRistorante.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		modelloTabella.addColumn("Codice");
 		modelloTabella.addColumn("Numero massimo avventori");
-		tabellaSaleRistorante.setModel(modelloTabella);
-		tabellaSaleRistorante.getTableHeader().setAlignmentX(CENTER_ALIGNMENT);
-		tabellaSaleRistorante.getTableHeader().setBackground(new Color(0, 0, 128));
-		tabellaSaleRistorante.getTableHeader().setForeground(Color.WHITE);
-		tabellaSaleRistorante.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
-		tabellaSaleRistorante.getTableHeader().setReorderingAllowed(false);
-		tabellaSaleRistorante.setSelectionBackground(new Color(245, 245, 220));
-		tabellaSaleRistorante.setRowHeight(30);
-		tabellaSaleRistorante.setDefaultEditor(Object.class, null);
-		tabellaSaleRistorante.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPaneTabellaSaleRistorante.setViewportView(tabellaSaleRistorante);
+		tabellaTavoliRistorante.setModel(modelloTabella);
+		tabellaTavoliRistorante.getTableHeader().setAlignmentX(CENTER_ALIGNMENT);
+		tabellaTavoliRistorante.getTableHeader().setBackground(new Color(0, 0, 128));
+		tabellaTavoliRistorante.getTableHeader().setForeground(Color.WHITE);
+		tabellaTavoliRistorante.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
+		tabellaTavoliRistorante.getTableHeader().setReorderingAllowed(false);
+		tabellaTavoliRistorante.setSelectionBackground(new Color(245, 245, 220));
+		tabellaTavoliRistorante.setRowHeight(30);
+		tabellaTavoliRistorante.setDefaultEditor(Object.class, null);
+		tabellaTavoliRistorante.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPaneTabellaTavoliRistorante.setViewportView(tabellaTavoliRistorante);
+		
 	}
 	
 	private void mostraLogoutDialog(Controller c) {
@@ -244,7 +246,7 @@ public class GestioneTavoliFrame extends JFrame {
 	}
 
 	public JTable getTabellaSaleRistorante() {
-		return tabellaSaleRistorante;
+		return tabellaTavoliRistorante;
 	}
 
 	

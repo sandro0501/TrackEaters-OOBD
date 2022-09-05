@@ -19,7 +19,9 @@ public class SalaOracleImplementation implements SalaDAO {
 		try {
 			connessione = ConnessioneDatabase.getIstanzaConnessione().getConnessione();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Codice errore SQL: "+e.getErrorCode()); 
+			System.out.println("SQL State: "+e.getSQLState()); 
+			System.out.println("Messaggio: " +e.getMessage());
 		}
 	}
 
@@ -145,6 +147,30 @@ public class SalaOracleImplementation implements SalaDAO {
 			System.out.println("Messaggio: " +e.getMessage());
 		}
 		return false;
+	}
+
+	@Override
+	public Sala getSalaByCodice(int codSala) {
+		Sala sala = null;
+		try {
+			String queryGetSala = "SELECT denominazione,capienzaavventori,dimensionemq,tiposala FROM SALA WHERE codSala = ?";
+			PreparedStatement stmtGetSala = connessione.prepareStatement(queryGetSala);
+			stmtGetSala.setInt(1, codSala);
+			ResultSet rs = stmtGetSala.executeQuery();
+			
+			if(rs.next()) {
+				sala = new Sala(rs.getString(1),rs.getInt(2),rs.getInt(3),rs.getString(4));
+			}
+			
+			rs.close();
+			stmtGetSala.close();
+			
+		} catch (SQLException e) {
+			System.out.println("Codice errore SQL: "+e.getErrorCode()); 
+			System.out.println("SQL State: "+e.getSQLState()); 
+			System.out.println("Messaggio: " +e.getMessage());
+		}	
+		return sala;
 	}
 
 }

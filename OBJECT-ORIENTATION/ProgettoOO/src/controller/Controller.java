@@ -49,7 +49,7 @@ public class Controller {
 	private GestioneSaleETavolateFrame gestioneSaleETavolatePage;
 	private AggiungiSalaFrame aggiungiSalaPage;
 	private ModificaSalaFrame modificaSalaPage;
-	private GestioneTavoliFrame tavoliPage;
+	private GestioneTavoliFrame gestioneTavoliPage;
 	
 	private Operatore operatore;
 	private Proprietario proprietario;
@@ -68,6 +68,7 @@ public class Controller {
 		ristoranteDAO = new RistoranteOracleImplementation();
 		salaDAO = new SalaOracleImplementation();
 		tavolataDAO = new TavolataOracleImplementation();
+		tavoloDAO = new TavoloOracleImplementation();
 
 	}
 	
@@ -495,6 +496,32 @@ public class Controller {
 	}
 	
 	
+	public void riempiTabellaTavoliRistorante() {
+
+		try {
+			JTable tabellaSale = gestioneSaleETavolatePage.getTabellaSaleRistorante();
+			String currentDenominazione = tabellaSale.getModel().getValueAt(tabellaSale.getSelectedRow(), 0).toString();
+			int currentCapienza =  (int) tabellaSale.getModel().getValueAt(tabellaSale.getSelectedRow(), 1);
+			int codSala = salaDAO.getCodiceSalaByDenominazioneAndCapienza(currentDenominazione, currentCapienza);
+			
+			ArrayList<Tavolo> tavoliRistorante = tavoloDAO.getTavoliByCodSala(codSala);
+			DefaultTableModel modellotabella = gestioneTavoliPage.getModel();
+			modellotabella.getDataVector().removeAllElements();
+			Object[] rigaTabella = new Object[2];
+			for(Tavolo tavolo : tavoliRistorante) {
+				tavolo.setContenimentoSala(salaDAO.getSalaByCodice(codSala));
+				rigaTabella[0] = tavolo.getCodice();
+				rigaTabella[1] = tavolo.getNumeroMassimoDiAvventori();
+				modellotabella.addRow(rigaTabella);
+			}
+			modellotabella.fireTableDataChanged();
+			gestioneTavoliPage.setModel(modellotabella);
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+	
+	
 	
 		
 	
@@ -598,12 +625,12 @@ public class Controller {
 	//starter pagina gestione tavoli
 	public void startGestioneTavoliFrame(boolean isProprietario) {
 		gestioneSaleETavolatePage.dispose();
-		tavoliPage = new GestioneTavoliFrame(this, isProprietario);
-		tavoliPage.setVisible(true);
+		gestioneTavoliPage = new GestioneTavoliFrame(this, isProprietario);
+		gestioneTavoliPage.setVisible(true);
 	}
 	
 	public void mostraGestioneTavoliFrame() { 
-		tavoliPage.setVisible(true); 
+		gestioneTavoliPage.setVisible(true); 
 	}
 	
 	

@@ -115,9 +115,9 @@ public class GestioneTavoliFrame extends JFrame {
 		lblDataEOra.setHorizontalAlignment(SwingConstants.CENTER);
 		c.mostraDataEOra(lblDataEOra);
 		
-		JButton bottone_VisualizzaTavoli = new JButton("");
-		bottone_VisualizzaTavoli.setIcon(new ImageIcon(GestioneTavoliFrame.class.getResource("/resources/btnTavolate.png")));
-		bottone_VisualizzaTavoli.addActionListener(new ActionListener() {
+		JButton bottone_VisualizzaTavolate = new JButton("");
+		bottone_VisualizzaTavolate.setIcon(new ImageIcon(GestioneTavoliFrame.class.getResource("/resources/btnTavolate.png")));
+		bottone_VisualizzaTavolate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		
 				if (tabellaTavoliRistorante.getSelectedRow() != -1) {
@@ -130,16 +130,16 @@ public class GestioneTavoliFrame extends JFrame {
 			
 			}
 		});
-		bottone_VisualizzaTavoli.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		bottone_VisualizzaTavoli.setBounds(124, 503, 160, 60);
-		pannello_Principale.add(bottone_VisualizzaTavoli);
+		bottone_VisualizzaTavolate.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		bottone_VisualizzaTavolate.setBounds(124, 503, 160, 60);
+		pannello_Principale.add(bottone_VisualizzaTavolate);
 		
 		JButton bottone_Aggiungi = new JButton("");
 		bottone_Aggiungi.setIcon(new ImageIcon(GestioneSaleETavolateFrame.class.getResource("/resources/btnAggiungi.png")));
 		bottone_Aggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					setVisible(false);
-					//c.startAggiungiSalaFrame(proprietario);
+					c.startAggiungiTavoloFrame(proprietario);
 			}
 		});
 		bottone_Aggiungi.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -156,8 +156,8 @@ public class GestioneTavoliFrame extends JFrame {
 				
 				if (tabellaTavoliRistorante.getSelectedRow()!=-1) {
 					setVisible(false);
-					//c.startModificaSalaFrame(proprietario);
-					//c.riempiCampiModificaSalaPage();
+					c.startModificaTavoloFrame(proprietario);
+					c.riempiCampiModificaTavoloPage();
 				} else {
 					c.mostraErroreSelezioneDialog(pannello_Principale);
 				}
@@ -182,8 +182,7 @@ public class GestioneTavoliFrame extends JFrame {
 				if (tabellaTavoliRistorante.getSelectedRow()!=-1) {
 					if(JOptionPane.showConfirmDialog(pannello_Principale,lblElimina) == 0) {
 						
-						//c.deleteSala(tabellaSaleRistorante.getModel().getValueAt(tabellaSaleRistorante.getSelectedRow(), 0).toString(), //denominazione
-									//(int)tabellaSaleRistorante.getModel().getValueAt(tabellaSaleRistorante.getSelectedRow(), 1)); //capienza
+						c.deleteTavolo((int)tabellaTavoliRistorante.getModel().getValueAt(tabellaTavoliRistorante.getSelectedRow(), 1)); //codTavolo
 					}
 				} else {
 					c.mostraErroreSelezioneDialog(pannello_Principale);
@@ -205,13 +204,14 @@ public class GestioneTavoliFrame extends JFrame {
 		scrollPaneTabellaTavoliRistorante = new JScrollPane();
 		scrollPaneTabellaTavoliRistorante.setViewportBorder(null);
 		scrollPaneTabellaTavoliRistorante.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPaneTabellaTavoliRistorante.setBounds(332, 119, 600, 346);
+		scrollPaneTabellaTavoliRistorante.setBounds(251, 119, 762, 346);
 		scrollPaneTabellaTavoliRistorante.getViewport().setBackground(new Color(176, 196, 222));
 		pannello_Principale.add(scrollPaneTabellaTavoliRistorante);
 		tabellaTavoliRistorante = new JTable();
 		tabellaTavoliRistorante.setForeground(new Color(0, 0, 128));
 		tabellaTavoliRistorante.setBackground(Color.WHITE);
 		tabellaTavoliRistorante.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		modelloTabella.addColumn("Num.");
 		modelloTabella.addColumn("Codice");
 		modelloTabella.addColumn("Numero massimo avventori");
 		tabellaTavoliRistorante.setModel(modelloTabella);
@@ -245,7 +245,7 @@ public class GestioneTavoliFrame extends JFrame {
 		this.modelloTabella = model;
 	}
 
-	public JTable getTabellaSaleRistorante() {
+	public JTable getTabellaTavoliRistorante() {
 		return tabellaTavoliRistorante;
 	}
 

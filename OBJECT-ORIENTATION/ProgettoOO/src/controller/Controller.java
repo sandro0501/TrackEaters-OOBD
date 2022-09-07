@@ -50,6 +50,8 @@ public class Controller {
 	private AggiungiSalaFrame aggiungiSalaPage;
 	private ModificaSalaFrame modificaSalaPage;
 	private GestioneTavoliFrame gestioneTavoliPage;
+	private AggiungiTavoloFrame aggiungiTavoloPage;
+	private ModificaTavoloFrame modificaTavoloPage;
 	
 	private Operatore operatore;
 	private Proprietario proprietario;
@@ -495,7 +497,7 @@ public class Controller {
 		}
 	}
 	
-	
+	/*metodo che riempie la tabella dei tavoli presenti nella sala*/
 	public void riempiTabellaTavoliRistorante() {
 
 		try {
@@ -503,15 +505,17 @@ public class Controller {
 			String currentDenominazione = tabellaSale.getModel().getValueAt(tabellaSale.getSelectedRow(), 0).toString();
 			int currentCapienza =  (int) tabellaSale.getModel().getValueAt(tabellaSale.getSelectedRow(), 1);
 			int codSala = salaDAO.getCodiceSalaByDenominazioneAndCapienza(currentDenominazione, currentCapienza);
+			int numero = 1;
 			
 			ArrayList<Tavolo> tavoliRistorante = tavoloDAO.getTavoliByCodSala(codSala);
 			DefaultTableModel modellotabella = gestioneTavoliPage.getModel();
 			modellotabella.getDataVector().removeAllElements();
-			Object[] rigaTabella = new Object[2];
+			Object[] rigaTabella = new Object[3];
 			for(Tavolo tavolo : tavoliRistorante) {
 				tavolo.setContenimentoSala(salaDAO.getSalaByCodice(codSala));
-				rigaTabella[0] = tavolo.getCodice();
-				rigaTabella[1] = tavolo.getNumeroMassimoDiAvventori();
+				rigaTabella[0] = numero++;
+				rigaTabella[1] = tavolo.getCodice();
+				rigaTabella[2] = tavolo.getNumeroMassimoDiAvventori();
 				modellotabella.addRow(rigaTabella);
 			}
 			modellotabella.fireTableDataChanged();
@@ -521,6 +525,64 @@ public class Controller {
 		}
 	}
 	
+	/* metodo inserisci tavolo */
+	public void insertTavolo(int numeroAvventori) {
+		boolean esitoInsert;
+		JTable tabellaSale = gestioneSaleETavolatePage.getTabellaSaleRistorante();
+		String currentDenominazione = tabellaSale.getModel().getValueAt(tabellaSale.getSelectedRow(), 0).toString();
+		int currentCapienza =  (int) tabellaSale.getModel().getValueAt(tabellaSale.getSelectedRow(), 1);
+		int codSala = salaDAO.getCodiceSalaByDenominazioneAndCapienza(currentDenominazione, currentCapienza);
+
+		try {
+			esitoInsert = tavoloDAO.insertTavolo(numeroAvventori, codSala);
+			if(esitoInsert) {
+				mostraEsitoCorrettoInsert();
+				riempiTabellaTavoliRistorante(); //aggiorna la tabella 
+			}
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+	
+	public void riempiCampiModificaTavoloPage() {
+		JTable tabellaTavoli = gestioneTavoliPage.getTabellaTavoliRistorante();
+		int codTavolo = (int) tabellaTavoli.getModel().getValueAt(tabellaTavoli.getSelectedRow(), 1);
+		int numeroAvventori = (int) tabellaTavoli.getModel().getValueAt(tabellaTavoli.getSelectedRow(), 2);
+		
+		modificaTavoloPage.getEtichetta_Codice().setText("Codice Tavolo: "+codTavolo);
+		modificaTavoloPage.getCampo_NumeroAvventori().setValue(numeroAvventori);
+	}
+	
+	/* metodo modifica tavolo */
+	public void updateTavolo(int numeroAvventori) {
+		boolean esitoUpdate;
+		JTable tabellaTavoli = gestioneTavoliPage.getTabellaTavoliRistorante();
+		int codTavolo = (int) tabellaTavoli.getModel().getValueAt(tabellaTavoli.getSelectedRow(), 1);
+
+		try {
+			esitoUpdate = tavoloDAO.updateTavolo(codTavolo,numeroAvventori);
+			if(esitoUpdate) {
+				mostraEsitoCorrettoUpdate();
+				riempiTabellaTavoliRistorante(); //aggiorna la tabella 
+			}
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+
+	/*metodo elimina tavolo*/
+	public void deleteTavolo(int codTavolo) {
+		boolean esitoDelete;
+		try {
+			esitoDelete = tavoloDAO.deleteTavolo(codTavolo);
+			if(esitoDelete) {
+				mostraEsitoCorrettoDelete();
+				riempiTabellaTavoliRistorante(); //aggiorna la tabella 
+			}
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
 	
 	
 		
@@ -633,6 +695,19 @@ public class Controller {
 		gestioneTavoliPage.setVisible(true); 
 	}
 	
+	//starter pagina aggiungi tavolo
+	public void startAggiungiTavoloFrame(boolean isProprietario) {
+		gestioneTavoliPage.dispose();
+		aggiungiTavoloPage = new AggiungiTavoloFrame(this, isProprietario);
+		aggiungiTavoloPage.setVisible(true);
+	}
+	
+	//starter pagina modifica tavolo
+	public void startModificaTavoloFrame(boolean isProprietario) {
+		modificaTavoloPage = new ModificaTavoloFrame(this, isProprietario);
+		modificaTavoloPage.setVisible(true);
+	}
+	
 	
 	public void startAggiungiAvventori(boolean proprietario) {
 		Aggiungi_Avventori aggiungiAvventoriPage = new Aggiungi_Avventori(this, proprietario);
@@ -660,10 +735,7 @@ public class Controller {
 		aggiungiTavolataPage.setVisible(true);
 	}
 	
-	public void startAggiungiTavolo(boolean proprietario) {
-		Aggiungi_Tavolo aggiungiTavoloPage = new Aggiungi_Tavolo(this, proprietario);
-		aggiungiTavoloPage.setVisible(true);
-	}
+
 	
 	public void startAvventori(boolean proprietario) {
 		Avventori avventoriPage = new Avventori(this, proprietario);
@@ -715,10 +787,7 @@ public class Controller {
 		modificaTavolataPage.setVisible(true);
 	}
 	
-	public void startModificaTavolo(boolean proprietario) {
-		Modifica_Tavolo modificaTavoloPage = new Modifica_Tavolo(this, proprietario);
-		modificaTavoloPage.setVisible(true);
-	}
+
 	
 	public void startStatistiche(boolean proprietario, boolean generale) {
 		Statistiche statistichePage = new Statistiche(this, proprietario, generale);

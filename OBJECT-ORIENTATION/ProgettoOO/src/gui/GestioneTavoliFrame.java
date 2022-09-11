@@ -121,9 +121,11 @@ public class GestioneTavoliFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 		
 				if (tabellaTavoliRistorante.getSelectedRow() != -1) {
-					//setVisible(false);
-					//c.startHomepageGestioneRistoranteFrame(true);
-					//c.setHomepageGestioneRistorante(true);
+					setVisible(false);
+				
+					c.startGestioneTavolateFrame(proprietario);
+					c.riempiTabellaTavolateRistorante();
+					
 				} else {
 					c.mostraErroreSelezioneDialog(pannello_Principale);
 				} 
@@ -197,10 +199,10 @@ public class GestioneTavoliFrame extends JFrame {
 			bottone_Elimina.setEnabled(false); 
 		}
 		
-		setTabellaSaleRistorante();
+		setTabellaTavoliRistorante();
 	}
 	
-	private void setTabellaSaleRistorante() {
+	private void setTabellaTavoliRistorante() {
 		scrollPaneTabellaTavoliRistorante = new JScrollPane();
 		scrollPaneTabellaTavoliRistorante.setViewportBorder(null);
 		scrollPaneTabellaTavoliRistorante.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);

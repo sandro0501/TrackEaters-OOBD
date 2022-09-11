@@ -24,6 +24,12 @@ import gui.*;
 
 import java.util.*;
 import java.sql.*;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+
 import database.ConnessioneDatabase;
 
 public class Controller { 
@@ -52,6 +58,9 @@ public class Controller {
 	private GestioneTavoliFrame gestioneTavoliPage;
 	private AggiungiTavoloFrame aggiungiTavoloPage;
 	private ModificaTavoloFrame modificaTavoloPage;
+	private GestioneTavolateFrame gestioneTavolatePage;
+	private AggiungiTavolataFrame aggiungiTavolataPage;
+	private ModificaTavolataFrame modificaTavolataPage;
 	
 	private Operatore operatore;
 	private Proprietario proprietario;
@@ -584,6 +593,195 @@ public class Controller {
 		}
 	}
 	
+	/*metodo che riempie la tabella delle tavolate*/
+	public void riempiTabellaTavolateRistorante() {
+
+		try {
+			JTable tabellaTavoli = gestioneTavoliPage.getTabellaTavoliRistorante();
+			SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/YYYY");
+			int numero = 1;
+			int codTavolo = (int) tabellaTavoli.getModel().getValueAt(tabellaTavoli.getSelectedRow(), 1);
+			ArrayList<Tavolata> tavolate = tavolataDAO.getTavolateByCodTavolo(codTavolo);
+			Cameriere c;
+			
+			DefaultTableModel modellotabella = gestioneTavolatePage.getModel();
+			modellotabella.getDataVector().removeAllElements();
+			Object[] rigaTabella = new Object[6];
+			
+			for(Tavolata tavolata : tavolate) {
+				c = cameriereDAO.getCameriereByCodTavoloAndDataTavolata(codTavolo, tavolata.getDataArrivo());
+				tavolata.setServizioCameriere(c);
+				rigaTabella[0] = numero++;
+				rigaTabella[1] = codTavolo;
+				rigaTabella[2] = formatoData.format(tavolata.getDataArrivo());
+				rigaTabella[3] = tavolata.getOraArrivo();
+				rigaTabella[4] = tavolata.getOraUscita();
+				rigaTabella[5] = tavolata.getServizioCameriere().getNome()+" "+tavolata.getServizioCameriere().getCognome();
+				
+				modellotabella.addRow(rigaTabella);
+			}
+			modellotabella.fireTableDataChanged();
+			gestioneTavolatePage.setModel(modellotabella);
+			
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+	
+	/*metodo che riempie i campi della pagina aggiungi tavolata*/
+	public void riempiCampiAggiungiTavolataPage(boolean proprietario) {
+		JTable tabellaTavoli = gestioneTavoliPage.getTabellaTavoliRistorante();
+		int codTavolo = (int) tabellaTavoli.getModel().getValueAt(tabellaTavoli.getSelectedRow(), 1);
+		int numAvventori = (int) tabellaTavoli.getModel().getValueAt(tabellaTavoli.getSelectedRow(), 2);
+		aggiungiTavolataPage.getEtichetta_CodTavolo().setText("Codice Tavolo: "+codTavolo+" | "+"Num. max di avventori: "+numAvventori);
+		
+		String currentDate = LocalDateTime.now().toString();
+		java.util.Date data = null;
+		try {
+			data = new SimpleDateFormat("yyyy-MM-dd").parse(currentDate);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		aggiungiTavolataPage.getCampo_DataArrivo().setDate(data);
+		
+		if(proprietario) {
+			int codRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
+			ArrayList<Cameriere> camerieri = cameriereDAO.getCamerieriRistorante(codRistorante);
+			for(Cameriere c : camerieri) {
+				aggiungiTavolataPage.getCampo_Cameriere().addItem(c.getNome()+" "+c.getCognome());
+			}
+		} else {
+			int codRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(
+					managerRistorante.getRistoranteGestito().getDenominazione(),
+					managerRistorante.getRistoranteGestito().getIndirizzo());
+			
+			ArrayList<Cameriere> camerieri = cameriereDAO.getCamerieriRistorante(codRistorante);
+			for(Cameriere c : camerieri) {
+				aggiungiTavolataPage.getCampo_Cameriere().addItem(c.getNome()+" "+c.getCognome());
+			}
+		}
+	}
+	
+	/* metodo inserisci tavolata */
+	public void insertTavolata(boolean isProprietario, String dataArrivo, String cameriere) {
+		boolean esitoInsert;
+		JTable tabellaTavoli = gestioneTavoliPage.getTabellaTavoliRistorante();
+		int codTavolo = (int) tabellaTavoli.getModel().getValueAt(tabellaTavoli.getSelectedRow(), 1);
+		String nomeCameriere = cameriere.substring(0, cameriere.indexOf(' '));
+		String cognomeCameriere = cameriere.substring(cameriere.indexOf(' ')+1);
+		int codRistorante;
+		
+		try {
+			if(isProprietario) {
+				codRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
+			} else {
+				codRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(
+						managerRistorante.getRistoranteGestito().getDenominazione(),
+						managerRistorante.getRistoranteGestito().getIndirizzo());
+			}
+			
+			String cameriereTavolata = cameriereDAO.getNumcidCameriereByNomeAndCognomeAndRistorante(nomeCameriere,cognomeCameriere,codRistorante);
+			
+			esitoInsert = tavolataDAO.insertTavolata(dataArrivo, codTavolo, cameriereTavolata);
+			if(esitoInsert) {
+				mostraEsitoCorrettoInsert();
+				riempiTabellaTavolateRistorante(); //aggiorna la tabella 
+			}
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+	
+	/*metodo che riempie i campi modifica tavolata page*/
+	public void riempiCampiModificaTavolataPage(boolean proprietario) {
+		JTable tabellaTavoli = gestioneTavoliPage.getTabellaTavoliRistorante();
+		JTable tabellaTavolate = gestioneTavolatePage.getTabellaTavolateRistorante();
+		int codTavolo = (int) tabellaTavoli.getModel().getValueAt(tabellaTavoli.getSelectedRow(), 1);
+		int numAvventori = (int) tabellaTavoli.getModel().getValueAt(tabellaTavoli.getSelectedRow(), 2);
+		String cameriere = (String) tabellaTavolate.getModel().getValueAt(tabellaTavolate.getSelectedRow(), 5);
+		
+		modificaTavolataPage.getEtichetta_CodTavolo().setText("Codice Tavolo: "+codTavolo+" | "+"Num. max di avventori: "+numAvventori);
+		try {
+			String dataArrivoString = (String) tabellaTavolate.getModel().getValueAt(tabellaTavolate.getSelectedRow(), 2);
+			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			java.util.Date dataArrivo = dateFormat.parse(dataArrivoString);
+			modificaTavolataPage.getCampo_DataArrivo().setDate(dataArrivo);
+			
+			if(proprietario) {
+				int codRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
+				ArrayList<Cameriere> camerieri = cameriereDAO.getCamerieriRistorante(codRistorante);
+				for(Cameriere c : camerieri) {
+					modificaTavolataPage.getCampo_Cameriere().addItem(c.getNome()+" "+c.getCognome());
+				}
+			} else {
+				int codRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(
+						managerRistorante.getRistoranteGestito().getDenominazione(),
+						managerRistorante.getRistoranteGestito().getIndirizzo());
+				
+				ArrayList<Cameriere> camerieri = cameriereDAO.getCamerieriRistorante(codRistorante);
+				for(Cameriere c : camerieri) {
+					modificaTavolataPage.getCampo_Cameriere().addItem(c.getNome()+" "+c.getCognome());
+				}
+			}
+		} catch (Exception e) {
+			mostraErrore(e);
+		}	
+	}
+	
+	/* metodo modifica tavolata */
+	public void updateTavolata(boolean isProprietario,String dataArrivo, String cameriere) {
+		boolean esitoUpdate;
+		JTable tabellaTavolate = gestioneTavolatePage.getTabellaTavolateRistorante();
+		int codRistorante;
+		int codTavolo = (int) tabellaTavolate.getModel().getValueAt(tabellaTavolate.getSelectedRow(), 1);
+		String currentDataArrivo = (String) tabellaTavolate.getModel().getValueAt(tabellaTavolate.getSelectedRow(), 2);
+		String nomeCameriere = cameriere.substring(0, cameriere.indexOf(' '));
+		String cognomeCameriere = cameriere.substring(cameriere.indexOf(' ')+1);
+		
+		try {
+			if(isProprietario) {
+				codRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
+			} else {
+				codRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(
+						managerRistorante.getRistoranteGestito().getDenominazione(),
+						managerRistorante.getRistoranteGestito().getIndirizzo());
+			}
+			
+			String cameriereTavolata = cameriereDAO.getNumcidCameriereByNomeAndCognomeAndRistorante(nomeCameriere,cognomeCameriere,codRistorante);
+			int codTavolata = tavolataDAO.getCodiceTavolataByDataArrivoAndTavolo(currentDataArrivo, codTavolo);
+			esitoUpdate = tavolataDAO.updateTavolata(codTavolata, dataArrivo, cameriereTavolata);
+			
+			if(esitoUpdate) {
+				mostraEsitoCorrettoUpdate();
+				riempiTabellaTavolateRistorante(); //aggiorna la tabella 
+			}
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+	
+	/*metodo elimina tavolata*/
+	public void deleteTavolata() {
+		boolean esitoDelete;
+		JTable tabellaTavolate = gestioneTavolatePage.getTabellaTavolateRistorante();
+		int codTavolo = (int) tabellaTavolate.getModel().getValueAt(tabellaTavolate.getSelectedRow(), 1);
+		String dataArrivo = (String) tabellaTavolate.getModel().getValueAt(tabellaTavolate.getSelectedRow(), 2);
+		
+		try {
+			int codTavolata = tavolataDAO.getCodiceTavolataByDataArrivoAndTavolo(dataArrivo, codTavolo);
+			esitoDelete = tavolataDAO.deleteTavolata(codTavolata);
+			if(esitoDelete) {
+				mostraEsitoCorrettoDelete();
+				riempiTabellaTavolateRistorante(); //aggiorna la tabella 
+			}
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+	
+	
+	
+	
 	
 		
 	
@@ -708,6 +906,29 @@ public class Controller {
 		modificaTavoloPage.setVisible(true);
 	}
 	
+	//starter pagina gestione tavolate
+	public void startGestioneTavolateFrame(boolean isProprietario) {
+		gestioneTavolatePage = new GestioneTavolateFrame(this, isProprietario);
+		gestioneTavolatePage.setVisible(true);
+	}
+	
+	public void mostraGestioneTavolateFrame() { 
+		gestioneTavolatePage.setVisible(true); 
+	}
+	
+	//starter pagina aggiungi tavolata
+	public void startAggiungiTavolataFrame(boolean isProprietario) {
+		aggiungiTavolataPage = new AggiungiTavolataFrame(this, isProprietario);
+		aggiungiTavolataPage.setVisible(true);
+	}
+	
+	//starter pagina modifica tavolata
+	public void startModificaTavolataFrame(boolean isProprietario) {
+		modificaTavolataPage = new ModificaTavolataFrame(this, isProprietario);
+		modificaTavolataPage.setVisible(true);
+	}
+	
+	
 	
 	public void startAggiungiAvventori(boolean proprietario) {
 		Aggiungi_Avventori aggiungiAvventoriPage = new Aggiungi_Avventori(this, proprietario);
@@ -730,10 +951,7 @@ public class Controller {
 	}
 	
 
-	public void startAggiungiTavolata(boolean proprietario) {
-		Aggiungi_Tavolata aggiungiTavolataPage = new Aggiungi_Tavolata(this, proprietario);
-		aggiungiTavolataPage.setVisible(true);
-	}
+	
 	
 
 	
@@ -782,10 +1000,7 @@ public class Controller {
 		modificaManagerPage.setVisible(true);
 	}
 	
-	public void startModificaTavolata(boolean proprietario) {
-		Modifica_Tavolata modificaTavolataPage = new Modifica_Tavolata(this, proprietario);
-		modificaTavolataPage.setVisible(true);
-	}
+	
 	
 
 	
@@ -794,11 +1009,7 @@ public class Controller {
 		statistichePage.setVisible(true);
 	}
 	
-	public void startTavolate(boolean proprietario) {
-		Tavolate tavolatePage = new Tavolate(this, proprietario);
-		tavolatePage.setVisible(true);
-	}
-	
+
 
 	
 	/*------------------------------------------------------------------------------------------------------------------------*/

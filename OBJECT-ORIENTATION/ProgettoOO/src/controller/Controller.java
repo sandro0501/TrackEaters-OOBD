@@ -25,14 +25,14 @@ import gui.*;
 import java.util.*;
 import java.sql.*;
 import java.sql.Date;
-<<<<<<< HEAD
+
 import java.text.SimpleDateFormat;
-=======
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
->>>>>>> bbf3c862ff39308c93916f24721e2610fef2e06e
+
 
 import database.ConnessioneDatabase;
 
@@ -60,9 +60,9 @@ public class Controller {
 	private HomepageGestioneRistoranteFrame gestioneRistorantePage; 
 	private InfoRistoranteFrame infoRistorantePage;
 	private GestioneSaleETavolateFrame gestioneSaleETavolatePage;
-<<<<<<< HEAD
+
 	private GestionePersonaleFrame gestionePersonalePage;
-=======
+
 	private AggiungiSalaFrame aggiungiSalaPage;
 	private ModificaSalaFrame modificaSalaPage;
 	private GestioneTavoliFrame gestioneTavoliPage;
@@ -71,7 +71,7 @@ public class Controller {
 	private GestioneTavolateFrame gestioneTavolatePage;
 	private AggiungiTavolataFrame aggiungiTavolataPage;
 	private ModificaTavolataFrame modificaTavolataPage;
->>>>>>> bbf3c862ff39308c93916f24721e2610fef2e06e
+
 	
 	private Operatore operatore;
 	private Proprietario proprietario;
@@ -537,7 +537,6 @@ public class Controller {
 		}
 	}
 	
-<<<<<<< HEAD
 	public void riempiTabllaCamerieriGestione() {
 		
 		try {
@@ -591,7 +590,10 @@ public class Controller {
 			}
 			modelloTabellaManager.fireTableDataChanged();
 			gestionePersonalePage.setModelManager(modelloTabellaManager);
-=======
+		}catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
 	/* metodo inserisci sala */
 	public void insertSala(String denominazione, int capienza, int dimensioneMq, String tipologia) {
 		boolean esitoInsert;
@@ -842,13 +844,13 @@ public class Controller {
 				mostraEsitoCorrettoInsert();
 				riempiTabellaTavolateRistorante(); //aggiorna la tabella 
 			}
->>>>>>> bbf3c862ff39308c93916f24721e2610fef2e06e
+
 		} catch (Exception e) {
 			mostraErrore(e);
 		}
 	}
 	
-<<<<<<< HEAD
+
 	public ArrayList<String> riempiComboRistoranti(){
 		ArrayList<String> listaRistorantiString = new ArrayList<>();
 		
@@ -862,7 +864,9 @@ public class Controller {
 		} catch (Exception e) {
 			mostraErrore(e);
 		}
-=======
+		
+		return listaRistorantiString;
+	}
 	/*metodo che riempie i campi modifica tavolata page*/
 	public void riempiCampiModificaTavolataPage(boolean proprietario) {
 		JTable tabellaTavoli = gestioneTavoliPage.getTabellaTavoliRistorante();
@@ -948,16 +952,7 @@ public class Controller {
 		} catch (Exception e) {
 			mostraErrore(e);
 		}
-	}
-	
-	
-	
-	
-	
->>>>>>> bbf3c862ff39308c93916f24721e2610fef2e06e
-		
-		return listaRistorantiString;
-	}
+	}	
 
 	public void riempiCampiModificaManager() {
 		JTable tabellaManager = gestionePersonalePage.getTabellaManager();
@@ -1108,14 +1103,14 @@ public class Controller {
 		gestioneSaleETavolatePage.setVisible(true);
 	}
 	
-<<<<<<< HEAD
+
 	public void startGestionePersonale() {
 		proprietarioPage.dispose();
 		gestionePersonalePage = new GestionePersonaleFrame(this);
 		gestionePersonalePage.setVisible(true);
 	}
 	
-=======
+
 	public void mostraGestioneSaleETavolateFrame() { 
 		gestioneSaleETavolatePage.setVisible(true); 
 	}
@@ -1182,7 +1177,7 @@ public class Controller {
 	
 	
 	
->>>>>>> bbf3c862ff39308c93916f24721e2610fef2e06e
+
 	public void startAggiungiAvventori(boolean proprietario) {
 		Aggiungi_Avventori aggiungiAvventoriPage = new Aggiungi_Avventori(this, proprietario);
 		aggiungiAvventoriPage .setVisible(true);

@@ -136,7 +136,7 @@ public class Avventori extends JFrame {
 		bottone_Indietro.addActionListener(new ActionListener () {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startTavolate(proprietario);
+				//c.startTavolate(proprietario);
 			}
 		});
 		bottone_Indietro.setFont(new Font("Tahoma", Font.BOLD, 12));

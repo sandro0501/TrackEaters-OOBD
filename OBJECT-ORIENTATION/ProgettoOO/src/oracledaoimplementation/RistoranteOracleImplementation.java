@@ -145,8 +145,8 @@ public class RistoranteOracleImplementation implements RistoranteDAO {
 			insertRistoranteStatement.setString(8, sitoweb);
 			insertRistoranteStatement.setInt(9, proprietario);
 			
-			int esitoUpdate = insertRistoranteStatement.executeUpdate();
-			if(esitoUpdate==1)
+			int esitoInsert = insertRistoranteStatement.executeUpdate();
+			if(esitoInsert==1)
 				return true;
 			
 			insertRistoranteStatement.close();

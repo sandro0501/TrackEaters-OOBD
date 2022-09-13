@@ -21,6 +21,10 @@ public class Tavolata {
 		this.codiceTavolata = codiceTavolata;
 		this.dataArrivo = dataArrivo;
 	}
+	
+	public Tavolata(Date dataArrivo) {
+		this.dataArrivo = dataArrivo;
+	}
 
 	public int getCodiceTavolata() {
 		return codiceTavolata;
@@ -28,10 +32,6 @@ public class Tavolata {
 
 	public void setCodiceTavolata(int codiceTavolata) {
 		this.codiceTavolata = codiceTavolata;
-	}
-	
-	public Tavolata(Date dataArrivo) {
-		this.dataArrivo = dataArrivo;
 	}
 
 	public Date getDataArrivo() {

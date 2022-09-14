@@ -25,12 +25,17 @@ import gui.*;
 import java.util.*;
 import java.sql.*;
 import java.sql.Date;
+
+import java.text.SimpleDateFormat;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 
+
 import database.ConnessioneDatabase;
+
 
 public class Controller { 
 	
@@ -47,13 +52,17 @@ public class Controller {
 	
 	private LoginFrame loginPage;
 	private HomepageProprietarioFrame proprietarioPage;
-	private ImpostazioniProprietarioFrame impostazioniPage;
 	private RistorantiProprietarioFrame ristorantiProprietarioPage;
 	private ModificaRistoranteFrame modificaRistorantePage;
+	private ModificaCameriereFrame modificaCamerierePage;
+	private ModificaManagerFrame modificaManagerPage;
 	private AggiungiRistoranteFrame aggiungiRistorantePage;
 	private HomepageGestioneRistoranteFrame gestioneRistorantePage; 
 	private InfoRistoranteFrame infoRistorantePage;
 	private GestioneSaleETavolateFrame gestioneSaleETavolatePage;
+
+	private GestionePersonaleFrame gestionePersonalePage;
+
 	private AggiungiSalaFrame aggiungiSalaPage;
 	private ModificaSalaFrame modificaSalaPage;
 	private GestioneTavoliFrame gestioneTavoliPage;
@@ -62,9 +71,7 @@ public class Controller {
 	private GestioneTavolateFrame gestioneTavolatePage;
 	private AggiungiTavolataFrame aggiungiTavolataPage;
 	private ModificaTavolataFrame modificaTavolataPage;
-	private GestioneAvventoriFrame gestioneAvventoriPage;
-	private AggiungiAvventoreFrame aggiungiAvventorePage;
-	private ModificaAvventoreFrame modificaAvventorePage;
+
 	
 	private Operatore operatore;
 	private Proprietario proprietario;
@@ -153,6 +160,25 @@ public class Controller {
 		}
 	}
 	
+	public void updateCameriere(String numeroCid, String nome, String cognome, String dataNascita, String sesso,
+			String cittaDiNascita, String provinciaDiNascita, String cittaDiResidenza, String provinciaDiResidenza,
+			String telefono, String email, String ristorante) {
+		
+		String[] splitted = ristorante.split(" - ");
+		int codRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(splitted[0], splitted[1]);
+		boolean esitoUpdate;
+		
+		try {
+			esitoUpdate = cameriereDAO.updateCameriere(numeroCid, nome, cognome, dataNascita, sesso, cittaDiNascita, provinciaDiNascita, cittaDiResidenza, provinciaDiResidenza, telefono, email, codRistorante);
+			
+			if (esitoUpdate) {
+				mostraEsitoCorrettoUpdate();
+			} 
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+	
 	/* metodo riempi tabella ristoranti proprietario */
 	public void riempiTabellaRistorantiDiProprietario() {
 		
@@ -185,7 +211,7 @@ public class Controller {
 	
 	
 	/*Metodo che riempie la tabella dei camerieri nella infoRistorantePage*/
-	public void riempiTabellaCamerieriPerRistorante(boolean proprietario) {
+	public void riempiTabellaCamerieriPerRistorante(Boolean proprietario) {
 		
 		try {
 			ArrayList<Cameriere> listaCamerieri;
@@ -205,7 +231,6 @@ public class Controller {
 			}
 			
 			ristorante.setCamerieriRistorante(listaCamerieri);
-			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 			DefaultTableModel model = infoRistorantePage.getModel();
 			model.getDataVector().removeAllElements();
 			String[] rigaTabella = new String[11];
@@ -215,7 +240,7 @@ public class Controller {
 				rigaTabella [0] = cameriere.getNumeroCid();
 				rigaTabella [1] = cameriere.getNome();
 				rigaTabella [2] = cameriere.getCognome();
-				rigaTabella [3] = dateFormat.format(cameriere.getDataDiNascita());
+				rigaTabella [3] = cameriere.getDataDiNascita().toString();
 				rigaTabella [4] = cameriere.getSesso();
 				rigaTabella [5] = cameriere.getCittaDiNascita();
 				rigaTabella [6] = cameriere.getProvinciaDiNascita();
@@ -284,6 +309,43 @@ public class Controller {
 		}
 	}
 	
+	public void insertCameriere(String numeroCid, String nome, String cognome, String dataNascita, String sesso,
+			String cittaDiNascita, String provinciaDiNascita, String cittaDiResidenza, String provinciaDiResidenza,
+			String telefono, String email, String ristorante) {
+		
+		String[] splitted = ristorante.split(" - ");
+		int codRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(splitted[0], splitted[1]); 
+		
+		boolean esitoInsert;
+		
+		try {
+			esitoInsert = cameriereDAO.insertCameriere(numeroCid, nome, cognome, dataNascita, sesso, cittaDiNascita, provinciaDiNascita, cittaDiResidenza, provinciaDiResidenza, telefono, email, codRistorante);
+			
+			if(esitoInsert) {
+				mostraEsitoCorrettoInsert();
+			}
+			
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+	
+	public void deleteCameriere(String numeroCid) {
+		
+		boolean esitoDelete;
+		
+		try {
+			esitoDelete= cameriereDAO.deleteCameriere(numeroCid);
+			
+			if(esitoDelete) {
+				mostraEsitoCorrettoDelete();
+			}
+			
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+	
 	/*metodo che riempie textfield modifica ristorante con campi della tabella*/
 	public void riempiCampiModificaRistorantePage() {
 		JTable tabellaRistoranti = ristorantiProprietarioPage.getTabellaRistoranti();
@@ -311,6 +373,39 @@ public class Controller {
 		modificaRistorantePage.getCampo_Cap().setText(currentCap);
 		modificaRistorantePage.getCampo_Email().setText(currentEmail);
 		modificaRistorantePage.getCampo_SitoWeb().setText(currentSitoWeb);
+	}
+	
+	public void riempiCampiModificaCameriere() {
+		JTable tabellaCameriere = gestionePersonalePage.getTabellaCamerieri();
+		String currentDocumento = tabellaCameriere.getModel().getValueAt(tabellaCameriere.getSelectedRow(), 0).toString();
+		String currentNome = tabellaCameriere.getModel().getValueAt(tabellaCameriere.getSelectedRow(), 1).toString();
+		String currentCognome = tabellaCameriere.getModel().getValueAt(tabellaCameriere.getSelectedRow(), 2).toString();
+		String currentDataNascita = tabellaCameriere.getModel().getValueAt(tabellaCameriere.getSelectedRow(), 3).toString();
+		String currentSesso = tabellaCameriere.getModel().getValueAt(tabellaCameriere.getSelectedRow(), 4).toString();
+		String currentCittaN = tabellaCameriere.getModel().getValueAt(tabellaCameriere.getSelectedRow(), 5).toString();
+		String currentProvinciaN = tabellaCameriere.getModel().getValueAt(tabellaCameriere.getSelectedRow(), 6).toString();
+		String currentCittaRes = tabellaCameriere.getModel().getValueAt(tabellaCameriere.getSelectedRow(), 7).toString();
+		String currentProvinciaRes = tabellaCameriere.getModel().getValueAt(tabellaCameriere.getSelectedRow(), 8).toString();
+		String currentTelefono = tabellaCameriere.getModel().getValueAt(tabellaCameriere.getSelectedRow(), 9).toString();
+		String currentEmail = tabellaCameriere.getModel().getValueAt(tabellaCameriere.getSelectedRow(), 10).toString();
+		String currentRistorante = tabellaCameriere.getModel().getValueAt(tabellaCameriere.getSelectedRow(), 11).toString();
+		
+		modificaCamerierePage.getCampo_NumeroDocumento().setText(currentDocumento);
+		modificaCamerierePage.getCampo_Nome().setText(currentNome);
+		modificaCamerierePage.getCampo_Cognome().setText(currentCognome);
+		modificaCamerierePage.getCampo_DataNascita().setText(currentDataNascita);
+		modificaCamerierePage.getComboBox_Sesso().setSelectedItem(currentSesso);
+		modificaCamerierePage.getCampo_CittaNatale().setText(currentCittaN);
+		modificaCamerierePage.getComboBox_ProvinciaNatale().setSelectedItem(currentProvinciaN);
+		modificaCamerierePage.getCampo_CittaResidenza().setText(currentCittaRes);
+		modificaCamerierePage.getComboBox_ProvinciaResidenza().setSelectedItem(currentProvinciaRes);
+		
+		if (currentEmail != null)
+			modificaCamerierePage.getCampo_Email().setText(currentEmail);
+		
+		modificaCamerierePage.getCampo_Telefono().setText(currentTelefono);
+		modificaCamerierePage.getComboBox_Ristorante().setSelectedItem(currentRistorante);
+		
 	}
 	
 	/*metodo update ristorante*/
@@ -442,6 +537,63 @@ public class Controller {
 		}
 	}
 	
+	public void riempiTabllaCamerieriGestione() {
+		
+		try {
+			ArrayList<Cameriere> listaCamerieri = cameriereDAO.getAllCamerieri();
+			DefaultTableModel modelloTabellaCamerieri = gestionePersonalePage.getModelCamerieri();
+			modelloTabellaCamerieri.getDataVector().removeAllElements();
+			Object[] colonnaTabella = new Object[12];
+			
+			for(Cameriere cameriere : listaCamerieri) {
+				Ristorante ristorante = cameriere.getLavoratoreRistorante();
+				colonnaTabella[0] = cameriere.getNumeroCid();
+				colonnaTabella[1] = cameriere.getNome();
+				colonnaTabella[2] = cameriere.getCognome();
+				colonnaTabella[3] = cameriere.getDataDiNascita();
+				colonnaTabella[4] = cameriere.getSesso();
+				colonnaTabella[5] = cameriere.getCittaDiNascita();
+				colonnaTabella[6] = cameriere.getProvinciaDiNascita();
+				colonnaTabella[7] = cameriere.getCittaDiResidenza();
+				colonnaTabella[8] = cameriere.getProvinciaDiResidenza();
+				colonnaTabella[9] = cameriere.getTelefono();
+				colonnaTabella[10] = cameriere.getEmail();
+				colonnaTabella[11] = ristorante.getDenominazione() + " - " + ristorante.getIndirizzo();
+				modelloTabellaCamerieri.addRow(colonnaTabella);
+			}
+			modelloTabellaCamerieri.fireTableDataChanged();
+			gestionePersonalePage.setModelCamerieri(modelloTabellaCamerieri);
+			
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+		
+	}
+		
+	public void riempiTabllaManagerGestione() {
+		
+		try {
+			ArrayList<ManagerRistorante> listaManager = managerRistoranteDAO.getAllManager();
+			DefaultTableModel modelloTabellaManager = gestionePersonalePage.getModelManager();
+			modelloTabellaManager.getDataVector().removeAllElements();
+			Object[] colonnaTabella = new Object[6];
+		
+			for(ManagerRistorante manager : listaManager) {
+				Ristorante ristorante = manager.getRistoranteGestito();
+				colonnaTabella[0] = manager.getUsername();
+				colonnaTabella[1] = manager.getNome();
+				colonnaTabella[2] = manager.getCognome();
+				colonnaTabella[3] = manager.getEmail();
+				colonnaTabella[4] = manager.getTelefono();
+				colonnaTabella[5] = ristorante.getDenominazione() + " - " + ristorante.getIndirizzo();
+				modelloTabellaManager.addRow(colonnaTabella);
+			}
+			modelloTabellaManager.fireTableDataChanged();
+			gestionePersonalePage.setModelManager(modelloTabellaManager);
+		}catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
 	/* metodo inserisci sala */
 	public void insertSala(String denominazione, int capienza, int dimensioneMq, String tipologia) {
 		boolean esitoInsert;
@@ -692,11 +844,29 @@ public class Controller {
 				mostraEsitoCorrettoInsert();
 				riempiTabellaTavolateRistorante(); //aggiorna la tabella 
 			}
+
 		} catch (Exception e) {
 			mostraErrore(e);
 		}
 	}
 	
+
+	public ArrayList<String> riempiComboRistoranti(){
+		ArrayList<String> listaRistorantiString = new ArrayList<>();
+		
+		try {
+			ArrayList<Ristorante> listaRistoranti =  ristoranteDAO.getRistorantiByUsernameProprietario(proprietario.getUsername());
+			
+			for (Ristorante ristorante : listaRistoranti) {
+				listaRistorantiString.add(ristorante.getDenominazione() +" - " + ristorante.getIndirizzo()); 
+			}
+			
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+		
+		return listaRistorantiString;
+	}
 	/*metodo che riempie i campi modifica tavolata page*/
 	public void riempiCampiModificaTavolataPage(boolean proprietario) {
 		JTable tabellaTavoli = gestioneTavoliPage.getTabellaTavoliRistorante();
@@ -782,205 +952,80 @@ public class Controller {
 		} catch (Exception e) {
 			mostraErrore(e);
 		}
+	}	
+
+	public void riempiCampiModificaManager() {
+		JTable tabellaManager = gestionePersonalePage.getTabellaManager();
+		
+		String currentUsername=tabellaManager.getModel().getValueAt(tabellaManager.getSelectedRow(), 0).toString();
+		String currentNome=tabellaManager.getModel().getValueAt(tabellaManager.getSelectedRow(), 1).toString();
+		String currentCognome=tabellaManager.getModel().getValueAt(tabellaManager.getSelectedRow(), 2).toString();
+		String currentEmail;
+		if(tabellaManager.getModel().getValueAt(tabellaManager.getSelectedRow(), 3)!=null) {
+			currentEmail=tabellaManager.getModel().getValueAt(tabellaManager.getSelectedRow(), 3).toString();
+			modificaManagerPage.getCampo_Email().setText(currentEmail);
+		}
+		String currentTelefono=tabellaManager.getModel().getValueAt(tabellaManager.getSelectedRow(), 4).toString();
+		String currentRistoranteGestito=tabellaManager.getModel().getValueAt(tabellaManager.getSelectedRow(), 5).toString();
+		
+		modificaManagerPage.getCampo_Username().setText(currentUsername);
+		modificaManagerPage.getCampo_Nome().setText(currentNome);
+		modificaManagerPage.getCampo_Cognome().setText(currentCognome);
+		modificaManagerPage.getCampo_Telefono().setText(currentTelefono);
+		modificaManagerPage.getComboBox_Ristorante().setSelectedItem(currentRistoranteGestito);
+		
 	}
 	
-	/*metodo che riempie la tabella degli avventori*/
-	public void riempiTabellaAvventoriRistorante() {
-		try {
-			JTable tabellaTavolate = gestioneTavolatePage.getTabellaTavolateRistorante();
-			int codTavolo = (int) tabellaTavolate.getModel().getValueAt(tabellaTavolate.getSelectedRow(), 1);
-			String dataArrivo = (String) tabellaTavolate.getModel().getValueAt(tabellaTavolate.getSelectedRow(), 2);
-			int codTavolata = tavolataDAO.getCodiceTavolataByDataArrivoAndTavolo(dataArrivo, codTavolo);
-			ArrayList<Avventore> avventori = avventoreDAO.getAvventoriByCodTavolata(codTavolata);
-			
-			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-			DefaultTableModel modellotabella = gestioneAvventoriPage.getModel();
-			modellotabella.getDataVector().removeAllElements();
-			Object[] rigaTabella = new Object[13];
-			
-			for(Avventore avventore : avventori) {
-				rigaTabella[0] = avventore.getNumeroCid();
-				rigaTabella[1] = avventore.getNome();
-				rigaTabella[2] = avventore.getCognome();
-				rigaTabella[3] = dateFormat.format(avventore.getDataDiNascita());
-				rigaTabella[4] = avventore.getSesso();
-				rigaTabella[5] = avventore.getCittaDiNascita();
-				rigaTabella[6] = avventore.getProvinciaDiNascita();
-				rigaTabella[7] = avventore.getCittaDiResidenza();
-				rigaTabella[8] = avventore.getProvinciaDiResidenza();
-				rigaTabella[9] = avventore.getTelefono();
-				rigaTabella[10] = avventore.getEmail();
-				rigaTabella[11] = avventore.getTemperaturaCorporea();
-				rigaTabella[12] = avventore.getGreenpass();
-				
-				modellotabella.addRow(rigaTabella);
-			}
-			modellotabella.fireTableDataChanged();
-			gestioneAvventoriPage.setModel(modellotabella);
-			
-		} catch (Exception e) {
-			mostraErrore(e);
-		}
-	}
-	
-	/* metodo inserisci avventore */
-	public void insertAvventore(boolean isProprietario, String numCid,String nome,String cognome,String dataNascita,String sesso,String cittaNascita,String provNascita, 
-			String cittaResidenza,String provResidenza,String telefono,String email,double temperatura,char greenpass) {
+	public void insertManager(String username, String password, String nome, String cognome, String telefono, String email, String ristorante) {
+		boolean esitoInsert;
 		
-		boolean esitoInsertAvventore;
-		boolean esitoInsertAvventoreTavolata;
-		boolean esitoInsertAvventoreRistorante;
-		JTable tabellaTavolate = gestioneTavolatePage.getTabellaTavolateRistorante();
-		int codTavolo = (int) tabellaTavolate.getModel().getValueAt(tabellaTavolate.getSelectedRow(), 1);
-		String dataArrivo = tabellaTavolate.getModel().getValueAt(tabellaTavolate.getSelectedRow(), 2).toString();
-		int codTavolata = tavolataDAO.getCodiceTavolataByDataArrivoAndTavolo(dataArrivo, codTavolo);
-		int codRistorante = 0;
-		
-		try {
-			
-			if(isProprietario) {
-				codRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
-			} else {
-				codRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(managerRistorante.getRistoranteGestito().getDenominazione(),
-						managerRistorante.getRistoranteGestito().getIndirizzo());
-			}
-			
-			if(avventoreDAO.getEsistenzaAvventoreByNumcid(numCid) == true) {
-				esitoInsertAvventoreTavolata = avventoreDAO.aggiungiAvventoreATavolata(numCid, codTavolata);
-				esitoInsertAvventoreRistorante = avventoreDAO.aggiungiAvventoreARistorante(codRistorante, numCid);
-				
-				if(esitoInsertAvventoreTavolata && esitoInsertAvventoreRistorante) {
-					mostraEsitoCorrettoInsertAvventoreEsistente();
-					riempiTabellaAvventoriRistorante(); //aggiorna la tabella 
-				}
-			}
-			else
-			{
-				esitoInsertAvventore = avventoreDAO.insertAvventore(numCid, nome, cognome, dataNascita, sesso, cittaNascita, provNascita, 
-						cittaResidenza, provResidenza, telefono, email, temperatura, greenpass);
-				if(esitoInsertAvventore) {
-					esitoInsertAvventoreTavolata = avventoreDAO.aggiungiAvventoreATavolata(numCid, codTavolata);
-					esitoInsertAvventoreRistorante = avventoreDAO.aggiungiAvventoreARistorante(codRistorante, numCid);
-					
-					if(esitoInsertAvventoreRistorante && esitoInsertAvventoreTavolata) {
-						mostraEsitoCorrettoInsert();
-						riempiTabellaAvventoriRistorante(); //aggiorna la tabella 
-					} else {
-						avventoreDAO.deleteAvventore(numCid);
-					}
-				}
-			}
-		
-		} catch (Exception e) {
-			mostraErrore(e);
-		}
-	}
-	
-	//metodo riempi campi pagina modifica avventore
-	public void riempiCampiModificaAvventorePage() {
-		JTable tabellaAvventori = gestioneAvventoriPage.getTabellaAvventoriRistorante();
-		String numcid = tabellaAvventori.getModel().getValueAt(tabellaAvventori.getSelectedRow(), 0).toString();
-		String nome = tabellaAvventori.getModel().getValueAt(tabellaAvventori.getSelectedRow(), 1).toString();
-		String cognome = tabellaAvventori.getModel().getValueAt(tabellaAvventori.getSelectedRow(), 2).toString();
-		String data = tabellaAvventori.getModel().getValueAt(tabellaAvventori.getSelectedRow(), 3).toString();
-		String sesso = tabellaAvventori.getModel().getValueAt(tabellaAvventori.getSelectedRow(), 4).toString();
-		String cittanascita = tabellaAvventori.getModel().getValueAt(tabellaAvventori.getSelectedRow(), 5).toString();
-		String provnascita = tabellaAvventori.getModel().getValueAt(tabellaAvventori.getSelectedRow(), 6).toString();
-		String cittaresidenza = tabellaAvventori.getModel().getValueAt(tabellaAvventori.getSelectedRow(), 7).toString();
-		String provresidenza = tabellaAvventori.getModel().getValueAt(tabellaAvventori.getSelectedRow(), 8).toString();
-		String telefono = tabellaAvventori.getModel().getValueAt(tabellaAvventori.getSelectedRow(), 9).toString();
-		String email = "";
-		if(!(tabellaAvventori.getModel().getValueAt(tabellaAvventori.getSelectedRow(), 6) == null)) {
-			email = tabellaAvventori.getModel().getValueAt(tabellaAvventori.getSelectedRow(), 10).toString();
-		}
-		double temperatura = (double) tabellaAvventori.getModel().getValueAt(tabellaAvventori.getSelectedRow(), 11);
-		char greenpass = tabellaAvventori.getModel().getValueAt(tabellaAvventori.getSelectedRow(), 12).toString().charAt(0);
-	
-		modificaAvventorePage.getCampo_NumCid().setText(numcid);
-		modificaAvventorePage.getCampo_Nome().setText(nome);
-		modificaAvventorePage.getCampo_Cognome().setText(cognome);
-		try {
-			java.util.Date datanascita = new SimpleDateFormat("dd/MM/yyyy").parse(data);
-			modificaAvventorePage.getCampo_DataNascita().setDate(datanascita);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		modificaAvventorePage.getCampo_Sesso().setSelectedItem(sesso);
-		modificaAvventorePage.getCampo_CittaNascita().setText(cittanascita);
-		modificaAvventorePage.getCampo_ProvNascita().setSelectedItem(provnascita);
-		modificaAvventorePage.getCampo_CittaResidenza().setText(cittaresidenza);
-		modificaAvventorePage.getCampo_ProvResidenza().setSelectedItem(provresidenza);
-		modificaAvventorePage.getCampo_Telefono().setText(telefono);
-		modificaAvventorePage.getCampo_Email().setText(email);
-		modificaAvventorePage.getCampo_Temperatura().setValue(temperatura);
-		modificaAvventorePage.getCampo_Greenpass().setSelectedItem(greenpass);	
-	}
-	
-	
-	//metodo modifica avventore
-	public void updateAvventore(String numCid,String nome,String cognome,String dataNascita,String sesso,String cittaNascita,String provNascita, 
-			String cittaResidenza,String provResidenza,String telefono,String email,double temperatura,char greenpass) {
-		
-		boolean esitoUpdate;
+		String[] splitted = ristorante.split(" - ");
+		int ristoranteGestito = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(splitted[0], splitted[1]);
 
 		try {
-			esitoUpdate = avventoreDAO.updateAvventore(numCid, nome, cognome, dataNascita, sesso, cittaNascita, provNascita, 
-					cittaResidenza, provResidenza, telefono, email, temperatura, greenpass);
-			if(esitoUpdate) {
+			esitoInsert = managerRistoranteDAO.insertManager(username, password, nome, cognome, telefono, email, ristoranteGestito);
+			if(esitoInsert) {
+				mostraEsitoCorrettoInsert();
+				riempiTabllaManagerGestione();
+			}
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+		
+	}
+	
+	public void updateManager(String username, String password, String nome, String cognome, String telefono, String email, String ristorante) {
+		boolean esitoInsert;
+		
+		String[] splitted = ristorante.split(" - ");
+		int ristoranteGestito = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(splitted[0], splitted[1]);
+
+		try {
+			esitoInsert = managerRistoranteDAO.updateManager(username, password, nome, cognome, telefono, email, ristoranteGestito);
+			if(esitoInsert) {
 				mostraEsitoCorrettoUpdate();
-				riempiTabellaAvventoriRistorante(); //aggiorna la tabella 
 			}
 		} catch (Exception e) {
 			mostraErrore(e);
 		}
 	}
 	
-	
-	//metodo elimina avventore
-	public void deleteAvventore() {
+	public void deleteManager(String username) {
 		boolean esitoDelete;
-		JTable tabellaAvventori = gestioneAvventoriPage.getTabellaAvventoriRistorante();
-		String numCid = (String) tabellaAvventori.getModel().getValueAt(tabellaAvventori.getSelectedRow(), 0);
 		
 		try {
+			esitoDelete= managerRistoranteDAO.deleteManager(username);
 			
-			esitoDelete = avventoreDAO.deleteAvventore(numCid);
 			if(esitoDelete) {
 				mostraEsitoCorrettoDelete();
-				riempiTabellaAvventoriRistorante(); //aggiorna la tabella 
 			}
+			
 		} catch (Exception e) {
 			mostraErrore(e);
 		}
+		
 	}
 	
-	//metodo elimina avventore da tavolata
-	public void deleteAvventoreFromTavolata() {
-		boolean esitoDelete;
-		
-		JTable tabellaTavolate = gestioneTavolatePage.getTabellaTavolateRistorante();
-		int codTavolo = (int) tabellaTavolate.getModel().getValueAt(tabellaTavolate.getSelectedRow(), 1);
-		String dataArrivo = (String) tabellaTavolate.getModel().getValueAt(tabellaTavolate.getSelectedRow(), 2);
-		int codTavolata = tavolataDAO.getCodiceTavolataByDataArrivoAndTavolo(dataArrivo, codTavolo);
-		JTable tabellaAvventori = gestioneAvventoriPage.getTabellaAvventoriRistorante();
-		String numCid = (String) tabellaAvventori.getModel().getValueAt(tabellaAvventori.getSelectedRow(), 0);
-		
-		try {
-			esitoDelete = avventoreDAO.deleteAvventoreFromTavolata(numCid, codTavolata);
-			if(esitoDelete) {
-				mostraEsitoCorrettoDelete();
-				riempiTabellaAvventoriRistorante(); //aggiorna la tabella 
-			}
-		} catch (Exception e) {
-			mostraErrore(e);
-		}
-	}
-	
-	
-		
-	
-	
-
 	/*-----------------------------------------------------------------------------------------------------------------------------*/
 	/*STARTER*/
 	
@@ -1000,12 +1045,6 @@ public class Controller {
 	
 	public void mostraHomepageProprietarioFrame() { 
 		proprietarioPage.setVisible(true); 
-	}
-	
-	//starter impostazioni proprietario
-	public void startImpostazioniProprietarioFrame () {
-		impostazioniPage = new ImpostazioniProprietarioFrame(this);
-		impostazioniPage.setVisible(true);
 	}
 	
 	//starter ristoranti proprietario
@@ -1064,6 +1103,14 @@ public class Controller {
 		gestioneSaleETavolatePage.setVisible(true);
 	}
 	
+
+	public void startGestionePersonale() {
+		proprietarioPage.dispose();
+		gestionePersonalePage = new GestionePersonaleFrame(this);
+		gestionePersonalePage.setVisible(true);
+	}
+	
+
 	public void mostraGestioneSaleETavolateFrame() { 
 		gestioneSaleETavolatePage.setVisible(true); 
 	}
@@ -1102,7 +1149,6 @@ public class Controller {
 	
 	//starter pagina modifica tavolo
 	public void startModificaTavoloFrame(boolean isProprietario) {
-		gestioneTavoliPage.dispose();
 		modificaTavoloPage = new ModificaTavoloFrame(this, isProprietario);
 		modificaTavoloPage.setVisible(true);
 	}
@@ -1119,45 +1165,26 @@ public class Controller {
 	
 	//starter pagina aggiungi tavolata
 	public void startAggiungiTavolataFrame(boolean isProprietario) {
-		gestioneTavolatePage.dispose();
 		aggiungiTavolataPage = new AggiungiTavolataFrame(this, isProprietario);
 		aggiungiTavolataPage.setVisible(true);
 	}
 	
 	//starter pagina modifica tavolata
 	public void startModificaTavolataFrame(boolean isProprietario) {
-		gestioneTavolatePage.dispose();
 		modificaTavolataPage = new ModificaTavolataFrame(this, isProprietario);
 		modificaTavolataPage.setVisible(true);
 	}
 	
-	//starter pagina gestione avventori
-	public void startGestioneAvventoriFrame(boolean isProprietario) {
-		gestioneAvventoriPage = new GestioneAvventoriFrame(this, isProprietario);
-		gestioneAvventoriPage.setVisible(true);
-	}
 	
-	public void mostraGestioneAvventoriFrame() { 
-		gestioneAvventoriPage.setVisible(true); 
-	}
 	
-	//starter pagina aggiungi avventori
-	public void startAggiungiAvventoriFrame(boolean isProprietario) {
-		gestioneAvventoriPage.dispose();
-		aggiungiAvventorePage = new AggiungiAvventoreFrame(this, isProprietario);
-		aggiungiAvventorePage.setVisible(true);
+
+	public void startAggiungiAvventori(boolean proprietario) {
+		Aggiungi_Avventori aggiungiAvventoriPage = new Aggiungi_Avventori(this, proprietario);
+		aggiungiAvventoriPage .setVisible(true);
 	}
-	
-	//starter pagina modifica avventori
-	public void startModificaAvventori(boolean isProprietario) {
-		gestioneAvventoriPage.dispose();
-		modificaAvventorePage = new ModificaAvventoreFrame(this, isProprietario);
-		modificaAvventorePage.setVisible(true);
-	}
-	
 	
 	public void startAggiungiCameriere(boolean proprietario) {
-		Aggiungi_Cameriere aggiungiCamerierePage = new Aggiungi_Cameriere(null, proprietario);
+		ModificaCameriereFrame aggiungiCamerierePage = new ModificaCameriereFrame(this, proprietario);
 		aggiungiCamerierePage.setVisible(true);
 	}
 	
@@ -1167,10 +1194,20 @@ public class Controller {
 	}
 	
 	public void startAggiungiManager() {
-		Aggiungi_Manager aggiungiManagerPage = new Aggiungi_Manager(this);
+		AggiungiManagerFrame aggiungiManagerPage = new AggiungiManagerFrame(this);
 		aggiungiManagerPage.setVisible(true);
 	}
+	
 
+	
+	
+
+	
+	public void startAvventori(boolean proprietario) {
+		Avventori avventoriPage = new Avventori(this, proprietario);
+		avventoriPage.setVisible(true);
+	}
+	
 	public void startCamerieri(boolean proprietario) {
 		Camerieri camerieriPage = new Camerieri(this, proprietario);
 		camerieriPage.setVisible(true);
@@ -1181,14 +1218,20 @@ public class Controller {
 		casiPage.setVisible(true);
 	}
 	
-	public void startManager() {
-		Manager managerPage = new Manager(this);
-		managerPage.setVisible(true);
+	public void startImpostazioni () {
+		ImpostazioniProprietarioFrame impostazioniPage = new ImpostazioniProprietarioFrame(this);
+		impostazioniPage.setVisible(true);
 	}
 	
 	
+	public void startModificaAvventori(boolean proprietario) {
+		Modifica_Avventori modificaAvventoriPage = new Modifica_Avventori(this, proprietario);
+		modificaAvventoriPage.setVisible(true);
+	}
+	
 	public void startModificaCameriere(boolean proprietario) {
-		Modifica_Cameriere modificaCamerierePage = new Modifica_Cameriere(this, proprietario);
+		modificaCamerierePage = new ModificaCameriereFrame(this, proprietario);
+		riempiCampiModificaCameriere();
 		modificaCamerierePage.setVisible(true);
 	}
 	
@@ -1198,14 +1241,22 @@ public class Controller {
 	}
 	
 	public void startModificaManager() {
-		Modifica_Manager modificaManagerPage = new Modifica_Manager(this);
+		modificaManagerPage = new ModificaManagerFrame(this);
+		riempiCampiModificaManager();
 		modificaManagerPage.setVisible(true);
 	}
+	
+	
+	
+
 	
 	public void startStatistiche(boolean proprietario, boolean generale) {
 		Statistiche statistichePage = new Statistiche(this, proprietario, generale);
 		statistichePage.setVisible(true);
 	}
+	
+
+
 	
 	/*------------------------------------------------------------------------------------------------------------------------*/
 	//gestione delle message dialog utente 
@@ -1233,16 +1284,6 @@ public class Controller {
 		lblEsitoInserimento.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		JOptionPane.showMessageDialog(null,lblEsitoInserimento,"Inserimento effettuato",JOptionPane.INFORMATION_MESSAGE);
 	}
-	
-	private void mostraEsitoCorrettoInsertAvventoreEsistente() {
-		JLabel lblEsitoInserimento = new JLabel("<html>L'avventore risulta già registrato in uno dei ristoranti del proprietario.<br>"
-				+ "E' stato aggiunto alla nuova tavolata con i dati precedentemente registrati."
-				+ "<br>Per modificarli cliccare su modifica avventore!</html>");
-		lblEsitoInserimento.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		JOptionPane.showMessageDialog(null,lblEsitoInserimento,"Inserimento effettuato",JOptionPane.INFORMATION_MESSAGE);
-	}
-	
-	
 	
 	private void mostraEsitoCorrettoDelete() {
 		JLabel lblEsitoInserimento = new JLabel("Eliminazione effettuata correttamente!");

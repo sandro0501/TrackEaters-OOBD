@@ -73,17 +73,19 @@ public class HomepageProprietarioFrame extends JFrame {
 		bottone_IMieiRistoranti.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		pannello_Principale.add(bottone_IMieiRistoranti);
 		
-		JButton bottone_Manager = new JButton("");
-		bottone_Manager.setIcon(new ImageIcon(HomepageProprietarioFrame.class.getResource("/resources/btnGestionePersonale.png")));
-		bottone_Manager.addActionListener(new ActionListener() {
+		JButton bottone_GestionePersonale = new JButton("");
+		bottone_GestionePersonale.setIcon(new ImageIcon(HomepageProprietarioFrame.class.getResource("/resources/btnGestionePersonale.png")));
+		bottone_GestionePersonale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startManager();
+				c.startGestionePersonale();
+				c.riempiTabllaCamerieriGestione();
+				c.riempiTabllaManagerGestione();
 			}
 		});
-		bottone_Manager.setBounds(422, 315, 420, 60);
-		bottone_Manager.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		pannello_Principale.add(bottone_Manager);
+		bottone_GestionePersonale.setBounds(422, 315, 420, 60);
+		bottone_GestionePersonale.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		pannello_Principale.add(bottone_GestionePersonale);
 		
 		JButton bottone_Statistiche = new JButton("");
 		bottone_Statistiche.setIcon(new ImageIcon(HomepageProprietarioFrame.class.getResource("/resources/btnStatistiche.png")));

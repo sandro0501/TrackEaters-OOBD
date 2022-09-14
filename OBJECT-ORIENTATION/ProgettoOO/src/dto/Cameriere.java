@@ -33,6 +33,7 @@ public class Cameriere {
 		this.telefono = telefono;
 		this.email = email;
 	}
+	
 
 	public String getNumeroCid() {
 		return numeroCid;

@@ -17,14 +17,14 @@ public class Avventore {
 	private String telefono;
 	private String email;
 	private double temperaturaCorporea;
-	private boolean greenpass;
+	private char greenpass;
 	
 	private List<Ristorante> accoglienzaRistorante;
 	private List<Tavolata> partecipazioneTavolata;
 	
 	public Avventore(String numeroCid, String nome, String cognome, Date dataDiNascita, String sesso,
 			String cittaDiNascita, String provinciaDiNascita, String cittaDiResidenza, String provinciaDiResidenza,
-			String telefono, String email, double temperaturaCorporea, boolean greenpass) {
+			String telefono, String email, double temperaturaCorporea, char greenpass) {
 		this.numeroCid = numeroCid;
 		this.nome = nome;
 		this.cognome = cognome;
@@ -136,11 +136,11 @@ public class Avventore {
 		this.temperaturaCorporea = temperaturaCorporea;
 	}
 	
-	public boolean hasGreenpass() {
+	public char getGreenpass() {
 		return greenpass;
 	}
 	
-	public void setGreenpass(boolean greenpass) {
+	public void setGreenpass(char greenpass) {
 		this.greenpass = greenpass;
 	}
 	

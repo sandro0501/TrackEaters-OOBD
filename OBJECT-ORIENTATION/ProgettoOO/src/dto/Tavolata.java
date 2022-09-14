@@ -11,7 +11,6 @@ public class Tavolata {
 	private Time oraArrivo = Time.valueOf("20:00:00");
 	private Time oraUscita = Time.valueOf("22:00:00");
 
-	private Tavolo composizioneTavolo;
 	private List<Avventore> partecipazioneAvventore; 
 	private Cameriere servizioCameriere; 
 	
@@ -48,14 +47,6 @@ public class Tavolata {
 
 	public Time getOraUscita() {
 		return oraUscita;
-	}
-	
-	public Tavolo getComposizioneTavolo() {
-		return composizioneTavolo;
-	}
-
-	public void setComposizioneTavolo(Tavolo composizioneTavolo) {
-		this.composizioneTavolo = composizioneTavolo;
 	}
 
 	public List<Avventore> getPartecipazioneTavolata() {

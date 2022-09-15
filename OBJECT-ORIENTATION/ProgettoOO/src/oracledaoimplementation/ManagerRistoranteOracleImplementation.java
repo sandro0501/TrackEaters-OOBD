@@ -208,24 +208,18 @@ public class ManagerRistoranteOracleImplementation implements ManagerRistoranteD
 			lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
 			JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);	
 		} 
-		else if (e.getErrorCode()==20012) 
-		{
-			JLabel lblErrore = new JLabel("CAP non valido! Sono ammesse al massimo 5 cifre numeriche. Riprova.");
-			lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
-			JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);	
-		} 
-		else if (e.getMessage().toString().contains("SITO_WEB_LEGALE"))
-		{
-			JLabel lblErrore = new JLabel("Sito web non valido! Non rispetta la forma 'www.example.domain'. Riprova.");
-			lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
-			JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);
-		} 
 		else if (e.getMessage().toString().contains("EMAIL_LEGALE"))
 		{
 			JLabel lblErrore = new JLabel("Email non valida! Non rispetta la forma 'example@mail.domain'. Riprova.");
 			lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
 			JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);	
-		} 
+		}
+		else if (e.getMessage().toString().contains("PASSWORD_MANAGER_RISTORANTE_LEGALE")) 
+		{
+			JLabel lblErrore = new JLabel("Password non valida. Deve contenere almeno 8 caratteri, una lettera ed un numero!");
+			lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
+			JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);	
+		}
 		else 
 		{
 			System.out.println("Codice errore SQL: "+e.getErrorCode()); 

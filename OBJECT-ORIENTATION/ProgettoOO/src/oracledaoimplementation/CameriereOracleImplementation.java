@@ -193,9 +193,18 @@ public class CameriereOracleImplementation implements CameriereDAO {
 			}
 			stmtDeleteCameriere.close();
 		} catch (SQLException e) {
-			System.out.println("Codice errore SQL: "+e.getErrorCode()); 
-			System.out.println("SQL State: "+e.getSQLState()); 
-			System.out.println("Messaggio: " +e.getMessage());
+			if(e.getErrorCode()==2292) 
+			{
+				JLabel lblErrore = new JLabel("Impossibile eliminare cameriere. E'associato a delle tavolate. Eliminarle e riprovare.");
+				lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
+				JOptionPane.showMessageDialog(null,lblErrore,"Errore eliminazione cameriere",JOptionPane.ERROR_MESSAGE);	
+			}
+			else
+			{
+				System.out.println("Codice errore SQL: "+e.getErrorCode()); 
+				System.out.println("SQL State: "+e.getSQLState()); 
+				System.out.println("Messaggio: " +e.getMessage());
+			}
 		}
 		return false;
 	}
@@ -237,23 +246,17 @@ public class CameriereOracleImplementation implements CameriereDAO {
 	}
 	
 	private void gestisciErroriInserimentoDati(SQLException e) {
-		if(e.getErrorCode()==20010) 
+		if(e.getErrorCode()==12899) 
+		{
+			JLabel lblErrore = new JLabel("<html>Numero della carta di identita' non valido!<br>Deve contenere al massimo 9 caratteri. Riprovare.</html>");
+			lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
+			JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento avventore - Numero carta identita' non valido",JOptionPane.ERROR_MESSAGE);
+		}
+		else if(e.getErrorCode()==20010) 
 		{
 			JLabel lblErrore = new JLabel("Numero di telefono non valido! Sono ammesse cifre numeriche ed il carattere +. Riprova.");
 			lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
 			JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);	
-		} 
-		else if (e.getErrorCode()==20012) 
-		{
-			JLabel lblErrore = new JLabel("CAP non valido! Sono ammesse al massimo 5 cifre numeriche. Riprova.");
-			lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
-			JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);	
-		} 
-		else if (e.getMessage().toString().contains("SITO_WEB_LEGALE"))
-		{
-			JLabel lblErrore = new JLabel("Sito web non valido! Non rispetta la forma 'www.example.domain'. Riprova.");
-			lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
-			JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);
 		} 
 		else if (e.getMessage().toString().contains("EMAIL_LEGALE"))
 		{

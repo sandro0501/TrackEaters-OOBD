@@ -47,19 +47,21 @@ public class AggiungiManagerFrame extends JFrame {
 		
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(AggiungiManagerFrame.class.getResource("/resources/icon.png")));
-		setTitle("TrackEaters - Modifica manager");
+		setTitle("TrackEaters - Aggiungi manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 540, 720);
+		setLocationRelativeTo(null);
 		pannello_Principale = new JPanel();
 		pannello_Principale.setBackground(new Color(176, 196, 222));
 		pannello_Principale.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(pannello_Principale);
 		pannello_Principale.setLayout(null);
 		
-		JLabel etichetta_Manager = new JLabel("MANAGER");
+		JLabel etichetta_Manager = new JLabel("");
+		etichetta_Manager.setIcon(new ImageIcon(AggiungiManagerFrame.class.getResource("/resources/aggiungiManagerTitle.png")));
 		etichetta_Manager.setFont(new Font("Tahoma", Font.BOLD, 20));
 		etichetta_Manager.setHorizontalAlignment(SwingConstants.CENTER);
-		etichetta_Manager.setBounds(133, 26, 257, 30);
+		etichetta_Manager.setBounds(10, 11, 487, 59);
 		pannello_Principale.add(etichetta_Manager);
 		
 		JLabel etichetta_Nome = new JLabel("Nome (*)");
@@ -169,7 +171,7 @@ public class AggiungiManagerFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler annullare?")==0) {
 					setVisible(false);
-					c.startGestionePersonale();
+					c.mostraGestionePersonaleFrame();
 					c.riempiTabllaCamerieriGestione();
 					c.riempiTabllaManagerGestione();
 				}
@@ -178,10 +180,10 @@ public class AggiungiManagerFrame extends JFrame {
 		bottone_Annulla.setBounds(24, 607, 160, 60);
 		pannello_Principale.add(bottone_Annulla);
 		
-		JButton bottone_Conferma = new JButton("");
+		JButton bottone_Aggiungi = new JButton("");
 		JLabel lblAggiungi = new JLabel("Sei sicuro di voler aggiungere il nuovo Manager?");
 		lblAggiungi.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		bottone_Conferma.addActionListener(new ActionListener() {
+		bottone_Aggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(areTextfieldsEmpty()) {
 					lblCampoNomeEmpty.setText("* Campo obbligatorio");
@@ -202,16 +204,16 @@ public class AggiungiManagerFrame extends JFrame {
 						c.insertManager(campo_Username.getText(),  password_Password.getText() , campo_Nome.getText(), campo_Cognome.getText(), campo_Telefono.getText(), campo_Email.getText(), comboBox_Ristorante.getSelectedItem().toString());
 						flushTextfields();
 						setVisible(false);
-						c.startGestionePersonale();
+						c.mostraGestionePersonaleFrame();
 						c.riempiTabllaManagerGestione();
 						c.riempiTabllaCamerieriGestione();
 					}
 				}
 			}
 		});
-		bottone_Conferma.setIcon(new ImageIcon(AggiungiManagerFrame.class.getResource("/resources/btnAggiungi.png")));
-		bottone_Conferma.setBounds(337, 607, 160, 60);
-		pannello_Principale.add(bottone_Conferma);
+		bottone_Aggiungi.setIcon(new ImageIcon(AggiungiManagerFrame.class.getResource("/resources/btnAggiungi.png")));
+		bottone_Aggiungi.setBounds(337, 607, 160, 60);
+		pannello_Principale.add(bottone_Aggiungi);
 		
 		campo_Username = new JTextField();
 		campo_Username.setFont(new Font("Segoe UI", Font.PLAIN, 15));

@@ -50,16 +50,18 @@ public class ModificaManagerFrame extends JFrame {
 		setTitle("TrackEaters - Modifica manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 540, 720);
+		setLocationRelativeTo(null);
 		pannello_Principale = new JPanel();
 		pannello_Principale.setBackground(new Color(176, 196, 222));
 		pannello_Principale.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(pannello_Principale);
 		pannello_Principale.setLayout(null);
 		
-		JLabel etichetta_Manager = new JLabel("MANAGER");
+		JLabel etichetta_Manager = new JLabel("");
+		etichetta_Manager.setIcon(new ImageIcon(ModificaManagerFrame.class.getResource("/resources/modificaManagerTitle.png")));
 		etichetta_Manager.setFont(new Font("Tahoma", Font.BOLD, 20));
 		etichetta_Manager.setHorizontalAlignment(SwingConstants.CENTER);
-		etichetta_Manager.setBounds(133, 26, 257, 30);
+		etichetta_Manager.setBounds(10, 11, 504, 60);
 		pannello_Principale.add(etichetta_Manager);
 		
 		JLabel etichetta_Username = new JLabel("Username (*)");
@@ -189,7 +191,7 @@ public class ModificaManagerFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler annullare?")==0) {
 					setVisible(false);
-					c.startGestionePersonale();
+					c.mostraGestionePersonaleFrame();
 					c.riempiTabllaCamerieriGestione();
 					c.riempiTabllaManagerGestione();
 				}
@@ -198,10 +200,10 @@ public class ModificaManagerFrame extends JFrame {
 		bottone_Annulla.setBounds(24, 607, 160, 60);
 		pannello_Principale.add(bottone_Annulla);
 		
-		JButton bottone_Conferma = new JButton("");
+		JButton bottone_Modifica = new JButton("");
 		JLabel lblConferma = new JLabel("Sei sicuro di voler modificare il Manager?");
 		lblConferma.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		bottone_Conferma.addActionListener(new ActionListener() {
+		bottone_Modifica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(areTextfieldsEmpty()) {
 					lblCampoNomeEmpty.setText("* Campo obbligatorio");
@@ -222,16 +224,16 @@ public class ModificaManagerFrame extends JFrame {
 						c.updateManager(campo_Username.getText(), password_Password.getText(), campo_Nome.getText(), campo_Cognome.getText(), campo_Telefono.getText(), campo_Email.getText(), comboBox_Ristorante.getSelectedItem().toString());
 						flushTextfields();
 						setVisible(false);
-						c.startGestionePersonale();
+						c.mostraGestionePersonaleFrame();
 						c.riempiTabllaCamerieriGestione();
 						c.riempiTabllaManagerGestione();
 					}
 				}
 			}
 		});
-		bottone_Conferma.setIcon(new ImageIcon(ModificaManagerFrame.class.getResource("/resources/ConfermaBtn.png")));
-		bottone_Conferma.setBounds(337, 607, 160, 60);
-		pannello_Principale.add(bottone_Conferma);
+		bottone_Modifica.setIcon(new ImageIcon(ModificaManagerFrame.class.getResource("/resources/btnModifica.png")));
+		bottone_Modifica.setBounds(337, 607, 160, 60);
+		pannello_Principale.add(bottone_Modifica);
 		
 		
 	}

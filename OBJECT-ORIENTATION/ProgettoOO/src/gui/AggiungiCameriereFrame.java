@@ -50,6 +50,7 @@ public class AggiungiCameriereFrame extends JFrame {
 		setTitle("TrackEaters - Aggiungi cameriere");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 540, 720);
+		setLocationRelativeTo(null);
 		pannello_Principale = new JPanel();
 		pannello_Principale.setBackground(new Color(176, 196, 222));
 		pannello_Principale.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -128,10 +129,11 @@ public class AggiungiCameriereFrame extends JFrame {
 		comboBox_Ristorante.setModel(new DefaultComboBoxModel<String>(c.riempiComboRistoranti().toArray(new String[0])));
 		pannello_Principale.add(comboBox_Ristorante);
 		
-		JLabel etichetta_Cameriere = new JLabel("CAMERIERE");
+		JLabel etichetta_Cameriere = new JLabel("");
+		etichetta_Cameriere.setIcon(new ImageIcon(AggiungiCameriereFrame.class.getResource("/resources/aggiungiCameriereTitle.png")));
 		etichetta_Cameriere.setFont(new Font("Tahoma", Font.BOLD, 20));
 		etichetta_Cameriere.setHorizontalAlignment(SwingConstants.CENTER);
-		etichetta_Cameriere.setBounds(133, 11, 257, 30);
+		etichetta_Cameriere.setBounds(0, 0, 524, 50);
 		pannello_Principale.add(etichetta_Cameriere);
 		
 		JLabel etichetta_Nome = new JLabel("Nome (*)");
@@ -149,13 +151,13 @@ public class AggiungiCameriereFrame extends JFrame {
 		pannello_Principale.add(etichetta_Cognome);
 		
 		JLabel etichetta_DataNascita = new JLabel("Data di nascita (*)");
-		etichetta_DataNascita.setIcon(new ImageIcon(ModificaCameriereFrame.class.getResource("/resources/DataEOraIcon.png")));
+		etichetta_DataNascita.setIcon(new ImageIcon(AggiungiCameriereFrame.class.getResource("/resources/iconCalendar.png")));
 		etichetta_DataNascita.setForeground(new Color(0, 0, 127));
 		etichetta_DataNascita.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		etichetta_DataNascita.setBounds(10, 173, 223, 27);
 		pannello_Principale.add(etichetta_DataNascita);
 		
-		JLabel etichetta_Sesso = new JLabel("Sesso (*)");
+		JLabel etichetta_Sesso = new JLabel("Sesso ");
 		etichetta_Sesso.setForeground(new Color(0, 0, 127));
 		etichetta_Sesso.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		etichetta_Sesso.setBounds(222, 174, 199, 27);
@@ -168,28 +170,28 @@ public class AggiungiCameriereFrame extends JFrame {
 		etichetta_NumeroDocumento.setBounds(10, 235, 238, 27);
 		pannello_Principale.add(etichetta_NumeroDocumento);
 		
-		JLabel etichetta_CittaNatale = new JLabel("Città natale (*)");
+		JLabel etichetta_CittaNatale = new JLabel("Citta'\u00A0nascita (*)");
 		etichetta_CittaNatale.setIcon(new ImageIcon(ModificaCameriereFrame.class.getResource("/resources/cityIcon.png")));
 		etichetta_CittaNatale.setForeground(new Color(0, 0, 127));
 		etichetta_CittaNatale.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		etichetta_CittaNatale.setBounds(10, 297, 188, 27);
 		pannello_Principale.add(etichetta_CittaNatale);
 		
-		JLabel etichetta_ProvinciaNatale = new JLabel("Provincia natale (*)");
+		JLabel etichetta_ProvinciaNatale = new JLabel("Prov. nascita");
 		etichetta_ProvinciaNatale.setIcon(new ImageIcon(ModificaCameriereFrame.class.getResource("/resources/capIcon.png")));
 		etichetta_ProvinciaNatale.setForeground(new Color(0, 0, 127));
 		etichetta_ProvinciaNatale.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		etichetta_ProvinciaNatale.setBounds(222, 298, 199, 27);
 		pannello_Principale.add(etichetta_ProvinciaNatale);
 		
-		JLabel etichetta_CittaResidenza = new JLabel("Città residenza  (*)");
+		JLabel etichetta_CittaResidenza = new JLabel("Citta' residenza  (*)");
 		etichetta_CittaResidenza.setIcon(new ImageIcon(ModificaCameriereFrame.class.getResource("/resources/cityIcon.png")));
 		etichetta_CittaResidenza.setForeground(new Color(0, 0, 127));
 		etichetta_CittaResidenza.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		etichetta_CittaResidenza.setBounds(10, 359, 188, 27);
 		pannello_Principale.add(etichetta_CittaResidenza);
 		
-		JLabel etichetta_ProvinciaResidenza = new JLabel("Provincia residenza (*)");
+		JLabel etichetta_ProvinciaResidenza = new JLabel("Prov. residenza ");
 		etichetta_ProvinciaResidenza.setIcon(new ImageIcon(ModificaCameriereFrame.class.getResource("/resources/capIcon.png")));
 		etichetta_ProvinciaResidenza.setForeground(new Color(0, 0, 127));
 		etichetta_ProvinciaResidenza.setFont(new Font("Segoe UI", Font.BOLD, 18));
@@ -210,11 +212,11 @@ public class AggiungiCameriereFrame extends JFrame {
 		etichetta_Telefono.setBounds(10, 483, 223, 27);
 		pannello_Principale.add(etichetta_Telefono);
 		
-		JLabel lblCampoNomeEmpty = new JLabel("");
-		lblCampoNomeEmpty.setForeground(new Color(47, 79, 79));
-		lblCampoNomeEmpty.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 14));
-		lblCampoNomeEmpty.setBounds(344, 73, 180, 27);
-		pannello_Principale.add(lblCampoNomeEmpty);
+		JLabel lblCampoUsernameEmpty = new JLabel("");
+		lblCampoUsernameEmpty.setForeground(new Color(47, 79, 79));
+		lblCampoUsernameEmpty.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 14));
+		lblCampoUsernameEmpty.setBounds(344, 73, 180, 27);
+		pannello_Principale.add(lblCampoUsernameEmpty);
 		
 		JLabel lblCampoCognomeEmpty = new JLabel("");
 		lblCampoCognomeEmpty.setForeground(new Color(47, 79, 79));
@@ -248,7 +250,7 @@ public class AggiungiCameriereFrame extends JFrame {
 		
 		
 		
-		JLabel etichetta_Ristorante = new JLabel("Ristorante (*)");
+		JLabel etichetta_Ristorante = new JLabel("Ristorante ");
 		etichetta_Ristorante.setForeground(new Color(0, 0, 127));
 		etichetta_Ristorante.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		etichetta_Ristorante.setBounds(10, 546, 223, 27);
@@ -272,7 +274,7 @@ public class AggiungiCameriereFrame extends JFrame {
 		bottone_Aggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(areTextfieldsEmpty()) {
-					lblCampoNomeEmpty.setText("* Campo obbligatorio");
+					lblCampoUsernameEmpty.setText("* Campo obbligatorio");
 					lblCampoCognomeEmpty.setText("* Campo obbligatorio");
 					lblCampoNumeroDocumentoEmpty.setText("* Campo obbligatorio");
 					lblCampoDataDiNascitaEmpty.setText("* Campo obbligatorio");
@@ -280,7 +282,7 @@ public class AggiungiCameriereFrame extends JFrame {
 					lblCampoResidenzaEmpty.setText("* Campo obbligatorio");
 					lblCampoTelefonoEmpty.setText("* Campo obbligatorio");
 				} else if(campo_Nome.getText().trim().isEmpty()) {
-					lblCampoNomeEmpty.setText("* Campo obbligatorio");
+					lblCampoUsernameEmpty.setText("* Campo obbligatorio");
 				} else if(campo_Cognome.getText().trim().isEmpty()) {
 					lblCampoCognomeEmpty.setText("* Campo obbligatorio");
 				} else if(campo_DataNascita.getText().trim().isEmpty()) {
@@ -299,7 +301,7 @@ public class AggiungiCameriereFrame extends JFrame {
 						c.insertCameriere(campo_NumeroDocumento.getText(), campo_Nome.getText(), campo_Cognome.getText(), campo_DataNascita.getText(), comboBox_Sesso.getSelectedItem().toString(), campo_CittaNatale.getText(), comboBox_ProvinciaNatale.getSelectedItem().toString(), campo_CittaResidenza.getText(), comboBox_ProvinciaResidenza.getSelectedItem().toString(), campo_Telefono.getText(), campo_Email.getText(),comboBox_Ristorante.getSelectedItem().toString());
 						flushTextfields();
 						setVisible(false);
-						c.startGestionePersonale();
+						c.mostraGestionePersonaleFrame();
 						c.riempiTabllaCamerieriGestione();
 						c.riempiTabllaManagerGestione();
 					}
@@ -314,7 +316,7 @@ public class AggiungiCameriereFrame extends JFrame {
 				if (JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler annullare?")==0) {
 					if(proprietario) {
 						setVisible(false);
-						c.startGestionePersonale();
+						c.mostraGestionePersonaleFrame();
 						c.riempiTabllaCamerieriGestione();
 						c.riempiTabllaManagerGestione();
 					}
@@ -326,6 +328,12 @@ public class AggiungiCameriereFrame extends JFrame {
 		bottone_Aggiungi.setIcon(new ImageIcon(AggiungiRistoranteFrame.class.getResource("/resources/btnAggiungi.png")));
 		bottone_Aggiungi.setBounds(337, 607, 160, 60);
 		pannello_Principale.add(bottone_Aggiungi);
+		
+		JLabel lblCampoCognomeEmpty_1 = new JLabel("");
+		lblCampoCognomeEmpty_1.setForeground(new Color(47, 79, 79));
+		lblCampoCognomeEmpty_1.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 14));
+		lblCampoCognomeEmpty_1.setBounds(336, 74, 180, 27);
+		pannello_Principale.add(lblCampoCognomeEmpty_1);
 	}
 	
 	public void flushTextfields() {

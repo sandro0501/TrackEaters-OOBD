@@ -1,6 +1,5 @@
 package gui;
 
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -31,7 +30,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.Controller;
 
-public class GestionePersonaleFrame extends JFrame implements FocusListener{
+public class GestionePersonaleFrame extends JFrame {
 	
 	private JPanel pannello_Principale;
 	private Controller theController;
@@ -51,7 +50,7 @@ public class GestionePersonaleFrame extends JFrame implements FocusListener{
 		theController = c;
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GestionePersonaleFrame.class.getResource("/resources/icon.png")));
-		setTitle("TrackEaters - I miei ristoranti");
+		setTitle("TrackEaters - Gestione personale");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1280, 720);
@@ -63,17 +62,12 @@ public class GestionePersonaleFrame extends JFrame implements FocusListener{
 		pannello_Principale.setLayout(null);
 		
 		etichetta_ristorante = new JLabel("");
+		etichetta_ristorante.setIcon(new ImageIcon(GestionePersonaleFrame.class.getResource("/resources/Camerieri_Title.png")));
 		etichetta_ristorante.setForeground(new Color(0, 0, 127));
 		etichetta_ristorante.setFont(new Font("Segoe UI", Font.ITALIC, 27));
 		etichetta_ristorante.setHorizontalAlignment(SwingConstants.CENTER);
-		etichetta_ristorante.setBounds(387, 11, 490, 40);
+		etichetta_ristorante.setBounds(41, 11, 1170, 40);
 		pannello_Principale.add(etichetta_ristorante);
-		
-		JLabel etichetta_Camerieri = new JLabel("CAMERIERI");
-		etichetta_Camerieri.setFont(new Font("Tahoma", Font.BOLD, 20));
-		etichetta_Camerieri.setHorizontalAlignment(SwingConstants.CENTER);
-		etichetta_Camerieri.setBounds(94, 62, 490, 37);
-		pannello_Principale.add(etichetta_Camerieri);
 		
 		
 		JButton bottone_Aggiungi = new JButton("");
@@ -87,16 +81,17 @@ public class GestionePersonaleFrame extends JFrame implements FocusListener{
 					setVisible(false);
 					c.startAggiungiManager();
 				} else {
-					c.mostraErroreSelezioneDialog(pannello_Principale);
+					c.mostraErroreSelezionePersonale(pannello_Principale);
 				}
 				
 			}
 		});
 		
-		JLabel etichetta_Manager = new JLabel("MANAGER");
+		JLabel etichetta_Manager = new JLabel("");
+		etichetta_Manager.setIcon(new ImageIcon(GestionePersonaleFrame.class.getResource("/resources/managersTitle.png")));
 		etichetta_Manager.setHorizontalAlignment(SwingConstants.CENTER);
 		etichetta_Manager.setFont(new Font("Tahoma", Font.BOLD, 20));
-		etichetta_Manager.setBounds(678, 62, 490, 37);
+		etichetta_Manager.setBounds(387, 255, 490, 40);
 		pannello_Principale.add(etichetta_Manager);
 		bottone_Aggiungi.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		bottone_Aggiungi.setBounds(196, 503, 160, 60);
@@ -121,7 +116,7 @@ public class GestionePersonaleFrame extends JFrame implements FocusListener{
 		bottone_Modifica.setBounds(552, 503, 160, 60);
 		pannello_Principale.add(bottone_Modifica);
 		
-		JLabel lblElimina = new JLabel("<html>Sei sicuro di voler eliminare il ristorante selezionato?<br/>Verranno cancellate tutte le informazioni ad esso collegate.</html>");
+		JLabel lblElimina = new JLabel("<html>Sei sicuro di voler eliminare il lavoratore selezionato?<br/>Verranno cancellate tutte le informazioni ad esso collegate.</html>");
 		lblElimina.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		JButton bottone_Elimina = new JButton("");
 		bottone_Elimina.setIcon(new ImageIcon(RistorantiProprietarioFrame.class.getResource("/resources/btnElimina.png")));
@@ -129,17 +124,19 @@ public class GestionePersonaleFrame extends JFrame implements FocusListener{
 			public void actionPerformed(ActionEvent e) {
 				
 				if(tabellaCamerieri.getSelectedRow()!=-1) {
-					setVisible(false);
-					c.deleteCameriere(tabellaCamerieri.getModel().getValueAt(tabellaCamerieri.getSelectedRow(), 0).toString());
-					c.startGestionePersonale();
-					c.riempiTabllaCamerieriGestione();
-					c.riempiTabllaManagerGestione();
+					if(JOptionPane.showConfirmDialog(pannello_Principale,lblElimina) == 0){
+						c.deleteCameriere(tabellaCamerieri.getModel().getValueAt(tabellaCamerieri.getSelectedRow(), 0).toString());
+						c.mostraGestionePersonaleFrame();
+						c.riempiTabllaCamerieriGestione();
+						c.riempiTabllaManagerGestione(); 
+					}
 				} else if(tabellaManager.getSelectedRow()!=-1) {
-					setVisible(false);
-					c.deleteManager(tabellaManager.getModel().getValueAt(tabellaManager.getSelectedRow(), 0).toString());
-					c.startGestionePersonale();
-					c.riempiTabllaCamerieriGestione();
-					c.riempiTabllaManagerGestione();
+					if(JOptionPane.showConfirmDialog(pannello_Principale,lblElimina) == 0){
+						c.deleteManager(tabellaManager.getModel().getValueAt(tabellaManager.getSelectedRow(), 0).toString());
+						c.mostraGestionePersonaleFrame();
+						c.riempiTabllaCamerieriGestione();
+						c.riempiTabllaManagerGestione();
+					}
 				} else {
 					c.mostraErroreSelezioneDialog(pannello_Principale);
 				}
@@ -212,7 +209,7 @@ public class GestionePersonaleFrame extends JFrame implements FocusListener{
 		scrollPaneTabellaCamerieri.setViewportBorder(null);
 		scrollPaneTabellaCamerieri.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPaneTabellaCamerieri.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED );
-		scrollPaneTabellaCamerieri.setBounds(10, 119, 619, 346);
+		scrollPaneTabellaCamerieri.setBounds(10, 56, 1244, 188);
 		scrollPaneTabellaCamerieri.getViewport().setBackground(new Color(176, 196, 222));
 		pannello_Principale.add(scrollPaneTabellaCamerieri);
 		tabellaCamerieri = new JTable();
@@ -220,21 +217,21 @@ public class GestionePersonaleFrame extends JFrame implements FocusListener{
 		tabellaCamerieri.setBackground(Color.WHITE);
 		tabellaCamerieri.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		tabellaCamerieri.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		tabellaCamerieri.addFocusListener(this);
 		
-		modelloTabellaCamerieri.addColumn("Documento");
+		modelloTabellaCamerieri.addColumn("N.CID");
 		modelloTabellaCamerieri.addColumn("Nome");
 		modelloTabellaCamerieri.addColumn("Cognome");
-		modelloTabellaCamerieri.addColumn("Data Di Nascita");
+		modelloTabellaCamerieri.addColumn("Data di nascita");
 		modelloTabellaCamerieri.addColumn("Sesso");
-		modelloTabellaCamerieri.addColumn("Città Nascita");
-		modelloTabellaCamerieri.addColumn("Provincia Nascita");
-		modelloTabellaCamerieri.addColumn("Città Residenza");
-		modelloTabellaCamerieri.addColumn("Provincia Residenza");
+		modelloTabellaCamerieri.addColumn("Citta' nascita");
+		modelloTabellaCamerieri.addColumn("Provincia nascita");
+		modelloTabellaCamerieri.addColumn("Citta' residenza");
+		modelloTabellaCamerieri.addColumn("Provincia residenza");
 		modelloTabellaCamerieri.addColumn("Telefono");
 		modelloTabellaCamerieri.addColumn("Email");
 		modelloTabellaCamerieri.addColumn("Ristorante");
 		tabellaCamerieri.setModel(modelloTabellaCamerieri);
+		
 		
 		tabellaCamerieri.getColumnModel().getColumn(0).setPreferredWidth(100);
 		tabellaCamerieri.getColumnModel().getColumn(1).setPreferredWidth(100);
@@ -242,9 +239,9 @@ public class GestionePersonaleFrame extends JFrame implements FocusListener{
 		tabellaCamerieri.getColumnModel().getColumn(3).setPreferredWidth(150);
 		tabellaCamerieri.getColumnModel().getColumn(4).setPreferredWidth(100);
 		tabellaCamerieri.getColumnModel().getColumn(5).setPreferredWidth(150);
-		tabellaCamerieri.getColumnModel().getColumn(6).setPreferredWidth(150);
+		tabellaCamerieri.getColumnModel().getColumn(6).setPreferredWidth(50);
 		tabellaCamerieri.getColumnModel().getColumn(7).setPreferredWidth(150);
-		tabellaCamerieri.getColumnModel().getColumn(8).setPreferredWidth(150);
+		tabellaCamerieri.getColumnModel().getColumn(8).setPreferredWidth(50);
 		tabellaCamerieri.getColumnModel().getColumn(9).setPreferredWidth(150);
 		tabellaCamerieri.getColumnModel().getColumn(10).setPreferredWidth(200);
 		tabellaCamerieri.getColumnModel().getColumn(11).setPreferredWidth(150);
@@ -260,23 +257,20 @@ public class GestionePersonaleFrame extends JFrame implements FocusListener{
 		tabellaCamerieri.setDefaultEditor(Object.class, null);
 		tabellaCamerieri.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPaneTabellaCamerieri.setViewportView(tabellaCamerieri);
+		
 	}
 	
 	private void setTabellaManager() {
 		scrollPaneTabellaManager = new JScrollPane();
 		scrollPaneTabellaManager.setViewportBorder(null);
-		scrollPaneTabellaManager.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		scrollPaneTabellaManager.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED );
-		scrollPaneTabellaManager.setBounds(635, 119, 619, 346);
+		scrollPaneTabellaManager.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPaneTabellaManager.setBounds(10, 298, 1244, 180);
 		scrollPaneTabellaManager.getViewport().setBackground(new Color(176, 196, 222));
 		pannello_Principale.add(scrollPaneTabellaManager);
 		tabellaManager = new JTable();
 		tabellaManager.setForeground(new Color(0, 0, 128));
 		tabellaManager.setBackground(Color.WHITE);
 		tabellaManager.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		tabellaManager.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		tabellaManager.addFocusListener(this);
-		
 		modelloTabellaManager.addColumn("Username");
 		modelloTabellaManager.addColumn("Nome");
 		modelloTabellaManager.addColumn("Cognome");
@@ -284,14 +278,6 @@ public class GestionePersonaleFrame extends JFrame implements FocusListener{
 		modelloTabellaManager.addColumn("Telefono");
 		modelloTabellaManager.addColumn("Ristorante");
 		tabellaManager.setModel(modelloTabellaManager);
-		
-		tabellaManager.getColumnModel().getColumn(0).setPreferredWidth(150);
-		tabellaManager.getColumnModel().getColumn(1).setPreferredWidth(100);
-		tabellaManager.getColumnModel().getColumn(2).setPreferredWidth(100);
-		tabellaManager.getColumnModel().getColumn(3).setPreferredWidth(250);
-		tabellaManager.getColumnModel().getColumn(4).setPreferredWidth(150);
-		tabellaManager.getColumnModel().getColumn(5).setPreferredWidth(200);
-		
 		tabellaManager.getTableHeader().setAlignmentX(CENTER_ALIGNMENT);
 		tabellaManager.getTableHeader().setBackground(new Color(0, 0, 128));
 		tabellaManager.getTableHeader().setForeground(Color.WHITE);
@@ -305,7 +291,6 @@ public class GestionePersonaleFrame extends JFrame implements FocusListener{
 	}
 	
 	
-
 	private void mostraLogoutDialog(Controller c) {
 		JLabel lblLogout = new JLabel("Sei sicuro di voler uscire?");
 		lblLogout.setFont(new Font("Segoe UI", Font.BOLD, 15));
@@ -347,19 +332,6 @@ public class GestionePersonaleFrame extends JFrame implements FocusListener{
 		this.modelloTabellaManager = model;
 	}
 
-	@Override
-	public void focusGained(FocusEvent e) {
-		if(tabellaCamerieri.hasFocus()) {
-			tabellaManager.clearSelection();
-		} else if (tabellaManager.hasFocus()) {
-			tabellaCamerieri.clearSelection();
-		}
-		
-	}
-
-	@Override
-	public void focusLost(FocusEvent e) {
-		
-	}
+	
 }
 

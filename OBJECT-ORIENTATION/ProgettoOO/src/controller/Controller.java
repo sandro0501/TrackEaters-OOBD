@@ -62,6 +62,8 @@ public class Controller {
 	private GestioneAvventoriFrame gestioneAvventoriPage;
 	private AggiungiAvventoreFrame aggiungiAvventorePage;
 	private ModificaAvventoreFrame modificaAvventorePage;
+	private StatisticheProprietarioFrame statisticheProprietarioPage;
+	private StatisticheRistoranteFrame statisticheRistorantePage;
 
 	
 	private Operatore operatore;
@@ -1431,11 +1433,16 @@ public class Controller {
 		modificaCasoPage.setVisible(true);
 	}
 
-	public void startStatistiche(boolean proprietario, boolean generale) {
-		StatisticheFrame statistichePage = new StatisticheFrame(this, proprietario, generale);
-		statistichePage.setVisible(true);
+	public void startStatisticheProprietario() {
+		statisticheProprietarioPage = new StatisticheProprietarioFrame(this);
+		statisticheProprietarioPage.setVisible(true);
 	}
 
+	public void startStatisticheRistorante(boolean proprietario) {
+		statisticheRistorantePage = new StatisticheRistoranteFrame(this, proprietario);
+		statisticheRistorantePage.setVisible(true);
+	}
+	
 	/*------------------------------------------------------------------------------------------------------------------------*/
 	
 	private void mostraEsitoCorrettoLogin(String tipoOperatore, Operatore operatore) {
@@ -1463,7 +1470,7 @@ public class Controller {
 	}
 	
 	private void mostraEsitoCorrettoInsertAvventoreEsistente() {
-		JLabel lblEsitoInserimento = new JLabel("<html>L'avventore risulta già registrato in uno dei ristoranti del proprietario.<br>"
+		JLabel lblEsitoInserimento = new JLabel("<html>L'avventore risulta giï¿½ registrato in uno dei ristoranti del proprietario.<br>"
 				+ "E' stato aggiunto alla nuova tavolata con i dati precedentemente registrati."
 				+ "<br>Per modificarli cliccare su modifica avventore!</html>");
 		lblEsitoInserimento.setFont(new Font("Segoe UI", Font.BOLD, 15));

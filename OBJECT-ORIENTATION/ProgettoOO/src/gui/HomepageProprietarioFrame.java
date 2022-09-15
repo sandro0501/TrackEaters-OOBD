@@ -92,7 +92,7 @@ public class HomepageProprietarioFrame extends JFrame {
 		bottone_Statistiche.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startStatistiche(true, true);
+				c.startStatisticheProprietario();
 			}
 		});
 		bottone_Statistiche.setFont(new Font("Tahoma", Font.PLAIN, 11));

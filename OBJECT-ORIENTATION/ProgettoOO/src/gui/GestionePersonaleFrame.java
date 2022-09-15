@@ -301,6 +301,7 @@ public class GestionePersonaleFrame extends JFrame implements FocusListener{
 		tabellaManager.setRowHeight(30);
 		tabellaManager.setDefaultEditor(Object.class, null);
 		tabellaManager.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tabellaManager.setColumnSelectionAllowed(true);
 		scrollPaneTabellaManager.setViewportView(tabellaManager);
 	}
 	

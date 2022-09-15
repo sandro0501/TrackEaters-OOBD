@@ -168,7 +168,7 @@ public class HomepageGestioneRistoranteFrame extends JFrame {
 		bottone_Statistiche.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startStatistiche(proprietario, false);
+				c.startStatisticheRistorante(proprietario);
 			}
 		});
 		bottone_Statistiche.setFont(new Font("Tahoma", Font.PLAIN, 11));

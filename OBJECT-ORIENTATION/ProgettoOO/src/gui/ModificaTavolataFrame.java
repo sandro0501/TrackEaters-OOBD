@@ -50,7 +50,7 @@ public class ModificaTavolataFrame extends JFrame {
 		theController = c;
 		
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Modifica_Avventori.class.getResource("/resources/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ModificaAvventoreFrame.class.getResource("/resources/icon.png")));
 		setTitle("TrackEaters - Modifica tavolata");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 540, 540);

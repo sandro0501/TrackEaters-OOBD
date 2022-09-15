@@ -4,7 +4,6 @@ import dto.ManagerRistorante;
 import java.util.ArrayList;
 
 public interface ManagerRistoranteDAO {
-	
 	ArrayList<ManagerRistorante> getAllManager();
 	ManagerRistorante getInformazioniManagerByCodRistorante(int codRistorante);
 	String getTelefonoManagerByUsername(String usernameManager);

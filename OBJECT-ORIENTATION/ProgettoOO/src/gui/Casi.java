@@ -95,7 +95,7 @@ public class Casi extends JFrame {
 		bottone_Modifica.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startModificaAvventori(proprietario);
+				c.startModificaAvventore(proprietario);
 			}
 		});
 		bottone_Modifica.setFont(new Font("Tahoma", Font.PLAIN, 12));

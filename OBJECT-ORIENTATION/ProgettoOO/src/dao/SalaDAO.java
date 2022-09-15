@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import dto.Sala;
 
 public interface SalaDAO {
-	
 	 ArrayList<Sala> getSaleByCodRistorante(int codRistorante);
 	 int getCodiceSalaByDenominazioneAndCapienza(String denominazione, int capienza);
 	 Sala getSalaByCodice(int codSala);

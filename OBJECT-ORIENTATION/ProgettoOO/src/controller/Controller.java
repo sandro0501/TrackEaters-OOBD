@@ -359,6 +359,7 @@ public class Controller {
 			}
 			
 			ristorante.setCamerieriRistorante(listaCamerieri);
+			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 			DefaultTableModel model = infoRistorantePage.getModel();
 			model.getDataVector().removeAllElements();
 			String[] rigaTabella = new String[11];
@@ -368,7 +369,7 @@ public class Controller {
 				rigaTabella [0] = cameriere.getNumeroCid();
 				rigaTabella [1] = cameriere.getNome();
 				rigaTabella [2] = cameriere.getCognome();
-				rigaTabella [3] = cameriere.getDataDiNascita().toString();
+				rigaTabella [3] = dateFormat.format(cameriere.getDataDiNascita());
 				rigaTabella [4] = cameriere.getSesso();
 				rigaTabella [5] = cameriere.getCittaDiNascita();
 				rigaTabella [6] = cameriere.getProvinciaDiNascita();
@@ -389,6 +390,7 @@ public class Controller {
 	public void riempiTabllaCamerieriGestione() {
 		try {
 			ArrayList<Cameriere> listaCamerieri = cameriereDAO.getAllCamerieri();
+			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 			DefaultTableModel modelloTabellaCamerieri = gestionePersonalePage.getModelCamerieri();
 			modelloTabellaCamerieri.getDataVector().removeAllElements();
 			Object[] colonnaTabella = new Object[12];
@@ -398,7 +400,7 @@ public class Controller {
 				colonnaTabella[0] = cameriere.getNumeroCid();
 				colonnaTabella[1] = cameriere.getNome();
 				colonnaTabella[2] = cameriere.getCognome();
-				colonnaTabella[3] = cameriere.getDataDiNascita();
+				colonnaTabella[3] = dateFormat.format(cameriere.getDataDiNascita());
 				colonnaTabella[4] = cameriere.getSesso();
 				colonnaTabella[5] = cameriere.getCittaDiNascita();
 				colonnaTabella[6] = cameriere.getProvinciaDiNascita();
@@ -1384,11 +1386,16 @@ public class Controller {
 	}
 
 	//starter pagina gestione personale
-		public void startGestionePersonale() {
-			proprietarioPage.dispose();
-			gestionePersonalePage = new GestionePersonaleFrame(this);
-			gestionePersonalePage.setVisible(true);
-		}
+	public void startGestionePersonale() {
+		proprietarioPage.dispose();
+		gestionePersonalePage = new GestionePersonaleFrame(this);
+		gestionePersonalePage.setVisible(true);
+	}
+	
+	public void mostraGestionePersonaleFrame() { 
+		gestionePersonalePage.setVisible(true); 
+	}
+	
 		
 	//starter pagina aggiungi cameriere
 	public void startAggiungiCameriere(boolean proprietario) {
@@ -1477,13 +1484,19 @@ public class Controller {
 	}
 	
 	public void mostraErrore(Exception e) {
-		JLabel lblerroreDB = new JLabel("ERRORE GENERICO: "+e.getMessage());
+		JLabel lblerroreDB = new JLabel("ERRORE GENERICO: "+e.getMessage()+"Riprovare.");
 		lblerroreDB.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		JOptionPane.showMessageDialog(null,lblerroreDB,"Errore",JOptionPane.ERROR_MESSAGE);
 	}
 	
 	public void mostraErroreSelezioneDialog(JPanel pannello_Principale) {
 		JLabel lblErrore = new JLabel("Attenzione: non hai selezionato una riga della tabella per cui effettuare l'operazione!");
+		lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		JOptionPane.showMessageDialog(pannello_Principale, lblErrore, "Attenzione", JOptionPane.WARNING_MESSAGE);
+	}
+	
+	public void mostraErroreSelezionePersonale(JPanel pannello_Principale) {
+		JLabel lblErrore = new JLabel("Attenzione: seleziona una due tabelle per effettuare l'operazione!");
 		lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		JOptionPane.showMessageDialog(pannello_Principale, lblErrore, "Attenzione", JOptionPane.WARNING_MESSAGE);
 	}

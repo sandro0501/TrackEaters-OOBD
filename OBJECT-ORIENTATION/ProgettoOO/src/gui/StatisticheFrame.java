@@ -18,12 +18,12 @@ import javax.swing.border.LineBorder;
 
 import controller.Controller;
 
-public class Statistiche extends JFrame {
+public class StatisticheFrame extends JFrame {
 
 	private JPanel pannello_Principale;
 	private Controller theController;
 	
-	public Statistiche(Controller c, boolean proprietario, boolean generale) {
+	public StatisticheFrame(Controller c, boolean proprietario, boolean generale) {
 		
 		theController = c;
 		

@@ -1432,7 +1432,7 @@ public class Controller {
 	}
 
 	public void startStatistiche(boolean proprietario, boolean generale) {
-		Statistiche statistichePage = new Statistiche(this, proprietario, generale);
+		StatisticheFrame statistichePage = new StatisticheFrame(this, proprietario, generale);
 		statistichePage.setVisible(true);
 	}
 

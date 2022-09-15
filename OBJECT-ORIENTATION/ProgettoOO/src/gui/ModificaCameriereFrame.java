@@ -46,7 +46,7 @@ public class ModificaCameriereFrame extends JFrame {
 		theController = c;
 		
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Modifica_Avventori.class.getResource("/resources/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ModificaCameriereFrame.class.getResource("/resources/icon.png")));
 		setTitle("TrackEaters - Modifica cameriere");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 540, 720);

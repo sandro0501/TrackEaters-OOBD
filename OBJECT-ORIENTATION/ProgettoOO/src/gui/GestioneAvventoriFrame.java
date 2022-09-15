@@ -155,7 +155,7 @@ public class GestioneAvventoriFrame extends JFrame {
 				
 				if (tabellaAvventoriRistorante.getSelectedRow()!=-1) {
 					setVisible(false);
-					c.startModificaAvventori(proprietario);
+					c.startModificaAvventore(proprietario);
 					c.riempiCampiModificaAvventorePage();
 				} else {
 					c.mostraErroreSelezioneDialog(pannello_Principale);

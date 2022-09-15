@@ -104,7 +104,7 @@ public class HomepageProprietarioFrame extends JFrame {
 		bottone_Impostazioni.addActionListener(new ActionListener () {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startImpostazioniProprietarioFrame();
+				c.startImpostazioni();
 			}
 		});
 		

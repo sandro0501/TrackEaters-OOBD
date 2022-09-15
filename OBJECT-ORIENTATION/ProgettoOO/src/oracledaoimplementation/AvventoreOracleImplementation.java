@@ -16,7 +16,7 @@ import dto.Avventore;
 import dto.Tavolata;
 
 public class AvventoreOracleImplementation implements AvventoreDAO {
-
+	
 	private Connection connessione = null;
 	
 	public AvventoreOracleImplementation() {
@@ -151,7 +151,6 @@ public class AvventoreOracleImplementation implements AvventoreDAO {
 		}
 		return false;
 	}
-
 	
 	@Override
 	public boolean updateAvventore(String numcid, String nome, String cognome, String dataNascita, String sesso, String cittaNascita,
@@ -308,5 +307,4 @@ public class AvventoreOracleImplementation implements AvventoreDAO {
 			System.out.println("Messaggio: " +e.getMessage());
 		}
 	}
-	
 }

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import dto.Avventore;
 
 public interface AvventoreDAO {
-
 	ArrayList<Avventore> getAvventoriByCodTavolata(int codTavolata);
 	boolean getEsistenzaAvventoreByNumcid(String numCid);
 	boolean insertAvventore(String numCid, String nome, String cognome, String dataNascita, String sesso, String cittaNascita, String provNascita, String cittaResidenza, String provResidenza, String telefono, String email, double temperatura, char greenpass);

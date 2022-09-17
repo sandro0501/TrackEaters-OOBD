@@ -264,6 +264,12 @@ public class CameriereOracleImplementation implements CameriereDAO {
 			lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
 			JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);	
 		} 
+		else if(e.getMessage().toString().contains("ETA_CAMERIERE_LEGALE"))
+		{
+			JLabel lblErrore = new JLabel("Data nascita per il cameriere non valida. Un cameriere deve essere maggiorenne! Riprovare.");
+			lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
+			JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);	
+		}
 		else 
 		{
 			System.out.println("Codice errore SQL: "+e.getErrorCode()); 

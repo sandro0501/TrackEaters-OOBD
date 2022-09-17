@@ -56,6 +56,32 @@ public class AvventoreOracleImplementation implements AvventoreDAO {
 	}
 	
 	@Override
+	public ArrayList<Avventore> getAvventoriRistorante(int codRistorante) {
+		ArrayList<Avventore> avventoriRistorante = new ArrayList<Avventore>();
+		try {
+			String queryGetAvventoriRistorante = "SELECT DISTINCT * FROM ACCOGLIENZA A JOIN AVVENTORE AV ON A.Avventore = AV.Numcid WHERE A.Ristorante = ?";
+			PreparedStatement stmtGetAvventoriRistorante = connessione.prepareStatement(queryGetAvventoriRistorante);
+			stmtGetAvventoriRistorante.setInt(1, codRistorante);
+			ResultSet rs = stmtGetAvventoriRistorante.executeQuery();
+			
+			while(rs.next()) {
+				Avventore a = new Avventore(rs.getString(3),rs.getString(4),rs.getString(5),rs.getDate(6),rs.getString(7),rs.getString(8),rs.getString(9),
+						rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getDouble(14),rs.getString(15).charAt(0));
+				
+				avventoriRistorante.add(a);
+			}
+			rs.close();
+			stmtGetAvventoriRistorante.close();	
+			    
+		} catch (SQLException e) {
+			System.out.println("Codice errore SQL: "+e.getErrorCode()); 
+			System.out.println("SQL State: "+e.getSQLState()); 
+			System.out.println("Messaggio: " +e.getMessage());
+		}
+		return avventoriRistorante;
+	}
+	
+	@Override
 	public boolean getEsistenzaAvventoreByNumcid(String numCid) {
 		try {
 			String queryGetAvventori = "SELECT * FROM AVVENTORE WHERE Numcid=?";

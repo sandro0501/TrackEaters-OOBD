@@ -120,6 +120,7 @@ public class GestioneCasiCovidFrame extends JFrame {
 				if (tabellaCasiCovid.getSelectedRow()!=-1) {
 					setVisible(false);
 					//c.startModificaCasoCovidFrame(proprietario);
+					
 				} else {
 					c.mostraErroreSelezioneDialog(pannello_Principale);
 				}
@@ -136,6 +137,7 @@ public class GestioneCasiCovidFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				c.startAggiungiCasoCovidFrame(proprietario);
+				c.riempiComboBoxAvventoriGestioneCasiCovid(proprietario);
 			}
 		});
 		bottone_Aggiungi.setIcon(new ImageIcon(GestioneCasiCovidFrame.class.getResource("/resources/btnAggiungi.png")));
@@ -150,6 +152,7 @@ public class GestioneCasiCovidFrame extends JFrame {
 				if (tabellaCasiCovid.getSelectedRow()!=-1) {
 					setVisible(false);
 					c.startModificaCasoCovidFrame(proprietario);
+					c.riempiCampiModificaCasoPage(proprietario);
 				} else {
 					c.mostraErroreSelezioneDialog(pannello_Principale);
 				}
@@ -161,7 +164,7 @@ public class GestioneCasiCovidFrame extends JFrame {
 		bottone_Modifica.setBounds(692, 503, 160, 60);
 		pannello_Principale.add(bottone_Modifica);
 		
-		JLabel lblElimina = new JLabel("<html>Sei sicuro di voler eliminare la tavolata selezionata?<br/>Verranno cancellate tutte le informazioni ad essa collegate.</html>");
+		JLabel lblElimina = new JLabel("<html>Sei sicuro di voler eliminare il caso selezionato?<br/>Verranno cancellate tutte le informazioni ad esso collegate.</html>");
 		lblElimina.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		JButton bottone_Elimina = new JButton("");
 		bottone_Elimina.addActionListener(new ActionListener() {
@@ -169,8 +172,8 @@ public class GestioneCasiCovidFrame extends JFrame {
 				
 				if (tabellaCasiCovid.getSelectedRow()!=-1) {
 					if(JOptionPane.showConfirmDialog(pannello_Principale,lblElimina) == 0) {
-						
-						//c.deleteTavolata();
+						c.deleteCaso();
+						c.mostraGestioneCasiCovidFrame(proprietario);
 					}
 				} else {
 					c.mostraErroreSelezioneDialog(pannello_Principale);
@@ -197,6 +200,7 @@ public class GestioneCasiCovidFrame extends JFrame {
 		tabellaCasiCovid.setBackground(Color.WHITE);
 		tabellaCasiCovid.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		modelloTabella.addColumn("Num.");
+		modelloTabella.addColumn("Codice caso");
 		modelloTabella.addColumn("Data registrazione");
 		modelloTabella.addColumn("N.CID");
 		modelloTabella.addColumn("Stato caso");

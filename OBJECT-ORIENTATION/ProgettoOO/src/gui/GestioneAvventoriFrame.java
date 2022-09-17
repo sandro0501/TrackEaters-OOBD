@@ -131,7 +131,7 @@ public class GestioneAvventoriFrame extends JFrame {
 						Date dataRegistrazione = new Date();
 						String dataformattata = dateFormat.format(dataRegistrazione);
 						
-						c.insertCasoCovid(proprietario, dataformattata, numCid, "NonRisolto", "");	
+						c.insertCasoCovid(dataformattata, numCid, "NonRisolto", "");	
 					}
 				} else {
 					c.mostraErroreSelezioneDialog(pannello_Principale);

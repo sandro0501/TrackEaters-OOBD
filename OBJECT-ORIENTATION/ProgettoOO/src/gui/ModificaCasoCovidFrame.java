@@ -1,15 +1,13 @@
 package gui;
 
-
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,84 +15,185 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTextArea;
+import java.awt.event.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Locale;
 
 import controller.Controller;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JSpinner;
+import javax.swing.JSpinner.DefaultEditor;
+import javax.swing.SpinnerNumberModel;
+import com.toedter.calendar.JDateChooser;
+import javax.swing.SpinnerDateModel;
+import java.util.Date;
+import java.util.Calendar;
+import javax.swing.JTextPane;
+import javax.swing.DropMode;
 
 public class ModificaCasoCovidFrame extends JFrame {
 
 	private JPanel pannello_Principale;
-	private JTextField campo_DataPositivita;
+	private JDateChooser campo_DataRegistrazioneCaso;
+	private JComboBox campo_AvventorePositivo;
+	private JTextPane campo_Note;
+	private JComboBox campo_StatoCaso;
 	private Controller theController;
 
-	public ModificaCasoCovidFrame(Controller c, boolean proprietario) {
+	
+	public ModificaCasoCovidFrame(Controller c, boolean isProprietario) {
 		
 		theController = c;
 		
 		setResizable(false);
-		//setIconImage(Toolkit.getDefaultToolkit().getImage();
-		setTitle("SecuRisto");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ModificaAvventoreFrame.class.getResource("/resources/icon.png")));
+		setTitle("TrackEaters - Modifica caso COVID");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 480);
+		setBounds(100, 100, 540, 598);
+		setLocationRelativeTo(null);
 		pannello_Principale = new JPanel();
+		pannello_Principale.setBackground(new Color(176, 196, 222));
 		pannello_Principale.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(pannello_Principale);
 		pannello_Principale.setLayout(null);
 		
-		JLabel etichetta_Caso = new JLabel("CASO");
-		etichetta_Caso.setFont(new Font("Tahoma", Font.BOLD, 20));
-		etichetta_Caso.setHorizontalAlignment(SwingConstants.CENTER);
-		etichetta_Caso.setBounds(137, 23, 209, 40);
-		pannello_Principale.add(etichetta_Caso);
+		JLabel etichetta_ModificaCaso = new JLabel("");
+		etichetta_ModificaCaso.setIcon(new ImageIcon(ModificaCasoCovidFrame.class.getResource("/resources/modificaCasoCovid.png")));
+		etichetta_ModificaCaso.setFont(new Font("Tahoma", Font.BOLD, 20));
+		etichetta_ModificaCaso.setHorizontalAlignment(SwingConstants.CENTER);
+		etichetta_ModificaCaso.setBounds(17, 28, 490, 52);
+		pannello_Principale.add(etichetta_ModificaCaso);
 		
-		JLabel etichetta_Ruolo = new JLabel("Ruolo");
-		etichetta_Ruolo.setBounds(92, 78, 46, 14);
-		pannello_Principale.add(etichetta_Ruolo);
+		JLabel etichetta_DataRegistrazioneCaso = new JLabel("Data registrazione");
+		etichetta_DataRegistrazioneCaso.setIcon(new ImageIcon(AggiungiTavolataFrame.class.getResource("/resources/iconCalendar.png")));
+		etichetta_DataRegistrazioneCaso.setForeground(new Color(0, 0, 128));
+		etichetta_DataRegistrazioneCaso.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		etichetta_DataRegistrazioneCaso.setBounds(20, 91, 223, 27);
+		pannello_Principale.add(etichetta_DataRegistrazioneCaso);
 		
-		JLabel etichetta_NumeroDocumento = new JLabel("Numero documento");
-		etichetta_NumeroDocumento.setBounds(92, 131, 111, 14);
-		pannello_Principale.add(etichetta_NumeroDocumento);
+		JLabel etichetta_AvventorePositivo = new JLabel("Avventore positivo");
+		etichetta_AvventorePositivo.setIcon(new ImageIcon(AggiungiCasoCovidFrame.class.getResource("/resources/usericon.png")));
+		etichetta_AvventorePositivo.setForeground(new Color(0, 0, 128));
+		etichetta_AvventorePositivo.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		etichetta_AvventorePositivo.setBounds(20, 173, 215, 27);
+		pannello_Principale.add(etichetta_AvventorePositivo);
 		
-		JLabel etichetta_DataPositivita = new JLabel("Data positivit\u00E0");
-		etichetta_DataPositivita.setBounds(92, 193, 111, 14);
-		pannello_Principale.add(etichetta_DataPositivita);
+		JLabel etichetta_StatoCaso = new JLabel("Stato del caso");
+		etichetta_StatoCaso.setForeground(new Color(0, 0, 128));
+		etichetta_StatoCaso.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		etichetta_StatoCaso.setBounds(20, 251, 215, 27);
+		pannello_Principale.add(etichetta_StatoCaso);
 		
-		JLabel etichetta_Note = new JLabel("Note");
-		etichetta_Note.setBounds(92, 253, 46, 14);
+		JLabel etichetta_Note = new JLabel("Note (max 100 car.)");
+		etichetta_Note.setForeground(new Color(0, 0, 128));
+		etichetta_Note.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		etichetta_Note.setBounds(20, 331, 215, 27);
 		pannello_Principale.add(etichetta_Note);
 		
-		JComboBox comboBox_Ruolo = new JComboBox();
-		comboBox_Ruolo.setBounds(92, 92, 300, 20);
-		pannello_Principale.add(comboBox_Ruolo);
+		campo_DataRegistrazioneCaso = new JDateChooser();
+		campo_DataRegistrazioneCaso.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+		campo_DataRegistrazioneCaso.setDateFormatString("dd/MM/yyyy");
+		campo_DataRegistrazioneCaso.setBounds(20, 121, 255, 27);
+		Date data = new Date();
+		campo_DataRegistrazioneCaso.setDate(data);
+		pannello_Principale.add(campo_DataRegistrazioneCaso);
+
+		campo_AvventorePositivo = new JComboBox();
+		campo_AvventorePositivo.setModel(new DefaultComboBoxModel(new String[] {"-"}));
+		campo_AvventorePositivo.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		campo_AvventorePositivo.setSelectedItem("");
+		campo_AvventorePositivo.setBounds(20, 201, 262, 27);
+		pannello_Principale.add(campo_AvventorePositivo);
 		
-		JComboBox comboBox_NumeroDocumento = new JComboBox();
-		comboBox_NumeroDocumento.setBounds(92, 147, 300, 20);
-		pannello_Principale.add(comboBox_NumeroDocumento);
+		campo_StatoCaso = new JComboBox();
+		campo_StatoCaso.setModel(new DefaultComboBoxModel(new String[] {"NonRisolto", "InRisoluzione", "Risolto"}));
+		campo_StatoCaso.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		campo_StatoCaso.setBounds(20, 281, 262, 27);
+		pannello_Principale.add(campo_StatoCaso);
 		
-		campo_DataPositivita = new JTextField();
-		campo_DataPositivita.setBounds(92, 206, 300, 20);
-		pannello_Principale.add(campo_DataPositivita);
-		campo_DataPositivita.setColumns(10);
+		campo_Note = new JTextPane();
+		campo_Note.setToolTipText("Annota qualcosa sul caso qui...");
+		campo_Note.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+		campo_Note.setBounds(20, 361, 473, 81);
+		pannello_Principale.add(campo_Note);
 		
-		JTextArea areaDiTesto_Note = new JTextArea();
-		areaDiTesto_Note.setBounds(92, 267, 300, 82);
-		pannello_Principale.add(areaDiTesto_Note);
-		
-		JButton bottone_Annulla = new JButton("Annulla");
+		JButton bottone_Annulla = new JButton("");
+		bottone_Annulla.setIcon(new ImageIcon(ImpostazioniProprietarioFrame.class.getResource("/resources/AnnulllaBtn.png")));
 		bottone_Annulla.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler annullare?")==0) {
-					setVisible(false);
-					c.startGestioneCasiCovidFrame(proprietario);
-				}
+				mostraAnnullaDialog(c,isProprietario);
 			}
 		});
-		bottone_Annulla.setBounds(84, 379, 117, 40);
+		bottone_Annulla.setBounds(17, 488, 160, 60);
 		pannello_Principale.add(bottone_Annulla);
 		
-		JButton bottone_Conferma = new JButton("Conferma");
-		bottone_Conferma.setBounds(284, 379, 117, 40);
-		pannello_Principale.add(bottone_Conferma);
+		JButton bottone_Aggiungi = new JButton("");
+		JLabel lblAggiungi = new JLabel("Sei sicuro di voler modificare il caso COVID?");
+		lblAggiungi.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		bottone_Aggiungi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					if (JOptionPane.showConfirmDialog(pannello_Principale, lblAggiungi)==0) 
+					{
+						if(campo_AvventorePositivo.getSelectedItem().toString().equals("-"))
+						{
+							c.mostraErroreSelezioneAvventore(pannello_Principale);
+						}
+						else
+						{
+							DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); 
+							String dataFormattata = dateFormat.format(campo_DataRegistrazioneCaso.getDate());
+							String avventoreSelezionato = campo_AvventorePositivo.getSelectedItem().toString();
+							String[] numCid = avventoreSelezionato.split("-");
+	
+							
+							c.updateCasoCovid(dataFormattata,
+											numCid[0].toString(),
+											campo_StatoCaso.getSelectedItem().toString(),
+											campo_Note.getText().toString());
+							setVisible(false);
+							c.mostraGestioneCasiCovidFrame(isProprietario);
+						}
+					
+					}
+				}
+		});
+
+		bottone_Aggiungi.setIcon(new ImageIcon(ModificaCasoCovidFrame.class.getResource("/resources/btnModifica.png")));
+		bottone_Aggiungi.setBounds(330, 488, 160, 60);
+		pannello_Principale.add(bottone_Aggiungi);	
+
 	}
+	
+	private void mostraAnnullaDialog(Controller c, boolean proprietario) {
+		JLabel lblAnnulla = new JLabel("Sei sicuro di voler annullare la modifica caso COVID?");
+		lblAnnulla.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		if (JOptionPane.showConfirmDialog(pannello_Principale, lblAnnulla)==0) {
+			setVisible(false);
+			c.mostraGestioneCasiCovidFrame(proprietario);
+		}
+	}
+
+	public JDateChooser getCampo_DataRegistrazioneCaso() {
+		return campo_DataRegistrazioneCaso;
+	}
+
+	public JComboBox getCampo_AvventorePositivo() {
+		return campo_AvventorePositivo;
+	}
+
+	public JTextPane getCampo_Note() {
+		return campo_Note;
+	}
+
+	public JComboBox getCampo_StatoCaso() {
+		return campo_StatoCaso;
+	}
+
+
+
 }
 

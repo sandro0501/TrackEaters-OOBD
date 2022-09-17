@@ -1194,14 +1194,15 @@ public class Controller {
 			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 			DefaultTableModel modellotabella = gestioneCasiCovidPage.getModel();
 			modellotabella.getDataVector().removeAllElements();
-			Object[] rigaTabella = new Object[5];
+			Object[] rigaTabella = new Object[6];
 			
 			for(Caso caso : casi) {
 				rigaTabella[0] = numero++;
-				rigaTabella[1] = dateFormat.format(caso.getDataRegistrazione()); 
-				rigaTabella[2] = caso.getNumeroCID();
-				rigaTabella[3] = caso.getStato();
-				rigaTabella[4] = caso.getNote();
+				rigaTabella[1] = caso.getCodiceCaso();
+				rigaTabella[2] = dateFormat.format(caso.getDataRegistrazione()); 
+				rigaTabella[3] = caso.getNumeroCID();
+				rigaTabella[4] = caso.getStato();
+				rigaTabella[5] = caso.getNote();
 				modellotabella.addRow(rigaTabella);
 			}
 			modellotabella.fireTableDataChanged();
@@ -1212,14 +1213,113 @@ public class Controller {
 	}
 	
 	//metodo insert caso covid
-	public void insertCasoCovid(boolean proprietario, String dataRegistrazione,String numCid,String stato,String note) {
+	public void insertCasoCovid(String dataRegistrazione,String numCid,String stato,String note) {
 		boolean esitoInsert;
 		
 		try {
 			esitoInsert = casoDAO.insertCaso(dataRegistrazione, numCid, stato, note);
 			if(esitoInsert) {
 				mostraEsitoCorrettoRegistrazioneCasoCovid();
-				
+			}
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+	
+	//metodo che riempie combobox avventori pagina aggiungi caso covid
+	public void riempiComboBoxAvventoriGestioneCasiCovid(boolean proprietario) {
+		int codRistorante;
+		ArrayList<Avventore> avventori;
+		
+		try {
+			if(proprietario) {
+				codRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
+				avventori = avventoreDAO.getAvventoriRistorante(codRistorante);
+				for(Avventore a : avventori) {
+						aggiungiCasoCovidPage.getCampo_AvventorePositivo().addItem(a.getNumeroCid()+"-"+a.getNome()+" "+a.getCognome());
+				}
+			} else {
+				codRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(managerRistorante.getRistoranteGestito().getDenominazione(),
+						managerRistorante.getRistoranteGestito().getIndirizzo());
+				avventori = avventoreDAO.getAvventoriRistorante(codRistorante);
+				for(Avventore a : avventori) {
+					aggiungiCasoCovidPage.getCampo_AvventorePositivo().addItem(a.getNumeroCid()+"-"+a.getNome()+" "+a.getCognome());
+				}
+			}
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+	
+	//metodo che riempie i campi pagina modifica caso 
+	public void riempiCampiModificaCasoPage(boolean proprietario) {
+		int codRistorante;
+		ArrayList<Avventore> avventori;
+		JTable tabellaCasi = gestioneCasiCovidPage.getTabellaCasiRistorante();
+		String dataReg = tabellaCasi.getModel().getValueAt(tabellaCasi.getSelectedRow(), 2).toString();
+		String avventorePositivo = tabellaCasi.getModel().getValueAt(tabellaCasi.getSelectedRow(), 3).toString();
+		String statoCaso = tabellaCasi.getModel().getValueAt(tabellaCasi.getSelectedRow(), 4).toString();
+		String note = "";
+		if(!(tabellaCasi.getModel().getValueAt(tabellaCasi.getSelectedRow(), 5) == null)) {
+			note = tabellaCasi.getModel().getValueAt(tabellaCasi.getSelectedRow(),5).toString();
+		}
+		
+		try {	
+			java.util.Date dataRegistrazione = new SimpleDateFormat("dd/MM/yyyy").parse(dataReg);
+			modificaCasoCovidPage.getCampo_DataRegistrazioneCaso().setDate(dataRegistrazione);
+			
+			if(proprietario) {
+				codRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
+				avventori = avventoreDAO.getAvventoriRistorante(codRistorante);
+				for(Avventore a : avventori) {
+						modificaCasoCovidPage.getCampo_AvventorePositivo().addItem(a.getNumeroCid()+"-"+a.getNome()+" "+a.getCognome());
+						modificaCasoCovidPage.getCampo_AvventorePositivo().setSelectedItem(avventorePositivo);
+				}
+			} else {
+				codRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(managerRistorante.getRistoranteGestito().getDenominazione(),
+						managerRistorante.getRistoranteGestito().getIndirizzo());
+				avventori = avventoreDAO.getAvventoriRistorante(codRistorante);
+				for(Avventore a : avventori) {
+					modificaCasoCovidPage.getCampo_AvventorePositivo().addItem(a.getNumeroCid()+"-"+a.getNome()+" "+a.getCognome());
+					modificaCasoCovidPage.getCampo_AvventorePositivo().setSelectedItem(avventorePositivo);
+				}
+			}
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+		
+		
+		modificaCasoCovidPage.getCampo_StatoCaso().setSelectedItem(statoCaso);
+		modificaCasoCovidPage.getCampo_Note().setText(note);
+	}
+	
+
+	//metodo update caso
+	public void updateCasoCovid(String dataRegistrazione,String numCid,String stato,String note) {
+		boolean esitoUpdate;
+		JTable tabellaCasi = gestioneCasiCovidPage.getTabellaCasiRistorante();
+		int codCaso = (int) tabellaCasi.getModel().getValueAt(tabellaCasi.getSelectedRow(), 1);
+		
+		try {
+			esitoUpdate = casoDAO.updateCaso(codCaso, dataRegistrazione, numCid, stato, note);
+			if(esitoUpdate) {
+				mostraEsitoCorrettoUpdate();
+			}
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+	
+	//metodo delete caso
+	public void deleteCaso() {
+		boolean esitoDelete;
+		JTable tabellaCasi = gestioneCasiCovidPage.getTabellaCasiRistorante();
+		int codCaso = (int) tabellaCasi.getModel().getValueAt(tabellaCasi.getSelectedRow(), 1);
+	
+		try {
+			esitoDelete = casoDAO.deleteCaso(codCaso);
+			if(esitoDelete) {
+				mostraEsitoCorrettoDelete();
 			}
 		} catch (Exception e) {
 			mostraErrore(e);
@@ -1490,8 +1590,9 @@ public class Controller {
 		gestioneCasiCovidPage.setVisible(true);
 	}
 	
-	public void mostraGestioneCasiCovidFrame() { 
-		gestioneCasiCovidPage.setVisible(true); 
+	public void mostraGestioneCasiCovidFrame(boolean isProprietario) { 
+		gestioneCasiCovidPage.setVisible(true);
+		riempiTabellaCasiCovidRistorante(isProprietario);
 	}
 	
 	//starter pagina aggiungi caso covid
@@ -1576,6 +1677,12 @@ public class Controller {
 	
 	public void mostraErroreSelezionePersonale(JPanel pannello_Principale) {
 		JLabel lblErrore = new JLabel("Attenzione: seleziona una due tabelle per effettuare l'operazione!");
+		lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		JOptionPane.showMessageDialog(pannello_Principale, lblErrore, "Attenzione", JOptionPane.WARNING_MESSAGE);
+	}
+	
+	public void mostraErroreSelezioneAvventore(JPanel pannello_Principale) {
+		JLabel lblErrore = new JLabel("Attenzione: non hai selezionato alcun avventore per cui associare il caso! Riprova.");
 		lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		JOptionPane.showMessageDialog(pannello_Principale, lblErrore, "Attenzione", JOptionPane.WARNING_MESSAGE);
 	}

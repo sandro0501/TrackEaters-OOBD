@@ -64,6 +64,10 @@ public class Controller {
 	private ModificaAvventoreFrame modificaAvventorePage;
 	private StatisticheProprietarioFrame statisticheProprietarioPage;
 	private StatisticheRistoranteFrame statisticheRistorantePage;
+	private GestioneCasiCovidFrame gestioneCasiCovidPage;
+	private AggiungiCasoCovidFrame aggiungiCasoCovidPage;
+	private ModificaCasoCovidFrame modificaCasoCovidPage;
+	
 
 	
 	private Operatore operatore;
@@ -1170,6 +1174,61 @@ public class Controller {
 		}
 	}
 	
+	//metodo che riempie la tabella dei casi del ristorante
+	public void riempiTabellaCasiCovidRistorante(boolean isProprietario) {
+		try {
+			int codRistorante = 0;
+			int numero = 1;
+			ArrayList<Caso> casi;
+			
+			if (isProprietario) {
+				codRistorante = this.getCodRistoranteForProprietarioByTabellaRistoranti();
+				casi = casoDAO.getCasiCovidByCodRistorante(codRistorante);
+			} else
+			{
+				codRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(managerRistorante.getRistoranteGestito().getDenominazione(),
+						managerRistorante.getRistoranteGestito().getIndirizzo());
+				casi = casoDAO.getCasiCovidByCodRistorante(codRistorante);
+			}
+			
+			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			DefaultTableModel modellotabella = gestioneCasiCovidPage.getModel();
+			modellotabella.getDataVector().removeAllElements();
+			Object[] rigaTabella = new Object[5];
+			
+			for(Caso caso : casi) {
+				rigaTabella[0] = numero++;
+				rigaTabella[1] = dateFormat.format(caso.getDataRegistrazione()); 
+				rigaTabella[2] = caso.getNumeroCID();
+				rigaTabella[3] = caso.getStato();
+				rigaTabella[4] = caso.getNote();
+				modellotabella.addRow(rigaTabella);
+			}
+			modellotabella.fireTableDataChanged();
+			gestioneCasiCovidPage.setModel(modellotabella);
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+	
+	//metodo insert caso covid
+	public void insertCasoCovid(boolean proprietario, String dataRegistrazione,String numCid,String stato,String note) {
+		boolean esitoInsert;
+		
+		try {
+			esitoInsert = casoDAO.insertCaso(dataRegistrazione, numCid, stato, note);
+			if(esitoInsert) {
+				mostraEsitoCorrettoRegistrazioneCasoCovid();
+				
+			}
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+	
+	
+	
+	
 	
 	
 	
@@ -1368,27 +1427,27 @@ public class Controller {
 	}
 		
 	//starter pagina aggiungi avventori
-	public void startAggiungiAvventoriFrame(boolean isProprietario) {
+	public void startAggiungiAvventoreFrame(boolean isProprietario) {
 		gestioneAvventoriPage.dispose();
 		aggiungiAvventorePage = new AggiungiAvventoreFrame(this, isProprietario);
 		aggiungiAvventorePage.setVisible(true);
 	}
 		
 	//starter pagina modifica avventori
-	public void startModificaAvventore(boolean isProprietario) {
+	public void startModificaAvventoreFrame(boolean isProprietario) {
 		gestioneAvventoriPage.dispose();
 		modificaAvventorePage = new ModificaAvventoreFrame(this, isProprietario);
 		modificaAvventorePage.setVisible(true);
 	}
 	
 	//starter pagina impostazioni proprietario
-	public void startImpostazioni () {
+	public void startImpostazioniProprietarioFrame () {
 		impostazioniPage = new ImpostazioniProprietarioFrame(this);
 		impostazioniPage.setVisible(true);
 	}
 
 	//starter pagina gestione personale
-	public void startGestionePersonale() {
+	public void startGestionePersonaleFrame() {
 		proprietarioPage.dispose();
 		gestionePersonalePage = new GestionePersonaleFrame(this);
 		gestionePersonalePage.setVisible(true);
@@ -1400,44 +1459,51 @@ public class Controller {
 	
 		
 	//starter pagina aggiungi cameriere
-	public void startAggiungiCameriere(boolean proprietario) {
+	public void startAggiungiCameriereFrame(boolean proprietario) {
 		aggiungiCamerierePage = new AggiungiCameriereFrame(this, proprietario);
 		aggiungiCamerierePage.setVisible(true);
 	}
 	
 	//starter pagina modifica cameriere
-	public void startModificaCameriere(boolean proprietario) {
+	public void startModificaCameriereFrame(boolean proprietario) {
 		modificaCamerierePage = new ModificaCameriereFrame(this, proprietario);
 		riempiCampiModificaCameriere();
 		modificaCamerierePage.setVisible(true);
 	}
 	
 	//starter pagina aggiungi manager
-	public void startAggiungiManager() {
+	public void startAggiungiManagerFrame() {
 		aggiungiManagerPage = new AggiungiManagerFrame(this);
 		aggiungiManagerPage.setVisible(true);
 	}
 	
 	//starter pagina modifica manager
-	public void startModificaManager() {
+	public void startModificaManagerFrame() {
 		modificaManagerPage = new ModificaManagerFrame(this);
 		riempiCampiModificaManager();
 		modificaManagerPage.setVisible(true);
 	}
 	
-	public void startAggiungiCaso(boolean proprietario) {
-		Aggiungi_Caso aggiungiCasoPage = new Aggiungi_Caso(this, proprietario);
-		aggiungiCasoPage.setVisible(true);
+	//starter pagina gestione casi covid
+	public void startGestioneCasiCovidFrame(boolean isProprietario) {
+		gestioneCasiCovidPage = new GestioneCasiCovidFrame(this, isProprietario);
+		gestioneCasiCovidPage.setVisible(true);
 	}
 	
-	public void startCasi(boolean proprietario) {
-		Casi casiPage = new Casi(this, proprietario);
-		casiPage.setVisible(true);
+	public void mostraGestioneCasiCovidFrame() { 
+		gestioneCasiCovidPage.setVisible(true); 
+	}
+	
+	//starter pagina aggiungi caso covid
+	public void startAggiungiCasoCovidFrame(boolean isProprietario) {
+		aggiungiCasoCovidPage = new AggiungiCasoCovidFrame(this, isProprietario);
+		aggiungiCasoCovidPage.setVisible(true);
 	}
 
-	public void startModificaCaso(boolean proprietario) {
-		Modifica_Caso modificaCasoPage = new Modifica_Caso(this, proprietario);
-		modificaCasoPage.setVisible(true);
+	//starter pagina modifica caso covid
+	public void startModificaCasoCovidFrame(boolean isProprietario) {
+		modificaCasoCovidPage = new ModificaCasoCovidFrame(this, isProprietario);
+		modificaCasoCovidPage.setVisible(true);
 	}
 
 	public void startStatisticheProprietario() {
@@ -1476,8 +1542,14 @@ public class Controller {
 		JOptionPane.showMessageDialog(null,lblEsitoInserimento,"Inserimento effettuato",JOptionPane.INFORMATION_MESSAGE);
 	}
 	
+	private void mostraEsitoCorrettoRegistrazioneCasoCovid() {
+		JLabel lblEsitoInserimento = new JLabel("Caso COVID registrato correttamente!");
+		lblEsitoInserimento.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		JOptionPane.showMessageDialog(null,lblEsitoInserimento,"Registrazione caso COVID effettuata",JOptionPane.INFORMATION_MESSAGE);
+	}
+	
 	private void mostraEsitoCorrettoInsertAvventoreEsistente() {
-		JLabel lblEsitoInserimento = new JLabel("<html>L'avventore risulta gi� registrato in uno dei ristoranti del proprietario.<br>"
+		JLabel lblEsitoInserimento = new JLabel("<html>L'avventore risulta gia' registrato in uno dei ristoranti del proprietario.<br>"
 				+ "E' stato aggiunto alla nuova tavolata con i dati precedentemente registrati."
 				+ "<br>Per modificarli cliccare su modifica avventore!</html>");
 		lblEsitoInserimento.setFont(new Font("Segoe UI", Font.BOLD, 15));

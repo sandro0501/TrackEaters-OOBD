@@ -21,13 +21,13 @@ import javax.swing.JTextArea;
 
 import controller.Controller;
 
-public class Aggiungi_Caso extends JFrame {
+public class AggiungiCasoCovidFrame extends JFrame {
 
 	private JPanel pannello_Principale;
 	private JTextField campo_DataPositivita;
 	private Controller theController;
 
-	public Aggiungi_Caso(Controller c, boolean proprietario) {
+	public AggiungiCasoCovidFrame(Controller c, boolean proprietario) {
 		
 		theController = c;
 		
@@ -85,7 +85,7 @@ public class Aggiungi_Caso extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler annullare?")==0) {
 					setVisible(false);
-					c.startCasi(proprietario);
+					c.startGestioneCasiCovidFrame(proprietario);
 				}
 			}
 		});

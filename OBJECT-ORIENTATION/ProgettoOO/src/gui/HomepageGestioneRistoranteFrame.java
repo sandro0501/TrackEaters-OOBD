@@ -180,7 +180,8 @@ public class HomepageGestioneRistoranteFrame extends JFrame {
 		bottone_CasiCovid.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				c.startCasi(proprietario);
+				c.startGestioneCasiCovidFrame(proprietario);
+				c.riempiTabellaCasiCovidRistorante(proprietario);
 			}
 		});
 		bottone_CasiCovid.setFont(new Font("Tahoma", Font.PLAIN, 11));

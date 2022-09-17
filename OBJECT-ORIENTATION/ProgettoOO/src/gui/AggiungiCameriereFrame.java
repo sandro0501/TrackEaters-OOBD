@@ -76,7 +76,7 @@ public class AggiungiCameriereFrame extends JFrame {
 		campo_DataNascita.setColumns(10);
 		
 		comboBox_Sesso = new JComboBox();
-		comboBox_Sesso.setModel(new DefaultComboBoxModel(new String[] {"Maschio", "Femmina", "Altro"}));
+		comboBox_Sesso.setModel(new DefaultComboBoxModel(new String[] {"Maschio", "Femmina", "Non specificato"}));
 		comboBox_Sesso.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		comboBox_Sesso.setBounds(222, 198, 104, 27);
 		pannello_Principale.add(comboBox_Sesso);

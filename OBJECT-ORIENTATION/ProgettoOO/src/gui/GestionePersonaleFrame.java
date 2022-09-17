@@ -76,10 +76,10 @@ public class GestionePersonaleFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(tabellaCamerieri.getSelectedRow()!=-1) {
 					setVisible(false);
-					c.startAggiungiCameriere(true);
+					c.startAggiungiCameriereFrame(true);
 				} else if(tabellaManager.getSelectedRow()!=-1) {
 					setVisible(false);
-					c.startAggiungiManager();
+					c.startAggiungiManagerFrame();
 				} else {
 					c.mostraErroreSelezionePersonale(pannello_Principale);
 				}
@@ -103,10 +103,10 @@ public class GestionePersonaleFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(tabellaCamerieri.getSelectedRow()!=-1) {
 					setVisible(false);
-					c.startModificaCameriere(true);
+					c.startModificaCameriereFrame(true);
 				} else if(tabellaManager.getSelectedRow()!=-1) {
 					setVisible(false);
-					c.startModificaManager();
+					c.startModificaManagerFrame();
 				} else {
 					c.mostraErroreSelezioneDialog(pannello_Principale);
 				}

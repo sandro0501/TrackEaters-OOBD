@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Caso {
 	
+	private int codiceCaso;
 	private Date dataRegistrazione;
 	private String numeroCID;
 	private String stato;
@@ -13,12 +14,22 @@ public class Caso {
 	private Cameriere camerierePositivo;
 	private Operatore tracciamentoOperatore;
 	
-	public Caso(Date dataRegistrazione, String numeroCID, String stato, String note) {
+	public Caso(int codiceCaso, Date dataRegistrazione, String numeroCID, String stato, String note) {
+		this.codiceCaso = codiceCaso;
 		this.dataRegistrazione = dataRegistrazione;
 		this.numeroCID = numeroCID;
 		this.stato = stato;
 		this.note = note;
 	}
+	
+	public int getCodiceCaso() {
+		return codiceCaso;
+	}
+	
+	public void setCodiceCaso(int codiceCaso) {
+		this.codiceCaso = codiceCaso;
+	}
+
 
 	public Date getDataRegistrazione() {
 		return dataRegistrazione;

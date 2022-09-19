@@ -35,12 +35,6 @@ import javax.swing.border.LineBorder;
 import com.toedter.calendar.JDateChooser;
 
 import controller.Controller;
-import de.progra.charting.ChartEncoder;
-import de.progra.charting.CoordSystem;
-import de.progra.charting.DefaultChart;
-import de.progra.charting.model.ObjectChartDataModel;
-import de.progra.charting.render.BarChartRenderer;
-
 import javax.swing.JComboBox;
 import javax.imageio.ImageIO;
 

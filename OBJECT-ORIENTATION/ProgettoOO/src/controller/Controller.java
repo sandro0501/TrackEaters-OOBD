@@ -12,11 +12,6 @@ import dto.Tavolata;
 import dto.Tavolo;
 
 import dao.*;
-import de.progra.charting.ChartEncoder;
-import de.progra.charting.CoordSystem;
-import de.progra.charting.DefaultChart;
-import de.progra.charting.model.ObjectChartDataModel;
-import de.progra.charting.render.BarChartRenderer;
 import oracledaoimplementation.*;
 import gui.*;
 

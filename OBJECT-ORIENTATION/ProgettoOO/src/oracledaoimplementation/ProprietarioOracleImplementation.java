@@ -2,6 +2,7 @@ package oracledaoimplementation;
 
 import java.awt.Font;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -81,6 +82,143 @@ public class ProprietarioOracleImplementation implements ProprietarioDAO {
 		}
 		
 		return false;
+	}
+
+
+	@Override
+	public int numeroPositivi(String dataInizio, String dataFine) {
+		
+		int totale = 0;
+		
+		try {
+			
+			String queryPositivi = "SELECT COUNT(C.AvventorePositivo) FROM RISTORANTE R JOIN ACCOGLIENZA A ON R.CodRistorante = A.Ristorante JOIN CASO C ON C.AvventorePositivo = A.Avventore JOIN PARTECIPAZIONETAVOLATA PT ON PT.Avventore = C.AvventorePositivo JOIN TAVOLATA T ON PT.Tavolata = T.CodTavolata WHERE T.DataArrivo BETWEEN TO_DATE(?, 'dd/mm/yyyy') AND TO_DATE(?, 'dd/mm/yyyy')";
+			
+			PreparedStatement stmtQueryPositivi = connessione.prepareStatement(queryPositivi);
+			stmtQueryPositivi.setString(1, dataInizio);
+			stmtQueryPositivi.setString(2, dataFine);
+			
+			ResultSet rs = stmtQueryPositivi.executeQuery();
+			
+			while(rs.next())
+				totale = rs.getInt(1);
+			
+			stmtQueryPositivi.close();
+			rs.close();
+			
+			
+		} catch(SQLException e) {
+			System.out.println("Sono in positivi"); 
+			System.out.println("Codice errore SQL: "+e.getErrorCode()); 
+			System.out.println("SQL State: "+e.getSQLState()); 
+			System.out.println("Messaggio: " +e.getMessage());
+			
+		}
+		
+		
+		return totale;
+	}
+
+	@Override
+	public int numeroTotaleAvventori(String dataInizio, String dataFine) {
+		
+		int totale = 0;
+		
+		try {
+			
+			String queryTotaleAvventori = "SELECT COUNT(ACC.Avventore) FROM RISTORANTE R JOIN ACCOGLIENZA ACC ON R.CodRistorante = ACC.Ristorante JOIN AVVENTORE A ON A.NumCid = ACC.Avventore JOIN PARTECIPAZIONETAVOLATA PT ON PT.Avventore = A.NumCid JOIN TAVOLATA T ON T.CodTavolata = PT.Tavolata WHERE T.DataArrivo BETWEEN TO_DATE(?,'dd/mm/yyyy') AND TO_DATE(?, 'dd/mm/yyyy')";
+			
+			PreparedStatement stmtQueryTotaleAvventori = connessione.prepareStatement(queryTotaleAvventori);
+			stmtQueryTotaleAvventori.setString(1, dataInizio);
+			stmtQueryTotaleAvventori.setString(2, dataFine);
+			
+			ResultSet rs = stmtQueryTotaleAvventori.executeQuery();
+			
+			while(rs.next())
+				totale = rs.getInt(1);
+			
+			stmtQueryTotaleAvventori.close();
+			rs.close();
+			
+			
+		} catch(SQLException e) {
+			System.out.println("Sono in totale"); 
+			System.out.println("Codice errore SQL: "+e.getErrorCode()); 
+			System.out.println("SQL State: "+e.getSQLState()); 
+			System.out.println("Messaggio: " +e.getMessage());
+			
+		}
+		
+		
+		return totale;
+	}
+
+	@Override
+	public int numeroAvventoriInterni(String dataInizio, String dataFine) {
+		
+		int totale = 0;
+		
+		try {
+			
+			String queryAvventoriInterni =  "SELECT COUNT (P.AVVENTORE) FROM TAVOLO T JOIN TAVOLATA TA ON T.CODTAVOLO = TA.TAVOLO JOIN PARTECIPAZIONETAVOLATA P ON P.TAVOLATA = TA.CODTAVOLATA JOIN SALA S ON T.SALA = S.CODSALA WHERE S.TIPOSALA = 'Interna' AND TA.DATAARRIVO BETWEEN TO_DATE(?, 'dd/mm/yyyy') AND TO_DATE(?, 'dd/mm/yyyy')";
+			
+			PreparedStatement stmtQueryAvventoriInterni = connessione.prepareStatement(queryAvventoriInterni);
+			stmtQueryAvventoriInterni.setString(1, dataInizio);
+			stmtQueryAvventoriInterni.setString(2, dataFine);
+			
+			ResultSet rs = stmtQueryAvventoriInterni.executeQuery();
+			
+			while(rs.next())
+				totale = rs.getInt(1);
+			
+			stmtQueryAvventoriInterni.close();
+			rs.close();
+			
+			
+		} catch(SQLException e) {
+			System.out.println("Sono in interni"); 
+			System.out.println("Codice errore SQL: "+e.getErrorCode()); 
+			System.out.println("SQL State: "+e.getSQLState()); 
+			System.out.println("Messaggio: " +e.getMessage());
+			
+		}
+		
+		
+		return totale;
+	}
+
+	@Override
+	public int numeroAvventoriEsterni(String dataInizio, String dataFine) {
+		
+		int totale = 0;
+		
+		try {
+			
+			String queryAvventoriEsterni = "SELECT COUNT (P.AVVENTORE) FROM TAVOLO T JOIN TAVOLATA TA ON T.CODTAVOLO = TA.TAVOLO JOIN PARTECIPAZIONETAVOLATA P ON P.TAVOLATA = TA.CODTAVOLATA JOIN SALA S ON T.SALA = S.CODSALA WHERE S.TIPOSALA = 'Esterna' AND TA.DATAARRIVO BETWEEN TO_DATE(?, 'dd/mm/yyyy') AND TO_DATE(?, 'dd/mm/yyyy')";
+			
+			PreparedStatement stmtQueryAvventoriEsterni = connessione.prepareStatement(queryAvventoriEsterni);
+			stmtQueryAvventoriEsterni.setString(1, dataInizio);
+			stmtQueryAvventoriEsterni.setString(2, dataFine);
+			
+			ResultSet rs = stmtQueryAvventoriEsterni.executeQuery();
+			
+			while(rs.next())
+				totale = rs.getInt(1);
+			
+			stmtQueryAvventoriEsterni.close();
+			rs.close();
+			
+			
+		} catch(SQLException e) {
+			System.out.println("Sono in esterni"); 
+			System.out.println("Codice errore SQL: "+e.getErrorCode()); 
+			System.out.println("SQL State: "+e.getSQLState()); 
+			System.out.println("Messaggio: " +e.getMessage());
+			
+		}
+		
+		
+		return totale;
 	}
 
 	

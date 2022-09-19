@@ -151,7 +151,7 @@ public class AggiungiCasoCovidFrame extends JFrame {
 	
 							
 							c.insertCasoCovid(dataFormattata,
-											numCid[0].toString(),
+											numCid[0].toString().toUpperCase(),
 											campo_StatoCaso.getSelectedItem().toString(),
 											campo_Note.getText().toString());
 							setVisible(false);

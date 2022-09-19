@@ -82,6 +82,30 @@ public class AvventoreOracleImplementation implements AvventoreDAO {
 	}
 	
 	@Override
+	public Avventore getAvventoreByNumcid(String numCid) {
+		Avventore avventore = null; 
+		try {
+			String queryGetAvventore = "SELECT * FROM AVVENTORE A WHERE A.Numcid = ?";
+			PreparedStatement stmtGetAvventore = connessione.prepareStatement(queryGetAvventore);
+			stmtGetAvventore.setString(1, numCid);
+			ResultSet rs = stmtGetAvventore.executeQuery();
+			
+			if(rs.next()) {
+				avventore = new Avventore(rs.getString(1),rs.getString(2),rs.getString(3),rs.getDate(4),rs.getString(5),rs.getString(6),rs.getString(7),
+						rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getDouble(12),rs.getString(13).charAt(0));
+			}
+			rs.close();
+			stmtGetAvventore.close();	
+			    
+		} catch (SQLException e) {
+			System.out.println("Codice errore SQL: "+e.getErrorCode()); 
+			System.out.println("SQL State: "+e.getSQLState()); 
+			System.out.println("Messaggio: " +e.getMessage());
+		}
+		return avventore;
+	}
+	
+	@Override
 	public boolean getEsistenzaAvventoreByNumcid(String numCid) {
 		try {
 			String queryGetAvventori = "SELECT * FROM AVVENTORE WHERE Numcid=?";
@@ -333,4 +357,5 @@ public class AvventoreOracleImplementation implements AvventoreDAO {
 			System.out.println("Messaggio: " +e.getMessage());
 		}
 	}
+
 }

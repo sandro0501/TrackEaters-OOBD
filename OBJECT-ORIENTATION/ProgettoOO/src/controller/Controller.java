@@ -67,8 +67,7 @@ public class Controller {
 	private GestioneCasiCovidFrame gestioneCasiCovidPage;
 	private AggiungiCasoCovidFrame aggiungiCasoCovidPage;
 	private ModificaCasoCovidFrame modificaCasoCovidPage;
-	
-
+	private TracciamentoAvventoreFrame tracciamentoAvventorePage;
 	
 	private Operatore operatore;
 	private Proprietario proprietario;
@@ -1326,6 +1325,33 @@ public class Controller {
 		}
 	}
 	
+	//metodo che setta label tracciamento avventore frame
+	public void setLabelsTracciamentoAvventore() {
+		JTable tabellaCasi = gestioneCasiCovidPage.getTabellaCasiRistorante();
+		String numCid = tabellaCasi.getModel().getValueAt(tabellaCasi.getSelectedRow(), 3).toString();
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		
+		try {
+			Avventore avventore = avventoreDAO.getAvventoreByNumcid(numCid);
+			
+			tracciamentoAvventorePage.getLblNumeroCartaDidentita().setText("Numero carta d'identita': "+avventore.getNumeroCid());
+			tracciamentoAvventorePage.getLblNome().setText("Nome: "+avventore.getNome());
+			tracciamentoAvventorePage.getLblCognome().setText("Cognome: "+avventore.getCognome());
+			tracciamentoAvventorePage.getLblDataDiNascita().setText("Data di nascita: "+dateFormat.format(avventore.getDataDiNascita()));
+			tracciamentoAvventorePage.getLblSesso().setText("Sesso: "+avventore.getSesso());
+			tracciamentoAvventorePage.getLblCittaDiNascita().setText("Citta' di nascita: "+avventore.getCittaDiNascita());
+			tracciamentoAvventorePage.getLblProvinciaDiNascita().setText("Provincia di nascita: "+avventore.getProvinciaDiNascita());
+			tracciamentoAvventorePage.getLblCittaDiResidenza().setText("Citta' di residenza: "+avventore.getCittaDiResidenza());
+			tracciamentoAvventorePage.getLblProvinciaDiResidenza().setText("Provincia di residenza: "+avventore.getProvinciaDiResidenza());
+			tracciamentoAvventorePage.getLblTelefono().setText("Telefono: "+avventore.getTelefono());
+			tracciamentoAvventorePage.getLblEmail().setText("Email: "+avventore.getEmail());
+			tracciamentoAvventorePage.getLblTemperaturaRegistrata().setText("Temperatura registrata: "+String.valueOf(avventore.getTemperaturaCorporea()));
+			tracciamentoAvventorePage.getLblProvvistoDiGreenpass().setText("Provvisto di Greenpass: "+String.valueOf(avventore.getGreenpass()));
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+	
 	
 	
 	
@@ -1606,6 +1632,13 @@ public class Controller {
 		modificaCasoCovidPage = new ModificaCasoCovidFrame(this, isProprietario);
 		modificaCasoCovidPage.setVisible(true);
 	}
+	
+	//starter pagina tracciamento avventore
+	public void startTracciamentoAvventoreFrame(boolean isProprietario) {
+		tracciamentoAvventorePage = new TracciamentoAvventoreFrame(this, isProprietario);
+		tracciamentoAvventorePage.setVisible(true);
+	}
+	
 
 	public void startStatisticheProprietario() {
 		statisticheProprietarioPage = new StatisticheProprietarioFrame(this);

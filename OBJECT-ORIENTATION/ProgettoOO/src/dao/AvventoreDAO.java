@@ -7,6 +7,7 @@ import dto.Avventore;
 public interface AvventoreDAO {
 	ArrayList<Avventore> getAvventoriByCodTavolata(int codTavolata);
 	ArrayList<Avventore> getAvventoriRistorante(int codRistorante);
+	Avventore getAvventoreByNumcid(String numCid);
 	boolean getEsistenzaAvventoreByNumcid(String numCid);
 	boolean insertAvventore(String numCid, String nome, String cognome, String dataNascita, String sesso, String cittaNascita, String provNascita, String cittaResidenza, String provResidenza, String telefono, String email, double temperatura, char greenpass);
 	boolean aggiungiAvventoreATavolata(String numCid, int codTavolata);

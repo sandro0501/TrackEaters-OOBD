@@ -107,6 +107,7 @@ public class AggiungiAvventoreFrame extends JFrame {
 		pannello_Principale.add(etichetta_Sesso);
 		
 		JLabel etichetta_CittaNascita = new JLabel("Citt\u00E0 nascita (*)");
+		etichetta_CittaNascita.setIcon(new ImageIcon(AggiungiAvventoreFrame.class.getResource("/resources/cityIcon.png")));
 		etichetta_CittaNascita.setForeground(new Color(0, 0, 128));
 		etichetta_CittaNascita.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		etichetta_CittaNascita.setBounds(20, 432, 172, 27);
@@ -119,9 +120,10 @@ public class AggiungiAvventoreFrame extends JFrame {
 		pannello_Principale.add(etichetta_ProvNascita);
 		
 		JLabel etichetta_CittaResidenza = new JLabel("Citt\u00E0 residenza (*)");
+		etichetta_CittaResidenza.setIcon(new ImageIcon(AggiungiAvventoreFrame.class.getResource("/resources/cityIcon.png")));
 		etichetta_CittaResidenza.setForeground(new Color(0, 0, 128));
 		etichetta_CittaResidenza.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		etichetta_CittaResidenza.setBounds(20, 501, 172, 27);
+		etichetta_CittaResidenza.setBounds(20, 501, 188, 27);
 		pannello_Principale.add(etichetta_CittaResidenza);
 		
 		JLabel etichetta_ProvinciaResidenza = new JLabel("Provincia (*)");
@@ -367,7 +369,7 @@ public class AggiungiAvventoreFrame extends JFrame {
 						String dataNascita = dateFormat.format(campo_DataNascita.getDate());
 						
 						c.insertAvventore(	isProprietario,
-											campo_NumCid.getText(),
+											campo_NumCid.getText().toUpperCase(),
 											campo_Nome.getText(),
 											campo_Cognome.getText(),
 											dataNascita,

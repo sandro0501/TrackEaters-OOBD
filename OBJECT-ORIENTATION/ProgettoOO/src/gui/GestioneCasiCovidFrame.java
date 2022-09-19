@@ -21,14 +21,19 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 import controller.Controller;
+import javax.swing.JTextField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class GestioneCasiCovidFrame extends JFrame {
 
@@ -119,7 +124,8 @@ public class GestioneCasiCovidFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (tabellaCasiCovid.getSelectedRow()!=-1) {
 					setVisible(false);
-					//c.startModificaCasoCovidFrame(proprietario);
+					c.startTracciamentoAvventoreFrame(proprietario);
+					c.setLabelsTracciamentoAvventore();
 					
 				} else {
 					c.mostraErroreSelezioneDialog(pannello_Principale);
@@ -186,6 +192,7 @@ public class GestioneCasiCovidFrame extends JFrame {
 		pannello_Principale.add(bottone_Elimina);
 
 		setTabellaCasiCovid();
+		
 	}
 	
 	private void setTabellaCasiCovid() {

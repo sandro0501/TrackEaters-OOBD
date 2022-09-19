@@ -98,9 +98,7 @@ public class StatisticheRistoranteFrame extends JFrame {
 		comboBox_TipoStatistica.setModel(new DefaultComboBoxModel(new String[] {"Testuale", "Grafica"}));
 		comboBox_TipoStatistica.setBounds(58, 167, 200, 27);
 		pannello_Principale.add(comboBox_TipoStatistica);
-		ArrayList<String> ristoranti = new ArrayList<>();
-		ristoranti.add("Tutti");
-		ristoranti.addAll(c.riempiComboRistoranti());
+		
 		
 		campo_DataIniziale = new JDateChooser();
 		campo_DataIniziale.setFont(new Font("Segoe UI", Font.PLAIN, 13));

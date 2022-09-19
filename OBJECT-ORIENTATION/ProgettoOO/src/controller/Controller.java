@@ -1743,7 +1743,7 @@ public class Controller {
 			statisticheProprietarioPage.getEtichetta_Positivi().setText("Positivi: " + proprietarioDAO.numeroPositivi(dataInizio, dataFine));
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			mostraErrore(e);
 		}
 	}
 	
@@ -1759,7 +1759,7 @@ public class Controller {
 			statisticheProprietarioPage.getEtichetta_Positivi().setText("Positivi: "+ ristoranteDAO.numeroPositiviRistorante(dataInizio, dataFine, codiceRistorante));
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			mostraErrore(e);
 		}
 		
 	}
@@ -1767,7 +1767,8 @@ public class Controller {
 	
 	public void statisticheRistorante(String dataInizio, String dataFine) {
 		
-		int codiceRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
+		int codiceRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(managerRistorante.getRistoranteGestito().getDenominazione(), managerRistorante.getRistoranteGestito().getIndirizzo());
+
 		
 		try {
 			statisticheRistorantePage.getEtichetta_TotaleAvventori().setText("Totale Avventori: " + ristoranteDAO.numeroTotaleAvventoriRistorante(dataInizio, dataFine, codiceRistorante));
@@ -1776,7 +1777,7 @@ public class Controller {
 			statisticheRistorantePage.getEtichetta_Positivi().setText("Positivi: "+ ristoranteDAO.numeroPositiviRistorante(dataInizio, dataFine, codiceRistorante));
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			mostraErrore(e);
 		}
 		
 	}
@@ -1792,7 +1793,7 @@ public class Controller {
 			statisticheRistorantePage.getEtichetta_Positivi().setText("Positivi: "+ ristoranteDAO.numeroPositiviRistorante(dataInizio, dataFine, codiceRistorante));
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			mostraErrore(e);
 		}
 		
 	}

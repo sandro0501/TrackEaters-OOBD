@@ -36,6 +36,12 @@ import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JYearChooser;
 
 import controller.Controller;
+import de.progra.charting.ChartEncoder;
+import de.progra.charting.DefaultChart;
+import de.progra.charting.model.ChartDataModel;
+import de.progra.charting.model.ObjectChartDataModel;
+import de.progra.charting.render.PieChartRenderer;
+
 import javax.swing.JComboBox;
 import javax.imageio.ImageIO;
 
@@ -58,9 +64,7 @@ public class StatisticheProprietarioFrame extends JFrame {
 	private JLabel etichetta_Esterni;
 	private JLabel etichetta_Positivi;
 	private JLabel etichetta_SelezionaDataFinale;
-	private JYearChooser campo_Anno;
 	private JLabel immagineStatistichePNG;
-	private JLabel etichetta_SelezionaData;
 	
 	
 	public StatisticheProprietarioFrame(Controller c) {
@@ -108,19 +112,21 @@ public class StatisticheProprietarioFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(comboBox_TipoStatistica.getSelectedItem().toString()=="Grafica") {
-					campo_DataIniziale.setVisible(false);
-					campo_DataFinale.setVisible(false);
-					etichetta_SelezionaDataIniziale.setVisible(false);
-					etichetta_SelezionaDataFinale.setVisible(false);
-					etichetta_SelezionaData.setVisible(true);
-					campo_Anno.setVisible(true);
+				
+					etichetta_Esterni.setVisible(false);
+					etichetta_Interni.setVisible(false);
+					etichetta_Positivi.setVisible(false);
+					etichetta_TotaleAvventori.setVisible(false);
+					immagineStatistichePNG.setVisible(true);
+					
 				} else {
-					campo_DataIniziale.setVisible(true);
-					campo_DataFinale.setVisible(true);
-					etichetta_SelezionaDataIniziale.setVisible(true);
-					etichetta_SelezionaDataFinale.setVisible(true);
-					etichetta_SelezionaData.setVisible(false);
-					campo_Anno.setVisible(false);
+					
+					etichetta_Esterni.setVisible(true);
+					etichetta_Interni.setVisible(true);
+					etichetta_Positivi.setVisible(true);
+					etichetta_TotaleAvventori.setVisible(true);
+					immagineStatistichePNG.setVisible(false);
+					
 				}
 				
 			}
@@ -153,11 +159,15 @@ public class StatisticheProprietarioFrame extends JFrame {
 					if (comboBox_TipoStatistica.getSelectedItem().toString() == "Testuale") {
 						
 						c.statisticaPropretario(dataInizio, dataFine);
+					} else {
+						
 					}
 				} else {
 					if(comboBox_TipoStatistica.getSelectedItem().toString() == "Testuale") {
 						
 						c.statisticheRistorantiProprietario(dataInizio, dataFine, comboBox_Ristorante.getSelectedItem().toString());
+					} else {
+						
 					}
 				}
 			}
@@ -255,18 +265,9 @@ public class StatisticheProprietarioFrame extends JFrame {
 		etichetta_Positivi.setBounds(761, 423, 250, 27);
 		pannello_Principale.add(etichetta_Positivi);
 		
-		campo_Anno = new JYearChooser();
-		campo_Anno.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-		campo_Anno.setBounds(59, 305, 200, 27);
-		pannello_Principale.add(campo_Anno);
-		campo_Anno.setVisible(false);
-		
-		etichetta_SelezionaData = new JLabel("Seleziona data:");
-		etichetta_SelezionaData.setForeground(new Color(0, 0, 128));
-		etichetta_SelezionaData.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		etichetta_SelezionaData.setBounds(59, 280, 200, 27);
-		pannello_Principale.add(etichetta_SelezionaData);
-		etichetta_SelezionaData.setVisible(false);
+		JLabel immagineStatistichePNG = new JLabel("");
+		immagineStatistichePNG.setBounds(346, 144, 680, 365);
+		pannello_Principale.add(immagineStatistichePNG);
 		
 		
 	}
@@ -352,6 +353,4 @@ public class StatisticheProprietarioFrame extends JFrame {
 	public void setEtichetta_Positivi(JLabel etichetta_Positivi) {
 		this.etichetta_Positivi = etichetta_Positivi;
 	}
-	
-	
 }

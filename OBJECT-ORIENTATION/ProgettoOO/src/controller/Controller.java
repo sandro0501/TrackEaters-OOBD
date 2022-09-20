@@ -12,6 +12,11 @@ import dto.Tavolata;
 import dto.Tavolo;
 
 import dao.*;
+import de.progra.charting.ChartEncoder;
+import de.progra.charting.DefaultChart;
+import de.progra.charting.model.ChartDataModel;
+import de.progra.charting.model.ObjectChartDataModel;
+import de.progra.charting.render.PieChartRenderer;
 import oracledaoimplementation.*;
 import gui.*;
 
@@ -1797,8 +1802,57 @@ public class Controller {
 		}	
 	}
 	
-	/*public void creaGraficoPng() {
+	public void ristorantiPNG(String dataInizio, String dataFine) {
 		
-	}*/
+		
+		try {
+			int totale = proprietarioDAO.numeroTotaleAvventori(dataInizio, dataFine);
+			int interni = proprietarioDAO.numeroAvventoriInterni(dataInizio, dataFine);
+			int esterni = proprietarioDAO.numeroAvventoriEsterni(dataInizio, dataFine);
+			int positivi = proprietarioDAO.numeroPositivi(dataInizio, dataFine);
+			
+			creaStatisticaPNG(esterni, interni, "Esterni", "Interni", totale, "/interni_esterni.png");
+			creaStatisticaPNG(totale-positivi, positivi, "Negativi", "Positivi", totale, "/negativi_positivi.png");
+			
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+	
+	public void ristoranteProprietarioPNG(String dataInizio, String dataFinale, int codiceRistorante) {
+		
+	}
+	
+	private void creaStatisticaPNG(int valore1, int valore2, String stringa1, String stringa2, int totale, String nomeFile){
+		 int[][] model = {{valore1}, {valore2}};
+			
+		 String[] columns = {""};
+		
+		 String[] rows = {stringa1 + ": " + valore1, stringa2+ ": " + valore2};
+		
+		 String title = "Totale: " + totale;
+		
+		 int width = 680;
+		 int height = 365;
+		 
+		 ChartDataModel data = new ObjectChartDataModel(model, columns, rows);
+		
+		 data.setAutoScale(true);
+		 
+		 DefaultChart c = new DefaultChart(data, title);
+		
+		
+		 c.addChartRenderer(new PieChartRenderer(data), 1);
+			
+		 c.setBounds(new Rectangle(0, 0, width, height));
+		
+		
+		 try {
+			 ChartEncoder.createPNG(new FileOutputStream(System.getProperty("user.home")+nomeFile), c);
+		 } catch(Exception e) {
+			 e.printStackTrace();
+		 }
+
+	}
 	
 }

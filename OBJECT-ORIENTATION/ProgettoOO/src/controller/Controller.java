@@ -1794,7 +1794,11 @@ public class Controller {
 			
 		} catch (Exception e) {
 			mostraErrore(e);
-		}
-		
+		}	
 	}
+	
+	/*public void creaGraficoPng() {
+		
+	}*/
+	
 }

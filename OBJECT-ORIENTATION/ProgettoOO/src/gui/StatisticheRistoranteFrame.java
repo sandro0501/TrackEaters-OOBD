@@ -33,6 +33,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JYearChooser;
 
 import controller.Controller;
 
@@ -57,8 +58,9 @@ public class StatisticheRistoranteFrame extends JFrame {
 	private JLabel etichetta_Esterni;
 	private JLabel etichetta_Positivi;
 	private JComboBox comboBox_TipoStatistica;
-	
-	
+	private JYearChooser campo_Anno;
+	private JLabel immagineStatistichePNG;
+	private JLabel etichetta_SelezionaData;
 	
 	public StatisticheRistoranteFrame(Controller c, boolean proprietario) {
 		
@@ -78,6 +80,30 @@ public class StatisticheRistoranteFrame extends JFrame {
 		setContentPane(pannello_Principale);
 		pannello_Principale.setLayout(null);
 		
+		etichetta_Positivi = new JLabel("");
+		etichetta_Positivi.setForeground(new Color(0, 0, 128));
+		etichetta_Positivi.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		etichetta_Positivi.setBounds(761, 423, 250, 27);
+		pannello_Principale.add(etichetta_Positivi);
+		
+		etichetta_Esterni = new JLabel("");
+		etichetta_Esterni.setForeground(new Color(0, 0, 128));
+		etichetta_Esterni.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		etichetta_Esterni.setBounds(761, 323, 250, 27);
+		pannello_Principale.add(etichetta_Esterni);
+		
+		etichetta_Interni = new JLabel("");
+		etichetta_Interni.setForeground(new Color(0, 0, 128));
+		etichetta_Interni.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		etichetta_Interni.setBounds(761, 229, 250, 27);
+		pannello_Principale.add(etichetta_Interni);
+		
+		etichetta_TotaleAvventori = new JLabel("");
+		etichetta_TotaleAvventori.setForeground(new Color(0, 0, 128));
+		etichetta_TotaleAvventori.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		etichetta_TotaleAvventori.setBounds(761, 136, 250, 27);
+		pannello_Principale.add(etichetta_TotaleAvventori);
+		
 		JLabel etichetta_Statistica = new JLabel("Statistica");
 		etichetta_Statistica.setForeground(new Color(0, 0, 128));
 		etichetta_Statistica.setFont(new Font("Segoe UI", Font.BOLD, 18));
@@ -90,11 +116,40 @@ public class StatisticheRistoranteFrame extends JFrame {
 		etichetta_SelezionaDataIniziale.setBounds(59, 242, 200, 27);
 		pannello_Principale.add(etichetta_SelezionaDataIniziale);
 		
+		JLabel etichetta_SelezionaDataFinale = new JLabel("Seleziona data finale");
+		etichetta_SelezionaDataFinale.setForeground(new Color(0, 0, 128));
+		etichetta_SelezionaDataFinale.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		etichetta_SelezionaDataFinale.setBounds(59, 342, 200, 27);
+		pannello_Principale.add(etichetta_SelezionaDataFinale);
+		
 		JLabel etichetta_Statistiche = new JLabel("STATISTICHE");
 		etichetta_Statistiche.setBounds(590, 36, 83, 14);
 		pannello_Principale.add(etichetta_Statistiche);
 		
 		comboBox_TipoStatistica = new JComboBox();
+		comboBox_TipoStatistica.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(comboBox_TipoStatistica.getSelectedItem().toString()=="Grafica") {
+					campo_DataIniziale.setVisible(false);
+					campo_DataFinale.setVisible(false);
+					etichetta_SelezionaDataIniziale.setVisible(false);
+					etichetta_SelezionaDataFinale.setVisible(false);
+					etichetta_SelezionaData.setVisible(true);
+					campo_Anno.setVisible(true);
+				} else {
+					campo_DataIniziale.setVisible(true);
+					campo_DataFinale.setVisible(true);
+					etichetta_SelezionaDataIniziale.setVisible(true);
+					etichetta_SelezionaDataFinale.setVisible(true);
+					etichetta_SelezionaData.setVisible(false);
+					campo_Anno.setVisible(false);
+				}
+				
+			}
+		});
+		
+		
 		comboBox_TipoStatistica.setModel(new DefaultComboBoxModel(new String[] {"Testuale", "Grafica"}));
 		comboBox_TipoStatistica.setBounds(58, 167, 200, 27);
 		pannello_Principale.add(comboBox_TipoStatistica);
@@ -105,7 +160,7 @@ public class StatisticheRistoranteFrame extends JFrame {
 		campo_DataIniziale.setDateFormatString("dd/MM/yyyy");
 		campo_DataIniziale.setBounds(58, 267, 200, 27);
 		pannello_Principale.add(campo_DataIniziale);
-		
+			
 		bottone_Conferma = new JButton("");
 		bottone_Conferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -183,42 +238,28 @@ public class StatisticheRistoranteFrame extends JFrame {
 		pannello_Navigazione.add(lblDataEOra);
 		c.mostraDataEOra(lblDataEOra);
 		
-		JLabel etichetta_SelezionaDataFinale = new JLabel("Seleziona data finale");
-		etichetta_SelezionaDataFinale.setForeground(new Color(0, 0, 128));
-		etichetta_SelezionaDataFinale.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		etichetta_SelezionaDataFinale.setBounds(59, 342, 200, 27);
-		pannello_Principale.add(etichetta_SelezionaDataFinale);
-		
 		campo_DataFinale = new JDateChooser();
 		campo_DataFinale.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 		campo_DataFinale.setDateFormatString("dd/MM/yyyy");
 		campo_DataFinale.setBounds(58, 367, 200, 27);
 		pannello_Principale.add(campo_DataFinale);
 		
-		etichetta_TotaleAvventori = new JLabel("");
-		etichetta_TotaleAvventori.setForeground(new Color(0, 0, 128));
-		etichetta_TotaleAvventori.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		etichetta_TotaleAvventori.setBounds(761, 136, 250, 27);
-		pannello_Principale.add(etichetta_TotaleAvventori);
+		immagineStatistichePNG = new JLabel("");
+		immagineStatistichePNG.setBounds(346, 144, 680, 365);
+		pannello_Principale.add(immagineStatistichePNG);
 		
-		etichetta_Interni = new JLabel("");
-		etichetta_Interni.setForeground(new Color(0, 0, 128));
-		etichetta_Interni.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		etichetta_Interni.setBounds(761, 229, 250, 27);
-		pannello_Principale.add(etichetta_Interni);
+		campo_Anno = new JYearChooser();
+		campo_Anno.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+		campo_Anno.setBounds(59, 305, 200, 27);
+		pannello_Principale.add(campo_Anno);
+		campo_Anno.setVisible(false);
 		
-		etichetta_Esterni = new JLabel("");
-		etichetta_Esterni.setForeground(new Color(0, 0, 128));
-		etichetta_Esterni.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		etichetta_Esterni.setBounds(761, 323, 250, 27);
-		pannello_Principale.add(etichetta_Esterni);
-		
-		etichetta_Positivi = new JLabel("");
-		etichetta_Positivi.setForeground(new Color(0, 0, 128));
-		etichetta_Positivi.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		etichetta_Positivi.setBounds(761, 423, 250, 27);
-		pannello_Principale.add(etichetta_Positivi);
-		
+		etichetta_SelezionaData = new JLabel("Seleziona data:");
+		etichetta_SelezionaData.setForeground(new Color(0, 0, 128));
+		etichetta_SelezionaData.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		etichetta_SelezionaData.setBounds(59, 280, 200, 27);
+		pannello_Principale.add(etichetta_SelezionaData);
+		etichetta_SelezionaData.setVisible(false);
 		
 		
 	}

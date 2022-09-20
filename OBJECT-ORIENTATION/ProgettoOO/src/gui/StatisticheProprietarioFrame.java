@@ -33,6 +33,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JYearChooser;
 
 import controller.Controller;
 import javax.swing.JComboBox;
@@ -56,7 +57,10 @@ public class StatisticheProprietarioFrame extends JFrame {
 	private JLabel etichetta_Interni;
 	private JLabel etichetta_Esterni;
 	private JLabel etichetta_Positivi;
-	
+	private JLabel etichetta_SelezionaDataFinale;
+	private JYearChooser campo_Anno;
+	private JLabel immagineStatistichePNG;
+	private JLabel etichetta_SelezionaData;
 	
 	
 	public StatisticheProprietarioFrame(Controller c) {
@@ -100,6 +104,27 @@ public class StatisticheProprietarioFrame extends JFrame {
 		pannello_Principale.add(etichetta_Statistiche);
 		
 		comboBox_TipoStatistica = new JComboBox();
+		comboBox_TipoStatistica.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(comboBox_TipoStatistica.getSelectedItem().toString()=="Grafica") {
+					campo_DataIniziale.setVisible(false);
+					campo_DataFinale.setVisible(false);
+					etichetta_SelezionaDataIniziale.setVisible(false);
+					etichetta_SelezionaDataFinale.setVisible(false);
+					etichetta_SelezionaData.setVisible(true);
+					campo_Anno.setVisible(true);
+				} else {
+					campo_DataIniziale.setVisible(true);
+					campo_DataFinale.setVisible(true);
+					etichetta_SelezionaDataIniziale.setVisible(true);
+					etichetta_SelezionaDataFinale.setVisible(true);
+					etichetta_SelezionaData.setVisible(false);
+					campo_Anno.setVisible(false);
+				}
+				
+			}
+		});
 		comboBox_TipoStatistica.setModel(new DefaultComboBoxModel(new String[] {"Testuale", "Grafica"}));
 		comboBox_TipoStatistica.setBounds(57, 223, 200, 27);
 		pannello_Principale.add(comboBox_TipoStatistica);
@@ -194,7 +219,7 @@ public class StatisticheProprietarioFrame extends JFrame {
 		pannello_Navigazione.add(lblDataEOra);
 		c.mostraDataEOra(lblDataEOra);
 		
-		JLabel etichetta_SelezionaDataFinale = new JLabel("Seleziona data finale");
+		etichetta_SelezionaDataFinale = new JLabel("Seleziona data finale");
 		etichetta_SelezionaDataFinale.setForeground(new Color(0, 0, 128));
 		etichetta_SelezionaDataFinale.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		etichetta_SelezionaDataFinale.setBounds(58, 398, 200, 27);
@@ -230,7 +255,18 @@ public class StatisticheProprietarioFrame extends JFrame {
 		etichetta_Positivi.setBounds(761, 423, 250, 27);
 		pannello_Principale.add(etichetta_Positivi);
 		
+		campo_Anno = new JYearChooser();
+		campo_Anno.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+		campo_Anno.setBounds(59, 305, 200, 27);
+		pannello_Principale.add(campo_Anno);
+		campo_Anno.setVisible(false);
 		
+		etichetta_SelezionaData = new JLabel("Seleziona data:");
+		etichetta_SelezionaData.setForeground(new Color(0, 0, 128));
+		etichetta_SelezionaData.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		etichetta_SelezionaData.setBounds(59, 280, 200, 27);
+		pannello_Principale.add(etichetta_SelezionaData);
+		etichetta_SelezionaData.setVisible(false);
 		
 		
 	}

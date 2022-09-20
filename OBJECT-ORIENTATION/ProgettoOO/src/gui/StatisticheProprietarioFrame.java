@@ -78,44 +78,45 @@ public class StatisticheProprietarioFrame extends JFrame {
 		pannello_Principale.setLayout(null);
 		
 		JLabel etichetta_Ristorante = new JLabel("Ristorante");
+		etichetta_Ristorante.setIcon(new ImageIcon(StatisticheProprietarioFrame.class.getResource("/resources/restaurantIcon.png")));
 		etichetta_Ristorante.setForeground(new Color(0, 0, 128));
 		etichetta_Ristorante.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		etichetta_Ristorante.setBounds(58, 105, 172, 27);
 		pannello_Principale.add(etichetta_Ristorante);
 		
 		JLabel etichetta_Statistica = new JLabel("Statistica");
+		etichetta_Statistica.setIcon(new ImageIcon(StatisticheProprietarioFrame.class.getResource("/resources/dimensioneIcon.png")));
 		etichetta_Statistica.setForeground(new Color(0, 0, 128));
 		etichetta_Statistica.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		etichetta_Statistica.setBounds(58, 198, 172, 27);
 		pannello_Principale.add(etichetta_Statistica);
 		
 		JLabel etichetta_SelezionaDataIniziale = new JLabel("Seleziona data iniziale");
+		etichetta_SelezionaDataIniziale.setIcon(new ImageIcon(StatisticheProprietarioFrame.class.getResource("/resources/iconCalendar.png")));
 		etichetta_SelezionaDataIniziale.setForeground(new Color(0, 0, 128));
 		etichetta_SelezionaDataIniziale.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		etichetta_SelezionaDataIniziale.setBounds(58, 298, 200, 27);
+		etichetta_SelezionaDataIniziale.setBounds(58, 298, 234, 27);
 		pannello_Principale.add(etichetta_SelezionaDataIniziale);
 		
-		JLabel etichetta_Statistiche = new JLabel("STATISTICHE");
-		etichetta_Statistiche.setBounds(590, 36, 83, 14);
-		pannello_Principale.add(etichetta_Statistiche);
-		
 		comboBox_TipoStatistica = new JComboBox();
+		comboBox_TipoStatistica.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		comboBox_TipoStatistica.setModel(new DefaultComboBoxModel(new String[] {"Testuale", "Grafica"}));
-		comboBox_TipoStatistica.setBounds(57, 223, 200, 27);
+		comboBox_TipoStatistica.setBounds(57, 223, 215, 27);
 		pannello_Principale.add(comboBox_TipoStatistica);
 		
 		comboBox_Ristorante = new JComboBox();
+		comboBox_Ristorante.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		ArrayList<String> ristoranti = new ArrayList<>();
 		ristoranti.add("Tutti");
 		ristoranti.addAll(c.riempiComboRistoranti());
 		comboBox_Ristorante.setModel(new DefaultComboBoxModel<String>(ristoranti.toArray(new String[ristoranti.size()])));
-		comboBox_Ristorante.setBounds(57, 130, 200, 27);
+		comboBox_Ristorante.setBounds(57, 130, 330, 27);
 		pannello_Principale.add(comboBox_Ristorante);
 		
 		campo_DataIniziale = new JDateChooser();
 		campo_DataIniziale.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 		campo_DataIniziale.setDateFormatString("dd/MM/yyyy");
-		campo_DataIniziale.setBounds(57, 323, 200, 27);
+		campo_DataIniziale.setBounds(57, 323, 215, 27);
 		pannello_Principale.add(campo_DataIniziale);
 		
 		bottone_Conferma = new JButton("");
@@ -195,40 +196,52 @@ public class StatisticheProprietarioFrame extends JFrame {
 		c.mostraDataEOra(lblDataEOra);
 		
 		JLabel etichetta_SelezionaDataFinale = new JLabel("Seleziona data finale");
+		etichetta_SelezionaDataFinale.setIcon(new ImageIcon(StatisticheProprietarioFrame.class.getResource("/resources/iconCalendar.png")));
 		etichetta_SelezionaDataFinale.setForeground(new Color(0, 0, 128));
 		etichetta_SelezionaDataFinale.setFont(new Font("Segoe UI", Font.BOLD, 18));
-		etichetta_SelezionaDataFinale.setBounds(58, 398, 200, 27);
+		etichetta_SelezionaDataFinale.setBounds(58, 398, 234, 27);
 		pannello_Principale.add(etichetta_SelezionaDataFinale);
 		
 		campo_DataFinale = new JDateChooser();
 		campo_DataFinale.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 		campo_DataFinale.setDateFormatString("dd/MM/yyyy");
-		campo_DataFinale.setBounds(57, 423, 200, 27);
+		campo_DataFinale.setBounds(57, 423, 215, 27);
 		pannello_Principale.add(campo_DataFinale);
 		
 		etichetta_TotaleAvventori = new JLabel("");
+		etichetta_TotaleAvventori.setIcon(null);
 		etichetta_TotaleAvventori.setForeground(new Color(0, 0, 128));
 		etichetta_TotaleAvventori.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		etichetta_TotaleAvventori.setBounds(761, 136, 250, 27);
 		pannello_Principale.add(etichetta_TotaleAvventori);
 		
 		etichetta_Interni = new JLabel("");
+		etichetta_Interni.setIcon(null);
 		etichetta_Interni.setForeground(new Color(0, 0, 128));
 		etichetta_Interni.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		etichetta_Interni.setBounds(761, 229, 250, 27);
 		pannello_Principale.add(etichetta_Interni);
 		
 		etichetta_Esterni = new JLabel("");
+		etichetta_Esterni.setIcon(null);
 		etichetta_Esterni.setForeground(new Color(0, 0, 128));
 		etichetta_Esterni.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		etichetta_Esterni.setBounds(761, 323, 250, 27);
 		pannello_Principale.add(etichetta_Esterni);
 		
 		etichetta_Positivi = new JLabel("");
+		etichetta_Positivi.setIcon(null);
 		etichetta_Positivi.setForeground(new Color(0, 0, 128));
 		etichetta_Positivi.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		etichetta_Positivi.setBounds(761, 423, 250, 27);
 		pannello_Principale.add(etichetta_Positivi);
+		
+		JLabel etichetta_IMieiRistoranti = new JLabel("");
+		etichetta_IMieiRistoranti.setIcon(new ImageIcon(StatisticheProprietarioFrame.class.getResource("/resources/statisticheRistoranteTitle.png")));
+		etichetta_IMieiRistoranti.setHorizontalAlignment(SwingConstants.CENTER);
+		etichetta_IMieiRistoranti.setFont(new Font("Tahoma", Font.BOLD, 20));
+		etichetta_IMieiRistoranti.setBounds(387, 24, 490, 52);
+		pannello_Principale.add(etichetta_IMieiRistoranti);
 		
 		
 		
@@ -316,6 +329,4 @@ public class StatisticheProprietarioFrame extends JFrame {
 	public void setEtichetta_Positivi(JLabel etichetta_Positivi) {
 		this.etichetta_Positivi = etichetta_Positivi;
 	}
-	
-	
 }

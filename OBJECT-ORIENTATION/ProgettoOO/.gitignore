@@ -28,5 +28,4 @@ local.properties
 *.launch
 
 # others 
-ConnessioneDatabase.java
 /bin/

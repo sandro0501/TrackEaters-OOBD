@@ -51,7 +51,6 @@ public class StatisticheRistoranteFrame extends JFrame {
 	private JDateChooser campo_DataIniziale;
 	private JDateChooser campo_DataFinale;
 	private JButton bottone_Conferma;
-	private Image immagineStatistiche;
 	private JLabel etichetta_TotaleAvventori;
 	private JLabel etichetta_Interni;
 	private JLabel etichetta_Esterni;
@@ -94,9 +93,34 @@ public class StatisticheRistoranteFrame extends JFrame {
 		pannello_Principale.add(etichetta_SelezionaDataIniziale);
 		
 		comboBox_TipoStatistica = new JComboBox();
-		comboBox_TipoStatistica.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		comboBox_TipoStatistica.setModel(new DefaultComboBoxModel(new String[] {"Testuale", "Grafica"}));
-		comboBox_TipoStatistica.setBounds(58, 167, 215, 27);
+		comboBox_TipoStatistica.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(comboBox_TipoStatistica.getSelectedItem().toString()=="Testuale") {
+
+					etichetta_Esterni.setVisible(true);
+					etichetta_Interni.setVisible(true);
+					etichetta_Positivi.setVisible(true);
+					etichetta_TotaleAvventori.setVisible(true);
+					immagineStatistichePNG.setVisible(false);
+					
+					
+				} else {
+					
+					etichetta_Esterni.setVisible(false);
+					etichetta_Interni.setVisible(false);
+					etichetta_Positivi.setVisible(false);
+					etichetta_TotaleAvventori.setVisible(false);
+					immagineStatistichePNG.setVisible(true);
+					
+				}
+				
+			}
+		});
+		
+		
+		comboBox_TipoStatistica.setModel(new DefaultComboBoxModel(new String[] {"Testuale", "Grafica: Positivi", "Grafica: Interni/Esterni"}));
+		comboBox_TipoStatistica.setBounds(58, 167, 200, 27);
 		pannello_Principale.add(comboBox_TipoStatistica);
 		
 		
@@ -117,6 +141,9 @@ public class StatisticheRistoranteFrame extends JFrame {
 						c.statisticheRistorante(dataInizio, dataFine);
 					else
 						c.statisticaRistoranteManager(dataInizio, dataFine);
+				} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Positivi"){
+					
+				} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Interni/Esterni") {
 					
 				}
 			}

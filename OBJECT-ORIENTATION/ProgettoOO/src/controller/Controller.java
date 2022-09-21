@@ -19,6 +19,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URL;
 import java.util.*;
 import java.text.SimpleDateFormat;
@@ -1732,7 +1734,7 @@ public class Controller {
 
 	//metodi per le statistiche
 	
-	public void statisticaPropretario(String dataInizio, String dataFine) {
+	public void statistichePropretario(String dataInizio, String dataFine) {
 		
 		
 		
@@ -1767,7 +1769,7 @@ public class Controller {
 	
 	public void statisticheRistorante(String dataInizio, String dataFine) {
 		
-		int codiceRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(managerRistorante.getRistoranteGestito().getDenominazione(), managerRistorante.getRistoranteGestito().getIndirizzo());
+		int codiceRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
 
 		
 		try {
@@ -1794,7 +1796,118 @@ public class Controller {
 			
 		} catch (Exception e) {
 			mostraErrore(e);
+		}	
+	}
+	
+	public void pngStatisticaPropretario(String dataInizio, String dataFine) {
+		
+		
+		try {
+			int totale = proprietarioDAO.numeroTotaleAvventori(dataInizio, dataFine);
+			int interni = proprietarioDAO.numeroAvventoriInterni(dataInizio, dataFine);
+			int esterni = proprietarioDAO.numeroAvventoriEsterni(dataInizio, dataFine);
+			int positivi = proprietarioDAO.numeroPositivi(dataInizio, dataFine);
+			
+			creaStatisticaPNG(esterni, interni, "Esterni", "Interni", totale, "/interni_esterni.png");
+			creaStatisticaPNG(totale-positivi, positivi, "Negativi", "Positivi", totale, "/negativi_positivi.png");
+			
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+	
+	public void pngStatisticheRistorantiProprietario(String dataInizio, String dataFine, String ristorante) {
+		
+		String[] splitted = ristorante.split(" - ");
+		int codiceRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(splitted[0], splitted[1]);  
+		
+		try {
+			int totale =  ristoranteDAO.numeroTotaleAvventoriRistorante(dataInizio, dataFine, codiceRistorante);
+			int interni = ristoranteDAO.numeroAvventoriInterniRistorante(dataInizio, dataFine, codiceRistorante);
+			int esterni = ristoranteDAO.numeroAvventoriEsterniRistorante(dataInizio, dataFine, codiceRistorante);
+			int positivi = ristoranteDAO.numeroPositiviRistorante(dataInizio, dataFine, codiceRistorante);
+			
+			creaStatisticaPNG(esterni, interni, "Esterni", "Interni", totale, "/interni_esterni.png");
+			creaStatisticaPNG(totale-positivi, positivi, "Negativi", "Positivi", totale, "/negativi_positivi.png");
+			
+		} catch (Exception e) {
+			mostraErrore(e);
 		}
 		
 	}
+	
+	public void pngStatisticheRistorante(String dataInizio, String dataFine) {
+		
+		int codiceRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
+		
+		try {
+			int totale = ristoranteDAO.numeroTotaleAvventoriRistorante(dataInizio, dataFine, codiceRistorante);
+			int interni = ristoranteDAO.numeroAvventoriInterniRistorante(dataInizio, dataFine, codiceRistorante);
+			int esterni = ristoranteDAO.numeroAvventoriEsterniRistorante(dataInizio, dataFine, codiceRistorante);
+			int positivi = ristoranteDAO.numeroPositiviRistorante(dataInizio, dataFine, codiceRistorante);
+			
+			creaStatisticaPNG(esterni, interni, "Esterni", "Interni", totale, "/interni_esterni.png");
+			creaStatisticaPNG(totale-positivi, positivi, "Negativi", "Positivi", totale, "/negativi_positivi.png");
+			
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+		
+	}
+	
+	public void pngStatisticaRistoranteManager(String dataInizio, String dataFine) {
+		
+		try {
+			
+			int codiceRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(managerRistorante.getRistoranteGestito().getDenominazione(), managerRistorante.getRistoranteGestito().getIndirizzo());
+			
+			int totale = ristoranteDAO.numeroTotaleAvventoriRistorante(dataInizio, dataFine, codiceRistorante);
+			int interni = ristoranteDAO.numeroAvventoriInterniRistorante(dataInizio, dataFine, codiceRistorante);
+			int esterni = ristoranteDAO.numeroAvventoriEsterniRistorante(dataInizio, dataFine, codiceRistorante);
+			int positivi = ristoranteDAO.numeroPositiviRistorante(dataInizio, dataFine, codiceRistorante);
+			
+			creaStatisticaPNG(esterni, interni, "Esterni", "Interni", totale, "/interni_esterni.png");
+			creaStatisticaPNG(totale-positivi, positivi, "Negativi", "Positivi", totale, "/negativi_positivi.png");
+			
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+		
+	}
+
+	
+	
+	private void creaStatisticaPNG(int valore1, int valore2, String stringa1, String stringa2, int totale, String nomeFile){
+		 int[][] model = {{valore1}, {valore2}};
+			
+		 String[] columns = {""};
+		
+		 String[] rows = {stringa1 + ": " + valore1, stringa2+ ": " + valore2};
+		
+		 String title = "Totale: " + totale;
+		
+		 int width = 680;
+		 int height = 365;
+		 
+		 ChartDataModel data = new ObjectChartDataModel(model, columns, rows);
+		
+		 data.setAutoScale(true);
+		 
+		 DefaultChart c = new DefaultChart(data, title);
+		
+		
+		 c.addChartRenderer(new PieChartRenderer(data), 1);
+			
+		 c.setBounds(new Rectangle(0, 0, width, height));
+		
+		
+		 try {
+			 String indirizzo = (controller.Controller.class.getResource("/resources").toString()+nomeFile).substring(6);
+			 ChartEncoder.createPNG(new FileOutputStream(indirizzo), c);
+		 } catch(Exception e) {
+			 e.printStackTrace();
+		 }
+
+	}
+	
 }

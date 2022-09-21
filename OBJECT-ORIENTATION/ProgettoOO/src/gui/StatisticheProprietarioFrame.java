@@ -51,7 +51,7 @@ public class StatisticheProprietarioFrame extends JFrame {
 	private JComboBox comboBox_Ristorante;
 	private JComboBox comboBox_TipoStatistica;
 	private JButton bottone_Conferma;
-	private Image immagineStatistiche;
+	private File immagineStatistiche;
 	private JLabel etichetta_TotaleAvventori;
 	private JLabel etichetta_Interni;
 	private JLabel etichetta_Esterni;
@@ -99,9 +99,31 @@ public class StatisticheProprietarioFrame extends JFrame {
 		pannello_Principale.add(etichetta_SelezionaDataIniziale);
 		
 		comboBox_TipoStatistica = new JComboBox();
-		comboBox_TipoStatistica.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		comboBox_TipoStatistica.setModel(new DefaultComboBoxModel(new String[] {"Testuale", "Grafica"}));
-		comboBox_TipoStatistica.setBounds(57, 223, 215, 27);
+		comboBox_TipoStatistica.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(comboBox_TipoStatistica.getSelectedItem().toString()=="Testuale") {
+				
+					etichetta_Esterni.setVisible(true);
+					etichetta_Interni.setVisible(true);
+					etichetta_Positivi.setVisible(true);
+					etichetta_TotaleAvventori.setVisible(true);
+					immagineStatistichePNG.setVisible(false);
+					
+				} else {
+					
+					etichetta_Esterni.setVisible(false);
+					etichetta_Interni.setVisible(false);
+					etichetta_Positivi.setVisible(false);
+					etichetta_TotaleAvventori.setVisible(false);
+					immagineStatistichePNG.setVisible(true);
+					
+				}
+				
+			}
+		});
+		comboBox_TipoStatistica.setModel(new DefaultComboBoxModel(new String[] {"Testuale", "Grafica: Positivi", "Grafica: Interni/Esterni"}));
+		comboBox_TipoStatistica.setBounds(57, 223, 200, 27);
 		pannello_Principale.add(comboBox_TipoStatistica);
 		
 		comboBox_Ristorante = new JComboBox();
@@ -127,13 +149,25 @@ public class StatisticheProprietarioFrame extends JFrame {
 				String dataFine = dateFormat.format(campo_DataFinale.getDate());
 				if (comboBox_Ristorante.getSelectedItem().toString() == "Tutti") {
 					if (comboBox_TipoStatistica.getSelectedItem().toString() == "Testuale") {
+						c.statistichePropretario(dataInizio, dataFine);
+					} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Positivi"){
+						c.pngStatisticaPropretario(dataInizio, dataFine);
+						immagineStatistiche =  new File(StatisticheProprietarioFrame.class.getResource("/resources/negativi_positivi.png").toString());
+						try {
+							immagineStatistichePNG.setIcon(new ImageIcon(ImageIO.read(immagineStatistiche)));
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+					} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Interni/Esterni") {
 						
-						c.statisticaPropretario(dataInizio, dataFine);
 					}
 				} else {
 					if(comboBox_TipoStatistica.getSelectedItem().toString() == "Testuale") {
-						
 						c.statisticheRistorantiProprietario(dataInizio, dataFine, comboBox_Ristorante.getSelectedItem().toString());
+					} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Positivi"){
+						
+					} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Interni/Esterni") {
+						
 					}
 				}
 			}
@@ -236,12 +270,9 @@ public class StatisticheProprietarioFrame extends JFrame {
 		etichetta_Positivi.setBounds(761, 423, 250, 27);
 		pannello_Principale.add(etichetta_Positivi);
 		
-		JLabel etichetta_IMieiRistoranti = new JLabel("");
-		etichetta_IMieiRistoranti.setIcon(new ImageIcon(StatisticheProprietarioFrame.class.getResource("/resources/statisticheRistoranteTitle.png")));
-		etichetta_IMieiRistoranti.setHorizontalAlignment(SwingConstants.CENTER);
-		etichetta_IMieiRistoranti.setFont(new Font("Tahoma", Font.BOLD, 20));
-		etichetta_IMieiRistoranti.setBounds(387, 24, 490, 52);
-		pannello_Principale.add(etichetta_IMieiRistoranti);
+		immagineStatistichePNG = new JLabel("");
+		immagineStatistichePNG.setBounds(346, 144, 680, 365);
+		pannello_Principale.add(immagineStatistichePNG);
 		
 		
 		
@@ -290,11 +321,11 @@ public class StatisticheProprietarioFrame extends JFrame {
 		this.bottone_Conferma = bottone_Conferma;
 	}
 
-	public Image getImmagineStatistiche() {
+	public File getImmagineStatistiche() {
 		return immagineStatistiche;
 	}
 
-	public void setImmagineStatistiche(Image immagineStatistiche) {
+	public void setImmagineStatistiche(File immagineStatistiche) {
 		this.immagineStatistiche = immagineStatistiche;
 	}
 

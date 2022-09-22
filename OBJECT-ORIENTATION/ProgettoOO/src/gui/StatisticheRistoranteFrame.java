@@ -57,6 +57,7 @@ public class StatisticheRistoranteFrame extends JFrame {
 	private JLabel etichetta_Positivi;
 	private JComboBox comboBox_TipoStatistica;
 	private JLabel etichetta_IMieiRistoranti;
+	private JLabel immagineStatistichePNG;
 	
 	
 	

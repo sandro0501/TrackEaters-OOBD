@@ -12,6 +12,11 @@ import dto.Tavolata;
 import dto.Tavolo;
 
 import dao.*;
+import de.progra.charting.ChartEncoder;
+import de.progra.charting.DefaultChart;
+import de.progra.charting.model.ChartDataModel;
+import de.progra.charting.model.ObjectChartDataModel;
+import de.progra.charting.render.PieChartRenderer;
 import oracledaoimplementation.*;
 import gui.*;
 
@@ -1357,25 +1362,55 @@ public class Controller {
 		}
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//metodi per le statistiche
+	public void statistichePropretario(String dataInizio, String dataFine) {
+		try {
+			statisticheProprietarioPage.getEtichetta_TotaleAvventori().setText("Totale Avventori: " + proprietarioDAO.numeroTotaleAvventori(dataInizio, dataFine));
+			statisticheProprietarioPage.getEtichetta_Interni().setText("Interni: " + proprietarioDAO.numeroAvventoriInterni(dataInizio, dataFine));
+			statisticheProprietarioPage.getEtichetta_Esterni().setText("Esterni: " + proprietarioDAO.numeroAvventoriEsterni(dataInizio, dataFine));
+			statisticheProprietarioPage.getEtichetta_Positivi().setText("Positivi: " + proprietarioDAO.numeroPositivi(dataInizio, dataFine));	
+			} catch (Exception e) {
+				mostraErrore(e);
+			}
+	}
+		
+	public void statisticheRistorantiProprietario(String dataInizio, String dataFine, String ristorante) {
+		String[] splitted = ristorante.split(" - ");
+		int codiceRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(splitted[0], splitted[1]);  
+		try {
+			statisticheProprietarioPage.getEtichetta_TotaleAvventori().setText("Totale Avventori: " + ristoranteDAO.numeroTotaleAvventoriRistorante(dataInizio, dataFine, codiceRistorante));
+			statisticheProprietarioPage.getEtichetta_Interni().setText("Interni: "+ ristoranteDAO.numeroAvventoriInterniRistorante(dataInizio, dataFine, codiceRistorante));
+			statisticheProprietarioPage.getEtichetta_Esterni().setText("Esterni: "+ ristoranteDAO.numeroAvventoriEsterniRistorante(dataInizio, dataFine, codiceRistorante));
+			statisticheProprietarioPage.getEtichetta_Positivi().setText("Positivi: "+ ristoranteDAO.numeroPositiviRistorante(dataInizio, dataFine, codiceRistorante));	
+		} catch (Exception e) {
+			mostraErrore(e);
+		}
+	}
+		
+	public void statisticheRistorante(String dataInizio, String dataFine) {
+		int codiceRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
+		try {
+			statisticheRistorantePage.getEtichetta_TotaleAvventori().setText("Totale Avventori: " + ristoranteDAO.numeroTotaleAvventoriRistorante(dataInizio, dataFine, codiceRistorante));
+			statisticheRistorantePage.getEtichetta_Interni().setText("Interni: "+ ristoranteDAO.numeroAvventoriInterniRistorante(dataInizio, dataFine, codiceRistorante));
+			statisticheRistorantePage.getEtichetta_Esterni().setText("Esterni: "+ ristoranteDAO.numeroAvventoriEsterniRistorante(dataInizio, dataFine, codiceRistorante));
+			statisticheRistorantePage.getEtichetta_Positivi().setText("Positivi: "+ ristoranteDAO.numeroPositiviRistorante(dataInizio, dataFine, codiceRistorante));	
+			} catch (Exception e) {
+				mostraErrore(e);
+			}
+	}
+		
+	public void statisticaRistoranteManager(String dataInizio, String dataFine) {
+		try {	
+			int codiceRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(managerRistorante.getRistoranteGestito().getDenominazione(), managerRistorante.getRistoranteGestito().getIndirizzo());
+			statisticheRistorantePage.getEtichetta_TotaleAvventori().setText("Totale Avventori: " + ristoranteDAO.numeroTotaleAvventoriRistorante(dataInizio, dataFine, codiceRistorante));
+			statisticheRistorantePage.getEtichetta_Interni().setText("Interni: "+ ristoranteDAO.numeroAvventoriInterniRistorante(dataInizio, dataFine, codiceRistorante));
+			statisticheRistorantePage.getEtichetta_Esterni().setText("Esterni: "+ ristoranteDAO.numeroAvventoriEsterniRistorante(dataInizio, dataFine, codiceRistorante));
+			statisticheRistorantePage.getEtichetta_Positivi().setText("Positivi: "+ ristoranteDAO.numeroPositiviRistorante(dataInizio, dataFine, codiceRistorante));	
+			} catch (Exception e) {
+				mostraErrore(e);
+			}	
+	}
+		
 	
 	/*------------------------------------------------------------------------------------------------------------------------*/
 	
@@ -1726,78 +1761,6 @@ public class Controller {
 	}
 	
 	/*------------------------------------------------------------------------------------------------------------------------*/
-	
-	
-	
-	
-	/*------------------------------------------------------------------------------------------------------------------------*/	
-
-	//metodi per le statistiche
-	
-	public void statistichePropretario(String dataInizio, String dataFine) {
-		
-		
-		
-		try {
-			statisticheProprietarioPage.getEtichetta_TotaleAvventori().setText("Totale Avventori: " + proprietarioDAO.numeroTotaleAvventori(dataInizio, dataFine));
-			statisticheProprietarioPage.getEtichetta_Interni().setText("Interni: " + proprietarioDAO.numeroAvventoriInterni(dataInizio, dataFine));
-			statisticheProprietarioPage.getEtichetta_Esterni().setText("Esterni: " + proprietarioDAO.numeroAvventoriEsterni(dataInizio, dataFine));
-			statisticheProprietarioPage.getEtichetta_Positivi().setText("Positivi: " + proprietarioDAO.numeroPositivi(dataInizio, dataFine));
-			
-		} catch (Exception e) {
-			mostraErrore(e);
-		}
-	}
-	
-	public void statisticheRistorantiProprietario(String dataInizio, String dataFine, String ristorante) {
-		
-		String[] splitted = ristorante.split(" - ");
-		int codiceRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(splitted[0], splitted[1]);  
-		
-		try {
-			statisticheProprietarioPage.getEtichetta_TotaleAvventori().setText("Totale Avventori: " + ristoranteDAO.numeroTotaleAvventoriRistorante(dataInizio, dataFine, codiceRistorante));
-			statisticheProprietarioPage.getEtichetta_Interni().setText("Interni: "+ ristoranteDAO.numeroAvventoriInterniRistorante(dataInizio, dataFine, codiceRistorante));
-			statisticheProprietarioPage.getEtichetta_Esterni().setText("Esterni: "+ ristoranteDAO.numeroAvventoriEsterniRistorante(dataInizio, dataFine, codiceRistorante));
-			statisticheProprietarioPage.getEtichetta_Positivi().setText("Positivi: "+ ristoranteDAO.numeroPositiviRistorante(dataInizio, dataFine, codiceRistorante));
-			
-		} catch (Exception e) {
-			mostraErrore(e);
-		}
-		
-	}
-	
-	
-	public void statisticheRistorante(String dataInizio, String dataFine) {
-		
-		int codiceRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
-
-		
-		try {
-			statisticheRistorantePage.getEtichetta_TotaleAvventori().setText("Totale Avventori: " + ristoranteDAO.numeroTotaleAvventoriRistorante(dataInizio, dataFine, codiceRistorante));
-			statisticheRistorantePage.getEtichetta_Interni().setText("Interni: "+ ristoranteDAO.numeroAvventoriInterniRistorante(dataInizio, dataFine, codiceRistorante));
-			statisticheRistorantePage.getEtichetta_Esterni().setText("Esterni: "+ ristoranteDAO.numeroAvventoriEsterniRistorante(dataInizio, dataFine, codiceRistorante));
-			statisticheRistorantePage.getEtichetta_Positivi().setText("Positivi: "+ ristoranteDAO.numeroPositiviRistorante(dataInizio, dataFine, codiceRistorante));
-			
-		} catch (Exception e) {
-			mostraErrore(e);
-		}
-		
-	}
-	
-	public void statisticaRistoranteManager(String dataInizio, String dataFine) {
-		try {
-			
-			int codiceRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(managerRistorante.getRistoranteGestito().getDenominazione(), managerRistorante.getRistoranteGestito().getIndirizzo());
-			
-			statisticheRistorantePage.getEtichetta_TotaleAvventori().setText("Totale Avventori: " + ristoranteDAO.numeroTotaleAvventoriRistorante(dataInizio, dataFine, codiceRistorante));
-			statisticheRistorantePage.getEtichetta_Interni().setText("Interni: "+ ristoranteDAO.numeroAvventoriInterniRistorante(dataInizio, dataFine, codiceRistorante));
-			statisticheRistorantePage.getEtichetta_Esterni().setText("Esterni: "+ ristoranteDAO.numeroAvventoriEsterniRistorante(dataInizio, dataFine, codiceRistorante));
-			statisticheRistorantePage.getEtichetta_Positivi().setText("Positivi: "+ ristoranteDAO.numeroPositiviRistorante(dataInizio, dataFine, codiceRistorante));
-			
-		} catch (Exception e) {
-			mostraErrore(e);
-		}	
-	}
 	
 	public void pngStatisticaPropretario(String dataInizio, String dataFine) {
 		

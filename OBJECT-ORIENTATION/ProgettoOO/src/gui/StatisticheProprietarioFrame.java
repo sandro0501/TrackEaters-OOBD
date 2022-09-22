@@ -275,6 +275,13 @@ public class StatisticheProprietarioFrame extends JFrame {
 		immagineStatistichePNG.setBounds(346, 144, 680, 365);
 		pannello_Principale.add(immagineStatistichePNG);
 		
+		JLabel etichetta_IMieiRistoranti = new JLabel("");
+		etichetta_IMieiRistoranti.setIcon(new ImageIcon(StatisticheProprietarioFrame.class.getResource("/resources/statisticheRistoranteTitle.png")));
+		etichetta_IMieiRistoranti.setHorizontalAlignment(SwingConstants.CENTER);
+		etichetta_IMieiRistoranti.setFont(new Font("Tahoma", Font.BOLD, 20));
+		etichetta_IMieiRistoranti.setBounds(387, 24, 490, 52);
+		pannello_Principale.add(etichetta_IMieiRistoranti);
+		
 		
 		
 		

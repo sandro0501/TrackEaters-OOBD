@@ -51,7 +51,6 @@ public class StatisticheProprietarioFrame extends JFrame {
 	private JComboBox comboBox_Ristorante;
 	private JComboBox comboBox_TipoStatistica;
 	private JButton bottone_Conferma;
-	private File immagineStatistiche;
 	private JLabel etichetta_TotaleAvventori;
 	private JLabel etichetta_Interni;
 	private JLabel etichetta_Esterni;
@@ -150,13 +149,7 @@ public class StatisticheProprietarioFrame extends JFrame {
 					if (comboBox_TipoStatistica.getSelectedItem().toString() == "Testuale") {
 						c.statistichePropretario(dataInizio, dataFine);
 					} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Positivi"){
-						c.pngStatisticaPropretario(dataInizio, dataFine);
-						immagineStatistiche =  new File(StatisticheProprietarioFrame.class.getResource("/resources/negativi_positivi.png").toString());
-						try {
-							immagineStatistichePNG.setIcon(new ImageIcon(ImageIO.read(immagineStatistiche)));
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						}
+						
 					} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Interni/Esterni") {
 						
 					}
@@ -318,14 +311,6 @@ public class StatisticheProprietarioFrame extends JFrame {
 
 	public void setBottone_Conferma(JButton bottone_Conferma) {
 		this.bottone_Conferma = bottone_Conferma;
-	}
-
-	public File getImmagineStatistiche() {
-		return immagineStatistiche;
-	}
-
-	public void setImmagineStatistiche(File immagineStatistiche) {
-		this.immagineStatistiche = immagineStatistiche;
 	}
 
 	public JLabel getEtichetta_TotaleAvventori() {

@@ -58,7 +58,10 @@ public class StatisticheRistoranteFrame extends JFrame {
 	private JComboBox comboBox_TipoStatistica;
 	private JLabel etichetta_IMieiRistoranti;
 	private JLabel immagineStatistichePNG;
+<<<<<<< Updated upstream
 	
+=======
+>>>>>>> Stashed changes
 	
 	
 	public StatisticheRistoranteFrame(Controller c, boolean proprietario) {

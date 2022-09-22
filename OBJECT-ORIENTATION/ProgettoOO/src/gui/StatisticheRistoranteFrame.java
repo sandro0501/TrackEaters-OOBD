@@ -60,7 +60,6 @@ public class StatisticheRistoranteFrame extends JFrame {
 	private JLabel immagineStatistichePNG;
 	
 	
-	
 	public StatisticheRistoranteFrame(Controller c, boolean proprietario) {
 		
 		theController = c;

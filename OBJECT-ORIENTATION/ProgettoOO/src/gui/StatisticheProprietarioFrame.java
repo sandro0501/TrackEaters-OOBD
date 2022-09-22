@@ -56,6 +56,7 @@ public class StatisticheProprietarioFrame extends JFrame {
 	private JLabel etichetta_Interni;
 	private JLabel etichetta_Esterni;
 	private JLabel etichetta_Positivi;
+	private JLabel immagineStatistichePNG;
 	
 	
 	

@@ -147,22 +147,30 @@ public class StatisticheProprietarioFrame extends JFrame {
 				DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 				String dataInizio = dateFormat.format(campo_DataIniziale.getDate());
 				String dataFine = dateFormat.format(campo_DataFinale.getDate());
-				if (comboBox_Ristorante.getSelectedItem().toString() == "Tutti") {
-					if (comboBox_TipoStatistica.getSelectedItem().toString() == "Testuale") {
-						c.statistichePropretario(dataInizio, dataFine);
-					} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Positivi"){
-						c.graficoPositiviRistoranti(dataInizio, dataFine);
-					} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Interni/Esterni") {
-						c.graficoInterniRistoranti(dataInizio, dataFine);
+				try {
+					if (campo_DataFinale.getDate().after(campo_DataIniziale.getDate())) {
+						throw new Exception("La data di fine periodo è precedente alla data di inizio. ");
+					}else {
+						if (comboBox_Ristorante.getSelectedItem().toString() == "Tutti") {
+							if (comboBox_TipoStatistica.getSelectedItem().toString() == "Testuale") {
+								c.statistichePropretario(dataInizio, dataFine);
+							} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Positivi"){
+								c.graficoPositiviRistoranti(dataInizio, dataFine);
+							} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Interni/Esterni") {
+								c.graficoInterniRistoranti(dataInizio, dataFine);
+							}
+						} else {
+							if(comboBox_TipoStatistica.getSelectedItem().toString() == "Testuale") {
+								c.statisticheRistorantiProprietario(dataInizio, dataFine, comboBox_Ristorante.getSelectedItem().toString());
+							} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Positivi"){
+								c.graficoPositiviRistorantePropretario(dataInizio, dataFine, comboBox_Ristorante.getSelectedItem().toString());
+							} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Interni/Esterni") {
+								c.graficoInterniRistoranteProprietario(dataInizio, dataFine, comboBox_Ristorante.getSelectedItem().toString());
+							}
+						}
 					}
-				} else {
-					if(comboBox_TipoStatistica.getSelectedItem().toString() == "Testuale") {
-						c.statisticheRistorantiProprietario(dataInizio, dataFine, comboBox_Ristorante.getSelectedItem().toString());
-					} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Positivi"){
-						c.graficoPositiviRistorantePropretario(dataInizio, dataFine, comboBox_Ristorante.getSelectedItem().toString());
-					} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Interni/Esterni") {
-						c.graficoInterniRistoranteProprietario(dataInizio, dataFine, comboBox_Ristorante.getSelectedItem().toString());
-					}
+				} catch (Exception e2) {
+					c.mostraErrore(e2);
 				}
 			}
 		});

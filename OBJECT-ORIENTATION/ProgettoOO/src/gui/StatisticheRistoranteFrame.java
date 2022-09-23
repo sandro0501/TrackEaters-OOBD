@@ -142,31 +142,39 @@ public class StatisticheRistoranteFrame extends JFrame {
 				DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 				String dataInizio = dateFormat.format(campo_DataIniziale.getDate());
 				String dataFine = dateFormat.format(campo_DataFinale.getDate());
-				if(comboBox_TipoStatistica.getSelectedItem().toString() == "Testuale") {
-					
-					if (proprietario) {
-						c.statisticheRistorante(dataInizio, dataFine);
-					} else {
-						c.statisticheRistoranteManager(dataInizio, dataFine);
+				try {
+					if (campo_DataFinale.getDate().after(campo_DataIniziale.getDate())) {
+						throw new Exception("La data di fine periodo è precedente alla data di inizio. ");
+					}else {
+						if(comboBox_TipoStatistica.getSelectedItem().toString() == "Testuale") {
+							
+							if (proprietario) {
+								c.statisticheRistorante(dataInizio, dataFine);
+							} else {
+								c.statisticheRistoranteManager(dataInizio, dataFine);
+							}
+							
+							
+						} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Positivi" && proprietario){
+							
+							c.graficoPositiviRistoranteProprietario(dataInizio, dataFine);
+							
+						} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Positivi" && !proprietario){
+								
+							c.graficoPositiviRistoranteManager(dataInizio, dataFine);
+							
+						} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Interni/Esterni" && proprietario) {
+							
+							c.graficoInterniRistoranteProprietario(dataInizio, dataFine);
+							
+						} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Interni/Esterni" && !proprietario) {
+							
+							c.graficoInterniRistoranteManager(dataInizio, dataFine);
+							
+						}
 					}
-					
-					
-				} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Positivi" && proprietario){
-					
-					c.graficoPositiviRistoranteProprietario(dataInizio, dataFine);
-					
-				} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Positivi" && !proprietario){
-						
-					c.graficoPositiviRistoranteManager(dataInizio, dataFine);
-					
-				} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Interni/Esterni" && proprietario) {
-					
-					c.graficoInterniRistoranteProprietario(dataInizio, dataFine);
-					
-				} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Interni/Esterni" && !proprietario) {
-					
-					c.graficoInterniRistoranteManager(dataInizio, dataFine);
-					
+				} catch (Exception e2) {
+					c.mostraErrore(e2);
 				}
 			}
 		});

@@ -17,6 +17,7 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -55,7 +56,7 @@ public class StatisticheProprietarioFrame extends JFrame {
 	private JLabel etichetta_Interni;
 	private JLabel etichetta_Esterni;
 	private JLabel etichetta_Positivi;
-	private JLabel immagineStatistichePNG;	
+	
 	
 	public StatisticheProprietarioFrame(Controller c) {
 		
@@ -106,7 +107,7 @@ public class StatisticheProprietarioFrame extends JFrame {
 					etichetta_Interni.setVisible(true);
 					etichetta_Positivi.setVisible(true);
 					etichetta_TotaleAvventori.setVisible(true);
-					immagineStatistichePNG.setVisible(false);
+					
 					
 				} else {
 					
@@ -114,7 +115,7 @@ public class StatisticheProprietarioFrame extends JFrame {
 					etichetta_Interni.setVisible(false);
 					etichetta_Positivi.setVisible(false);
 					etichetta_TotaleAvventori.setVisible(false);
-					immagineStatistichePNG.setVisible(true);
+					
 					
 				}
 				
@@ -139,6 +140,7 @@ public class StatisticheProprietarioFrame extends JFrame {
 		campo_DataIniziale.setBounds(57, 323, 215, 27);
 		pannello_Principale.add(campo_DataIniziale);
 		
+		
 		bottone_Conferma = new JButton("");
 		bottone_Conferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -149,17 +151,17 @@ public class StatisticheProprietarioFrame extends JFrame {
 					if (comboBox_TipoStatistica.getSelectedItem().toString() == "Testuale") {
 						c.statistichePropretario(dataInizio, dataFine);
 					} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Positivi"){
-						
+						c.graficoPositiviRistoranti(dataInizio, dataFine);
 					} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Interni/Esterni") {
-						
+						c.graficoInterniRistoranti(dataInizio, dataFine);
 					}
 				} else {
 					if(comboBox_TipoStatistica.getSelectedItem().toString() == "Testuale") {
 						c.statisticheRistorantiProprietario(dataInizio, dataFine, comboBox_Ristorante.getSelectedItem().toString());
 					} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Positivi"){
-						
+						c.graficoPositiviRistorantePropretario(dataInizio, dataFine, comboBox_Ristorante.getSelectedItem().toString());
 					} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Interni/Esterni") {
-						
+						c.graficoInterniRistoranteProprietario(dataInizio, dataFine, comboBox_Ristorante.getSelectedItem().toString());
 					}
 				}
 			}
@@ -262,9 +264,15 @@ public class StatisticheProprietarioFrame extends JFrame {
 		etichetta_Positivi.setBounds(761, 423, 250, 27);
 		pannello_Principale.add(etichetta_Positivi);
 		
-		immagineStatistichePNG = new JLabel("");
-		immagineStatistichePNG.setBounds(346, 144, 680, 365);
-		pannello_Principale.add(immagineStatistichePNG);
+		String currentDate = LocalDateTime.now().toString();
+		java.util.Date data = null;
+		try {
+			data = new SimpleDateFormat("yyyy-MM-dd").parse(currentDate);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		campo_DataIniziale.setDate(data);
+		campo_DataFinale.setDate(data);
 		
 		JLabel etichetta_IMieiRistoranti = new JLabel("");
 		etichetta_IMieiRistoranti.setIcon(new ImageIcon(StatisticheProprietarioFrame.class.getResource("/resources/statisticheRistoranteTitle.png")));

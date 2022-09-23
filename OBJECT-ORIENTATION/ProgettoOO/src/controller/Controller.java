@@ -17,6 +17,16 @@ import gui.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.PieSectionLabelGenerator;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.plot.PiePlot3D;
+import org.jfree.data.general.DefaultPieDataset;
+
 import java.awt.*;
 import java.util.*;
 import java.text.SimpleDateFormat;
@@ -141,7 +151,7 @@ public class Controller {
 		{
 			JTable tabellaRistoranti = ristorantiProprietarioPage.getTabellaRistoranti();
 			String denominazione = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString();
-			int codRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
+			int codRistorante = codiceRistorante();
 			manager = managerRistoranteDAO.getInformazioniManagerByCodRistorante(codRistorante);
 			
 			gestioneRistorantePage.setLblDenominazioneRistorante("Ristorante "+"\""+denominazione+"\"");
@@ -244,7 +254,7 @@ public class Controller {
 	}
 	
 	//metodo che recupera il codice del ristorante selezionato dalla tabella per il proprietario
-	public int getCodRistoranteForProprietarioByTabellaRistoranti() {
+	public int codiceRistorante() {
 		int codRistorante = 0;
 		JTable tabellaRistoranti = ristorantiProprietarioPage.getTabellaRistoranti();
 		String currentDenominazione = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString();
@@ -304,7 +314,7 @@ public class Controller {
 		int codRistorante;
 		boolean esitoUpdate;
 		try {
-			codRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
+			codRistorante = codiceRistorante();
 			esitoUpdate = ristoranteDAO.updateRistorante(codRistorante, denominazione, indirizzo, telefono, citta, prov, cap, email, sitoweb);
 			if(esitoUpdate) {
 				mostraEsitoCorrettoUpdate();
@@ -355,7 +365,7 @@ public class Controller {
 				JTable tabellaRistoranti = ristorantiProprietarioPage.getTabellaRistoranti();
 				String currentDenominazione = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString();
 				String currentIndirizzo = tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 1).toString();
-				listaCamerieri = cameriereDAO.getCamerieriRistorante(getCodRistoranteForProprietarioByTabellaRistoranti());
+				listaCamerieri = cameriereDAO.getCamerieriRistorante(codiceRistorante());
 				ristorante = ristoranteDAO.getRistoranteByDenominazioneAndIndirizzo(currentDenominazione, currentIndirizzo);
 			} else {
 				String currentDenominazione = managerRistorante.getRistoranteGestito().getDenominazione();
@@ -659,7 +669,7 @@ public class Controller {
 	//metodo inserisci sala 
 	public void insertSala(String denominazione, int capienza, int dimensioneMq, String tipologia) {
 		boolean esitoInsert;
-		int codRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
+		int codRistorante = codiceRistorante();
 		try {
 			esitoInsert = salaDAO.insertSala(denominazione, capienza, dimensioneMq, tipologia, codRistorante);
 			if(esitoInsert) {
@@ -858,7 +868,7 @@ public class Controller {
 		aggiungiTavolataPage.getCampo_DataArrivo().setDate(data);
 		
 		if(proprietario) {
-			int codRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
+			int codRistorante = codiceRistorante();
 			ArrayList<Cameriere> camerieri = cameriereDAO.getCamerieriRistorante(codRistorante);
 			for(Cameriere c : camerieri) {
 				aggiungiTavolataPage.getCampo_Cameriere().addItem(c.getNome()+" "+c.getCognome());
@@ -886,7 +896,7 @@ public class Controller {
 		
 		try {
 			if(isProprietario) {
-				codRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
+				codRistorante = codiceRistorante();
 			} else {
 				codRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(
 						managerRistorante.getRistoranteGestito().getDenominazione(),
@@ -920,7 +930,7 @@ public class Controller {
 			modificaTavolataPage.getCampo_DataArrivo().setDate(dataArrivo);
 			
 			if(proprietario) {
-				int codRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
+				int codRistorante = codiceRistorante();
 				ArrayList<Cameriere> camerieri = cameriereDAO.getCamerieriRistorante(codRistorante);
 				for(Cameriere c : camerieri) {
 					modificaTavolataPage.getCampo_Cameriere().addItem(c.getNome()+" "+c.getCognome());
@@ -951,7 +961,7 @@ public class Controller {
 		
 		try {
 			if(isProprietario) {
-				codRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
+				codRistorante = codiceRistorante();
 			} else {
 				codRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(
 						managerRistorante.getRistoranteGestito().getDenominazione(),
@@ -1042,7 +1052,7 @@ public class Controller {
 		
 		try {
 			if(isProprietario) {
-				codRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
+				codRistorante = codiceRistorante();
 			} else {
 				codRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(managerRistorante.getRistoranteGestito().getDenominazione(),
 						managerRistorante.getRistoranteGestito().getIndirizzo());
@@ -1182,7 +1192,7 @@ public class Controller {
 			ArrayList<Caso> casi;
 			
 			if (isProprietario) {
-				codRistorante = this.getCodRistoranteForProprietarioByTabellaRistoranti();
+				codRistorante = this.codiceRistorante();
 				casi = casoDAO.getCasiCovidByCodRistorante(codRistorante);
 			} else
 			{
@@ -1233,7 +1243,7 @@ public class Controller {
 		
 		try {
 			if(proprietario) {
-				codRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
+				codRistorante = codiceRistorante();
 				avventori = avventoreDAO.getAvventoriRistorante(codRistorante);
 				for(Avventore a : avventori) {
 						aggiungiCasoCovidPage.getCampo_AvventorePositivo().addItem(a.getNumeroCid()+"-"+a.getNome()+" "+a.getCognome());
@@ -1269,7 +1279,7 @@ public class Controller {
 			modificaCasoCovidPage.getCampo_DataRegistrazioneCaso().setDate(dataRegistrazione);
 			
 			if(proprietario) {
-				codRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
+				codRistorante = codiceRistorante();
 				avventori = avventoreDAO.getAvventoriRistorante(codRistorante);
 				for(Avventore a : avventori) {
 						modificaCasoCovidPage.getCampo_AvventorePositivo().addItem(a.getNumeroCid()+"-"+a.getNome()+" "+a.getCognome());
@@ -1379,7 +1389,7 @@ public class Controller {
 	}
 		
 	public void statisticheRistorante(String dataInizio, String dataFine) {
-		int codiceRistorante = getCodRistoranteForProprietarioByTabellaRistoranti();
+		int codiceRistorante = codiceRistorante();
 		try {
 			statisticheRistorantePage.getEtichetta_TotaleAvventori().setText("Totale Avventori: " + ristoranteDAO.numeroTotaleAvventoriRistorante(dataInizio, dataFine, codiceRistorante));
 			statisticheRistorantePage.getEtichetta_Interni().setText("Interni: "+ ristoranteDAO.numeroAvventoriInterniRistorante(dataInizio, dataFine, codiceRistorante));
@@ -1390,7 +1400,7 @@ public class Controller {
 			}
 	}
 		
-	public void statisticaRistoranteManager(String dataInizio, String dataFine) {
+	public void statisticheRistoranteManager(String dataInizio, String dataFine) {
 		try {	
 			int codiceRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(managerRistorante.getRistoranteGestito().getDenominazione(), managerRistorante.getRistoranteGestito().getIndirizzo());
 			statisticheRistorantePage.getEtichetta_TotaleAvventori().setText("Totale Avventori: " + ristoranteDAO.numeroTotaleAvventoriRistorante(dataInizio, dataFine, codiceRistorante));
@@ -1752,11 +1762,109 @@ public class Controller {
 	}
 	
 	/*------------------------------------------------------------------------------------------------------------------------*/
+	public void creaGrafico(int valore1, int valore2, int totale, String testo1, String testo2) {
+		
+		DefaultPieDataset dataset = new DefaultPieDataset();
+		
+		dataset.setValue(testo1, valore1);
+		dataset.setValue(testo2, valore2);
+		
+		JFreeChart grafico = ChartFactory.createPieChart("Totale: " + totale, dataset, true, true, false);
+		
+		PieSectionLabelGenerator labelGenerator = new StandardPieSectionLabelGenerator("{0} : ({2})", new DecimalFormat("0"), new DecimalFormat("0%"));
+		((PiePlot) grafico.getPlot()).setLabelGenerator(labelGenerator);
+		
+		
+		ChartPanel pannello = new ChartPanel(grafico);
+		
+		JFrame frameGrafico = new JFrame("Grafico");
+		frameGrafico.setContentPane(pannello);
+		
+		frameGrafico.setIconImage(Toolkit.getDefaultToolkit().getImage(GestionePersonaleFrame.class.getResource("/resources/icon.png")));
+		frameGrafico.setSize(500,350);
+		frameGrafico.setLocationRelativeTo(null);
+		frameGrafico.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		frameGrafico.setResizable(false);
+		frameGrafico.setAlwaysOnTop(true);
+		frameGrafico.setAutoRequestFocus(true);
+		frameGrafico.setVisible(true);
+		
+	}
 	
+	public void graficoPositiviRistoranteProprietario(String dataInizio, String dataFine) {
+		
+		int positivi = ristoranteDAO.numeroPositiviRistorante(dataInizio, dataFine, codiceRistorante()); 
+		int totale = ristoranteDAO.numeroTotaleAvventoriRistorante(dataInizio, dataFine, codiceRistorante());
+		
+		creaGrafico(totale-positivi, positivi , totale, "Non positivi", "Positivi");
+		
+	}
 	
-
+	public void graficoInterniRistoranteProprietario(String dataInizio, String dataFine) {
+		
+		int interni = ristoranteDAO.numeroAvventoriInterniRistorante(dataInizio, dataFine, codiceRistorante());
+		int esterni = ristoranteDAO.numeroAvventoriEsterniRistorante(dataInizio, dataFine, codiceRistorante());
+		int totale = ristoranteDAO.numeroTotaleAvventoriRistorante(dataInizio, dataFine, codiceRistorante());
+		
+		creaGrafico(interni, esterni, totale, "Interni", "Esterni");
+		
+	}
 	
+	public void graficoPositiviRistoranteManager(String dataInizio, String dataFine) {
+		
+		int codiceRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(managerRistorante.getRistoranteGestito().getDenominazione(), managerRistorante.getRistoranteGestito().getIndirizzo());
+		int positivi = ristoranteDAO.numeroPositiviRistorante(dataInizio, dataFine, codiceRistorante); 
+		int totale = ristoranteDAO.numeroTotaleAvventoriRistorante(dataInizio, dataFine, codiceRistorante);
+		
+		creaGrafico(totale-positivi, positivi , totale, "Non positivi", "Positivi");
+	}
 	
+	public void graficoInterniRistoranteManager(String dataInizio, String dataFine) {
+		
+		int codiceRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(managerRistorante.getRistoranteGestito().getDenominazione(), managerRistorante.getRistoranteGestito().getIndirizzo());
+		int interni = ristoranteDAO.numeroAvventoriInterniRistorante(dataInizio, dataFine, codiceRistorante);
+		int esterni = ristoranteDAO.numeroAvventoriEsterniRistorante(dataInizio, dataFine, codiceRistorante);
+		int totale = ristoranteDAO.numeroTotaleAvventoriRistorante(dataInizio, dataFine, codiceRistorante);
+		
+		creaGrafico(interni, esterni, totale, "Interni", "Esterni");
+		
+	}
 	
+	public void graficoPositiviRistorantePropretario(String dataInizio, String dataFine, String ristorante) {
+		String[] splitted = ristorante.split(" - ");
+		int codiceRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(splitted[0], splitted[1]);
+		int positivi = ristoranteDAO.numeroPositiviRistorante(dataInizio, dataFine, codiceRistorante); 
+		int totale = ristoranteDAO.numeroTotaleAvventoriRistorante(dataInizio, dataFine, codiceRistorante);
+		
+		creaGrafico(totale-positivi, positivi , totale, "Non positivi", "Positivi");
+	
+	}
+	
+	public void graficoInterniRistoranteProprietario(String dataInizio, String dataFine, String ristorante) {
+		String[] splitted = ristorante.split(" - ");
+		int codiceRistorante = ristoranteDAO.getCodiceRistoranteByDenominazioneAndIndirizzo(splitted[0], splitted[1]);
+		int interni = ristoranteDAO.numeroAvventoriInterniRistorante(dataInizio, dataFine, codiceRistorante);
+		int esterni = ristoranteDAO.numeroAvventoriEsterniRistorante(dataInizio, dataFine, codiceRistorante);
+		int totale = ristoranteDAO.numeroTotaleAvventoriRistorante(dataInizio, dataFine, codiceRistorante);
+		
+		creaGrafico(interni, esterni, totale, "Interni", "Esterni");
+	}
+	
+	public void graficoPositiviRistoranti(String dataInizio, String dataFine){
+		
+		int totale= proprietarioDAO.numeroTotaleAvventori(dataInizio, dataFine);
+		int positivi = proprietarioDAO.numeroPositivi(dataInizio, dataFine);	
+		
+		creaGrafico(totale-positivi, positivi , totale, "Non positivi", "Positivi");
+	}
+	
+	public void graficoInterniRistoranti(String dataInizio, String dataFine){
+		
+		int totale= proprietarioDAO.numeroTotaleAvventori(dataInizio, dataFine);
+		int interni = proprietarioDAO.numeroAvventoriInterni(dataInizio, dataFine);
+		int esterni = proprietarioDAO.numeroAvventoriEsterni(dataInizio, dataFine);
+		
+		creaGrafico(interni, esterni, totale, "Interni", "Esterni");
+	}
 	
 }

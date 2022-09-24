@@ -143,7 +143,7 @@ public class StatisticheRistoranteFrame extends JFrame {
 				String dataInizio = dateFormat.format(campo_DataIniziale.getDate());
 				String dataFine = dateFormat.format(campo_DataFinale.getDate());
 				try {
-					if (campo_DataFinale.getDate().after(campo_DataIniziale.getDate())) {
+					if (campo_DataFinale.getDate().before(campo_DataIniziale.getDate())) {
 						throw new Exception("La data di fine periodo è precedente alla data di inizio. ");
 					}else {
 						if(comboBox_TipoStatistica.getSelectedItem().toString() == "Testuale") {

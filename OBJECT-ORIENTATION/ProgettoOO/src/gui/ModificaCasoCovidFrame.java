@@ -150,7 +150,7 @@ public class ModificaCasoCovidFrame extends JFrame {
 							String[] numCid = avventoreSelezionato.split("-");
 	
 							
-							c.updateCasoCovid(dataFormattata,
+							c.modificaCasoCovid(dataFormattata,
 											numCid[0].toString(),
 											campo_StatoCaso.getSelectedItem().toString(),
 											campo_Note.getText().toString());

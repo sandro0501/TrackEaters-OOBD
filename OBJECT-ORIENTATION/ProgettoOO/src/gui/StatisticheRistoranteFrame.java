@@ -149,27 +149,27 @@ public class StatisticheRistoranteFrame extends JFrame {
 						if(comboBox_TipoStatistica.getSelectedItem().toString() == "Testuale") {
 							
 							if (proprietario) {
-								c.statisticheRistorante(dataInizio, dataFine);
+								c.mostraStatisticheTestualiPerSingoloRistoranteProprietario(dataInizio, dataFine);
 							} else {
-								c.statisticheRistoranteManager(dataInizio, dataFine);
+								c.mostraStatisticheTestualiPerSingoloRistoranteManager(dataInizio, dataFine);
 							}
 							
 							
 						} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Positivi" && proprietario){
 							
-							c.graficoPositiviRistoranteProprietario(dataInizio, dataFine);
+							c.creaGraficoAvventoriPositiviRistoranteProprietario(dataInizio, dataFine);
 							
 						} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Positivi" && !proprietario){
 								
-							c.graficoPositiviRistoranteManager(dataInizio, dataFine);
+							c.creaGraficoAvventoriPositiviRistorantePerManager(dataInizio, dataFine);
 							
 						} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Interni/Esterni" && proprietario) {
 							
-							c.graficoInterniRistoranteProprietario(dataInizio, dataFine);
+							c.creaGraficoAvventoriInterniEsterniRistoranteProprietario(dataInizio, dataFine);
 							
 						} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Interni/Esterni" && !proprietario) {
 							
-							c.graficoInterniRistoranteManager(dataInizio, dataFine);
+							c.creaGraficoAvventoriInterniEsterniRistorantePerManager(dataInizio, dataFine);
 							
 						}
 					}

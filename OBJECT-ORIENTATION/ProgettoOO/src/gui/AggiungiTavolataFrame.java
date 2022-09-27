@@ -151,7 +151,7 @@ public class AggiungiTavolataFrame extends JFrame {
 					
 						DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 						String dataformattata = dateFormat.format(campo_DataArrivo.getDate());
-						c.insertTavolata(isProprietario,dataformattata, campo_Cameriere.getSelectedItem().toString());
+						c.aggiungiTavolata(isProprietario,dataformattata, campo_Cameriere.getSelectedItem().toString());
 						setVisible(false);
 						c.mostraGestioneTavolateFrame();
 					}

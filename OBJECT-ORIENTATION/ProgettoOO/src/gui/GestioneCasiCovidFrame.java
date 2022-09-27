@@ -125,7 +125,7 @@ public class GestioneCasiCovidFrame extends JFrame {
 				if (tabellaCasiCovid.getSelectedRow()!=-1) {
 					setVisible(false);
 					c.startTracciamentoAvventoreFrame(proprietario);
-					c.setLabelsTracciamentoAvventore();
+					c.setLabelsTracciamentoAvventorePage();
 					
 				} else {
 					c.mostraErroreSelezioneDialog(pannello_Principale);
@@ -143,7 +143,7 @@ public class GestioneCasiCovidFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				c.startAggiungiCasoCovidFrame(proprietario);
-				c.riempiComboBoxAvventoriGestioneCasiCovid(proprietario);
+				c.riempiComboBoxAvventoriGestioneCasiCovidPage(proprietario);
 			}
 		});
 		bottone_Aggiungi.setIcon(new ImageIcon(GestioneCasiCovidFrame.class.getResource("/resources/btnAggiungi.png")));
@@ -178,7 +178,7 @@ public class GestioneCasiCovidFrame extends JFrame {
 				
 				if (tabellaCasiCovid.getSelectedRow()!=-1) {
 					if(JOptionPane.showConfirmDialog(pannello_Principale,lblElimina) == 0) {
-						c.deleteCaso();
+						c.eliminaCasoCovid();
 						c.mostraGestioneCasiCovidFrame(proprietario);
 					}
 				} else {

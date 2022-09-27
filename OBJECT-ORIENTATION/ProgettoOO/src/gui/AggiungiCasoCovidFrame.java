@@ -1,39 +1,25 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.*;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Locale;
-
 import controller.Controller;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JSpinner;
-import javax.swing.JSpinner.DefaultEditor;
-import javax.swing.SpinnerNumberModel;
 import com.toedter.calendar.JDateChooser;
-import javax.swing.SpinnerDateModel;
 import java.util.Date;
-import java.util.Calendar;
 import javax.swing.JTextPane;
-import javax.swing.DropMode;
 
 public class AggiungiCasoCovidFrame extends JFrame {
 
@@ -140,7 +126,7 @@ public class AggiungiCasoCovidFrame extends JFrame {
 					{
 						if(campo_AvventorePositivo.getSelectedItem().toString().equals("-"))
 						{
-							c.mostraErroreSelezioneAvventore(pannello_Principale);
+							theController.mostraErroreSelezioneAvventore(pannello_Principale);
 						}
 						else
 						{
@@ -150,12 +136,12 @@ public class AggiungiCasoCovidFrame extends JFrame {
 							String[] numCid = avventoreSelezionato.split("-");
 	
 							
-							c.insertCasoCovid(dataFormattata,
-											numCid[0].toString().toUpperCase(),
-											campo_StatoCaso.getSelectedItem().toString(),
-											campo_Note.getText().toString());
+							theController.aggiungiCasoCovid(dataFormattata,
+									numCid[0].toString().toUpperCase(),
+									campo_StatoCaso.getSelectedItem().toString(),
+									campo_Note.getText().toString());
 							setVisible(false);
-							c.mostraGestioneCasiCovidFrame(isProprietario);
+							theController.mostraGestioneCasiCovidFrame(isProprietario);
 						}
 					
 					}

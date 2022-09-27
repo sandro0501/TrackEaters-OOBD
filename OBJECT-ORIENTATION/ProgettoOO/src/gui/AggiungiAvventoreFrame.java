@@ -1,11 +1,8 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,8 +18,6 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
-
 import controller.Controller;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -368,7 +363,7 @@ public class AggiungiAvventoreFrame extends JFrame {
 						DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 						String dataNascita = dateFormat.format(campo_DataNascita.getDate());
 						
-						c.insertAvventore(	isProprietario,
+						theController.aggiungiAvventore(	isProprietario,
 											campo_NumCid.getText().toUpperCase(),
 											campo_Nome.getText(),
 											campo_Cognome.getText(),

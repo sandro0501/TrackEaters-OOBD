@@ -39,8 +39,9 @@ public class AvventoreOracleImplementation implements AvventoreDAO {
 			ResultSet rs = stmtGetAvventori.executeQuery();
 			
 			while(rs.next()) {
-				Avventore a = new Avventore(rs.getString(1),rs.getString(2),rs.getString(3),rs.getDate(4),rs.getString(5),rs.getString(6),rs.getString(7),
-						rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getDouble(12),rs.getString(13).charAt(0));
+				Avventore a = new Avventore(rs.getString(1),rs.getString(2),rs.getString(3),rs.getDate(4),rs.getString(5),rs.getString(6),
+						rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),
+						rs.getDouble(12),rs.getString(13).charAt(0));
 				
 				avventori.add(a);
 			}
@@ -65,8 +66,9 @@ public class AvventoreOracleImplementation implements AvventoreDAO {
 			ResultSet rs = stmtGetAvventoriRistorante.executeQuery();
 			
 			while(rs.next()) {
-				Avventore a = new Avventore(rs.getString(3),rs.getString(4),rs.getString(5),rs.getDate(6),rs.getString(7),rs.getString(8),rs.getString(9),
-						rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getDouble(14),rs.getString(15).charAt(0));
+				Avventore a = new Avventore(rs.getString(3),rs.getString(4),rs.getString(5),rs.getDate(6),rs.getString(7),rs.getString(8),
+						rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getDouble(14),
+						rs.getString(15).charAt(0));
 				
 				avventoriRistorante.add(a);
 			}
@@ -91,8 +93,9 @@ public class AvventoreOracleImplementation implements AvventoreDAO {
 			ResultSet rs = stmtGetAvventore.executeQuery();
 			
 			if(rs.next()) {
-				avventore = new Avventore(rs.getString(1),rs.getString(2),rs.getString(3),rs.getDate(4),rs.getString(5),rs.getString(6),rs.getString(7),
-						rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getDouble(12),rs.getString(13).charAt(0));
+				avventore = new Avventore(rs.getString(1),rs.getString(2),rs.getString(3),rs.getDate(4),rs.getString(5),rs.getString(6),
+						rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getDouble(12),
+						rs.getString(13).charAt(0));
 			}
 			rs.close();
 			stmtGetAvventore.close();	
@@ -163,7 +166,7 @@ public class AvventoreOracleImplementation implements AvventoreDAO {
 	}
 	
 	@Override
-	public boolean aggiungiAvventoreATavolata(String numCid, int codTavolata) {
+	public boolean insertAvventoreATavolata(String numCid, int codTavolata) {
 		try {
 			String queryAvventoreTavolata = "INSERT INTO PARTECIPAZIONETAVOLATA (Avventore, Tavolata) VALUES (?,?)";
 			PreparedStatement insertAvventoreTavolataStatement = connessione.prepareStatement(queryAvventoreTavolata);
@@ -183,7 +186,7 @@ public class AvventoreOracleImplementation implements AvventoreDAO {
 	}
 
 	@Override
-	public boolean aggiungiAvventoreARistorante(int codRistorante, String numCid) {
+	public boolean insertAvventoreARistorante(int codRistorante, String numCid) {
 		try {
 			String queryAvventoreRistorante = "INSERT INTO ACCOGLIENZA (Ristorante, Avventore) VALUES (?,?)";
 			PreparedStatement insertAvventoreRistoranteStatement = connessione.prepareStatement(queryAvventoreRistorante);
@@ -308,7 +311,7 @@ public class AvventoreOracleImplementation implements AvventoreDAO {
 			JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento avventore - Avventore sprovvisto di greenpass",JOptionPane.ERROR_MESSAGE);
 			
 		} else if (e.getMessage().toString().contains("TEMPERATURA_AVVENTORE")) {
-			JLabel lblErrore = new JLabel("<html>L' avventore non puo' partecipare alla tavolata.<br>La sua temperatura corporea è oltre il limite consentito!</html>");
+			JLabel lblErrore = new JLabel("<html>L' avventore non puo' partecipare alla tavolata.<br>La sua temperatura corporea ï¿½ oltre il limite consentito!</html>");
 			lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
 			JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento avventore - Temperatura avventore illegale",JOptionPane.ERROR_MESSAGE);
 			
@@ -342,7 +345,7 @@ public class AvventoreOracleImplementation implements AvventoreDAO {
 			JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento avventore - Avventore sprovvisto di greenpass",JOptionPane.ERROR_MESSAGE);
 			
 		} else if (e.getMessage().toString().contains("TEMPERATURA_AVVENTORE")) {
-			JLabel lblErrore = new JLabel("<html>L' avventore non puo' partecipare alla tavolata.<br>La sua temperatura corporea è oltre il limite consentito!</html>");
+			JLabel lblErrore = new JLabel("<html>L' avventore non puo' partecipare alla tavolata.<br>La sua temperatura corporea ï¿½ oltre il limite consentito!</html>");
 			lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
 			JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento avventore - Temperatura avventore illegale",JOptionPane.ERROR_MESSAGE);
 			

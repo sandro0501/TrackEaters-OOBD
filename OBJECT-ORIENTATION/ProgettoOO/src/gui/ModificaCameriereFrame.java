@@ -125,7 +125,7 @@ public class ModificaCameriereFrame extends JFrame {
 		campo_Telefono.setColumns(10);
 		
 		comboBox_Ristorante = new JComboBox();
-		comboBox_Ristorante.setModel(new DefaultComboBoxModel<String>(c.riempiComboRistoranti().toArray(new String[0])));
+		comboBox_Ristorante.setModel(new DefaultComboBoxModel<String>(c.riempiComboBoxRistoranti().toArray(new String[0])));
 		comboBox_Ristorante.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		comboBox_Ristorante.setBounds(10, 568, 316, 27);
 		pannello_Principale.add(comboBox_Ristorante);
@@ -299,12 +299,12 @@ public class ModificaCameriereFrame extends JFrame {
 				} else {
 					
 					if (JOptionPane.showConfirmDialog(pannello_Principale, lblAggiungi)==0) {
-						c.updateCameriere(campo_NumeroDocumento.getText(), campo_Nome.getText(), campo_Cognome.getText(), campo_DataNascita.getText(), comboBox_Sesso.getSelectedItem().toString(), campo_CittaNatale.getText(), comboBox_ProvinciaNatale.getSelectedItem().toString(), campo_CittaResidenza.getText(), comboBox_ProvinciaResidenza.getSelectedItem().toString(), campo_Telefono.getText(), campo_Email.getText(),comboBox_Ristorante.getSelectedItem().toString());
+						c.modificaCameriere(campo_NumeroDocumento.getText(), campo_Nome.getText(), campo_Cognome.getText(), campo_DataNascita.getText(), comboBox_Sesso.getSelectedItem().toString(), campo_CittaNatale.getText(), comboBox_ProvinciaNatale.getSelectedItem().toString(), campo_CittaResidenza.getText(), comboBox_ProvinciaResidenza.getSelectedItem().toString(), campo_Telefono.getText(), campo_Email.getText(),comboBox_Ristorante.getSelectedItem().toString());
 						flushTextfields();
 						setVisible(false);
 						c.mostraGestionePersonaleFrame();
-						c.riempiTabllaCamerieriGestione();
-						c.riempiTabllaManagerGestione();
+						c.riempiTabellaCamerieriPerGestionePersonale();
+						c.riempiTabellaManagerRistorantePerGestionePersonale();
 					}
 				}
 			}
@@ -318,8 +318,8 @@ public class ModificaCameriereFrame extends JFrame {
 					if(proprietario) {
 						setVisible(false);
 						c.mostraGestionePersonaleFrame();
-						c.riempiTabllaCamerieriGestione();
-						c.riempiTabllaManagerGestione();
+						c.riempiTabellaCamerieriPerGestionePersonale();
+						c.riempiTabellaManagerRistorantePerGestionePersonale();
 					}
 				}
 			}

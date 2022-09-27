@@ -94,7 +94,7 @@ public class AggiungiTavoloFrame extends JFrame {
 				if (JOptionPane.showConfirmDialog(pannello_Principale, lblAggiungi)==0) 
 				{
 					int numeroAvventori = (Integer)campo_NumeroAvventori.getValue();
-					c.insertTavolo(numeroAvventori);
+					c.aggiungiTavolo(numeroAvventori);
 					setVisible(false);
 					c.mostraGestioneTavoliFrame();
 				}

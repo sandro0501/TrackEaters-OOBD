@@ -184,7 +184,7 @@ public class GestioneTavoliFrame extends JFrame {
 				if (tabellaTavoliRistorante.getSelectedRow()!=-1) {
 					if(JOptionPane.showConfirmDialog(pannello_Principale,lblElimina) == 0) {
 						
-						c.deleteTavolo((int)tabellaTavoliRistorante.getModel().getValueAt(tabellaTavoliRistorante.getSelectedRow(), 1)); //codTavolo
+						c.eliminaTavolo((int)tabellaTavoliRistorante.getModel().getValueAt(tabellaTavoliRistorante.getSelectedRow(), 1)); //codTavolo
 					}
 				} else {
 					c.mostraErroreSelezioneDialog(pannello_Principale);

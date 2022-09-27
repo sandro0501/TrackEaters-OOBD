@@ -151,7 +151,7 @@ public class ModificaTavolataFrame extends JFrame {
 					
 						DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 						String dataformattata = dateFormat.format(campo_DataArrivo.getDate());
-						c.updateTavolata(isProprietario,dataformattata, campo_Cameriere.getSelectedItem().toString());
+						c.modificaTavolata(isProprietario,dataformattata, campo_Cameriere.getSelectedItem().toString());
 						setVisible(false);
 						c.mostraGestioneTavolateFrame();
 					}

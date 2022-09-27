@@ -270,7 +270,7 @@ public class RistoranteOracleImplementation implements RistoranteDAO {
 	}
 
 	@Override
-	public int numeroPositiviRistorante(String dataInizio, String dataFine, int codRistorante) {
+	public int getNumeroPositiviRistorante(String dataInizio, String dataFine, int codRistorante) {
 		
 		try {
 			String queryTotaleAvventori = "SELECT COUNT(C.AvventorePositivo) TOT_RISULTATI_POSITIVI FROM RISTORANTE R JOIN ACCOGLIENZA A ON R.CodRistorante = A.Ristorante JOIN CASO C ON C.AvventorePositivo = A.Avventore JOIN PARTECIPAZIONETAVOLATA PT ON PT.Avventore = C.AvventorePositivo JOIN TAVOLATA T ON PT.Tavolata = T.CodTavolata WHERE R.CodRistorante = ? AND T.DataArrivo BETWEEN TO_DATE(?,'dd/mm/yyyy') AND TO_DATE(?, 'dd/mm/yyyy')";
@@ -301,7 +301,7 @@ public class RistoranteOracleImplementation implements RistoranteDAO {
 	}
 
 	@Override
-	public int numeroTotaleAvventoriRistorante(String dataInizio, String dataFine, int codRistorante) {
+	public int getNumeroTotaleAvventoriRistorante(String dataInizio, String dataFine, int codRistorante) {
 		try {
 			
 			String queryTotaleAvventori = "SELECT COUNT(ACC.Avventore) TOT_GIORNALIERO_AVVENTORI FROM RISTORANTE R JOIN ACCOGLIENZA ACC ON R.CodRistorante = ACC.Ristorante JOIN AVVENTORE A ON A.NumCid = ACC.Avventore JOIN PARTECIPAZIONETAVOLATA PT ON PT.Avventore = A.NumCid JOIN TAVOLATA T ON T.CodTavolata = PT.Tavolata WHERE R.CodRistorante = ? AND T.DataArrivo BETWEEN TO_DATE(?,'dd/mm/yyyy') AND TO_DATE(?, 'dd/mm/yyyy')";
@@ -333,7 +333,7 @@ public class RistoranteOracleImplementation implements RistoranteDAO {
 	}
 
 	@Override
-	public int numeroAvventoriInterniRistorante(String dataInizio, String dataFine, int codRistorante) {
+	public int getNumeroAvventoriInterniRistorante(String dataInizio, String dataFine, int codRistorante) {
 
 		try {
 			
@@ -366,7 +366,7 @@ public class RistoranteOracleImplementation implements RistoranteDAO {
 	}
 
 	@Override
-	public int numeroAvventoriEsterniRistorante(String dataInizio, String dataFine, int codRistorante) {
+	public int getNumeroAvventoriEsterniRistorante(String dataInizio, String dataFine, int codRistorante) {
 		
 		int totale = 0;
 		

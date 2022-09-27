@@ -1,8 +1,6 @@
 package dao;
 
-import java.sql.Date;
 import java.util.ArrayList;
-
 import dto.Tavolata;
 
 public interface TavolataDAO {

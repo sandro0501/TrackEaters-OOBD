@@ -125,17 +125,17 @@ public class GestionePersonaleFrame extends JFrame {
 				
 				if(tabellaCamerieri.getSelectedRow()!=-1) {
 					if(JOptionPane.showConfirmDialog(pannello_Principale,lblElimina) == 0){
-						c.deleteCameriere(tabellaCamerieri.getModel().getValueAt(tabellaCamerieri.getSelectedRow(), 0).toString());
+						c.eliminaCameriere(tabellaCamerieri.getModel().getValueAt(tabellaCamerieri.getSelectedRow(), 0).toString());
 						c.mostraGestionePersonaleFrame();
-						c.riempiTabllaCamerieriGestione();
-						c.riempiTabllaManagerGestione(); 
+						c.riempiTabellaCamerieriPerGestionePersonale();
+						c.riempiTabellaManagerRistorantePerGestionePersonale(); 
 					}
 				} else if(tabellaManager.getSelectedRow()!=-1) {
 					if(JOptionPane.showConfirmDialog(pannello_Principale,lblElimina) == 0){
-						c.deleteManager(tabellaManager.getModel().getValueAt(tabellaManager.getSelectedRow(), 0).toString());
+						c.eliminaManager(tabellaManager.getModel().getValueAt(tabellaManager.getSelectedRow(), 0).toString());
 						c.mostraGestionePersonaleFrame();
-						c.riempiTabllaCamerieriGestione();
-						c.riempiTabllaManagerGestione();
+						c.riempiTabellaCamerieriPerGestionePersonale();
+						c.riempiTabellaManagerRistorantePerGestionePersonale();
 					}
 				} else {
 					c.mostraErroreSelezioneDialog(pannello_Principale);

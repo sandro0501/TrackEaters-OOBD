@@ -246,7 +246,7 @@ public class ImpostazioniProprietarioFrame extends JFrame {
 				} else {
 					
 					if (JOptionPane.showConfirmDialog(pannello_Principale, lblConferma)==0) {
-						c.updateProprietario(campo_Nome.getText(), campo_Cognome.getText(), campo_Username.getText(), campo_Email.getText(), password_Password.getText());
+						c.modificaProprietario(campo_Nome.getText(), campo_Cognome.getText(), campo_Username.getText(), campo_Email.getText(), password_Password.getText());
 						flushTextfields();
 						setVisible(false);
 						c.startHomepageProprietarioFrame();

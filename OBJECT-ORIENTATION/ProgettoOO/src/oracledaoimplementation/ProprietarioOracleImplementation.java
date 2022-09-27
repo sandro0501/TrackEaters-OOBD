@@ -86,7 +86,7 @@ public class ProprietarioOracleImplementation implements ProprietarioDAO {
 
 
 	@Override
-	public int numeroPositivi(String dataInizio, String dataFine) {
+	public int getNumeroAvventoriPositiviRistoranti(String dataInizio, String dataFine) {
 		
 		int totale = 0;
 		
@@ -120,7 +120,7 @@ public class ProprietarioOracleImplementation implements ProprietarioDAO {
 	}
 
 	@Override
-	public int numeroTotaleAvventori(String dataInizio, String dataFine) {
+	public int getNumeroTotaleAvventoriRistoranti(String dataInizio, String dataFine) {
 		
 		int totale = 0;
 		
@@ -154,7 +154,7 @@ public class ProprietarioOracleImplementation implements ProprietarioDAO {
 	}
 
 	@Override
-	public int numeroAvventoriInterni(String dataInizio, String dataFine) {
+	public int getNumeroAvventoriInterniRistoranti(String dataInizio, String dataFine) {
 		
 		int totale = 0;
 		
@@ -188,7 +188,7 @@ public class ProprietarioOracleImplementation implements ProprietarioDAO {
 	}
 
 	@Override
-	public int numeroAvventoriEsterni(String dataInizio, String dataFine) {
+	public int getNumeroAvventoriEsterniRistoranti(String dataInizio, String dataFine) {
 		
 		int totale = 0;
 		

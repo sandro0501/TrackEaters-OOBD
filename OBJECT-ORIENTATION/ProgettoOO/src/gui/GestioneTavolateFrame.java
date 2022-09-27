@@ -179,7 +179,7 @@ public class GestioneTavolateFrame extends JFrame {
 				if (tabellaTavolateRistorante.getSelectedRow()!=-1) {
 					if(JOptionPane.showConfirmDialog(pannello_Principale,lblElimina) == 0) {
 						
-						c.deleteTavolata();
+						c.eliminaTavolata();
 					}
 				} else {
 					c.mostraErroreSelezioneDialog(pannello_Principale);

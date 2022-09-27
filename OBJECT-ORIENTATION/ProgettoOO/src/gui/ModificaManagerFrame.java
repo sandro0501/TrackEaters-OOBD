@@ -152,7 +152,7 @@ public class ModificaManagerFrame extends JFrame {
 		comboBox_Ristorante = new JComboBox();
 		comboBox_Ristorante.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		comboBox_Ristorante.setBounds(10, 542, 316, 27);
-		comboBox_Ristorante.setModel(new DefaultComboBoxModel<String>(c.riempiComboRistoranti().toArray(new String[0])));
+		comboBox_Ristorante.setModel(new DefaultComboBoxModel<String>(c.riempiComboBoxRistoranti().toArray(new String[0])));
 		pannello_Principale.add(comboBox_Ristorante);
 		
 		JLabel lblCampoUsernameEmpty = new JLabel("");
@@ -192,8 +192,8 @@ public class ModificaManagerFrame extends JFrame {
 				if (JOptionPane.showConfirmDialog(pannello_Principale, "Sei sicuro di voler annullare?")==0) {
 					setVisible(false);
 					c.mostraGestionePersonaleFrame();
-					c.riempiTabllaCamerieriGestione();
-					c.riempiTabllaManagerGestione();
+					c.riempiTabellaCamerieriPerGestionePersonale();
+					c.riempiTabellaManagerRistorantePerGestionePersonale();
 				}
 			}
 		});
@@ -221,12 +221,12 @@ public class ModificaManagerFrame extends JFrame {
 				} else {
 					
 					if (JOptionPane.showConfirmDialog(pannello_Principale, lblConferma)==0) {
-						c.updateManager(campo_Username.getText(), password_Password.getText(), campo_Nome.getText(), campo_Cognome.getText(), campo_Telefono.getText(), campo_Email.getText(), comboBox_Ristorante.getSelectedItem().toString());
+						c.modificaManager(campo_Username.getText(), password_Password.getText(), campo_Nome.getText(), campo_Cognome.getText(), campo_Telefono.getText(), campo_Email.getText(), comboBox_Ristorante.getSelectedItem().toString());
 						flushTextfields();
 						setVisible(false);
 						c.mostraGestionePersonaleFrame();
-						c.riempiTabllaCamerieriGestione();
-						c.riempiTabllaManagerGestione();
+						c.riempiTabellaCamerieriPerGestionePersonale();
+						c.riempiTabellaManagerRistorantePerGestionePersonale();
 					}
 				}
 			}

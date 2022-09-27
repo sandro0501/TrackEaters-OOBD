@@ -181,7 +181,7 @@ public class GestioneSaleETavolateFrame extends JFrame {
 				if (tabellaSaleRistorante.getSelectedRow()!=-1) {
 					if(JOptionPane.showConfirmDialog(pannello_Principale,lblElimina) == 0) {
 						
-						c.deleteSala(tabellaSaleRistorante.getModel().getValueAt(tabellaSaleRistorante.getSelectedRow(), 0).toString(), //denominazione
+						c.eliminaSala(tabellaSaleRistorante.getModel().getValueAt(tabellaSaleRistorante.getSelectedRow(), 0).toString(), //denominazione
 									(int)tabellaSaleRistorante.getModel().getValueAt(tabellaSaleRistorante.getSelectedRow(), 1)); //capienza
 					}
 				} else {

@@ -132,7 +132,7 @@ public class RistorantiProprietarioFrame extends JFrame {
 				
 				if (tabellaRistoranti.getSelectedRow()!=-1) {
 					if(JOptionPane.showConfirmDialog(pannello_Principale,lblElimina) == 0) {
-						c.deleteRistorante(	tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString(), 	//denominazione 
+						c.eliminaRistorante(	tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 0).toString(), 	//denominazione 
 										 	tabellaRistoranti.getModel().getValueAt(tabellaRistoranti.getSelectedRow(), 1).toString());	//indirizzo
 					}
 				} else {

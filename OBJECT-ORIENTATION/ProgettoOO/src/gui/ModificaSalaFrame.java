@@ -153,7 +153,7 @@ public class ModificaSalaFrame extends JFrame {
 						int capienzaAvventori = (Integer)campo_CapienzaAvventori.getValue();
 						int dimensioneMq = (Integer)campo_DimensioneMq.getValue();
 						
-						c.updateSala(campo_Denominazione.getText(),capienzaAvventori,dimensioneMq,campo_TipologiaSala.getSelectedItem().toString());
+						c.modificaSala(campo_Denominazione.getText(),capienzaAvventori,dimensioneMq,campo_TipologiaSala.getSelectedItem().toString());
 						flushTextfields();
 						setVisible(false);
 						c.mostraGestioneSaleETavolateFrame();

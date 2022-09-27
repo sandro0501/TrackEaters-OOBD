@@ -264,7 +264,7 @@ public class AggiungiRistoranteFrame extends JFrame {
 				} else {
 					
 					if (JOptionPane.showConfirmDialog(pannello_Principale, lblAggiungi)==0) {
-						c.insertRistorante(campo_Denominazione.getText(),
+						c.aggiungiRistorante(campo_Denominazione.getText(),
 											campo_Indirizzo.getText(),
 											campo_Telefono.getText(),
 											campo_Citta.getText(),

@@ -262,7 +262,7 @@ public class ModificaRistoranteFrame extends JFrame {
 				} else {
 					
 					if (JOptionPane.showConfirmDialog(pannello_Principale, lblModifica)==0) {
-						c.updateRistorante(campo_Denominazione.getText(),
+						c.modificaRistorante(campo_Denominazione.getText(),
 											campo_Indirizzo.getText(),
 											campo_Telefono.getText(),
 											campo_Citta.getText(),

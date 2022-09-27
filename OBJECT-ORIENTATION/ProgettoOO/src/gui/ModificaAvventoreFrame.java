@@ -367,7 +367,7 @@ public class ModificaAvventoreFrame extends JFrame {
 						DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 						String dataNascita = dateFormat.format(campo_DataNascita.getDate());
 						
-						c.updateAvventore(	campo_NumCid.getText(),
+						c.aggiornaAvventore(	campo_NumCid.getText(),
 											campo_Nome.getText(),
 											campo_Cognome.getText(),
 											dataNascita,

@@ -152,7 +152,7 @@ public class AggiungiSalaFrame extends JFrame {
 						int capienzaAvventori = (Integer)campo_CapienzaAvventori.getValue();
 						int dimensioneMq = (Integer)campo_DimensioneMq.getValue();
 						
-						c.insertSala(campo_Denominazione.getText(),capienzaAvventori,dimensioneMq,campo_TipologiaSala.getSelectedItem().toString());
+						c.aggiungiSala(campo_Denominazione.getText(),capienzaAvventori,dimensioneMq,campo_TipologiaSala.getSelectedItem().toString());
 						flushTextfields();
 						setVisible(false);
 						c.mostraGestioneSaleETavolateFrame();

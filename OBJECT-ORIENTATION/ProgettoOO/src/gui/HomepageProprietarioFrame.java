@@ -79,8 +79,8 @@ public class HomepageProprietarioFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				c.startGestionePersonaleFrame();
-				c.riempiTabllaCamerieriGestione();
-				c.riempiTabllaManagerGestione();
+				c.riempiTabellaCamerieriPerGestionePersonale();
+				c.riempiTabellaManagerRistorantePerGestionePersonale();
 			}
 		});
 		bottone_GestionePersonale.setBounds(422, 315, 420, 60);

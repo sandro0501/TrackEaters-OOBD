@@ -131,7 +131,7 @@ public class GestioneAvventoriFrame extends JFrame {
 						Date dataRegistrazione = new Date();
 						String dataformattata = dateFormat.format(dataRegistrazione);
 						
-						c.insertCasoCovid(dataformattata, numCid, "NonRisolto", "");	
+						c.aggiungiCasoCovid(dataformattata, numCid, "NonRisolto", "");	
 					}
 				} else {
 					c.mostraErroreSelezioneDialog(pannello_Principale);
@@ -186,7 +186,7 @@ public class GestioneAvventoriFrame extends JFrame {
 				if (tabellaAvventoriRistorante.getSelectedRow()!=-1) {
 					if(JOptionPane.showConfirmDialog(pannello_Principale,lblElimina) == 0) {
 						
-						c.deleteAvventoreFromTavolata();
+						c.eliminaAvventoreFromTavolata();
 					}
 				} else {
 					c.mostraErroreSelezioneDialog(pannello_Principale);

@@ -129,7 +129,7 @@ public class StatisticheProprietarioFrame extends JFrame {
 		comboBox_Ristorante.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 		ArrayList<String> ristoranti = new ArrayList<>();
 		ristoranti.add("Tutti");
-		ristoranti.addAll(c.riempiComboRistoranti());
+		ristoranti.addAll(c.riempiComboBoxRistoranti());
 		comboBox_Ristorante.setModel(new DefaultComboBoxModel<String>(ristoranti.toArray(new String[ristoranti.size()])));
 		comboBox_Ristorante.setBounds(57, 130, 330, 27);
 		pannello_Principale.add(comboBox_Ristorante);
@@ -153,19 +153,19 @@ public class StatisticheProprietarioFrame extends JFrame {
 					}else {
 						if (comboBox_Ristorante.getSelectedItem().toString() == "Tutti") {
 							if (comboBox_TipoStatistica.getSelectedItem().toString() == "Testuale") {
-								c.statistichePropretario(dataInizio, dataFine);
+								c.mostraStatisticheTestualiRistorantiProprietario(dataInizio, dataFine);
 							} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Positivi"){
-								c.graficoPositiviRistoranti(dataInizio, dataFine);
+								c.creaGraficoAvventoriPositiviRistoranti(dataInizio, dataFine);
 							} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Interni/Esterni") {
-								c.graficoInterniRistoranti(dataInizio, dataFine);
+								c.creaGraficoAvventoriInterniEsterniRistoranti(dataInizio, dataFine);
 							}
 						} else {
 							if(comboBox_TipoStatistica.getSelectedItem().toString() == "Testuale") {
-								c.statisticheRistorantiProprietario(dataInizio, dataFine, comboBox_Ristorante.getSelectedItem().toString());
+								c.mostraStatisticheTestualiPerSingoloRistorante(dataInizio, dataFine, comboBox_Ristorante.getSelectedItem().toString());
 							} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Positivi"){
-								c.graficoPositiviRistorantePropretario(dataInizio, dataFine, comboBox_Ristorante.getSelectedItem().toString());
+								c.creaGraficoAvventoriPositiviRistorantePerProprietario(dataInizio, dataFine, comboBox_Ristorante.getSelectedItem().toString());
 							} else if (comboBox_TipoStatistica.getSelectedItem().toString() == "Grafica: Interni/Esterni") {
-								c.graficoInterniRistoranteProprietario(dataInizio, dataFine, comboBox_Ristorante.getSelectedItem().toString());
+								c.creaGraficoAvventoriInterniEsterniRistoranteProprietario(dataInizio, dataFine, comboBox_Ristorante.getSelectedItem().toString());
 							}
 						}
 					}

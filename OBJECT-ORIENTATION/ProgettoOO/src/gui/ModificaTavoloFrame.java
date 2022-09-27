@@ -95,7 +95,7 @@ public class ModificaTavoloFrame extends JFrame {
 				if (JOptionPane.showConfirmDialog(pannello_Principale, lblAggiungi)==0) 
 				{
 					int numeroAvventori = (Integer)campo_NumeroAvventori.getValue();
-					c.updateTavolo(numeroAvventori);
+					c.modificaTavolo(numeroAvventori);
 					setVisible(false);
 					c.mostraGestioneTavoliFrame();
 				}

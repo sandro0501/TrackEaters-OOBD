@@ -454,7 +454,10 @@ public class Controller {
 		String currentCittaRes = tabellaCameriere.getModel().getValueAt(tabellaCameriere.getSelectedRow(), 7).toString();
 		String currentProvinciaRes = tabellaCameriere.getModel().getValueAt(tabellaCameriere.getSelectedRow(), 8).toString();
 		String currentTelefono = tabellaCameriere.getModel().getValueAt(tabellaCameriere.getSelectedRow(), 9).toString();
-		String currentEmail = tabellaCameriere.getModel().getValueAt(tabellaCameriere.getSelectedRow(), 10).toString();
+		if(tabellaCameriere.getModel().getValueAt(tabellaCameriere.getSelectedRow(), 10) != null) {
+			String currentEmail = tabellaCameriere.getModel().getValueAt(tabellaCameriere.getSelectedRow(), 10).toString();
+			modificaCamerierePage.getCampo_Email().setText(currentEmail);
+		}
 		String currentRistorante = tabellaCameriere.getModel().getValueAt(tabellaCameriere.getSelectedRow(), 11).toString();
 		
 		modificaCamerierePage.getCampo_NumeroDocumento().setText(currentDocumento);
@@ -466,10 +469,6 @@ public class Controller {
 		modificaCamerierePage.getComboBox_ProvinciaNatale().setSelectedItem(currentProvinciaN);
 		modificaCamerierePage.getCampo_CittaResidenza().setText(currentCittaRes);
 		modificaCamerierePage.getComboBox_ProvinciaResidenza().setSelectedItem(currentProvinciaRes);
-		
-		if (currentEmail != null)
-			modificaCamerierePage.getCampo_Email().setText(currentEmail);
-		
 		modificaCamerierePage.getCampo_Telefono().setText(currentTelefono);
 		modificaCamerierePage.getComboBox_Ristorante().setSelectedItem(currentRistorante);
 	}
@@ -1071,7 +1070,7 @@ public class Controller {
 		String telefono = tabellaAvventori.getModel().getValueAt(tabellaAvventori.getSelectedRow(), 9).toString();
 		String email = "";
 		
-		if(!(tabellaAvventori.getModel().getValueAt(tabellaAvventori.getSelectedRow(), 6) == null)) {
+		if(!(tabellaAvventori.getModel().getValueAt(tabellaAvventori.getSelectedRow(), 10) == null)) {
 			email = tabellaAvventori.getModel().getValueAt(tabellaAvventori.getSelectedRow(), 10).toString();
 		}
 		double temperatura = (double) tabellaAvventori.getModel().getValueAt(tabellaAvventori.getSelectedRow(), 11);

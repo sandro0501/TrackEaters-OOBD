@@ -76,6 +76,12 @@ public class TavoloOracleImplementation implements TavoloDAO {
 				lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
 				JOptionPane.showMessageDialog(null,lblErrore,"Errore inserimento dati",JOptionPane.ERROR_MESSAGE);	
 			}
+			else if(e.getErrorCode()==20016){
+				JLabel lblErrore = new JLabel("<html>Attenzione: non è possibile aggiungere il tavolo.<br>"
+						+ "Il valore del numero di avventori per il tavolo deve essere minore o uguale alla capienza della sala!</html>");
+				lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
+				JOptionPane.showMessageDialog(null,lblErrore,"Errore modifica dati",JOptionPane.ERROR_MESSAGE);	
+			}
 			else 
 			{
 				System.out.println("Codice errore SQL: "+e.getErrorCode()); 

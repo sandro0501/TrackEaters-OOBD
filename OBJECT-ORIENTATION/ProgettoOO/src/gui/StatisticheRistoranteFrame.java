@@ -220,9 +220,9 @@ public class StatisticheRistoranteFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				if(proprietario) {
-					c.mostraGestioneRistoranteFrame();
-				} else {
 					c.mostraHomepageProprietarioFrame();
+				} else {
+					c.mostraGestioneRistoranteFrame();
 				}
 			}
 		});

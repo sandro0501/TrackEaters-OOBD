@@ -148,12 +148,17 @@ public class AggiungiTavolataFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 					if (JOptionPane.showConfirmDialog(pannello_Principale, lblAggiungi)==0) 
 					{
-					
-						DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-						String dataformattata = dateFormat.format(campo_DataArrivo.getDate());
-						c.aggiungiTavolata(isProprietario,dataformattata, campo_Cameriere.getSelectedItem().toString());
-						setVisible(false);
-						c.mostraGestioneTavolateFrame();
+						if(campo_Cameriere.getSelectedItem() == null) {
+							JLabel lblErrore = new JLabel("Attenzione: non hai selezionato alcun cameriere! Riprova.");
+							lblErrore.setFont(new Font("Segoe UI", Font.BOLD, 15));
+							JOptionPane.showMessageDialog(pannello_Principale, lblErrore, "Attenzione", JOptionPane.WARNING_MESSAGE);
+						} else {
+							DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+							String dataformattata = dateFormat.format(campo_DataArrivo.getDate());
+							c.aggiungiTavolata(isProprietario,dataformattata, campo_Cameriere.getSelectedItem().toString());
+							setVisible(false);
+							c.mostraGestioneTavolateFrame();
+						}
 					}
 				}
 		});
